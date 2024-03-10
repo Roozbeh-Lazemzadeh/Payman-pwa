@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const themeVar = {
+export const themeVar = {
   PrimaryColor: '#0072ff',
   PrimaryColorOp: '#0073ff20',
   Deactive: '#acacac',
