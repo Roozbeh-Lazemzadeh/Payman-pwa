@@ -131,6 +131,17 @@
   transition: ease-in-out 0.3s all;
 }
 
+.home-datepicker:nth-child(6) {
+  background-color: #0072ff;
+  color: #fff;
+  border-radius: 10px;
+  padding: 2.1rem 30px;
+  width: 3rem;
+  height: 3rem;
+  opacity: 1;
+  transition: ease-in-out 0.3s all;
+}
+
 .home-datepicker:hover {
   background-color: #0072ff;
   color: #fff;
@@ -170,7 +181,7 @@
 
 .TransactionHomeCard {
   overflow: scroll !important;
-  height: 70%;
+  height: calc(100vh - 495px);
   direction: ltr;
 }
 

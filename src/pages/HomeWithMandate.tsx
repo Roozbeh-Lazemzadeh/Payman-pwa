@@ -1,11 +1,13 @@
 /* eslint-disable react/jsx-key */
-import React from 'react';
+import React, { useState } from 'react';
 import { MerchantChartSection } from '../components/chart/MerchantChartSection';
 import FilterTools from '../components/template/FilterTools';
 import { TransactionHomeCard } from '../components/shared/Cards/TransactionHomeCards';
 import { DetailedDrawer } from '../components/shared/Drawer/DetailedDrawer';
 
 function HomeWithMandate() {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  // const handleOpenDetailedDrawer = () => {};
   return (
     <div className="home-wrapper">
       <div className="home-datepickers">
@@ -35,33 +37,37 @@ function HomeWithMandate() {
         </div>
       </div>
       <MerchantChartSection />
-      <DetailedDrawer />
+      <DetailedDrawer isOpen={isOpen} setIsOpen={setIsOpen} title={''} />
       <FilterTools title="تراکنش‌های پرداخت مستقیم" />
       <div className="TransactionHomeCard-wrapper">
         <div className="TransactionHomeCard">
           <div className="TransactionHomeCard-wrapper-cards">
             <p className="TransactionHomeCard-p">امروز، ۱۸ آبان</p>
-            {Array.from({ length: 10 }, (value, index) => value).map(
+            {Array.from({ length: 50 }, (value, index) => value).map(
               (item, index) => (
-                <TransactionHomeCard
-                  key={index}
-                  merchant="تپسی"
-                  price={4550}
-                  transDate="سه‌شنبه، ۱۴۰۲/۰۷/۲۵- ۱۸:۴۸"
-                />
+                <div onClick={() => setIsOpen(!isOpen)}>
+                  <TransactionHomeCard
+                    key={index}
+                    merchant="تپسی"
+                    price={4550}
+                    transDate="سه‌شنبه، ۱۴۰۲/۰۷/۲۵- ۱۸:۴۸"
+                  />
+                </div>
               )
             )}
           </div>
           <div className="TransactionHomeCard-wrapper-cards active">
             <p className="TransactionHomeCard-p">امروز، ۱۸ آبان</p>
-            {Array.from({ length: 5 }, (value, index) => value).map(
+            {Array.from({ length: 1 }, (value, index) => value).map(
               (item, index) => (
-                <TransactionHomeCard
-                  key={index}
-                  merchant="خودرو"
-                  price={4550}
-                  transDate="سه‌شنبه، ۱۴۰۲/۰۷/۲۵- ۱۸:۴۸"
-                />
+                <div onClick={() => setIsOpen(!isOpen)}>
+                  <TransactionHomeCard
+                    key={index}
+                    merchant="خودرو"
+                    price={4550}
+                    transDate="سه‌شنبه، ۱۴۰۲/۰۷/۲۵- ۱۸:۴۸"
+                  />
+                </div>
               )
             )}
           </div>

@@ -73,20 +73,37 @@ svg.recharts-surface {
   display: flex;
   justify-content: center;
   border-radius: 5px;
+  border: 1px solid #fff;
 }
 .instance.all {
   color: rgba(0, 114, 255, 1);
   background-color: rgba(0, 114, 255, 0.2);
 }
+.instance.all.active {
+  border: 1px solid rgba(0, 114, 255, 1);
+}
 .instance.fil {
   color: rgba(255, 170, 27, 1);
   background-color: rgba(255, 170, 27, 0.2);
+}
+.instance.fil.active {
+  border: 1px solid #ffaa1b;
 }
 .instance.taps {
   color: rgba(255, 104, 59, 1);
   background-color: rgba(255, 104, 59, 0.2);
 }
+.instance.taps.active {
+  border: 1px solid #ff683b;
+}
 .instance.snap {
   color: rgba(18, 183, 106, 1);
   background-color: rgba(0, 226, 97, 0.2);
+}
+.instance.snap.active {
+  border: 1px solid #12b76a;
+}
+
+.recharts-layer {
+  outline: none !important;
 }

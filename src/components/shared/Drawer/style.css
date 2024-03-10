@@ -30,3 +30,13 @@
   border-top-left-radius: 10px !important;
   height: auto !important;
 }
+
+.react-modal-sheet-container {
+  /* height: 50% !important; */
+  /* overflow: auto; */
+}
+
+/* .detailed-drawer-wrapper {
+  width: 100%;
+  overflow: scroll;
+} */

@@ -1,11 +1,16 @@
 import React from 'react';
 import { RechartPieChart } from './RechartPieChart';
 import './style.css';
-import { useAppDispatch } from '../hooks/reduxHooks';
-import { selectMerchant } from '../../store/chart/chartSlice';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import {
+  selectMerchant,
+  selectSelectedMerchant,
+} from '../../store/chart/chartSlice';
 
 export const MerchantChartSection: React.FC = () => {
   const dispatch = useAppDispatch();
+  const selectedMerchant = useAppSelector(selectSelectedMerchant);
+  console.log(selectedMerchant);
   const handleSelectedMerchant = (
     e: React.MouseEvent<HTMLSpanElement, MouseEvent>
   ) => {
@@ -45,16 +50,36 @@ export const MerchantChartSection: React.FC = () => {
             <span className="pay-price">۱۰٬۰۰۰٬۰۰۰ تومان</span>
           </div>
           <div className="merchants-wrapper">
-            <span className="instance all" onClick={handleSelectedMerchant}>
+            <span
+              className={`instance all ${
+                selectedMerchant === 3 ? 'active' : ''
+              }`}
+              onClick={handleSelectedMerchant}
+            >
               همه
             </span>
-            <span className="instance fil" onClick={handleSelectedMerchant}>
+            <span
+              className={`instance fil ${
+                selectedMerchant === 2 ? 'active' : ''
+              }`}
+              onClick={handleSelectedMerchant}
+            >
               فیلیمو
             </span>
-            <span className="instance taps" onClick={handleSelectedMerchant}>
+            <span
+              className={`instance taps ${
+                selectedMerchant === 1 ? 'active' : ''
+              }`}
+              onClick={handleSelectedMerchant}
+            >
               تپسی
             </span>
-            <span className="instance snap" onClick={handleSelectedMerchant}>
+            <span
+              className={`instance snap ${
+                selectedMerchant === 0 ? 'active' : ''
+              }`}
+              onClick={handleSelectedMerchant}
+            >
               اسنپ
             </span>
           </div>

@@ -1,10 +1,23 @@
-import React, { useState } from 'react';
+import React, { type Dispatch, type SetStateAction } from 'react';
 import { CustomDrawer } from './Drawer';
 import { DotLeader } from '../../helpers/DotLeader';
 
-export const DetailedDrawer: React.FC = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+interface DetailedDrawerProps {
+  title: string;
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+}
 
+const DetailedDrawerArray = [
+  { nameItem1: 'بانک', nameItem2: 'سامان' },
+  { nameItem1: 'شماره موبایل', nameItem2: '989385445348+' },
+  { nameItem1: 'شناسه پیمان', nameItem2: 'Ajdfni830874p39vfndl' },
+];
+
+export const DetailedDrawer: React.FC<DetailedDrawerProps> = ({
+  isOpen,
+  setIsOpen,
+}) => {
   return (
     <CustomDrawer
       isOpen={isOpen}
@@ -12,12 +25,14 @@ export const DetailedDrawer: React.FC = () => {
       setIsOpen={setIsOpen}
     >
       {
-        <div>
-          {Array.from({ length: 5 }, (value, index) => value).map(
-            (val, index) => (
-              <DotLeader key={index} text1="نام" text2="بانک سامان" />
-            )
-          )}
+        <div className="detailed-drawer">
+          {DetailedDrawerArray.map((val, index) => (
+            <DotLeader
+              key={index}
+              text1={val.nameItem1}
+              text2={val.nameItem2}
+            />
+          ))}
         </div>
       }
     </CustomDrawer>

@@ -69,7 +69,11 @@ export const RechartPieChart: React.FC = () => {
           cornerRadius={5}
         >
           {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            <Cell
+              key={`cell-${index}`}
+              fill={COLORS[index % COLORS.length]}
+              style={{ outline: 'none' }}
+            />
           ))}
         </Pie>
       </PieChart>
