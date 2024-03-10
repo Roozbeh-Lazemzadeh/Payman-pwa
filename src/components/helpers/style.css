@@ -1,0 +1,15 @@
+.dot-leader-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.start-text,
+.end-text {
+  white-space: nowrap;
+}
+
+.dots {
+  overflow: hidden;
+  color: #cdcdd0;
+}

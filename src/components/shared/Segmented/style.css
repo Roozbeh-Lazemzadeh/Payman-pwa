@@ -1,0 +1,55 @@
+.ant-segmented .ant-segmented-group {
+  align-items: center;
+}
+
+.ant-segmented .ant-segmented-item-label {
+  min-height: 36px;
+  line-height: 36px;
+  transition: none;
+}
+
+.ant-segmented .ant-segmented-item {
+  border-radius: 10px;
+  transition: none;
+}
+.ant-segmented.ant-segmented-block {
+  border-radius: 10px;
+  border: 1px solid rgba(0, 114, 255, 1);
+}
+.ant-segmented {
+  background: rgba(0, 114, 255, 0.2);
+}
+.ant-segmented
+  .ant-segmented-item:hover:not(.ant-segmented-item-selected):not(
+    .ant-segmented-item-disabled
+  ) {
+  color: #0072ff;
+}
+
+.ant-segmented-item {
+  color: #0072ff;
+}
+.ant-segmented .ant-segmented-item-selected {
+  background-color: rgba(0, 114, 255, 1);
+  color: #ffffff;
+}
+
+.ant-segmented .ant-segmented-thumb {
+  background-color: rgba(0, 114, 255, 1);
+  border-radius: 10px;
+}
+
+.ant-segmented
+  .ant-segmented-item:hover:not(.ant-segmented-item-selected):not(
+    .ant-segmented-item-disabled
+  )::after {
+  background-color: unset;
+}
+
+.ant-segmented
+  .ant-segmented-thumb
+  ~ .ant-segmented-item:not(.ant-segmented-item-selected):not(
+    .ant-segmented-item-disabled
+  )::after {
+  background-color: unset;
+}

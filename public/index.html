@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/logo-48x48.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="stylesheet" href="./style.css">
+    <title>پیمان</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <!-- <div class="splash-container">
+      <div class="logo-wrapper">
+        <div class="logo-animation">
+          <div class="logo-wrapper__top">
+            <img src="./assets/logo-splash/logo-top.svg" alt="" class="logo-top">
+          </div>
+            <img src="./assets/logo-splash/logo-Mid.svg" alt="" class="logo-mid">
+            <img src="./assets/logo-splash/logo-Bottom.svg" alt="" class="logo-bottom">
+        </div>
+      </div>
+      <div class="footer-wrapper"><img class="footer-wrapper_img" src="./assets/logo-splash/payman-bottom-page.svg" alt="">توسعه‌یافته توسط پیمان</div>
+  </div> -->
+    <div id="root"></div>
+    <script>
+      if('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.ts').then((reg) => {
+            console.log('Worker Registered')
+          }).catch((err) => {
+            console.log('Error in service worker registration.')
+          })
+        })
+      }
+    </script>
+    <!-- <script src="./script.js"></script> -->
+</html>

@@ -1,0 +1,92 @@
+.onboardingStyle {
+  min-width: 320px;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  direction: ltr !important;
+}
+
+.headerOnboarding {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 2rem auto;
+}
+
+.headerOnboarding-navgit {
+  display: flex;
+  align-items: center;
+  width: 50px;
+  height: 24px;
+  justify-content: center;
+}
+
+.headerOnboarding-box {
+  width: 50px;
+  height: 24px;
+}
+
+.onboardingSlider {
+  position: relative !important;
+  width: 100%;
+  height: 100%;
+}
+
+.mySwiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-pagination {
+  position: absolute !important;
+  bottom: 160px !important;
+  left: 20px !important;
+  display: block;
+}
+
+.swiper-pagination-fraction, .swiper-pagination-custom, .swiper-horizontal > .swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal {
+  width: 4rem !important;
+}
+
+.btn-slid {
+  position: absolute;
+  bottom: 135px !important;
+  display: flex;
+  z-index: 999999;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-wrapper {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.item-onboarding_title {
+  font-size: 1.3rem;
+}
+
+.item-onboarding-des {
+  padding: 0 1.2rem ;
+  font-size: 1.1rem;
+  direction: rtl;
+}
+
+.prevClick {
+  margin-left: 6rem;
+}
+
+.progress-wrapper {
+ margin-right: 1rem !important;
+}
+
+.ant-progress-inner {
+  height: 65px !important;
+}
+

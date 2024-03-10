@@ -1,0 +1,202 @@
+/* .send-otp-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    background-color: #fff;
+    max-height: 80%;
+    height: 100%;
+    width: 100%;
+    border-top-right-radius: 40px 40px;
+    border-top-left-radius: 40px 40px;
+} */
+
+.send-otp-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+}
+
+.send-otp-form {
+  width: 90vw !important;
+  font-weight: 500;
+  font-size: 18px;
+  /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; */
+}
+
+.send-otp__title {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.otp-form_input {
+  display: block;
+  width: 90vw;
+  height: 44px;
+  margin-top: 1.5rem;
+}
+
+.otp-form_checked {
+  display: block;
+}
+
+.otp-Checkbox {
+  font-weight: 500;
+  font-size: 14px;
+  margin-top: 1.5rem;
+}
+
+.otp-form_btn-wrapper {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90vw;
+  height: 40px;
+  margin-top: 1.5rem;
+}
+
+.otp-form_submit {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  width: 100%;
+  height: 100%;
+}
+
+.cover-customer__login {
+  margin-top: 1.5rem;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.otp-Checkbox__open-drawer {
+  color: rgba(0, 114, 255, 1);
+}
+
+.info-login {
+  margin-top: 5rem;
+  background-color: rgba(239, 242, 255, 1);
+  width: 81%;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 1rem 1.2rem;
+  border: 1.2px dashed rgba(0, 114, 255, 1);
+  border-radius: 10px;
+}
+
+.check-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-items-wrapper {
+  margin-top: 3rem;
+}
+
+.check-otp-inputs {
+  justify-content: space-around;
+  flex-direction: row-reverse;
+  width: 90vw;
+}
+
+.check-otp-input {
+  width: 4rem !important;
+  padding: 0.5rem 0.2rem !important;
+  border: none !important;
+  border-bottom: 2px solid rgba(205, 205, 208, 1) !important;
+  outline: none !important;
+  text-align: center !important;
+  background-color: transparent !important;
+  color: black !important;
+}
+
+.check-otp-input:focus {
+  border-bottom: 2px solid blue !important;
+}
+
+.check-otp__style {
+  text-align: center;
+}
+
+.check-title {
+  color: rgba(16, 24, 40, 0.2);
+  margin-top: -6rem;
+}
+
+.check-number {
+  color: rgba(0, 114, 255, 1);
+  font-weight: 600;
+  margin-top: 2rem;
+}
+
+.check-timer {
+  font-weight: 500;
+  margin-top: 3rem;
+}
+
+.btns-wrapper-check-otp {
+  margin-top: 4rem;
+}
+
+.customer-login-btn {
+  background-color: rgba(172, 172, 172, 1);
+  border: none;
+}
+
+/* start Selected Merchants style  */
+
+.selected-merchants {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0 10px;
+}
+
+.selected-merchant {
+  height: 7.5rem;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-top: 1rem;
+  border-radius: 10px;
+  padding-top: 2rem;
+  -webkit-box-shadow: -6px 5px 10px -3px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: -6px 5px 10px -3px rgba(0, 0, 0, 0.1);
+  box-shadow: -6px 5px 10px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* end Selected Merchants style  */
+
+/* start filter tools style */
+
+.filter-tools-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.2rem;
+}
+
+.filter-tools-component {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filter-tools-title {
+  color: rgba(16, 24, 40, 0.5);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* end filter tools style */

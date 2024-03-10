@@ -1,0 +1,32 @@
+/* .ant-drawer-content.customDrawer .ant-drawer-header-title {
+  display: flex;
+}
+
+.ant-drawer-content.customDrawer {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+.ant-drawer-content-wrapper {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.ant-drawer .ant-drawer-title {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.ant-drawer .ant-drawer-header {
+  border-bottom: none;
+}
+
+.ant-drawer .ant-drawer-body {
+  padding: 0px 20px 45px 20px;
+} */
+
+.react-modal-sheet-container {
+  border-top-right-radius: 10px !important;
+  border-top-left-radius: 10px !important;
+  height: auto !important;
+}

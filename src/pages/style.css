@@ -1,0 +1,181 @@
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 100vw;
+  height: 100vh;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: contain;
+  overflow: hidden;
+}
+
+.login-body {
+  display: flex;
+  justify-content: flex-start;
+  background-color: #fff;
+  max-height: 80%;
+  height: 100vh;
+  width: 100vw;
+  border-top-right-radius: 40px 40px;
+  border-top-left-radius: 40px 40px;
+  overflow: hidden;
+  flex-direction: column;
+  align-items: center;
+  /* align-content: stretch; */
+  /* flex-wrap: wrap; */
+  align-self: self-end;
+}
+
+.login-body-wrapper {
+  max-height: 100%;
+  height: 100%;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.login-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-header__logo {
+  margin-top: 30px;
+}
+
+.login-header__title {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+/* home style ( with out mandate ) */
+
+.contant-wrapper.scroll {
+  overflow: hidden !important;
+}
+
+.banner-home {
+  display: flex;
+  justify-content: center;
+}
+
+.banner-home img {
+  width: 100%;
+}
+
+/* .home-des {
+  color: #245ed3;
+} */
+
+.home-des_title {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.home-des_parghraf {
+  color: #5f6061;
+  line-height: 15.6px;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.home-search_input {
+  width: 100% !important;
+  margin-top: 2rem;
+}
+
+.home-merchants-wrapper {
+  height: 50rem;
+  overflow: scroll !important;
+  direction: ltr;
+}
+
+.selected-merchants-title {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.home-merchants {
+  direction: rtl;
+}
+
+.home-merchants_ {
+  height: 70rem;
+}
+
+.home-datepickers {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid #d3d3d3;
+}
+
+.home-datepicker {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 2.1rem 30px;
+  font-weight: 500;
+  font-size: 14px;
+  opacity: 0.3;
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 10px;
+  transition: ease-in-out 0.3s all;
+}
+
+.home-datepicker:hover {
+  background-color: #0072ff;
+  color: #fff;
+  border-radius: 10px;
+  padding: 2.1rem 30px;
+  width: 3rem;
+  height: 3rem;
+  opacity: 1;
+  transition: ease-in-out 0.3s all;
+}
+
+.home-datepicker-num {
+}
+
+/* .home-datepicker-p {
+  color: #fff;
+} */
+
+.home-datepicker-p:hover {
+  font-size: 12px;
+  transition: ease-in-out 0.001s all;
+  color: #fff;
+}
+
+.TransactionHomeCard-wrapper-cards {
+  border-bottom: 1px solid gray;
+  padding-bottom: 1.2rem;
+}
+
+.TransactionHomeCard-wrapper-cards.active {
+  border: unset;
+}
+
+.TransactionHomeCard-wrapper {
+  height: 35rem;
+}
+
+.TransactionHomeCard {
+  overflow: scroll !important;
+  height: 70%;
+  direction: ltr;
+}
+
+.TransactionHomeCard-p {
+  direction: rtl;
+  font-size: 14px;
+  font-weight: 500;
+}

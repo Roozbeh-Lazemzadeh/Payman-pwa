@@ -1,0 +1,43 @@
+.ant-modal-root .ant-modal-mask {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.ant-modal.notification-modal {
+  top: 74px;
+}
+.ant-modal.notification-modal .ant-modal-content {
+  width: 350px;
+  height: 328px;
+  padding: 20px 0px;
+  margin: 0 auto;
+}
+.notification-modal-title-content {
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(172, 172, 172, 0.2);
+}
+.notification-modal-title-content > span:nth-child(1) {
+  color: rgba(18, 25, 39, 1);
+  font-weight: 500;
+  font-size: 14px;
+  padding-right: 20px;
+}
+.notification-modal-title-content > span:nth-child(2) {
+  color: rgba(0, 114, 255, 1);
+  font-weight: 500;
+  font-size: 12px;
+  padding-left: 20px;
+}
+.empty-notification-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 90px;
+}
+.empty-notification-content > span {
+  color: rgba(18, 25, 39, 1);
+  font-weight: 500;
+  font-size: 14px;
+  text-align: center;
+}

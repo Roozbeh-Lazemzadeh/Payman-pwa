@@ -1,0 +1,58 @@
+{
+  "short_name": "پیمان",
+  "name": "پرداخت این بار لذت بخشن",
+  "display": "standalone",
+  "theme_color": "#0072FF",
+  "background_color" : "#0072FF",
+  "start_url": "/",
+  "scope": ".",
+  "lang": "fa",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "assets/icons/logo-48x48.svg",
+      "sizes": "48x48",
+      "type": "image/svg"
+    },
+    {
+      "src": "assets/icons/logo-72x72.svg",
+      "sizes": "72x72",
+      "type": "image/svg"
+    },
+    {
+      "src": "assets/icons/logo-96x96.svg",
+      "sizes": "96x96",
+      "type": "image/svg"
+    },
+    {
+      "src": "assets/icons/logo-128x128.svg",
+      "sizes": "128x128",
+      "type": "image/svg"
+    },
+    {
+      "src": "assets/icons/logo-144x144.svg",
+      "sizes": "144x144",
+      "type": "image/svg"
+    },
+    {
+      "src": "assets/icons/logo-152x152.svg",
+      "sizes": "152x152",
+      "type": "image/svg"
+    },
+    {
+      "src": "assets/icons/logo-192x192.svg",
+      "sizes": "192x192",
+      "type": "image/svg"
+    },
+    {
+      "src": "assets/icons/logo-412x412.svg",
+      "sizes": "412x412",
+      "type": "image/svg"
+    },
+    {
+      "src": "assets/icons/logo-512x512.svg",
+      "sizes": "512x512",
+      "type": "image/svg"
+    }
+  ]
+}

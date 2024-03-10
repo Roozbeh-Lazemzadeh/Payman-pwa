@@ -1,0 +1,92 @@
+.recharts-responsive-container {
+  height: 95px !important;
+  width: 50% !important;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: absolute;
+  left: 0;
+}
+@media (min-width: 400px) {
+  .recharts-responsive-container {
+    width: 44% !important;
+  }
+}
+
+.recharts-wrapper {
+  height: 120px !important;
+  width: 135px !important;
+  display: flex;
+  justify-content: center;
+
+  align-items: center;
+  max-width: unset;
+  max-width: unset;
+}
+
+svg.recharts-surface {
+  width: 75% !important;
+  height: 110px !important;
+}
+.chart-text {
+  font-size: 34px !important;
+  font-weight: 600;
+}
+
+.chart-row-wrapper {
+  display: flex;
+  width: 100%;
+  padding: 1.6rem 0 1.6rem 0;
+  border-bottom: 1px solid #d3d3d3;
+}
+
+.pay-info-wrapper {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.pay-title-price-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.pay-title {
+  color: rgba(16, 24, 40, 0.5);
+  font-size: 14px;
+  font-weight: 500;
+}
+.pay-price {
+  color: #101828;
+  font-size: 20px;
+  font-weight: 600;
+}
+.merchants-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  z-index: 2;
+}
+.instance {
+  font-size: 10px;
+  padding: 5px 10px;
+  display: flex;
+  justify-content: center;
+  border-radius: 5px;
+}
+.instance.all {
+  color: rgba(0, 114, 255, 1);
+  background-color: rgba(0, 114, 255, 0.2);
+}
+.instance.fil {
+  color: rgba(255, 170, 27, 1);
+  background-color: rgba(255, 170, 27, 0.2);
+}
+.instance.taps {
+  color: rgba(255, 104, 59, 1);
+  background-color: rgba(255, 104, 59, 0.2);
+}
+.instance.snap {
+  color: rgba(18, 183, 106, 1);
+  background-color: rgba(0, 226, 97, 0.2);
+}
