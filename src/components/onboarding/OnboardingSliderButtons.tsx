@@ -16,7 +16,7 @@ const OnboardingSliderButtons: FC<OnboardingSliderButtonsProps> = ({
   const [circle, setCircle] = useState<number>(33.33);
   const swiper = useSwiper();
 
-  swiper.on('slideChange', function (e) {
+  swiper.on('slideChange', function (e: any) {
     const currentIndex: number = e.activeIndex;
 
     switch (currentIndex) {
