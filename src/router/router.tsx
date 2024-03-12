@@ -2,9 +2,10 @@ import { Navigate, createBrowserRouter } from 'react-router-dom';
 import PWALayout from '../components/layout';
 import Onboarding from '../pages/Onboarding';
 import LoginPage from '../pages/LoginPage';
-// import HomeWithOutMandate from '../pages/HomeWithOutMandate';
-import HomeWithMandate from '../pages/HomeWithMandate';
+// import HomeWithMandate from '../pages/HomeWithMandate';
 import { FAQPage } from '../pages/FAQ';
+import HomeWithOutMandate from '../pages/HomeWithOutMandate';
+import ContactUs from '../pages/ContactUs';
 
 export const router = createBrowserRouter([
   {
@@ -17,7 +18,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'home',
-        element: <HomeWithMandate />,
+        element: <HomeWithOutMandate />,
       },
       {
         path: 'transactions',
@@ -38,6 +39,10 @@ export const router = createBrowserRouter([
       {
         path: 'faq',
         element: <FAQPage />,
+      },
+      {
+        path: '/contact-us',
+        element: <ContactUs />,
       },
     ],
   },

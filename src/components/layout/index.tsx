@@ -39,6 +39,8 @@ const PWALayout: React.FC = () => {
       return <CustomHeader title="پیمان‌ها" />;
     } else if (location.pathname === '/faq') {
       return <CustomHeader background title="پرسش‌های متداول" />;
+    } else if (location.pathname === '/contact-us') {
+      return <CustomHeader title="تماس با پیمان" />;
     } else {
       return <CustomHeader background title="خانه" />;
     }

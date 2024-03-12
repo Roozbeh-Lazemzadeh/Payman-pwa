@@ -46,6 +46,7 @@ export const RechartPieChart: React.FC = () => {
           endAngle={endAngle}
           fill={fill}
           cornerRadius={5}
+          style={{ outline: 'none' }}
         />
       </g>
     );
@@ -67,6 +68,7 @@ export const RechartPieChart: React.FC = () => {
           // onMouseEnter={onPieEnter}
           paddingAngle={4}
           cornerRadius={5}
+          style={{ outline: 'none' }}
         >
           {data.map((entry, index) => (
             <Cell

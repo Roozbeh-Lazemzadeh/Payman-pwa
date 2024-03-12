@@ -190,3 +190,72 @@
   font-size: 14px;
   font-weight: 500;
 }
+
+/* start style contact page */
+
+.contact-wrapper {
+  height: 100%;
+  width: 100%;
+}
+
+.contact-banner {
+  width: 100%;
+  margin-bottom: 7rem;
+}
+
+/* .contact-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+} */
+
+.contact-detail {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.3rem;
+}
+
+.contact-btn {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0072ff;
+  padding: 10px 8px;
+  border: 1px solid #0072ff;
+  border-radius: 10px;
+  text-align: center;
+  width: 123px;
+}
+
+.contact-btn:focus {
+  color: #0072ff;
+}
+
+.contact-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 16px;
+  color: #0072ff;
+}
+
+.info-login {
+  margin-top: 4rem;
+  background-color: rgba(239, 242, 255, 1);
+  width: 100%;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 1rem 1.2rem;
+  border: 2px dashed rgba(0, 114, 255, 1);
+  border-radius: 10px;
+}
+
+/* end style contact page */
+
+
+/* start slider homw with out mandate */
+.swiper-3d .swiper-slide-shadow {
+  background: unset !important;
+}
+/* end slider homw with out mandate */
