@@ -1,9 +1,10 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { Navigate, createBrowserRouter } from 'react-router-dom';
 import PWALayout from '../components/layout';
 import Onboarding from '../pages/Onboarding';
 import LoginPage from '../pages/LoginPage';
 // import HomeWithOutMandate from '../pages/HomeWithOutMandate';
 import HomeWithMandate from '../pages/HomeWithMandate';
+import { FAQPage } from '../pages/FAQ';
 
 export const router = createBrowserRouter([
   {
@@ -11,8 +12,12 @@ export const router = createBrowserRouter([
     element: <PWALayout />,
     children: [
       {
+        path: '/',
+        element: <Navigate to="home" />,
+      },
+      {
         path: 'home',
-        element: <HomeWithMandate/>,
+        element: <HomeWithMandate />,
       },
       {
         path: 'transactions',
@@ -32,7 +37,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'faq',
-        element: <h1>frequently asked questions</h1>,
+        element: <FAQPage />,
       },
     ],
   },
