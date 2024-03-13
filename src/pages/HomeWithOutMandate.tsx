@@ -2,10 +2,12 @@ import Search, { type SearchProps } from 'antd/es/input/Search';
 import SelectedMerchants from '../components/template/SelectedMerchants';
 import OtherMerchants from '../components/template/OtherMerchants';
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
+
 import 'swiper/css';
 import 'swiper/css/effect-cards';
 import { Pagination, EffectCards, Autoplay } from 'swiper/modules';
-import './style.css';
+
+import './style-slider-home.css';
 function HomeWithOutMandate() {
   const onSearch: SearchProps['onSearch'] = (value, _e, info) =>
     console.log(info?.source, value);
@@ -14,6 +16,7 @@ function HomeWithOutMandate() {
     <div className="home-wrapper">
       <Swiper
         effect={'cards'}
+        slidesOffsetAfter={3}
         // grabCursor={true}
         // modules={[Pagination, Navigation, EffectCards]}
         // pagination={{
@@ -22,16 +25,16 @@ function HomeWithOutMandate() {
         // className="mySwiper"
         spaceBetween={30}
         centeredSlides={true}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
+        // autoplay={{
+        //   delay: 2500,
+        //   disableOnInteraction: false,
+        // }}
         pagination={{
           clickable: true,
         }}
-        navigation={true}
+        // navigation={true}
         modules={[Autoplay, Pagination, EffectCards]}
-        className="mySwiper"
+        className="mySwiper slider-home"
       >
         <SwiperSlide className="banner-home">
           <img src="/assets/pics/Baner-home.svg" />
@@ -82,6 +85,7 @@ export default HomeWithOutMandate;
 
 const SliderButtons = () => {
   const swiper = useSwiper();
+
   return (
     <div className="flexCenter r-buttons">
       <button onClick={() => swiper.slideNext()}>

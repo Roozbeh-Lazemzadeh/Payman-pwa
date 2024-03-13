@@ -1,0 +1,28 @@
+/* start slider homw with out mandate */
+.swiper-3d .swiper-slide-shadow {
+  background: unset !important;
+}
+
+.slider-home {
+  width: 100%;
+  position: relative;
+}
+
+.slider-home
+  .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal {
+  position: absolute;
+  top: 5rem;
+  right: 41%;
+  z-index: 9999;
+}
+
+.swiper-3d {
+        perspective: 574px;
+}
+
+/* .slider-home swiper-pagination-bullet swiper-pagination-bullet-active */
+
+/* .swiper-slide .banner-home {
+  transform: translate3d(calc(3.25% + 3px), 13px, -100px) rotateZ(0deg) scale(1) !important;
+} */
+/* end slider homw with out mandate */
