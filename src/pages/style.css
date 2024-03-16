@@ -1,3 +1,5 @@
+/* start style login page */
+
 .login-wrapper {
   display: flex;
   justify-content: center;
@@ -22,8 +24,6 @@
   overflow: hidden;
   flex-direction: column;
   align-items: center;
-  /* align-content: stretch; */
-  /* flex-wrap: wrap; */
   align-self: self-end;
 }
 
@@ -52,6 +52,8 @@
   font-size: 18px;
 }
 
+/* end style login page */
+
 /* home style ( with out mandate ) */
 
 .contant-wrapper.scroll {
@@ -67,20 +69,16 @@
   width: 100%;
 }
 
-/* .home-des {
-  color: #245ed3;
-} */
-
 .home-des_title {
   font-weight: 600;
-  font-size: 20px;
+  font-size: 1.3rem;
 }
 
 .home-des_parghraf {
   color: #5f6061;
   line-height: 15.6px;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 0.8rem;
 }
 
 .home-search_input {
@@ -89,22 +87,21 @@
 }
 
 .home-merchants-wrapper {
-  height: 50rem;
+  height: 100%;
   overflow: scroll !important;
   direction: ltr;
 }
 
 .selected-merchants-title {
   font-weight: 500;
-  font-size: 14px;
+  font-size: 0.9rem;
+  /* direction: rtl; */
 }
 
 .home-merchants {
-  direction: rtl;
-}
-
-.home-merchants_ {
-  height: 70rem;
+  overflow: scroll !important;
+  height: calc(100vh - 545px);
+  padding-bottom: 1rem ;
 }
 
 .home-datepickers {
@@ -153,13 +150,6 @@
   transition: ease-in-out 0.3s all;
 }
 
-.home-datepicker-num {
-}
-
-/* .home-datepicker-p {
-  color: #fff;
-} */
-
 .home-datepicker-p:hover {
   font-size: 12px;
   transition: ease-in-out 0.001s all;
@@ -200,15 +190,8 @@
 
 .contact-banner {
   width: 100%;
-  margin-bottom: 7rem;
+  margin-bottom: 5.4rem;
 }
-
-/* .contact-details {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-} */
 
 .contact-detail {
   display: flex;
@@ -252,5 +235,3 @@
 }
 
 /* end style contact page */
-
-

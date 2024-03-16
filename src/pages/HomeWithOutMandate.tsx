@@ -2,15 +2,25 @@ import Search, { type SearchProps } from 'antd/es/input/Search';
 import SelectedMerchants from '../components/template/SelectedMerchants';
 import OtherMerchants from '../components/template/OtherMerchants';
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
+import { Switch } from 'antd';
 
 import 'swiper/css';
 import 'swiper/css/effect-cards';
 import { Pagination, EffectCards, Autoplay } from 'swiper/modules';
-
 import './style-slider-home.css';
+import { useNavigate } from 'react-router-dom';
+
 function HomeWithOutMandate() {
+  const navigate = useNavigate();
+
   const onSearch: SearchProps['onSearch'] = (value, _e, info) =>
     console.log(info?.source, value);
+  const onChange = (checked: boolean) => {
+    console.log(`switch to ${checked}`);
+    if (checked) {
+      navigate('/home/with-mandate', { replace: true });
+    }
+  };
 
   return (
     <div className="home-wrapper">
@@ -37,16 +47,16 @@ function HomeWithOutMandate() {
         className="mySwiper slider-home"
       >
         <SwiperSlide className="banner-home">
-          <img src="/assets/pics/Baner-home.svg" />
+          <img src="/assets/pics/Baner-home.svg" className="banner-home-1" />
         </SwiperSlide>
         <SwiperSlide className="banner-home">
-          <img src="/assets/pics/Baner-home.svg" />
+          <img src="/assets/pics/Baner-home.svg" className="banner-home-2" />
         </SwiperSlide>
         <SwiperSlide className="banner-home">
-          <img src="/assets/pics/Baner-home.svg" />
+          <img src="/assets/pics/Baner-home.svg" className="banner-home-3" />
         </SwiperSlide>
         <SwiperSlide className="banner-home">
-          <img src="/assets/pics/Baner-home.svg" />
+          <img src="/assets/pics/Baner-home.svg" className="banner-home-4" />
         </SwiperSlide>
         <SliderButtons />
       </Swiper>
@@ -54,7 +64,16 @@ function HomeWithOutMandate() {
         <img src="/assets/pics/Baner-home.svg" />
       </div> */}
       <div className="home-des">
-        <p className="home-des_title">پیمان چیست؟</p>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          <p className="home-des_title">پیمان چیست؟</p>
+          <Switch onChange={onChange} />
+        </div>
         <p className="home-des_parghraf">
           «پیمان»، راهکار پرداخت مستقیم از حساب بانکی است که در آن، شما به
           اپلیکیشن یا کسب‌وکار آنلاین مورد نظر خود اجازه می‌دهید طبق شرایطی که
@@ -71,10 +90,8 @@ function HomeWithOutMandate() {
 
       <div className="home-merchants-wrapper">
         <div className="home-merchants">
-          <div className="home-merchants_">
             <SelectedMerchants />
             <OtherMerchants />
-          </div>
         </div>
       </div>
     </div>
@@ -87,12 +104,12 @@ const SliderButtons = () => {
   const swiper = useSwiper();
 
   return (
-    <div className="flexCenter r-buttons">
-      <button onClick={() => swiper.slideNext()}>
+    <div className="slider-buttons">
+      <button onClick={() => swiper.slideNext()} className="slider-button">
         <img src="/assets/onboarding-img/Arrow-Right.svg" />
       </button>
-      <button onClick={() => swiper.slidePrev()}>
-        <img src="/assets/onboarding-img/Arrow-Left.svg" />
+      <button onClick={() => swiper.slidePrev()} className="slider-button">
+        <img src="/assets/onboarding-img/Arrow-Left-white.svg" />
       </button>
     </div>
   );

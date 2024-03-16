@@ -9,7 +9,7 @@ export const sidebarSlice = createSlice({
   name: 'sidebar',
   initialState,
   reducers: {
-    toggle: (state) => {
+    toggleSidebar: (state) => {
       state.isOpen = !state.isOpen;
     },
   },
@@ -17,5 +17,5 @@ export const sidebarSlice = createSlice({
 
 export const selectSidebar = (state: RootState) => state.sidebar?.isOpen;
 
-export const { toggle } = sidebarSlice.actions;
+export const { toggleSidebar } = sidebarSlice.actions;
 export default sidebarSlice.reducer;

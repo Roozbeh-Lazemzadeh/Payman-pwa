@@ -45,9 +45,8 @@ function HomeWithMandate() {
             <p className="TransactionHomeCard-p">امروز، ۱۸ آبان</p>
             {Array.from({ length: 10 }, (value, index) => value).map(
               (item, index) => (
-                <div onClick={() => setIsOpen(!isOpen)}>
+                <div onClick={() => setIsOpen(!isOpen)} key={index}>
                   <TransactionHomeCard
-                    key={index}
                     merchant="تپسی"
                     price={4550}
                     transDate="سه‌شنبه، ۱۴۰۲/۰۷/۲۵- ۱۸:۴۸"
@@ -60,9 +59,8 @@ function HomeWithMandate() {
             <p className="TransactionHomeCard-p">امروز، ۱۸ آبان</p>
             {Array.from({ length: 1 }, (value, index) => value).map(
               (item, index) => (
-                <div onClick={() => setIsOpen(!isOpen)}>
+                <div onClick={() => setIsOpen(!isOpen)} key={index}>
                   <TransactionHomeCard
-                    key={index}
                     merchant="خودرو"
                     price={4550}
                     transDate="سه‌شنبه، ۱۴۰۲/۰۷/۲۵- ۱۸:۴۸"

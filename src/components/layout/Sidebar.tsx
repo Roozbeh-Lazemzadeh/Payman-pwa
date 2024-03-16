@@ -1,7 +1,7 @@
 import React from 'react';
 import { Drawer, Menu } from 'antd';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
-import { selectSidebar, toggle } from '../../store/sidebar/sidebarSlice';
+import { selectSidebar, toggleSidebar } from '../../store/sidebar/sidebarSlice';
 import { getItem } from '../helpers';
 import { ReactComponent as DashboardIcon } from '../../icons/defaultHome.svg';
 import { ReactComponent as ContactIcon } from '../../icons/defaultContact.svg';
@@ -170,7 +170,7 @@ export const Sidebar: React.FC = () => {
       className="custom-sidebar"
       title={CustomTitle()}
       width={300}
-      onClose={() => dispatch(toggle())}
+      onClose={() => dispatch(toggleSidebar())}
       open={isSidebarOpen}
       closeIcon={false}
       footer={customFooter()}

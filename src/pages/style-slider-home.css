@@ -10,19 +10,46 @@
 
 .slider-home
   .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal {
-  position: absolute;
-  top: 5rem;
+  position: absolute !important;
+  top: 6rem;
   right: 41%;
+  z-index: 9999;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  width: 4rem !important;
+  height: 1rem;
+  border-radius: 1rem;
+}
+
+.slider-home
+  .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal
+  > .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background: #fff !important;
+}
+
+.slider-buttons {
+  position: absolute !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  top: 40%;
   z-index: 9999;
 }
 
 .swiper-3d {
-        perspective: 574px;
+  perspective: 574px;
 }
 
-/* .slider-home swiper-pagination-bullet swiper-pagination-bullet-active */
+.slider-button {
+  background-color: unset;
+  border: unset;
+}
 
-/* .swiper-slide .banner-home {
-  transform: translate3d(calc(3.25% + 3px), 13px, -100px) rotateZ(0deg) scale(1) !important;
-} */
+.banner-home-1 {
+  filter: invert(1) !important;
+}
+
 /* end slider homw with out mandate */

@@ -7,7 +7,6 @@ import { getItem } from '../../helpers';
 import './style.css';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import {
-  // filteredToggle,
   searchedToggle,
   selectFilteredFooter,
   selectSearchedFooter,
@@ -21,22 +20,22 @@ const FilteredFooter: React.FC = () => {
   const dispatch = useAppDispatch();
   const items = [
     getItem({
-      key: '1',
+      key: '101',
       label: 'اعمال',
       icon: <TickSquareIcon />,
     }),
     getItem({
-      key: '2',
+      key: '102',
       label: 'مبلغ',
       icon: <ActivityIcon />,
     }),
     getItem({
-      key: '3',
+      key: '103',
       label: 'تاریخ',
       icon: <CalendarIcon />,
     }),
     getItem({
-      key: '4',
+      key: '104',
       label: 'کسب و کار',
       icon: <WorkIcon />,
     }),

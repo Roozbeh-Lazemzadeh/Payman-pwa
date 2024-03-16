@@ -7,7 +7,7 @@ import { ReactComponent as SideBarIcon } from '../../icons/HamburgerMenu.svg';
 
 import './style.css';
 import { useAppDispatch } from '../hooks/reduxHooks';
-import { toggle } from '../../store/sidebar/sidebarSlice';
+import { toggleSidebar } from '../../store/sidebar/sidebarSlice';
 import { NotificationModal } from '../modals/NotificationModal';
 import { toggleNotificationModal } from '../../store/notification/notificationSlice';
 
@@ -23,7 +23,7 @@ const CustomHeader: React.FC<CustomHeaderProps> = ({ background, title }) => {
     : 'none';
   const backgroundColor = background ? '#fff' : 'none';
   const handleShowSidebar = (): void => {
-    dispatch(toggle());
+    dispatch(toggleSidebar());
   };
   const handleNotificationWindow = () => {
     dispatch(toggleNotificationModal());
