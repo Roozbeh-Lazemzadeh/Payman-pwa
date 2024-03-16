@@ -2,7 +2,8 @@ import Search, { type SearchProps } from 'antd/es/input/Search';
 import SelectedMerchants from '../components/template/SelectedMerchants';
 import OtherMerchants from '../components/template/OtherMerchants';
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
-import { ReactComponent as LeftArrowIcon } from '../icons/Arrow-Left 2.svg';
+import { ReactComponent as LeftArrowIcon } from '../icons/Arrow-Left2.svg';
+import { ReactComponent as RightArrowIcon } from '../icons/Arrow-Right2.svg';
 import { Switch } from 'antd';
 
 import 'swiper/css';
@@ -106,13 +107,13 @@ const SliderButtons = () => {
 
   return (
     <div className="slider-buttons">
-      <button onClick={() => swiper.slideNext()} className="slider-button">
-        <img src="/assets/onboarding-img/Arrow-Right.svg" />
-      </button>
-      <button onClick={() => swiper.slidePrev()} className="slider-button">
-        {/* <img src="/assets/onboarding-img/Arrow-Left-white.svg" /> */}
+      <span onClick={() => swiper.slideNext()} className="slider-button">
+        <RightArrowIcon />
+      </span>
+
+      <span onClick={() => swiper.slidePrev()} className="slider-button">
         <LeftArrowIcon />
-      </button>
+      </span>
     </div>
   );
 };

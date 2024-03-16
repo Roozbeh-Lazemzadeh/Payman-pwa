@@ -36,20 +36,18 @@
 }
 
 .ant-collapse-header-text {
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: 600;
   color: #101828;
 }
 
 .ant-collapse-content-box {
   padding: 20px 0 0 0 !important;
-}
-
-.ant-collapse-content-box {
-  line-height: 13px;
+  line-height: 16px;
 }
 
 .ant-collapse-content-box > span {
-  font-size: 10px;
+  font-size: 12px;
   color: #121927;
   font-weight: 500;
 }

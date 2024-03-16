@@ -11,7 +11,7 @@
 .slider-home
   .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal {
   position: absolute !important;
-  top: 6rem;
+  top: 5.5rem;
   right: 41%;
   z-index: 9999;
   display: flex;
@@ -46,10 +46,15 @@
 .slider-button {
   background-color: unset;
   border: unset;
+  width: 20px !important;
+  height: 20px !important;
 }
 
 .banner-home-1 {
   filter: invert(1) !important;
+}
+.swiper.swiper-cards.swiper-3d.swiper-initialized.swiper-horizontal.swiper-rtl.swiper-ios.swiper-watch-progress.mySwiper.slider-home {
+  height: 110px;
 }
 
 /* end slider homw with out mandate */
