@@ -2,6 +2,7 @@ import Search, { type SearchProps } from 'antd/es/input/Search';
 import SelectedMerchants from '../components/template/SelectedMerchants';
 import OtherMerchants from '../components/template/OtherMerchants';
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
+import { ReactComponent as LeftArrowIcon } from '../icons/Arrow-Left 2.svg';
 import { Switch } from 'antd';
 
 import 'swiper/css';
@@ -90,8 +91,8 @@ function HomeWithOutMandate() {
 
       <div className="home-merchants-wrapper">
         <div className="home-merchants">
-            <SelectedMerchants />
-            <OtherMerchants />
+          <SelectedMerchants />
+          <OtherMerchants />
         </div>
       </div>
     </div>
@@ -109,7 +110,8 @@ const SliderButtons = () => {
         <img src="/assets/onboarding-img/Arrow-Right.svg" />
       </button>
       <button onClick={() => swiper.slidePrev()} className="slider-button">
-        <img src="/assets/onboarding-img/Arrow-Left-white.svg" />
+        {/* <img src="/assets/onboarding-img/Arrow-Left-white.svg" /> */}
+        <LeftArrowIcon />
       </button>
     </div>
   );
