@@ -6,9 +6,9 @@ import HomeWithMandate from '../pages/HomeWithMandate';
 import { FAQPage } from '../pages/FAQ';
 import HomeWithOutMandate from '../pages/HomeWithOutMandate';
 import ContactUs from '../pages/ContactUs';
-import { MyPaymans } from '../components/Paymans/myPaymans/MyPaymans';
-import { OtherPaymans } from '../components/Paymans/OtherPaymans';
 import PaymansLayout from '../pages/PaymansPage';
+import { MyPaymans } from '../components/Paymans/myPaymans/MyPaymans';
+import { OtherPaymans } from '../components/Paymans/otherPaymans/OtherPaymans';
 
 export const router = createBrowserRouter([
   {

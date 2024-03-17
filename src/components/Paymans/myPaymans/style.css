@@ -1,3 +1,8 @@
 .payman-filter-title .filter-tools-wrapper .filter-tools-title {
   color: rgba(16, 24, 40, 1);
 }
+
+.other-payman-title {
+  font-size: 14px;
+  font-weight: 500;
+}
