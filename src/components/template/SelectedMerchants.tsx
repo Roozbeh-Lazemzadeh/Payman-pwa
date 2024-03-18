@@ -1,8 +1,9 @@
 import React from 'react';
+import './style.css';
 
 function SelectedMerchants() {
   return (
-    <>
+    <div className="selected-merchants-wrapper">
       <p className="selected-merchants-title">کسب‌وکارهای منتخب</p>
 
       <div className="selected-merchants">
@@ -77,7 +78,7 @@ function SelectedMerchants() {
           <p className="selected-merchant-title">آسان پرداخت</p>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

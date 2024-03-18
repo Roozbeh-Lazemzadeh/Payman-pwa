@@ -1,16 +1,18 @@
 import Search, { type SearchProps } from 'antd/es/input/Search';
 import SelectedMerchants from '../components/template/SelectedMerchants';
 import OtherMerchants from '../components/template/OtherMerchants';
-import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
-import { ReactComponent as LeftArrowIcon } from '../icons/Arrow-Left2.svg';
-import { ReactComponent as RightArrowIcon } from '../icons/Arrow-Right2.svg';
+
 import { Switch } from 'antd';
 
-import 'swiper/css';
-import 'swiper/css/effect-cards';
-import { Pagination, EffectCards, Autoplay } from 'swiper/modules';
-import './style-slider-home.css';
 import { useNavigate } from 'react-router-dom';
+import Slider from '../components/slider/Slider';
+
+const homeSliderArray = [
+  { img: '/assets/banner-home/home1.png' },
+  { img: '/assets/banner-home/home2.png' },
+  { img: '/assets/banner-home/home3.png' },
+  { img: '/assets/banner-home/home4.png' },
+];
 
 function HomeWithOutMandate() {
   const navigate = useNavigate();
@@ -26,45 +28,7 @@ function HomeWithOutMandate() {
 
   return (
     <div className="home-wrapper">
-      <Swiper
-        effect={'cards'}
-        slidesOffsetAfter={3}
-        // grabCursor={true}
-        // modules={[Pagination, Navigation, EffectCards]}
-        // pagination={{
-        //   clickable: true,
-        // }}
-        // className="mySwiper"
-        spaceBetween={30}
-        centeredSlides={true}
-        // autoplay={{
-        //   delay: 2500,
-        //   disableOnInteraction: false,
-        // }}
-        pagination={{
-          clickable: true,
-        }}
-        // navigation={true}
-        modules={[Autoplay, Pagination, EffectCards]}
-        className="mySwiper slider-home"
-      >
-        <SwiperSlide className="banner-home">
-          <img src="/assets/pics/Baner-home.svg" className="banner-home-1" />
-        </SwiperSlide>
-        <SwiperSlide className="banner-home">
-          <img src="/assets/pics/Baner-home.svg" className="banner-home-2" />
-        </SwiperSlide>
-        <SwiperSlide className="banner-home">
-          <img src="/assets/pics/Baner-home.svg" className="banner-home-3" />
-        </SwiperSlide>
-        <SwiperSlide className="banner-home">
-          <img src="/assets/pics/Baner-home.svg" className="banner-home-4" />
-        </SwiperSlide>
-        <SliderButtons />
-      </Swiper>
-      {/* <div className="banner-home">
-        <img src="/assets/pics/Baner-home.svg" />
-      </div> */}
+      <Slider ImgArray={homeSliderArray} />
       <div className="home-des">
         <div
           style={{
@@ -101,19 +65,3 @@ function HomeWithOutMandate() {
 }
 
 export default HomeWithOutMandate;
-
-const SliderButtons = () => {
-  const swiper = useSwiper();
-
-  return (
-    <div className="slider-buttons">
-      <span onClick={() => swiper.slideNext()} className="slider-button">
-        <RightArrowIcon />
-      </span>
-
-      <span onClick={() => swiper.slidePrev()} className="slider-button">
-        <LeftArrowIcon />
-      </span>
-    </div>
-  );
-};

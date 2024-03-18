@@ -1,0 +1,61 @@
+/* start slider homw with out mandate */
+.swiper-3d .swiper-slide-shadow {
+  background: unset !important;
+}
+
+.slider-home {
+  width: 100%;
+  position: relative;
+}
+
+.slider-home
+  .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal {
+  position: absolute !important;
+  top: 6.2rem;
+  right: 41%;
+  z-index: 9999;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  width: 4rem !important;
+  height: 1rem;
+  border-radius: 1rem;
+}
+
+.slider-home
+  .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal
+  > .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background: #fff !important;
+}
+
+.slider-buttons {
+  position: absolute !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  top: 40%;
+  z-index: 9999;
+}
+
+.swiper-3d {
+  perspective: 574px !important;
+}
+
+.slider-button {
+  background-color: unset;
+  border: unset;
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.banner-home-1 {
+  width: 100%;
+  height: 100%;
+}
+.swiper.swiper-cards.swiper-3d.swiper-initialized.swiper-horizontal.swiper-rtl.swiper-ios.swiper-watch-progress.mySwiper.slider-home {
+  height: 120px;
+}
+
+/* end slider homw with out mandate */

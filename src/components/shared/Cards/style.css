@@ -1,10 +1,11 @@
 .transaction-card {
-  height: 53px;
-  width: 330px;
+  height: 85px;
+  width: 100%;
   display: flex;
   padding: 15px 10px;
   box-shadow: 0px 5px 22px 0px rgba(0, 0, 0, 0.05);
   border-radius: 10px;
+  margin-top: 20px;
 }
 .card-merchant-wrapper {
   display: flex;
@@ -112,15 +113,37 @@
   background: rgba(16, 24, 40, 1);
   position: relative;
   display: flex;
-}
-.near-expiration-card-wrapper.expired {
+  align-items: flex-start;
+  gap: 1.5rem;
   color: rgba(255, 255, 255, 0.5);
+}
+.near-expiration-card-wrapper.expired::after {
+  position: absolute;
+  content: '';
+  padding: 0.4rem;
+  background-color: #fff;
+  border-radius: 50%;
+  left: -9px;
+  top: 33%;
+}
+.remain-dates-wrapper {
+  display: flex;
+  gap: 1rem;
+}
+.near-expiration-card-wrapper.expired::before {
+  position: absolute;
+  content: '';
+  padding: 0.4rem;
+  background-color: #fff;
+  border-radius: 50%;
+  left: -9px;
+  top: 57%;
 }
 .merchant-row {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 10%;
+  gap: 1.5rem;
 }
 .merchant-row .merchant-name-logo svg {
   vertical-align: middle;
@@ -160,10 +183,15 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 10%;
+  gap: 1.5rem;
 }
 .bank-row-wrapper.expired {
   width: 19rem;
+}
+.price-ceiling,
+.transaction-ceiling {
+  display: flex;
+  gap: 1rem;
 }
 .ceiling-value {
   font-size: 12px;
@@ -192,7 +220,47 @@
   display: flex;
   flex-direction: column;
 }
-.expiration-section svg {
-  /* margin-top: 30px; */
+
+
+.merchant-name-logo {
+  display: flex;
+  align-items: center;
+}
+
+.merchant-dateils-wrapper {
+  font-size: 10px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  gap: 1.5rem;
+}
+
+.merchant-dateil-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.merchant-dateil-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.merchant-expiration-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+  height: 100%;
+  gap: 6px;
+}
+
+.merchant-expiration-title {
+  font-size: 12px;
+  font-weight: 400;
+  transform: rotate(180deg);
+  writing-mode: vertical-rl;
+  color: #fff;
+  display: block;
 }
 /*  end Near Expired card style */

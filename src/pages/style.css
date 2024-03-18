@@ -102,6 +102,8 @@
   overflow: scroll !important;
   height: calc(100vh - 545px);
   padding-bottom: 1rem ;
+  padding-right: .5rem;
+  padding-left: .5rem;
 }
 
 .home-datepickers {

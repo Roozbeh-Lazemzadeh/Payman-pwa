@@ -9,6 +9,7 @@ import ContactUs from '../pages/ContactUs';
 import PaymansLayout from '../pages/PaymansPage';
 import { MyPaymans } from '../components/Paymans/myPaymans/MyPaymans';
 import { OtherPaymans } from '../components/Paymans/otherPaymans/OtherPaymans';
+import Transactions from '../pages/Transactions';
 
 export const router = createBrowserRouter([
   {
@@ -30,7 +31,7 @@ export const router = createBrowserRouter([
 
       {
         path: 'transactions',
-        element: <h1>تراکنش ها</h1>,
+        element: <Transactions />,
       },
       {
         path: 'paymans',
@@ -60,7 +61,7 @@ export const router = createBrowserRouter([
     element: <Onboarding />,
   },
   {
-    path: '/login-page',
+    path: '/login',
     element: <LoginPage />,
   },
 ]);
