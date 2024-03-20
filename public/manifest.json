@@ -3,7 +3,7 @@
   "name": "پرداخت این بار لذت بخشن",
   "display": "standalone",
   "theme_color": "#0072FF",
-  "background_color" : "#0072FF",
+  "background_color": "#0072FF",
   "start_url": "/",
   "scope": ".",
   "lang": "fa",
