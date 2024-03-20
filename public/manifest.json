@@ -10,49 +10,49 @@
   "dir": "rtl",
   "icons": [
     {
-      "src": "assets/icons/logo-48x48.svg",
+      "src": "assets/payman-logo/logo-48x48.png",
       "sizes": "48x48",
-      "type": "image/svg"
+      "type": "image/png"
     },
     {
-      "src": "assets/icons/logo-72x72.svg",
+      "src": "assets/payman-logo/logo-72x72.png",
       "sizes": "72x72",
-      "type": "image/svg"
+      "type": "image/png"
     },
     {
-      "src": "assets/icons/logo-96x96.svg",
+      "src": "assets/payman-logo/logo-96x96.png",
       "sizes": "96x96",
-      "type": "image/svg"
+      "type": "image/png"
     },
     {
-      "src": "assets/icons/logo-128x128.svg",
+      "src": "assets/payman-logo/logo-128x128.png",
       "sizes": "128x128",
-      "type": "image/svg"
+      "type": "image/png"
     },
     {
-      "src": "assets/icons/logo-144x144.svg",
+      "src": "assets/payman-logo/logo-144x144.png",
       "sizes": "144x144",
-      "type": "image/svg"
+      "type": "image/png"
     },
     {
-      "src": "assets/icons/logo-152x152.svg",
+      "src": "assets/payman-logo/logo-152x152.png",
       "sizes": "152x152",
-      "type": "image/svg"
+      "type": "image/png"
     },
     {
-      "src": "assets/icons/logo-192x192.svg",
+      "src": "assets/payman-logo/logo-192x192.png",
       "sizes": "192x192",
-      "type": "image/svg"
+      "type": "image/png"
     },
     {
-      "src": "assets/icons/logo-412x412.svg",
+      "src": "assets/payman-logo/logo-412x412.png",
       "sizes": "412x412",
-      "type": "image/svg"
+      "type": "image/png"
     },
     {
-      "src": "assets/icons/logo-512x512.svg",
+      "src": "assets/payman-logo/logo-512x512.png",
       "sizes": "512x512",
-      "type": "image/svg"
+      "type": "image/png"
     }
   ]
 }
