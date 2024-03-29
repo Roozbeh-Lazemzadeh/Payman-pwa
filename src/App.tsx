@@ -39,6 +39,12 @@ function App(): JSX.Element {
               borderRadius: 10,
               colorBgContainerDisabled: 'rgba(172, 172, 172, 0.2)',
             },
+            Segmented: {
+              itemSelectedColor: '#fff',
+              itemSelectedBg: 'rgba(0, 114, 255, 1)',
+              motionEaseInOut: 'linear',
+              motionDurationSlow: '250ms',
+            },
           },
         }}
       >

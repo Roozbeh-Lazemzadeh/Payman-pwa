@@ -5,12 +5,10 @@
 .ant-segmented .ant-segmented-item-label {
   min-height: 36px;
   line-height: 36px;
-  transition: none;
 }
 
 .ant-segmented .ant-segmented-item {
   border-radius: 10px;
-  transition: none;
 }
 .ant-segmented.ant-segmented-block {
   border-radius: 10px;
@@ -28,10 +26,6 @@
 
 .ant-segmented-item {
   color: #0072ff;
-}
-.ant-segmented .ant-segmented-item-selected {
-  background-color: rgba(0, 114, 255, 1);
-  color: #ffffff;
 }
 
 .ant-segmented .ant-segmented-thumb {

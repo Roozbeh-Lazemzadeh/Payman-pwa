@@ -1,4 +1,3 @@
-
 .send-otp-wrapper {
   display: flex;
   flex-direction: column;
@@ -71,6 +70,9 @@
   padding: 1rem 1.2rem;
   border: 1.2px dashed rgba(0, 114, 255, 1);
   border-radius: 10px;
+}
+.info-login.payman {
+  margin-top: 2rem;
 }
 
 .check-wrapper {
@@ -158,7 +160,7 @@
   background-size: cover;
   margin-top: 1rem;
   border-radius: 10px;
-  padding-top: 2rem;
+  padding-top: 1rem;
   -webkit-box-shadow: -6px 5px 10px -3px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: -6px 5px 10px -3px rgba(0, 0, 0, 0.1);
   box-shadow: -6px 5px 10px -3px rgba(0, 0, 0, 0.1);
@@ -188,3 +190,16 @@
 }
 
 /* end filter tools style */
+
+.selected-merchant-title {
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0;
+}
+.img-wrapper {
+  width: 50px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

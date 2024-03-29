@@ -96,6 +96,7 @@
 
 /*  start Near Expired card style */
 .near-expiration-card-wrapper {
+  direction: rtl;
   border: 1px solid rgba(0, 114, 255, 1);
   box-shadow: 0px 5px 22px 0px rgba(0, 114, 255, 0.1);
   border-radius: 10px;
@@ -105,10 +106,12 @@
   padding: 10px 10px;
 }
 .near-expiration-card-wrapper.other {
+  direction: rtl;
   border: unset;
   box-shadow: 0px 5px 22px 0px rgba(0, 0, 0, 0.05);
 }
 .near-expiration-card-wrapper.expired {
+  direction: rtl;
   border: unset;
   background: rgba(16, 24, 40, 1);
   position: relative;
@@ -221,7 +224,6 @@
   flex-direction: column;
 }
 
-
 .merchant-name-logo {
   display: flex;
   align-items: center;
@@ -253,6 +255,28 @@
   justify-content: center;
   height: 100%;
   gap: 6px;
+  margin-right: 10px; /* Default margin */
+}
+
+@media (min-width: 400px) {
+  .merchant-expiration-wrapper {
+    margin-right: 20px; /* Margin for min width 400px */
+  }
+}
+@media (min-width: 410px) {
+  .merchant-expiration-wrapper {
+    margin-right: 30px; /* Margin for min width 400px */
+  }
+}
+@media (min-width: 420px) {
+  .merchant-expiration-wrapper {
+    margin-right: 40px; /* Margin for min width 400px */
+  }
+}
+@media (min-width: 430px) {
+  .merchant-expiration-wrapper {
+    margin-right: 50px; /* Margin for min width 400px */
+  }
 }
 
 .merchant-expiration-title {

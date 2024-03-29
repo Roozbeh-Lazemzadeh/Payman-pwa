@@ -3,6 +3,24 @@
 }
 
 .other-payman-title {
+  direction: rtl !important;
   font-size: 14px;
   font-weight: 500;
+  display: flex;
 }
+
+.scrollable-section {
+  overflow-y: scroll !important;
+  overflow-x: hidden;
+  height: calc(100vh - 290px);
+  padding-bottom: 1rem;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  direction: ltr;
+}
+
+/* .scrollable-section-wrapper {
+  height: 100%;
+  overflow: scroll !important;
+  direction: ltr;
+} */
