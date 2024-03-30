@@ -1,4 +1,4 @@
-/* eslint-disable react/no-unescaped-entities */
+import React, { useState, useEffect } from 'react';
 import { RouterProvider } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 // import { Button, ConfigProvider, Input, Tag } from 'antd';
@@ -11,8 +11,19 @@ import './App.css';
 // import { CustomDrawer } from './components/shared/Drawer/Drawer';
 // import { TransactionCard } from './components/shared/Cards/TransactionCards';
 import { router } from './router/router';
+import SplashScreen from './components/splash/SplashScreen';
 
 function App(): JSX.Element {
+  const [isAppLoaded, setIsAppLoaded] = useState<boolean>(false);
+
+  useEffect(() => {
+    // Simulate app loading
+    const loadApp = setTimeout(() => {
+      setIsAppLoaded(true);
+    }, 3000); // Adjust the delay as needed
+
+    return () => clearTimeout(loadApp);
+  }, []);
   return (
     <>
       <ConfigProvider
@@ -192,7 +203,7 @@ function App(): JSX.Element {
           />
         </div>
       </div> */}
-        <RouterProvider router={router} />
+        {isAppLoaded ? <RouterProvider router={router} /> : <SplashScreen />}
       </ConfigProvider>
     </>
   );
