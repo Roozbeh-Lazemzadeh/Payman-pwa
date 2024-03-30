@@ -29,7 +29,7 @@ const SplashScreen: React.FC = () => {
         <span>توسعه‌یافته توسط پیمان</span>
         <img
           className="footer-wrapper__img"
-          src="/assets/logo-splash/Payman.png"
+          src="/assets/logo-splash/Payman.svg"
           alt="توسعه‌یافته توسط پیمان"
         />
       </div>
