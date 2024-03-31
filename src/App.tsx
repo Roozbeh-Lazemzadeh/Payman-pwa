@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable react/no-unescaped-entities */
-=======
 import React, { useState, useEffect } from 'react';
->>>>>>> cf1ff983f05a4e916cd5618656a366814ff9c5d2
 import { RouterProvider } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 // import { Button, ConfigProvider, Input, Tag } from 'antd';
