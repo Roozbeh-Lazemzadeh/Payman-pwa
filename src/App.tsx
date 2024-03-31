@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react/no-unescaped-entities */
 import { RouterProvider } from 'react-router-dom';
 import { ConfigProvider } from 'antd';

@@ -10,58 +10,59 @@ import PaymansLayout from '../pages/PaymansPage';
 import { MyPaymans } from '../components/Paymans/myPaymans/MyPaymans';
 import { OtherPaymans } from '../components/Paymans/otherPaymans/OtherPaymans';
 import Transactions from '../pages/Transactions';
+import AccountPage from '../pages/AccountPage';
 
 export const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <PWALayout />,
     children: [
       {
-        path: '/',
+        path: "/",
         element: <Navigate to="home" />,
       },
       {
-        path: 'home',
+        path: "home",
         children: [
-          { path: 'with-mandate', element: <HomeWithMandate /> },
-          { path: '', element: <Navigate to="without-mandate" /> },
-          { path: 'without-mandate', element: <HomeWithOutMandate /> },
+          { path: "with-mandate", element: <HomeWithMandate /> },
+          { path: "", element: <Navigate to="without-mandate" /> },
+          { path: "without-mandate", element: <HomeWithOutMandate /> },
         ],
       },
 
       {
-        path: 'transactions',
+        path: "transactions",
         element: <Transactions />,
       },
       {
-        path: 'paymans',
+        path: "paymans",
         element: <PaymansLayout />,
         children: [
-          { path: '', element: <Navigate to="me" /> },
-          { path: 'me', element: <MyPaymans /> },
-          { path: 'others', element: <OtherPaymans /> },
+          { path: "", element: <Navigate to="me" /> },
+          { path: "me", element: <MyPaymans /> },
+          { path: "others", element: <OtherPaymans /> },
         ],
       },
       {
-        path: 'profile',
-        element: <h1>profile</h1>,
+        path: "profile",
+        element: <AccountPage />,
       },
       {
-        path: 'faq',
+        path: "faq",
         element: <FAQPage />,
       },
       {
-        path: '/contact-us',
+        path: "/contact-us",
         element: <ContactUs />,
       },
     ],
   },
   {
-    path: '/onboarding',
+    path: "/onboarding",
     element: <Onboarding />,
   },
   {
-    path: '/login',
+    path: "/login",
     element: <LoginPage />,
   },
 ]);
