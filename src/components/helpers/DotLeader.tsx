@@ -11,7 +11,7 @@ export const DotLeader: React.FC<DotLeaderProps> = ({ text1, text2 }) => {
     <div className="dot-leader-wrapper">
       <span className="start-text">{text1}</span>
       <span className="dots">
-        {Array.from({ length: 1000 }, (value, index) => value).map(() => '.')}
+        {Array.from({ length: 1000 }, (value) => value).map(() => '.')}
       </span>
       <span className="end-text">{text2} </span>
     </div>

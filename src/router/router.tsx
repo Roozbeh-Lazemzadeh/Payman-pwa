@@ -1,67 +1,68 @@
-import { Navigate, createBrowserRouter } from 'react-router-dom';
-import PWALayout from '../components/layout';
-import Onboarding from '../pages/Onboarding';
-import LoginPage from '../pages/LoginPage';
-import HomeWithMandate from '../pages/HomeWithMandate';
-import { FAQPage } from '../pages/FAQ';
-import HomeWithOutMandate from '../pages/HomeWithOutMandate';
-import ContactUs from '../pages/ContactUs';
-import PaymansLayout from '../pages/PaymansPage';
-import { MyPaymans } from '../components/Paymans/myPaymans/MyPaymans';
-import { OtherPaymans } from '../components/Paymans/otherPaymans/OtherPaymans';
-import Transactions from '../pages/Transactions';
+import { Navigate, createBrowserRouter } from "react-router-dom";
+import PWALayout from "../components/layout";
+import Onboarding from "../pages/Onboarding";
+import LoginPage from "../pages/LoginPage";
+import HomeWithMandate from "../pages/HomeWithMandate";
+import { FAQPage } from "../pages/FAQ";
+import HomeWithOutMandate from "../pages/HomeWithOutMandate";
+import ContactUs from "../pages/ContactUs";
+import PaymansLayout from "../pages/PaymansPage";
+import { MyPaymans } from "../components/Paymans/myPaymans/MyPaymans";
+import { OtherPaymans } from "../components/Paymans/otherPaymans/OtherPaymans";
+import Transactions from "../pages/Transactions";
+import AccountPage from "../pages/AccountPage";
 
 export const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <PWALayout />,
     children: [
       {
-        path: '/',
+        path: "/",
         element: <Navigate to="onboarding" />,
       },
       {
-        path: 'home',
+        path: "home",
         children: [
-          { path: 'with-mandate', element: <HomeWithMandate /> },
-          { path: '', element: <Navigate to="without-mandate" /> },
-          { path: 'without-mandate', element: <HomeWithOutMandate /> },
+          { path: "with-mandate", element: <HomeWithMandate /> },
+          { path: "", element: <Navigate to="without-mandate" /> },
+          { path: "without-mandate", element: <HomeWithOutMandate /> },
         ],
       },
 
       {
-        path: 'transactions',
+        path: "transactions",
         element: <Transactions />,
       },
       {
-        path: 'paymans',
+        path: "paymans",
         element: <PaymansLayout />,
         children: [
-          { path: '', element: <Navigate to="me" /> },
-          { path: 'me', element: <MyPaymans /> },
-          { path: 'others', element: <OtherPaymans /> },
+          { path: "", element: <Navigate to="me" /> },
+          { path: "me", element: <MyPaymans /> },
+          { path: "others", element: <OtherPaymans /> },
         ],
       },
       {
-        path: 'profile',
-        element: <h1>profile</h1>,
+        path: "profile",
+        element: <AccountPage />,
       },
       {
-        path: 'faq',
+        path: "faq",
         element: <FAQPage />,
       },
       {
-        path: '/contact-us',
+        path: "/contact-us",
         element: <ContactUs />,
       },
     ],
   },
   {
-    path: '/onboarding',
+    path: "/onboarding",
     element: <Onboarding />,
   },
   {
-    path: '/login',
+    path: "/login",
     element: <LoginPage />,
   },
 ]);

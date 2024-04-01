@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
 import { Autoplay, EffectCards, Pagination } from 'swiper/modules';
 import { ReactComponent as LeftArrowIcon } from '../../icons/Arrow-Left2.svg';

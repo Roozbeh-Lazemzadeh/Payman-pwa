@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import { useEffect, useState } from 'react';
 import { Layout, Tabs } from 'antd';
 import { ReactComponent as DefaultPaymanIcon } from '../../icons/defaultPayman.svg';

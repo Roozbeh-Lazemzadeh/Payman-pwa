@@ -1,21 +1,24 @@
-import React from 'react';
-import { Drawer, Menu } from 'antd';
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
-import { selectSidebar, toggleSidebar } from '../../store/sidebar/sidebarSlice';
-import { getItem } from '../helpers';
-import { ReactComponent as DashboardIcon } from '../../icons/defaultHome.svg';
-import { ReactComponent as ContactIcon } from '../../icons/defaultContact.svg';
-import { ReactComponent as ProfileIcon } from '../../icons/defaultProfile.svg';
-import { ReactComponent as InfoIcon } from '../../icons/defaultInfoIcon.svg';
-import { ReactComponent as BlogIcon } from '../../icons/defaultBlog.svg';
-import './style.css';
-import Slider from '../slider/Slider';
+import React from "react";
+import { Drawer, Menu } from "antd";
+import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
+import { selectSidebar, toggleSidebar } from "../../store/sidebar/sidebarSlice";
+import { getItem } from "../helpers";
+import { ReactComponent as DashboardIcon } from "../../icons/defaultHome.svg";
+import { ReactComponent as ContactIcon } from "../../icons/defaultContact.svg";
+import { ReactComponent as ProfileIcon } from "../../icons/defaultProfile.svg";
+import { ReactComponent as InfoIcon } from "../../icons/defaultInfoIcon.svg";
+import { ReactComponent as BlogIcon } from "../../icons/defaultBlog.svg";
+import "./style.css";
+import Slider from "../slider/Slider";
 
 const homeSliderArray = [
-  { img: '/assets/banner-sidbar/photo101.png' },
-  { img: '/assets/banner-sidbar/photo102.png' },
-  { img: '/assets/banner-sidbar/photo103.png' },
-  { img: '/assets/banner-sidbar/photo104.png' }
+  { img: "/assets/banner-sidbar/photo101.png" },
+  { img: "/assets/banner-sidbar/photo101.png" },
+  { img: "/assets/banner-sidbar/photo101.png" },
+  { img: "/assets/banner-sidbar/photo101.png" }
+  // { img: '/assets/banner-sidbar/photo102.png' },
+  // { img: '/assets/banner-sidbar/photo103.png' },
+  // { img: '/assets/banner-sidbar/photo104.png' }
 ];
 
 export const Sidebar: React.FC = () => {
@@ -24,35 +27,35 @@ export const Sidebar: React.FC = () => {
 
   const items = [
     getItem({
-      label: 'داشبورد',
-      key: '1',
+      label: "داشبورد",
+      key: "1",
       icon: <DashboardIcon />,
     }),
     getItem({
-      label: 'تماس با پیمان',
-      key: '2',
+      label: "تماس با پیمان",
+      key: "2",
       icon: <ContactIcon />,
     }),
     getItem({
-      label: 'حساب کاربری',
-      key: '3',
+      label: "حساب کاربری",
+      key: "3",
       icon: <ProfileIcon />,
     }),
     getItem({
-      label: 'پرسش‌های متداول',
-      key: '4',
+      label: "پرسش‌های متداول",
+      key: "4",
       icon: <InfoIcon />,
     }),
     getItem({
-      label: 'بلاگ پیمان',
-      key: '5',
+      label: "بلاگ پیمان",
+      key: "5",
       icon: <BlogIcon />,
     }),
   ];
 
   const CustomTitle = () => {
     return (
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div style={{ display: "flex", alignItems: "center" }}>
         <svg
           width="40"
           height="40"
@@ -78,7 +81,7 @@ export const Sidebar: React.FC = () => {
           style={{
             fontSize: 14,
             fontWeight: 600,
-            marginRight: '10px',
+            marginRight: "10px",
           }}
         >
           خوش آمدید به
@@ -90,8 +93,8 @@ export const Sidebar: React.FC = () => {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           style={{
-            marginRight: '3px',
-            marginTop: '3px',
+            marginRight: "3px",
+            marginTop: "3px",
           }}
         >
           <path
@@ -134,15 +137,15 @@ export const Sidebar: React.FC = () => {
     return (
       <div
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
         <span
           style={{
             fontSize: 10,
-            color: 'rgba(16, 24, 40, 0.2)',
+            color: "rgba(16, 24, 40, 0.2)",
             fontWeight: 500,
             paddingLeft: 5,
           }}
@@ -184,7 +187,7 @@ export const Sidebar: React.FC = () => {
       footer={customFooter()}
     >
       <Menu
-        style={{ background: 'none' }}
+        style={{ background: "none" }}
         // onClick={handleNavLink}
         mode="inline"
         selectedKeys={[location.pathname]}
@@ -193,7 +196,7 @@ export const Sidebar: React.FC = () => {
       />
       <div
         style={{
-          borderBottom: '1px solid rgba(5, 5, 5, 0.06)',
+          borderBottom: "1px solid rgba(5, 5, 5, 0.06)",
           width: 260,
         }}
       >
@@ -201,9 +204,9 @@ export const Sidebar: React.FC = () => {
       </div>
       <div
         style={{
-          padding: '30px 10px',
-          display: 'flex',
-          alignItems: 'center',
+          padding: "30px 10px",
+          display: "flex",
+          alignItems: "center",
         }}
       >
         <svg
