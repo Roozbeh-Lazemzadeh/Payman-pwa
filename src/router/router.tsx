@@ -18,7 +18,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Navigate to="home" />,
+        element: <Navigate to="onboarding" />,
       },
       {
         path: 'home',

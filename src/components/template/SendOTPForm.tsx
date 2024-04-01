@@ -32,15 +32,13 @@ const SendOTPForm: FC<OnboardingProps> = ({ setStep }) => {
               را خوانده‌ام و می‌پذیرم.
             </span>
           </Checkbox>
-          <Button
-            className="otp-form_btn-wrapper"
-            type="primary"
-          >
-            <input
+          <Button className="otp-form_btn-wrapper" type="primary">
+            {/* <input
               type="submit"
               value="تایید و ادامه"
               className="otp-form_submit"
-            />
+            /> */}
+            تایید و ادامه
           </Button>
         </form>
       </div>
@@ -105,6 +103,7 @@ const SendOTPForm: FC<OnboardingProps> = ({ setStep }) => {
           <div
             style={{
               paddingTop: 40,
+              paddingBottom: 40,
               display: 'flex',
               justifyContent: 'center',
             }}

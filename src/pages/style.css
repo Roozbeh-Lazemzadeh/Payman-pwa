@@ -113,7 +113,7 @@
 }
 
 .home-merchants.payman {
-  height: calc(100vh - 510px);
+  height: calc(100vh - 530px);
 }
 
 .home-datepickers {
@@ -238,12 +238,13 @@
 .info-login {
   margin-top: 4rem;
   background-color: rgba(239, 242, 255, 1);
-  width: 100%;
+  width: 77%;
   font-size: 13px;
   font-weight: 600;
-  padding: 1rem 1.2rem;
+  padding: 1rem 1.5rem;
   border: 2px dashed rgba(0, 114, 255, 1);
   border-radius: 10px;
+  line-height: 20px;
 }
 
 /* end style contact page */
