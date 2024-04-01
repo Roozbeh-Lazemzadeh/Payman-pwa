@@ -3,6 +3,7 @@ import { CustomCollapse } from '../components/collapse/CustomCollapse';
 import '../components/collapse/style.css';
 import { Button } from 'antd';
 import { ReactComponent as ContactIcon } from '../icons/calling.svg';
+import './style.css'
 interface CollapseItem {
   label: string;
   text: string;
@@ -40,9 +41,9 @@ const items: CollapseItem[] = [
     key: '6',
   },
 ];
-const handleCallSupport = () => {
-  window.location.href = 'tel:+982188332216';
-};
+// const handleCallSupport = () => {
+//   window.location.href = 'tel:+982188332216';
+// };
 
 export const FAQPage: React.FC = () => {
   return (
@@ -56,10 +57,12 @@ export const FAQPage: React.FC = () => {
       <Button
         className="contact-us-with-icon"
         type="primary"
-        icon={<ContactIcon />}
-        onClick={handleCallSupport}
+        // icon={}
       >
-        تماس با پشتیبانی
+        <a href="tel:02122989880" className="btn-faq">
+          <ContactIcon />
+          تماس با پشتیبانی
+        </a>
       </Button>
     </>
   );
