@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
-import { type FC, type Dispatch, type SetStateAction, useState } from 'react';
-import { Input, Checkbox, Button } from 'antd';
+import { type FC, type Dispatch, type SetStateAction, useState } from "react";
+import { Input, Checkbox, Button } from "antd";
 
-import './style.css';
-import { CustomDrawer } from '../shared/Drawer/Drawer';
+import "./style.css";
+import { CustomDrawer } from "../shared/Drawer/Drawer";
 // import { Button } from 'antd/es/radio';
 
 interface OnboardingProps {
@@ -27,7 +27,7 @@ const SendOTPForm: FC<OnboardingProps> = ({ setStep }) => {
           <Checkbox className="otp-Checkbox">
             <span onClick={() => setIsOpen(!isOpen)}>
               <span className="otp-Checkbox__open-drawer">
-                توافق‌نامه کاربری پیمان{' '}
+                توافق‌نامه کاربری پیمان{" "}
               </span>
               را خوانده‌ام و می‌پذیرم.
             </span>
@@ -48,7 +48,7 @@ const SendOTPForm: FC<OnboardingProps> = ({ setStep }) => {
           <span className="cover-customer__login-link">پشتیبانی</span>
         </p>
       </div>
-      <p className="info-login">
+      <p className="info-login login">
         پیمان برای استعلام اطلاعات هویتی شما، از سامانه شاهکار بانک مرکزی
         استفاده می‌کند؛ بنابراین توجه کنید که کد ملی و شماره موبایل، متعلق به یک
         نفر باشد.
@@ -56,15 +56,15 @@ const SendOTPForm: FC<OnboardingProps> = ({ setStep }) => {
       <CustomDrawer
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        title={'توافق‌نامه کاربری پیمان'}
+        title={"توافق‌نامه کاربری پیمان"}
       >
         <div style={{ fontWeight: 500 }}>
           <div
             style={{
               height: 300,
-              overflow: 'scroll',
-              padding: '0px 20px',
-              color: 'rgba(16, 24, 40, 1)',
+              overflow: "scroll",
+              padding: "0px 20px",
+              color: "rgba(16, 24, 40, 1)",
               fontSize: 14,
             }}
           >
@@ -104,12 +104,12 @@ const SendOTPForm: FC<OnboardingProps> = ({ setStep }) => {
             style={{
               paddingTop: 40,
               paddingBottom: 40,
-              display: 'flex',
-              justifyContent: 'center',
+              display: "flex",
+              justifyContent: "center",
             }}
           >
             <Button
-              style={{ display: 'flex' }}
+              style={{ display: "flex" }}
               type="primary"
               icon={
                 <svg

@@ -2,7 +2,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
+  /* width: 100%; */
+  padding: 0px 20px;
+  margin: 0 auto;
 }
 
 .send-otp-form {
@@ -18,7 +20,7 @@
 
 .otp-form_input {
   display: block;
-  width: 90vw;
+  width: 100%;
   height: 44px;
   margin-top: 1.5rem;
 }
@@ -38,7 +40,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 90vw;
+  width: 100%;
   height: 40px;
   margin-top: 1.5rem;
 }

@@ -1,5 +1,6 @@
-import './style.css';
-import IconSvg from './icon.svg';
+import PropTypes from "prop-types";
+import "./style.css";
+import IconSvg from "./icon.svg";
 
 interface TransactionCardProps {
   merchant: string;
@@ -16,6 +17,13 @@ export const TransactionCard: React.FC<TransactionCardProps> = ({
   transStatusIcon,
   price,
 }) => {
+  TransactionCard.propTypes = {
+    merchant: PropTypes.string.isRequired,
+    transDate: PropTypes.string.isRequired,
+    transStatus: PropTypes.string.isRequired,
+    transStatusIcon: PropTypes.node.isRequired,
+    price: PropTypes.number.isRequired,
+  };
   return (
     <div className="transaction-card">
       <div className="card-merchant-wrapper">
@@ -35,7 +43,7 @@ export const TransactionCard: React.FC<TransactionCardProps> = ({
           </div>
         </div>
         <div>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div style={{ display: "flex", alignItems: "center" }}>
             <span className="transaction-title">تاریخ تراکنش:‌</span>
             <span className="card-date">{transDate}</span>
           </div>

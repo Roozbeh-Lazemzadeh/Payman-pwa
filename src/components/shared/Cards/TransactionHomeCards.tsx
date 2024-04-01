@@ -1,6 +1,7 @@
-import './style.css';
-import IconSvg from './icon.svg';
-import { ReactComponent as ArrowLeft2Icon } from '../../../icons/arrowLeft2.svg';
+import PropTypes from "prop-types";
+import IconSvg from "./icon.svg";
+import { ReactComponent as ArrowLeft2Icon } from "../../../icons/arrowLeft2.svg";
+import "./style.css";
 
 interface TransactionHomeCardProps {
   merchant: string;
@@ -13,6 +14,11 @@ export const TransactionHomeCard: React.FC<TransactionHomeCardProps> = ({
   transDate,
   price,
 }) => {
+  TransactionHomeCard.propTypes = {
+    merchant: PropTypes.string.isRequired,
+    transDate: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+  };
   return (
     <div className="transaction-home-card">
       <div className="card-merchant-wrapper">
@@ -28,7 +34,7 @@ export const TransactionHomeCard: React.FC<TransactionHomeCardProps> = ({
           </div>
         </div>
         <div>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div style={{ display: "flex", alignItems: "center" }}>
             <span className="transaction-title">تاریخ تراکنش:‌</span>
             <span className="card-date">{transDate}</span>
           </div>

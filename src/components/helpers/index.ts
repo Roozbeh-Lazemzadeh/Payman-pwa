@@ -1,6 +1,6 @@
-import { useNavigate } from 'react-router-dom';
-import { toggleSidebar } from '../../store/sidebar/sidebarSlice';
-import { useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+import { toggleSidebar } from "../../store/sidebar/sidebarSlice";
+import { useDispatch } from "react-redux";
 
 interface ItemProps {
   label: string;
@@ -20,12 +20,14 @@ export function getItem({ label, key, icon, children }: ItemProps) {
     }
 
     // for navigating the page
-    if (key === '4') {
-      navigate('/faq');
-    } else if (key === '2') {
-      navigate('/contact-us');
-    } else if (key === '1') {
-      navigate('/home');
+    if (key === "4") {
+      navigate("/faq");
+    } else if (key === "2") {
+      navigate("/contact-us");
+    } else if (key === "1") {
+      navigate("/home");
+    } else if (key === "3") {
+      navigate("/profile");
     }
   };
 
