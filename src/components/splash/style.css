@@ -52,17 +52,22 @@
 }
 
 .footer-wrapper {
-  direction: ltr;
+  direction: rtl;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
+  /* gap: 5px; */
   margin-bottom: 1.2rem;
   font-size: 10px;
+  color: rgba(16, 24, 40, 0.2);
+  font-weight: 500;
 }
 .footer-wrapper > span {
   color: #fff;
   font-weight: 500;
+}
+.footer-wrapper.splash {
+  direction: ltr;
 }
 
 @keyframes logo-mid {

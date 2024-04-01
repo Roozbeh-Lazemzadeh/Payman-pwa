@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface OnboardingRedirectBtnProps {
   tickShow: boolean;
@@ -7,8 +8,15 @@ interface OnboardingRedirectBtnProps {
 const OnboardingRedirectBtn: React.FC<OnboardingRedirectBtnProps> = ({
   tickShow,
 }) => {
+  const navigate = useNavigate();
+
+  const NavigateToHomePage = (): void => {
+    navigate('/home');
+  };
   return (
-    <div className="headerOnboarding-navgit">{!tickShow && <p>رد کردن</p>}</div>
+    <div className="headerOnboarding-navgit">
+      {!tickShow && <p onClick={NavigateToHomePage}>رد کردن</p>}
+    </div>
   );
 };
 

@@ -117,8 +117,13 @@
   position: relative;
   display: flex;
   align-items: flex-start;
-  gap: 1.5rem;
+  gap: 1rem;
   color: rgba(255, 255, 255, 0.5);
+}
+@media (max-width: 390px) {
+  .near-expiration-card-wrapper.expired {
+    gap: 0.5rem;
+  }
 }
 .near-expiration-card-wrapper.expired::after {
   position: absolute;

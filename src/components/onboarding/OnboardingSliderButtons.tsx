@@ -2,6 +2,7 @@
 import { type FC, useState } from 'react';
 import { Progress } from 'antd';
 import { useSwiper } from 'swiper/react';
+import { useNavigate } from 'react-router-dom';
 
 interface OnboardingSliderButtonsProps {
   tickShow: boolean;
@@ -12,6 +13,7 @@ const OnboardingSliderButtons: FC<OnboardingSliderButtonsProps> = ({
   tickShow,
   settickShow,
 }) => {
+  const navigate = useNavigate();
   const [btnShow, setbtnShow] = useState<boolean>(false);
   const [circle, setCircle] = useState<number>(33.33);
   const swiper = useSwiper();
@@ -44,6 +46,10 @@ const OnboardingSliderButtons: FC<OnboardingSliderButtonsProps> = ({
     swiper.slidePrev();
   };
 
+  const NavigateToHomePage = (): void => {
+    navigate('/home');
+  };
+
   return (
     <div className="btn-slid">
       <span onClick={handlePrevClick} className="prevClick">
@@ -68,6 +74,7 @@ const OnboardingSliderButtons: FC<OnboardingSliderButtonsProps> = ({
                   width: '1rem',
                   height: '1rem',
                 }}
+                onClick={NavigateToHomePage}
               />
             ) : (
               <img

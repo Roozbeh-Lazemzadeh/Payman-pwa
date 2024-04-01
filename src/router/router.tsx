@@ -1,16 +1,16 @@
-import { Navigate, createBrowserRouter } from 'react-router-dom';
-import PWALayout from '../components/layout';
-import Onboarding from '../pages/Onboarding';
-import LoginPage from '../pages/LoginPage';
-import HomeWithMandate from '../pages/HomeWithMandate';
-import { FAQPage } from '../pages/FAQ';
-import HomeWithOutMandate from '../pages/HomeWithOutMandate';
-import ContactUs from '../pages/ContactUs';
-import PaymansLayout from '../pages/PaymansPage';
-import { MyPaymans } from '../components/Paymans/myPaymans/MyPaymans';
-import { OtherPaymans } from '../components/Paymans/otherPaymans/OtherPaymans';
-import Transactions from '../pages/Transactions';
-import AccountPage from '../pages/AccountPage';
+import { Navigate, createBrowserRouter } from "react-router-dom";
+import PWALayout from "../components/layout";
+import Onboarding from "../pages/Onboarding";
+import LoginPage from "../pages/LoginPage";
+import HomeWithMandate from "../pages/HomeWithMandate";
+import { FAQPage } from "../pages/FAQ";
+import HomeWithOutMandate from "../pages/HomeWithOutMandate";
+import ContactUs from "../pages/ContactUs";
+import PaymansLayout from "../pages/PaymansPage";
+import { MyPaymans } from "../components/Paymans/myPaymans/MyPaymans";
+import { OtherPaymans } from "../components/Paymans/otherPaymans/OtherPaymans";
+import Transactions from "../pages/Transactions";
+import AccountPage from "../pages/AccountPage";
 
 export const router = createBrowserRouter([
   {
@@ -19,7 +19,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Navigate to="home" />,
+        element: <Navigate to="onboarding" />,
       },
       {
         path: "home",

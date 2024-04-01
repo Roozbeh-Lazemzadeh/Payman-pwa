@@ -25,7 +25,7 @@ const SplashScreen: React.FC = () => {
           />
         </div>
       </div>
-      <div className="footer-wrapper">
+      <div className="footer-wrapper splash">
         <span>توسعه‌یافته توسط پیمان</span>
         <img
           className="footer-wrapper__img"
