@@ -1,6 +1,7 @@
-import Sheet from 'react-modal-sheet';
-import { type Dispatch, type SetStateAction, type ReactNode } from 'react';
-import './style.css';
+import PropTypes from "prop-types";
+import Sheet from "react-modal-sheet";
+import { type Dispatch, type SetStateAction, type ReactNode } from "react";
+import "./style.css";
 
 interface CustomDrawerProps {
   title: string;
@@ -15,6 +16,12 @@ export const CustomDrawer: React.FC<CustomDrawerProps> = ({
   title,
   children,
 }) => {
+  CustomDrawer.propTypes = {
+    isOpen: PropTypes.bool.isRequired,
+    setIsOpen: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired,
+    children: PropTypes.node.isRequired,
+  };
   return (
     <>
       <Sheet
@@ -27,11 +34,11 @@ export const CustomDrawer: React.FC<CustomDrawerProps> = ({
           <Sheet.Header>
             <div
               style={{
-                display: 'flex',
-                cursor: 'move',
-                userSelect: 'none',
-                direction: 'ltr',
-                padding: '20px 20px 0px 20px',
+                display: "flex",
+                cursor: "move",
+                userSelect: "none",
+                direction: "ltr",
+                padding: "20px 20px 0px 20px",
               }}
             >
               <svg
@@ -74,17 +81,17 @@ export const CustomDrawer: React.FC<CustomDrawerProps> = ({
                 viewBox="0 0 73 4"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                style={{ margin: '0 auto' }}
+                style={{ margin: "0 auto" }}
               >
                 <rect width="73" height="4" rx="2" fill="#CDCDD0" />
               </svg>
             </div>
             <div
               style={{
-                textAlign: 'center',
-                paddingTop: '20px',
-                paddingBottom: '20px',
-                color: 'rgba(16, 24, 40, 1)',
+                textAlign: "center",
+                paddingTop: "20px",
+                paddingBottom: "20px",
+                color: "rgba(16, 24, 40, 1)",
                 fontSize: 18,
                 fontWeight: 500,
               }}

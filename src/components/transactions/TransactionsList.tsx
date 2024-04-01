@@ -1,10 +1,10 @@
-import React from 'react';
-import { TransactionCard } from '../shared/Cards/TransactionCards';
+import React from "react";
+import { TransactionCard } from "../shared/Cards/TransactionCards";
 
 export const TransactionsList: React.FC = () => {
   return (
     <div>
-      {Array.from({ length: 5 }, (value, index) => value).map((val, index) => (
+      {Array.from({ length: 5 }, (value) => value).map((val, index) => (
         <TransactionCard
           key={index}
           merchant="تپسی"
