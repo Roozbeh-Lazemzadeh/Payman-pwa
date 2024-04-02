@@ -47,3 +47,7 @@
   )::after {
   background-color: unset;
 }
+
+.ant-segmented-item.ant-segmented-item-selected {
+  transition: color 0s !important;
+}

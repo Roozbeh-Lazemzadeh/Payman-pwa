@@ -8,6 +8,12 @@ import { DetailedDrawer } from "../components/shared/Drawer/DetailedDrawer";
 function HomeWithMandate() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   // const handleOpenDetailedDrawer = () => {};
+  const DetailedDrawerArray = [
+    { nameItem1: "بانک", nameItem2: "سامان" },
+    { nameItem1: "شماره موبایل", nameItem2: "989385445348+" },
+    { nameItem1: "شناسه پیمان", nameItem2: "Ajdfni830874p39vfndl" },
+  ];
+
   return (
     <div className="home-wrapper">
       <div className="home-datepickers">
@@ -37,7 +43,12 @@ function HomeWithMandate() {
         </div>
       </div>
       <MerchantChartSection />
-      <DetailedDrawer isOpen={isOpen} setIsOpen={setIsOpen} title={""} />
+      <DetailedDrawer
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        title={"جزئیات بیشتر"}
+        data={DetailedDrawerArray}
+      />
       <FilterTools title="تراکنش‌های پرداخت مستقیم" />
       <div className="TransactionHomeCard-wrapper">
         <div className="TransactionHomeCard">

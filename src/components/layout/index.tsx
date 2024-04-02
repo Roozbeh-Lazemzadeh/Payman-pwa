@@ -1,18 +1,18 @@
-import { Outlet, useLocation } from 'react-router-dom';
-import { Layout } from 'antd';
-import CustomHeader from './CustomHeader';
-import { Sidebar } from './Sidebar';
-import FilteredFooter from '../shared/Footer/FilteredFooter';
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import { Outlet, useLocation } from "react-router-dom";
+import { Layout } from "antd";
+import CustomHeader from "./CustomHeader";
+import { Sidebar } from "./Sidebar";
+import FilteredFooter from "../shared/Footer/FilteredFooter";
+import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import {
   closeSearchFooterToggle,
   filteredToggle,
   searchedToggle,
   selectFilteredFooter,
   selectSearchedFooter,
-} from '../../store/footer/footerSlice';
-import PrimaryFooter from './PrimaryFooter';
-import { SearchedFooter } from '../shared/Footer/SearchedFooter';
+} from "../../store/footer/footerSlice";
+import PrimaryFooter from "./PrimaryFooter";
+import { SearchedFooter } from "../shared/Footer/SearchedFooter";
 
 // Define the main layout for the Progressive Web App (PWA)
 const PWALayout: React.FC = () => {
@@ -21,25 +21,23 @@ const PWALayout: React.FC = () => {
   const dispatch = useAppDispatch();
   const isFilteredFooterShown = useAppSelector(selectFilteredFooter);
   const isSearchedFooterShown = useAppSelector(selectSearchedFooter);
-  const isUserRegistered = true; // todo replace with corresponding API
+  // const isUserRegistered = true; // todo replace with corresponding API
 
   // Define different headers (blue or white) based on the route
   const getHeader = (): JSX.Element => {
-    if (location.pathname === '/home') {
-      if (isUserRegistered) {
-        return <CustomHeader background title="خانه" />;
-      } else {
-        return <CustomHeader title="خانه" />;
-      }
-    } else if (location.pathname === '/profile') {
+    if (location.pathname === "/home/with-mandate") {
+      return <CustomHeader background title="خانه" />;
+    } else if (location.pathname === "/home/without-mandate") {
+      return <CustomHeader title="خانه" />;
+    } else if (location.pathname === "/profile") {
       return <CustomHeader background title="حساب کاربری" />;
-    } else if (location.pathname === '/transactions') {
+    } else if (location.pathname === "/transactions") {
       return <CustomHeader title=" تراکنش ها" />;
-    } else if (location.pathname === '/paymans') {
+    } else if (location.pathname.includes("/paymans")) {
       return <CustomHeader title="پیمان‌ها" />;
-    } else if (location.pathname === '/faq') {
+    } else if (location.pathname === "/faq") {
       return <CustomHeader background title="پرسش‌های متداول" />;
-    } else if (location.pathname === '/contact-us') {
+    } else if (location.pathname === "/contact-us") {
       return <CustomHeader title="تماس با پیمان" />;
     } else {
       return <CustomHeader background title="خانه" />;
@@ -50,12 +48,12 @@ const PWALayout: React.FC = () => {
   const handleClosingFooters = (e: any): void => {
     e.stopPropagation();
     const targetElement = e.target as Element;
-    const filterIcon = targetElement?.closest('.filter-icon');
+    const filterIcon = targetElement?.closest(".filter-icon");
     const filteredFooterWrapper = targetElement?.closest(
-      '.filtered-footer.active'
+      ".filtered-footer.active"
     );
     const searchFooterWrapper = targetElement?.closest(
-      '.searched-footer.active'
+      ".searched-footer.active"
     );
     if (!filterIcon) {
       if (
@@ -75,7 +73,7 @@ const PWALayout: React.FC = () => {
 
   // Main layout structure
   return (
-    <Layout style={{ overflow: 'hidden' }} onClick={handleClosingFooters}>
+    <Layout style={{ overflow: "hidden" }} onClick={handleClosingFooters}>
       <Sidebar />
       <div>
         {getHeader()}
