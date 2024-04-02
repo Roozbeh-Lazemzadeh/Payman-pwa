@@ -90,7 +90,6 @@ export const CustomDrawer: React.FC<CustomDrawerProps> = ({
               style={{
                 textAlign: "center",
                 paddingTop: "20px",
-                paddingBottom: "20px",
                 color: "rgba(16, 24, 40, 1)",
                 fontSize: 18,
                 fontWeight: 500,

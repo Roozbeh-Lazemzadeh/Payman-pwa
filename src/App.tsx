@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { RouterProvider } from 'react-router-dom';
-import { ConfigProvider } from 'antd';
+import React, { useState, useEffect } from "react";
+import { RouterProvider } from "react-router-dom";
+import { ConfigProvider } from "antd";
 // import { Button, ConfigProvider, Input, Tag } from 'antd';
-import './App.css';
+import "./App.css";
 // import FilteredTag from './components/shared/Tags/Tag';
 // import {
 //   NotificationBadge,
@@ -10,8 +10,8 @@ import './App.css';
 // } from './components/shared/Badges/Badge';
 // import { CustomDrawer } from './components/shared/Drawer/Drawer';
 // import { TransactionCard } from './components/shared/Cards/TransactionCards';
-import { router } from './router/router';
-import SplashScreen from './components/splash/SplashScreen';
+import { router } from "./router/router";
+import SplashScreen from "./components/splash/SplashScreen";
 
 function App(): JSX.Element {
   const [isAppLoaded, setIsAppLoaded] = useState<boolean>(false);
@@ -29,32 +29,32 @@ function App(): JSX.Element {
       <ConfigProvider
         theme={{
           token: {
-            fontFamily: 'IranYekan',
-            colorText: 'rgba(16, 24, 40, 1)',
+            fontFamily: "IranYekan",
+            colorText: "rgba(16, 24, 40, 1)",
           },
           components: {
             Button: {
-              colorPrimary: '#0072ff',
-              defaultBg: 'rgba(0, 114, 255, 0.2)',
-              defaultBorderColor: '#0072FF',
-              defaultColor: '#0072FF',
+              colorPrimary: "#0072ff",
+              defaultBg: "rgba(0, 114, 255, 0.2)",
+              defaultBorderColor: "#0072FF",
+              defaultColor: "#0072FF",
               borderRadius: 10,
               lineHeight: 28,
               fontWeight: 600,
-              colorBgContainerDisabled: '#ACACAC',
-              colorTextDisabled: 'rgba(255, 255, 255, 0.5)',
+              colorBgContainerDisabled: "#ACACAC",
+              colorTextDisabled: "rgba(255, 255, 255, 0.5)",
             },
             Input: {
-              colorPrimary: '#0072ff',
-              colorBorder: '#CDCDD0',
+              colorPrimary: "#0072ff",
+              colorBorder: "#CDCDD0",
               borderRadius: 10,
-              colorBgContainerDisabled: 'rgba(172, 172, 172, 0.2)',
+              colorBgContainerDisabled: "rgba(172, 172, 172, 0.2)",
             },
             Segmented: {
-              itemSelectedColor: '#fff',
-              itemSelectedBg: 'rgba(0, 114, 255, 1)',
-              motionEaseInOut: 'linear',
-              motionDurationSlow: '250ms',
+              itemSelectedColor: "#fff",
+              itemSelectedBg: "rgba(0, 114, 255, 1)",
+              motionEaseInOut: "linear",
+              motionDurationSlow: "250ms",
             },
           },
         }}
