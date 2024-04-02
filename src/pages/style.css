@@ -113,7 +113,7 @@
 }
 
 .home-merchants.payman {
-  height: calc(100vh - 530px);
+  height: calc(100vh - 510px);
 }
 
 .home-datepickers {
@@ -241,12 +241,128 @@
   width: 100%;
   font-size: 13px;
   font-weight: 600;
-  padding: 1rem 1.5rem;
+  padding: 1rem 1.2rem;
   border: 2px dashed rgba(0, 114, 255, 1);
   border-radius: 10px;
-  line-height: 20px;
 }
-.info-login.login {
-  width: unset;
-}
+
 /* end style contact page */
+
+/* start faq style */
+.btn-faq {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  align-items: center;
+}
+/* end faq style */
+
+/* start profile page style */
+
+.profile-wrapper input {
+  height: 44px !important;
+  border-radius: 10px;
+  /* margin-bottom: 2rem; */
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.profile-input {
+  margin-bottom: 2rem;
+}
+
+.profile-input-disabled {
+  height: 44px !important;
+  margin-bottom: 2rem;
+}
+
+.ant-select-selector {
+  border-radius: 10px !important;
+  -webkit-border-radius: 10px !important;
+  -moz-border-radius: 10px !important;
+  -ms-border-radius: 10px !important;
+  -o-border-radius: 10px !important;
+}
+
+.datepiker-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  margin-top: 2.5rem;
+}
+
+.datepiker-title {
+  position: relative;
+  padding-right: 10px;
+  color: rgb(0, 0, 0, 0.25);
+}
+
+.rmdp-container {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  margin-top: 0.2rem;
+  margin-bottom: unset;
+}
+
+.rmdp-input {
+  border: 1px solid #c0c4d6;
+  border-radius: 10px !important;
+  height: 44px !important;
+  margin: 1px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  direction: ltr;
+  padding: 2px 5px;
+  width: 100%;
+  background: transparent;
+  font-family: "IranYekan";
+  padding-left: 2rem !important;
+  -webkit-border-radius: 10px !important;
+  -moz-border-radius: 10px !important;
+  -ms-border-radius: 10px !important;
+  -o-border-radius: 10px !important;
+}
+
+.rmdp-input:focus {
+  border: 1px solid #a4b3c5;
+  box-shadow: 0 0 2px #a4b3c5;
+  outline: none !important;
+}
+
+.calendar-icon {
+  width: 7%;
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* position: relative; */
+}
+
+.calendar-icon svg {
+  width: 100px !important;
+  height: 18px !important;
+}
+
+.contact-us-with-icon.profile {
+  height: 40px;
+  margin-top: 4rem;
+}
+
+.contact-us-with-icon.logout {
+  height: 40px;
+  margin-top: 2rem;
+  background-color: #FF3672;
+  color: #fff;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* end profile page style */
