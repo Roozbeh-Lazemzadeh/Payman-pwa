@@ -15,7 +15,7 @@ const homeSliderArray = [
   { img: "/assets/banner-sidbar/photo101.png" },
   { img: "/assets/banner-sidbar/photo101.png" },
   { img: "/assets/banner-sidbar/photo101.png" },
-  { img: "/assets/banner-sidbar/photo101.png" }
+  { img: "/assets/banner-sidbar/photo101.png" },
   // { img: '/assets/banner-sidbar/photo102.png' },
   // { img: '/assets/banner-sidbar/photo103.png' },
   // { img: '/assets/banner-sidbar/photo104.png' }
@@ -194,14 +194,14 @@ export const Sidebar: React.FC = () => {
         items={items}
         className="custom-sidebar-menu"
       />
-      <div
+      {/* <div
         style={{
           borderBottom: "1px solid rgba(5, 5, 5, 0.06)",
           width: 260,
         }}
-      >
-        <Slider ImgArray={homeSliderArray} />
-      </div>
+      > */}
+      <Slider ImgArray={homeSliderArray} />
+      {/* </div> */}
       <div
         style={{
           padding: "30px 10px",
