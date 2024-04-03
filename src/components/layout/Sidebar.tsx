@@ -13,9 +13,9 @@ import Slider from "../slider/Slider";
 
 const homeSliderArray = [
   { img: "/assets/banner-sidbar/photo101.png" },
-  { img: "/assets/banner-sidbar/photo101.png" },
-  { img: "/assets/banner-sidbar/photo101.png" },
-  { img: "/assets/banner-sidbar/photo101.png" },
+  { img: "/assets/banner-sidbar/photo102.png" },
+  { img: "/assets/banner-sidbar/photo103.png" },
+  { img: "/assets/banner-sidbar/photo104.png" },
   // { img: '/assets/banner-sidbar/photo102.png' },
   // { img: '/assets/banner-sidbar/photo103.png' },
   // { img: '/assets/banner-sidbar/photo104.png' }
@@ -197,8 +197,9 @@ export const Sidebar: React.FC = () => {
       <div
         style={{
           borderBottom: "1px solid rgba(5, 5, 5, 0.06)",
-          width: 220,
-          margin: "20px auto",
+          width: 260,
+          // margin: "20px auto",
+          display: "unset",
         }}
       >
         <Slider ImgArray={homeSliderArray} />
