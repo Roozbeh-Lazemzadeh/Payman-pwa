@@ -180,7 +180,7 @@ export const Sidebar: React.FC = () => {
     <Drawer
       className="custom-sidebar"
       title={CustomTitle()}
-      width={300}
+      width={380}
       onClose={() => dispatch(toggleSidebar())}
       open={isSidebarOpen}
       closeIcon={false}
