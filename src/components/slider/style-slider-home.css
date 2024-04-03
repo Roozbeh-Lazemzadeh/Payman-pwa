@@ -55,7 +55,8 @@
   height: 100%;
 }
 .banner-home-sidebar {
-  width: 100%;
+  width: 220px;
+  height: 100px;
 }
 .swiper.swiper-cards.swiper-3d.swiper-initialized.swiper-horizontal.swiper-rtl.swiper-ios.swiper-watch-progress.mySwiper.slider-home {
   height: 120px;
