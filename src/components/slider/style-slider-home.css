@@ -54,6 +54,9 @@
   width: 100%;
   height: 100%;
 }
+.banner-home-sidebar {
+  width: 100%;
+}
 .swiper.swiper-cards.swiper-3d.swiper-initialized.swiper-horizontal.swiper-rtl.swiper-ios.swiper-watch-progress.mySwiper.slider-home {
   height: 120px;
 }
