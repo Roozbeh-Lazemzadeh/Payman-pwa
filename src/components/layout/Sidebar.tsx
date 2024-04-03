@@ -198,8 +198,8 @@ export const Sidebar: React.FC = () => {
         style={{
           borderBottom: "1px solid rgba(5, 5, 5, 0.06)",
           width: 260,
-          // margin: "20px auto",
-          display: "unset",
+          margin: "20px auto",
+          display: "flex",
         }}
       >
         <Slider ImgArray={homeSliderArray} />
