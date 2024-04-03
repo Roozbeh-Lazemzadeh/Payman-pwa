@@ -33,8 +33,10 @@ const PWALayout: React.FC = () => {
       return <CustomHeader background title="حساب کاربری" />;
     } else if (location.pathname === "/transactions") {
       return <CustomHeader title=" تراکنش ها" />;
-    } else if (location.pathname.includes("/paymans")) {
+    } else if (location.pathname === "/paymans/me") {
       return <CustomHeader title="پیمان‌ها" />;
+    } else if (location.pathname === "/paymans/others") {
+      return <CustomHeader title="سایر ‌هم‌پیمان‌ها" />;
     } else if (location.pathname === "/faq") {
       return <CustomHeader background title="پرسش‌های متداول" />;
     } else if (location.pathname === "/contact-us") {
