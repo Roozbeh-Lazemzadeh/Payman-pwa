@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { toggleSidebar } from "../../store/sidebar/sidebarSlice";
 import { useDispatch } from "react-redux";
+import { searchedToggle } from "../../store/footer/footerSlice";
 
 interface ItemProps {
   label: string;
@@ -28,6 +29,12 @@ export function getItem({ label, key, icon, children }: ItemProps) {
       navigate("/home");
     } else if (key === "3") {
       navigate("/profile");
+    }
+
+    // for filtering price , date, merchants
+    if (key.length === 3) {
+      console.log(key);
+      dispatch(searchedToggle(key));
     }
   };
 

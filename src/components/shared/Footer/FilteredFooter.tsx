@@ -5,9 +5,8 @@ import { ReactComponent as CalendarIcon } from "../../../icons/calendar.svg";
 import { ReactComponent as TickSquareIcon } from "../../../icons/tickSquare.svg";
 import { getItem } from "../../helpers";
 import "./style.css";
-import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
+import { useAppSelector } from "../../hooks/reduxHooks";
 import {
-  searchedToggle,
   selectFilteredFooter,
   selectSearchedFooter,
 } from "../../../store/footer/footerSlice";
@@ -17,7 +16,7 @@ const { Footer } = Layout;
 const FilteredFooter: React.FC = () => {
   const isFilteredFooterShown = useAppSelector(selectFilteredFooter);
   const isSearchedFooterShown = useAppSelector(selectSearchedFooter);
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const items = [
     getItem({
       key: "101",
@@ -41,9 +40,9 @@ const FilteredFooter: React.FC = () => {
     }),
   ];
 
-  const handleTabClick = (): void => {
-    dispatch(searchedToggle());
-  };
+  // const handleTabClick = (): void => {
+  //   dispatch(searchedToggle());
+  // };
 
   return (
     <Footer
@@ -53,7 +52,7 @@ const FilteredFooter: React.FC = () => {
     >
       <Menu
         style={{ background: "none" }}
-        onClick={handleTabClick}
+        // onClick={handleTabClick}
         mode="inline"
         selectedKeys={[location.pathname]}
         items={items}

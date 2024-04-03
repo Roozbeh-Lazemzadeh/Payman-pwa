@@ -67,7 +67,7 @@ const PWALayout: React.FC = () => {
       }
       if (!searchFooterWrapper && isSearchedFooterShown) {
         dispatch(closeSearchFooterToggle());
-        dispatch(searchedToggle());
+        dispatch(searchedToggle(""));
         dispatch(filteredToggle());
       }
     }

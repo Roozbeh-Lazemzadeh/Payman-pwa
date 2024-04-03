@@ -1,21 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { type RootState } from '../store';
+import { createSlice } from "@reduxjs/toolkit";
+import { type RootState } from "../store";
 
 const initialState = {
   isFilteredShown: false,
   isSearchedShown: false,
   closingSearchFooter: false,
+  searchItem: "",
 };
 
 export const footerSlice = createSlice({
-  name: 'footer',
+  name: "footer",
   initialState,
   reducers: {
     filteredToggle: (state) => {
       state.isFilteredShown = !state.isFilteredShown;
     },
-    searchedToggle: (state) => {
+    searchedToggle: (state, action) => {
       state.isSearchedShown = !state.isSearchedShown;
+      state.searchItem = action.payload;
     },
     closeSearchFooterToggle: (state) => {
       state.closingSearchFooter = true;
@@ -32,6 +34,8 @@ export const selectSearchedFooter = (state: RootState) =>
   state.footer?.isSearchedShown;
 export const selectCloseSearchFooter = (state: RootState) =>
   state.footer?.closingSearchFooter;
+export const selectSelectedSearchItem = (state: RootState) =>
+  state.footer?.searchItem;
 
 export const {
   filteredToggle,
