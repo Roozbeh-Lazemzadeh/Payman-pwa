@@ -58,4 +58,8 @@
   height: 120px;
 }
 
+.ant-drawer .ant-drawer-content {
+  display: unset;
+}
+
 /* end slider homw with out mandate */
