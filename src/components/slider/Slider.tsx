@@ -44,7 +44,7 @@ const Slider: FC<SliderProps> = ({ ImgArray }) => {
 
 export default Slider;
 
-const SliderButtons = () => {
+export const SliderButtons = () => {
   const swiper = useSwiper();
 
   return (

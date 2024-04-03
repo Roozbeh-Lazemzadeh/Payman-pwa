@@ -9,13 +9,19 @@ import { ReactComponent as ProfileIcon } from "../../icons/defaultProfile.svg";
 import { ReactComponent as InfoIcon } from "../../icons/defaultInfoIcon.svg";
 import { ReactComponent as BlogIcon } from "../../icons/defaultBlog.svg";
 import "./style.css";
-import Slider from "../slider/Slider";
+// import Slider from "../slider/Slider";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, EffectCards, Pagination } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/effect-cards";
+import { SliderButtons } from "../slider/Slider";
 
 const homeSliderArray = [
-  { img: "/assets/banner-sidbar/photo101.png" },
-  { img: "/assets/banner-sidbar/photo102.png" },
-  { img: "/assets/banner-sidbar/photo103.png" },
-  { img: "/assets/banner-sidbar/photo104.png" },
+  { img: "/assets/banner-sidbar/photo101.png", id: 1 },
+  { img: "/assets/banner-sidbar/photo102.png", id: 2 },
+  { img: "/assets/banner-sidbar/photo103.png", id: 3 },
+  { img: "/assets/banner-sidbar/photo104.png", id: 4 },
   // { img: '/assets/banner-sidbar/photo102.png' },
   // { img: '/assets/banner-sidbar/photo103.png' },
   // { img: '/assets/banner-sidbar/photo104.png' }
@@ -194,7 +200,7 @@ export const Sidebar: React.FC = () => {
         items={items}
         className="custom-sidebar-menu"
       />
-      <div
+      {/* <div
         style={{
           borderBottom: "1px solid rgba(5, 5, 5, 0.06)",
           width: 260,
@@ -203,7 +209,32 @@ export const Sidebar: React.FC = () => {
         }}
       >
         <Slider ImgArray={homeSliderArray} />
-      </div>
+      </div> */}
+      <Swiper
+        effect={"cards"}
+        slidesOffsetAfter={3}
+        spaceBetween={30}
+        centeredSlides={true}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        modules={[Autoplay, Pagination, EffectCards]}
+        className="slider-home"
+      >
+        {/* <SwiperSlide className="banner-home">
+          <img src="/assets/pics/Baner-home.svg" className="banner-home-1" />
+        </SwiperSlide> */}
+        {homeSliderArray.map((item) => (
+          <SwiperSlide key={item.id}>
+            <img src={item.img} className="banner-home-sidebar" />
+          </SwiperSlide>
+        ))}
+        <SliderButtons />
+      </Swiper>
       <div
         style={{
           padding: "30px 10px",
