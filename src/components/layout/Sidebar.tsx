@@ -18,13 +18,10 @@ import "swiper/css/effect-cards";
 import { SliderButtons } from "../slider/Slider";
 
 const homeSliderArray = [
-  { img: "/assets/banner-sidbar/photo101.png", id: 1 },
-  { img: "/assets/banner-sidbar/photo102.png", id: 2 },
-  { img: "/assets/banner-sidbar/photo103.png", id: 3 },
-  { img: "/assets/banner-sidbar/photo104.png", id: 4 },
-  // { img: '/assets/banner-sidbar/photo102.png' },
-  // { img: '/assets/banner-sidbar/photo103.png' },
-  // { img: '/assets/banner-sidbar/photo104.png' }
+  { img: "/assets/banner-home/home1.png", id: 1 },
+  { img: "/assets/banner-home/home2.png", id: 2 },
+  { img: "/assets/banner-home/home3.png", id: 3 },
+  { img: "/assets/banner-home/home4.png", id: 4 },
 ];
 
 export const Sidebar: React.FC = () => {
@@ -215,10 +212,10 @@ export const Sidebar: React.FC = () => {
         slidesOffsetAfter={3}
         spaceBetween={30}
         centeredSlides={true}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
+        // autoplay={{
+        //   delay: 2500,
+        //   disableOnInteraction: false,
+        // }}
         pagination={{
           clickable: true,
         }}
