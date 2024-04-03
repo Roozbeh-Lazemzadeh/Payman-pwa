@@ -92,3 +92,27 @@
 .ant-progress-inner {
   height: 65px !important;
 }
+
+/* media gueries */
+
+@media screen and (max-width: 376px), 
+       screen and (max-height: 668px) {
+
+  .item-onboarding_img {
+    width: 67% !important;
+  }
+
+  /* svg.ant-progress-circle {
+    width: 80%;
+    height: 80%;
+} */
+
+.item-onboarding_title {
+    font-size: 1.2rem;
+}
+
+.item-onboarding-des {
+    font-size: 1rem;
+}
+
+}

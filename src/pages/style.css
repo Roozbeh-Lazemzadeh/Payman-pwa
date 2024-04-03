@@ -373,3 +373,27 @@
   justify-content: center;
 }
 /* end profile page style */
+
+/* media gueries */
+
+/* SE phone */
+
+@media screen and (max-width: 376px), 
+       screen and (max-height: 668px) {
+
+  .headerOnboarding-img {
+      width: 30%;
+  }
+
+  .item-onboarding_img {
+    width: 67% !important;
+  }
+
+  /* svg.ant-progress-circle {
+    width: 80%;
+    height: 80%;
+} */
+
+
+}
+
