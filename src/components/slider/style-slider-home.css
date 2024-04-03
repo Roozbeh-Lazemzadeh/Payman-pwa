@@ -57,6 +57,7 @@
 .banner-home-sidebar {
   width: 220px;
   height: 100px;
+  display: block;
 }
 .swiper.swiper-cards.swiper-3d.swiper-initialized.swiper-horizontal.swiper-rtl.swiper-ios.swiper-watch-progress.mySwiper.slider-home {
   height: 120px;
