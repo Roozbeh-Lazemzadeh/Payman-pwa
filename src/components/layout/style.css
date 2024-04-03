@@ -129,9 +129,9 @@
 }
 
 .ant-drawer-content.custom-sidebar .ant-drawer-body {
-  margin: 0px 20px;
+  /* margin: 0px 20px;
   padding: unset;
-  overflow: hidden;
+  overflow: hidden; */
 }
 
 .ant-menu.ant-menu-root.ant-menu-inline.ant-menu-light.custom-sidebar-menu
