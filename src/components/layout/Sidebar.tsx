@@ -11,10 +11,11 @@ import { ReactComponent as BlogIcon } from "../../icons/defaultBlog.svg";
 import "./style.css";
 // import Slider from "../slider/Slider";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectCards, Pagination } from "swiper/modules";
+import { Autoplay, EffectCards, Pagination, EffectFlip } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/effect-cards";
+import "swiper/css/effect-flip";
 import { SliderButtons } from "../slider/Slider";
 
 const homeSliderArray = [
@@ -208,7 +209,7 @@ export const Sidebar: React.FC = () => {
         <Slider ImgArray={homeSliderArray} />
       </div> */}
       <Swiper
-        effect={"cards"}
+        effect={"flip"}
         slidesOffsetAfter={3}
         spaceBetween={30}
         centeredSlides={true}
@@ -219,7 +220,7 @@ export const Sidebar: React.FC = () => {
         pagination={{
           clickable: true,
         }}
-        modules={[Autoplay, Pagination, EffectCards]}
+        modules={[Autoplay, Pagination, EffectCards, EffectFlip]}
         className="slider-home"
       >
         {/* <SwiperSlide className="banner-home">
