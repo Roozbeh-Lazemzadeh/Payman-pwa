@@ -190,7 +190,9 @@
   width: 100%;
   height: 50%;
   padding: 15px 10px 13px;
+  padding: 15px 10px 13px;
   gap: 10px;
+  direction: rtl;
   direction: rtl;
 }
 .search-input .ant-input-group .ant-input {
