@@ -1,38 +1,39 @@
 @font-face {
-  font-family: 'IranYekan';
-  src: url('/public/assets/fonts/IRANYekanXFaNum-DemiBold.ttf')
-    format('truetype');
+  font-family: "IranYekan";
+  src: url("/public/assets/fonts/IRANYekanXFaNum-DemiBold.ttf")
+    format("truetype");
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'IranYekan';
-  src: url('/public/assets/fonts/IRANYekanXFaNum-ExtraBold.ttf')
-    format('truetype');
+  font-family: "IranYekan";
+  src: url("/public/assets/fonts/IRANYekanXFaNum-ExtraBold.ttf")
+    format("truetype");
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'IranYekan';
-  src: url('/public/assets/fonts/IRANYekanXFaNum-Medium.ttf') format('truetype');
+  font-family: "IranYekan";
+  src: url("/public/assets/fonts/IRANYekanXFaNum-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'IranYekan';
-  src: url('/public/assets/fonts/IRANYekanXFaNum-Regular.ttf')
-    format('truetype');
+  font-family: "IranYekan";
+  src: url("/public/assets/fonts/IRANYekanXFaNum-Regular.ttf")
+    format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 
 body {
   margin: 0;
-  font-family: 'IranYekan', sans-serif;
+  font-family: "IranYekan", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   user-select: none;
+  background: #fff;
 }

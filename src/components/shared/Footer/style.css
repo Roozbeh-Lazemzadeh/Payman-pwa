@@ -180,14 +180,39 @@
   display: flex;
   justify-content: center;
 }
+
+.ant-input-group {
+  margin-bottom: 1rem;
+}
+
 .search-section {
   display: flex;
   width: 100%;
   height: 50%;
-  padding: 20px 10px 13px;
+  padding: 15px 10px 13px;
   gap: 10px;
-  direction: ltr;
+  direction: rtl;
 }
 .search-input .ant-input-group .ant-input {
   text-align: end;
+}
+.search-input {
+  direction: ltr;
+}
+.search-section .home-search_input.payman {
+  margin-top: 0;
+}
+
+/* media gueries */
+
+/* SE phone */
+
+@media screen and (max-width: 376px), screen and (max-height: 668px) {
+  .ant-btn {
+    height: 29px !important;
+  }
+
+  .ant-input-group {
+    margin-bottom: .5rem;
+  }
 }

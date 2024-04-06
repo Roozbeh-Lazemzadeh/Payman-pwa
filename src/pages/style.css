@@ -365,7 +365,7 @@
 .contact-us-with-icon.logout {
   height: 40px;
   margin-top: 2rem;
-  background-color: #FF3672;
+  background-color: #ff3672;
   color: #fff;
   width: 100%;
   display: flex;
@@ -378,22 +378,33 @@
 
 /* SE phone */
 
-@media screen and (max-width: 376px), 
-       screen and (max-height: 668px) {
-
+@media screen and (max-width: 376px), screen and (max-height: 668px) {
   .headerOnboarding-img {
-      width: 30%;
+    width: 30%;
   }
 
   .item-onboarding_img {
     width: 67% !important;
   }
 
+  .home-des_title {
+    font-size: 1rem;
+  }
+
+  .home-des_parghraf {
+    font-size: 0.7rem;
+  }
+
+  .home-search_input.payman {
+    margin-top: 0rem;
+  }
+
+  .home-merchants {
+    height: calc(100vh - 490px);
+  }
+
   /* svg.ant-progress-circle {
     width: 80%;
     height: 80%;
 } */
-
-
 }
-
