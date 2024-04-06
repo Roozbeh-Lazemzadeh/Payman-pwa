@@ -71,3 +71,15 @@
 } */
 
 /* end slider home with out mandate */
+
+/* media gueries */
+
+/* SE phone */
+
+@media screen and (max-width: 376px), screen and (max-height: 668px) {
+  .slider-home
+    .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal {
+    top: 102px;
+    height: 12px;
+  }
+}

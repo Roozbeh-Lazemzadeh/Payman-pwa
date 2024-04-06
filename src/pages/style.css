@@ -400,7 +400,7 @@
   }
 
   .home-merchants {
-    height: calc(100vh - 490px);
+    height: calc(100vh - 480px);
   }
 
   /* svg.ant-progress-circle {
