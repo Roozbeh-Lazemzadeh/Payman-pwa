@@ -8,10 +8,12 @@ import {
 } from "../../../store/footer/footerSlice";
 import { ReactComponent as TickSquareIcon } from "../../../icons/tickSquare.svg";
 import { ReactComponent as CalendarIcon } from "../../../icons/calendar.svg";
+import { ReactComponent as BuyIcon } from "../../../icons/buy2.svg";
 
 import "./style.css";
 
 import { Input } from "antd";
+import Search from "antd/es/input/Search";
 
 export const SearchedFooter: React.FC = () => {
   const [firstTitle, setFirstTitle] = useState("");
@@ -20,7 +22,6 @@ export const SearchedFooter: React.FC = () => {
   const isSearchedFooterShown = useAppSelector(selectSearchedFooter);
   const closeSearchFooter = useAppSelector(selectCloseSearchFooter);
   const searchItem = useAppSelector(selectSelectedSearchItem);
-  console.log(searchItem);
 
   useEffect(() => {
     if (searchItem !== "")
@@ -64,16 +65,30 @@ export const SearchedFooter: React.FC = () => {
             <span>{thirdTitle}</span>
           </div>
           <div className="search-section">
-            <Input
-              className="search-input"
-              addonBefore={<CalendarIcon />}
-              placeholder="تا تاریخ"
-            />
-            <Input
-              className="search-input"
-              addonBefore={<CalendarIcon />}
-              placeholder="از تاریخ"
-            />
+            {searchItem && searchItem === "104" ? (
+              <Search />
+            ) : (
+              <>
+                <Input
+                  className="search-input"
+                  addonBefore={
+                    searchItem === "103" ? <CalendarIcon /> : <BuyIcon />
+                  }
+                  placeholder={`${
+                    searchItem === "103" ? "تا تاریخ" : "تا مبلغ"
+                  }`}
+                />
+                <Input
+                  className="search-input"
+                  addonBefore={
+                    searchItem === "103" ? <CalendarIcon /> : <BuyIcon />
+                  }
+                  placeholder={`${
+                    searchItem === "103" ? "از تاریخ" : "از مبلغ"
+                  }`}
+                />
+              </>
+            )}
           </div>
         </div>
       </div>
