@@ -176,3 +176,21 @@
   bottom: 0px;
   transition: ease-in-out 0.35s;
 }
+
+/* media gueries */
+
+/* SE phone */
+
+@media screen and (max-width: 376px), screen and (max-height: 668px) {
+  .content-wrapper {
+    top: 12vh;
+    overflow: hidden;
+    height: 80%;
+  }
+
+  .ant-layout-header {
+    padding: 40px 20px 46px !important;
+    overflow: hidden;
+  }
+}
+/* media gueries */

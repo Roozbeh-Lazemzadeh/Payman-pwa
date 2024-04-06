@@ -361,6 +361,7 @@
   height: 40px;
   margin-top: 2rem;
   background-color: #ff3672;
+  background-color: #ff3672;
   color: #fff;
   width: 100%;
   display: flex;
@@ -374,7 +375,9 @@
 /* SE phone */
 
 @media screen and (max-width: 376px), screen and (max-height: 668px) {
+@media screen and (max-width: 376px), screen and (max-height: 668px) {
   .headerOnboarding-img {
+    width: 30%;
     width: 30%;
   }
 

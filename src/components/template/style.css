@@ -218,3 +218,14 @@
   text-underline-offset: 0.4rem;
   text-decoration-color: #0072ff;
 }
+
+/* media gueries */
+
+/* SE phone */
+
+@media screen and (max-width: 376px), screen and (max-height: 668px) {
+  .selected-merchant {
+    height: 6rem;
+    margin-top: .8rem;
+  }
+}

@@ -110,3 +110,9 @@
   border-color: #cdcdd0;
   box-shadow: unset;
 }
+
+@media screen and (max-width: 376px), screen and (max-height: 668px) {
+  .home-search_input.payman .ant-input-outlined {
+    height: unset;
+  }
+}

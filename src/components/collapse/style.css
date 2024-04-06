@@ -97,3 +97,13 @@
     padding-bottom: 20px;
   }
 }
+
+/* media gueries */
+
+/* SE phone */
+
+@media screen and (max-width: 376px), screen and (max-height: 668px) {
+  .ant-btn {
+    height: 29px !important;
+  }
+}
