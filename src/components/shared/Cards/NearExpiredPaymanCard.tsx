@@ -1,12 +1,27 @@
-import React from 'react';
-import { ReactComponent as TapsiIcon } from './icon.svg';
-import { ReactComponent as SamanBankIcon } from '../../../icons/samanBank.svg';
-
-import './style.css';
+import React, { useState } from "react";
+import { ReactComponent as TapsiIcon } from "./icon.svg";
+import { ReactComponent as SamanBankIcon } from "../../../icons/samanBank.svg";
+import { DetailedDrawer } from "../Drawer/DetailedDrawer";
+import { Button } from "antd";
+import "./style.css";
 
 export const NearExpiredPaymanCard: React.FC = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const DetailedDrawerArray = [
+    { nameItem1: "تاریخ شروع", nameItem2: "۰۲ / ۱۰ / ۲۴" },
+    { nameItem1: "تاریخ پایان", nameItem2: "۰۲ / ۱۰ / ۲۴" },
+    { nameItem1: "بانک مبدا", nameItem2: "سامان" },
+    { nameItem1: "مبلغ باقی‌مانده", nameItem2: "۱۵۰٬۰۰۰ تومانءءء" },
+    { nameItem1: "تعداد باقی‌مانده", nameItem2: "۲ تراکنش " },
+    { nameItem1: "شماره موبایل", nameItem2: "989385445348+" },
+    { nameItem1: "شناسه پیمان", nameItem2: "Ajdfni830874p39vfndl" },
+  ];
   return (
-    <div className="near-expiration-card-wrapper">
+    <div
+      className="near-expiration-card-wrapper"
+      onClick={() => setIsOpen(!isOpen)}
+    >
       <div className="merchant-row">
         <div className="merchant-name-logo">
           <TapsiIcon />
@@ -32,6 +47,18 @@ export const NearExpiredPaymanCard: React.FC = () => {
           </div>
         </div>
       </div>
+      <DetailedDrawer
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        title={"جزییات پیمان"}
+        data={DetailedDrawerArray}
+      >
+        <div className="more-trans-btn-wrapper">
+          <Button className="more-trans-btn" type="primary">
+            مشاهده همه تراکنش‌های این پیمان
+          </Button>
+        </div>
+      </DetailedDrawer>
     </div>
   );
 };

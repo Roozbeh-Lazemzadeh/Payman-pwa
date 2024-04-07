@@ -1,8 +1,9 @@
-import { configureStore } from '@reduxjs/toolkit';
-import sidebarReducer from './sidebar/sidebarSlice';
-import footerReducer from './footer/footerSlice';
-import notificationReducer from './notification/notificationSlice';
-import chartReducer from './chart/chartSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import sidebarReducer from "./sidebar/sidebarSlice";
+import footerReducer from "./footer/footerSlice";
+import notificationReducer from "./notification/notificationSlice";
+import chartReducer from "./chart/chartSlice";
+import merchantReducer from "./merchant/merchantSlice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     footer: footerReducer,
     notification: notificationReducer,
     chart: chartReducer,
+    merchant: merchantReducer,
   },
 });
 

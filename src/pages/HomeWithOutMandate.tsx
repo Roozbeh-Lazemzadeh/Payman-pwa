@@ -1,27 +1,30 @@
-import Search, { type SearchProps } from "antd/es/input/Search";
+import { useState } from "react";
 import SelectedMerchants from "../components/template/SelectedMerchants";
 import OtherMerchants from "../components/template/OtherMerchants";
-import { ReactComponent as MagnifierIcon } from "../icons/magnifier.svg";
-
-import { Button, Switch } from "antd";
-
+import { Switch } from "antd";
 import { useNavigate } from "react-router-dom";
 import Slider from "../components/slider/Slider";
-
-const homeSliderArray = [
-  { img: "/assets/banner-home/home1.png" },
-  { img: "/assets/banner-home/home2.png" },
-  { img: "/assets/banner-home/home3.png" },
-  { img: "/assets/banner-home/home4.png" },
-];
+import { MerchantBottomSheet } from "../components/shared/Drawer/MerchantBottomSheet";
+import {
+  homeSliderArray,
+  otherMerchantsArray,
+  selectedMerchantsArray,
+} from "../components/shared/Constant";
+import MerchantSearch from "../components/shared/Merchant/MerchantSearch";
+import "./style.css";
+import MerchantInfo from "../components/shared/Merchant/MerchantInfo";
+import { Merchant } from "../components/types/Merchant";
 
 function HomeWithOutMandate() {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const navigate = useNavigate();
+  const [selectedMerchants, setSelectedMerchants] = useState<Merchant[]>(
+    selectedMerchantsArray
+  );
+  const [otherMerchants, setOtherMerchants] =
+    useState<Merchant[]>(otherMerchantsArray);
 
-  const onSearch: SearchProps["onSearch"] = (value, _e, info) =>
-    console.log(info?.source, value);
   const onChange = (checked: boolean) => {
-    console.log(`switch to ${checked}`);
     if (checked) {
       navigate("/home/with-mandate", { replace: true });
     }
@@ -48,22 +51,26 @@ function HomeWithOutMandate() {
           هزینه خدمات را پرداخت کند.
         </p>
       </div>
-      <Search
-        placeholder="جستجوی نام کسب‌وکار"
-        onSearch={onSearch}
-        style={{ width: "90%" }}
-        className="home-search_input payman others"
-        enterButton={
-          <Button className="search-btn" disabled icon={<MagnifierIcon />} />
-        }
-        />
-
+      <MerchantSearch
+        setSelectedMerchants={setSelectedMerchants}
+        setOtherMerchants={setOtherMerchants}
+      />
       <div className="home-merchants-wrapper">
         <div className="home-merchants">
-          <SelectedMerchants />
-          <OtherMerchants />
+          <SelectedMerchants
+            merchants={selectedMerchants}
+            setIsOpen={setIsOpen}
+          />
+          <OtherMerchants merchants={otherMerchants} setIsOpen={setIsOpen} />
         </div>
       </div>
+      <MerchantBottomSheet
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        title={"جزئیات بیشتر"}
+      >
+        <MerchantInfo />
+      </MerchantBottomSheet>
     </div>
   );
 }

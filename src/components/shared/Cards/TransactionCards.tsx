@@ -24,6 +24,22 @@ export const TransactionCard: React.FC<TransactionCardProps> = ({
     transStatusIcon: PropTypes.node.isRequired,
     price: PropTypes.number.isRequired,
   };
+  let color;
+  switch (transStatus) {
+    case "موفق":
+      color = "green";
+      break;
+    case "ناموفق":
+      color = "red";
+      break;
+    case "نامشخص":
+      color = "yellow";
+      break;
+
+    default:
+      break;
+  }
+
   return (
     <div className="transaction-card">
       <div className="card-merchant-wrapper">
@@ -38,7 +54,7 @@ export const TransactionCard: React.FC<TransactionCardProps> = ({
             <span className="card-price"> تومانءءء</span>
           </div>
           <div>
-            <span className="card-status">{transStatus}</span>
+            <span className={`card-status ${color}`}>{transStatus}</span>
             <span className="card-status-icon">{transStatusIcon}</span>
           </div>
         </div>

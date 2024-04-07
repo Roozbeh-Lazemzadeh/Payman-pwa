@@ -10,12 +10,6 @@ interface DetailedDrawerProps {
   children?: React.ReactNode;
 }
 
-// const DetailedDrawerArray = [
-//   { nameItem1: "بانک", nameItem2: "سامان" },
-//   { nameItem1: "شماره موبایل", nameItem2: "989385445348+" },
-//   { nameItem1: "شناسه پیمان", nameItem2: "Ajdfni830874p39vfndl" },
-// ];
-
 export const DetailedDrawer: React.FC<DetailedDrawerProps> = ({
   isOpen,
   setIsOpen,
@@ -34,7 +28,7 @@ export const DetailedDrawer: React.FC<DetailedDrawerProps> = ({
               text2={val.nameItem2}
             />
           ))}
-          <div>{children}</div>
+          <div className="drawer-children">{children}</div>
         </div>
       }
     </CustomDrawer>

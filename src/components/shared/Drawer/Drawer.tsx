@@ -4,7 +4,7 @@ import { type Dispatch, type SetStateAction, type ReactNode } from "react";
 import "./style.css";
 
 interface CustomDrawerProps {
-  title: string;
+  title?: string;
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   children: ReactNode;
