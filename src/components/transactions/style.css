@@ -1,3 +1,10 @@
 .transaction-filter .filter-tools-wrapper .filter-tools-title {
   color: rgba(16, 24, 40, 1);
 }
+
+.trans-list {
+  overflow-y: auto;
+  max-height: 70vh;
+  padding-bottom: 30px;
+  direction: ltr;
+}

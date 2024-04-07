@@ -3,11 +3,9 @@ import PropTypes from "prop-types";
 import "./style.css";
 import { useAppDispatch } from "../hooks/reduxHooks";
 import { merchantDetails } from "../../store/merchant/merchantSlice";
+import { Merchant } from "../types/Merchant";
 // import { Button } from "antd";
-interface Merchant {
-  title: string;
-  img: string;
-}
+
 interface SelectedMerchantsProps {
   merchants: Merchant[];
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;

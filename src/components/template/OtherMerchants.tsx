@@ -1,12 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./style.css";
-interface Merchant {
-  title: string;
-  img: string;
-}
+import { merchantDetails } from "../../store/merchant/merchantSlice";
+import { useAppDispatch } from "../hooks/reduxHooks";
+import { Merchant } from "../types/Merchant";
 
-function OtherMerchants({ merchants }: { merchants: Merchant[] }) {
+interface OtherMerchantsProps {
+  merchants: Merchant[];
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+function OtherMerchants({ merchants, setIsOpen }: OtherMerchantsProps) {
+  const dispatch = useAppDispatch();
+
+  const handleMerchantDetails = (merchant: Merchant) => {
+    setIsOpen(true);
+    dispatch(merchantDetails(merchant));
+  };
   return (
     <div className="selected-merchants-wrapper">
       <p className="selected-merchants-title">سایر کسب‌وکارها</p>
@@ -17,6 +26,7 @@ function OtherMerchants({ merchants }: { merchants: Merchant[] }) {
             key={index}
             className="selected-merchant"
             style={{ backgroundImage: "url(/assets/pics/mask-group.svg)" }}
+            onClick={() => handleMerchantDetails(merchant)}
           >
             <div className="img-wrapper">
               <img className="selected-merchant-img" src={merchant.img} />

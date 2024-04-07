@@ -16,6 +16,19 @@
 .card-merchant-wrapper .card-icon {
   padding-left: 10px;
 }
+.more-trans-btn-wrapper {
+  width: 90%;
+  margin: 0 auto;
+  padding-bottom: 45px;
+}
+.more-trans-btn-wrapper button {
+  width: 100%;
+  height: 40px;
+}
+.more-trans-btn-wrapper button span {
+  font-size: 12px;
+  font-weight: 500;
+}
 .card-content {
   display: flex;
   flex-direction: column;
@@ -51,8 +64,16 @@
 .card-status {
   font-size: 12px;
   font-weight: 500;
-  color: rgba(18, 183, 106, 1);
   padding-left: 5px;
+}
+.card-status.green {
+  color: rgba(18, 183, 106, 1);
+}
+.card-status.red {
+  color: rgba(255, 54, 114, 1);
+}
+.card-status.yellow {
+  color: rgba(255, 184, 0, 1);
 }
 
 .card-date {
@@ -127,7 +148,7 @@
 }
 .near-expiration-card-wrapper.expired::after {
   position: absolute;
-  content: '';
+  content: "";
   padding: 0.4rem;
   background-color: #fff;
   border-radius: 50%;
@@ -140,7 +161,7 @@
 }
 .near-expiration-card-wrapper.expired::before {
   position: absolute;
-  content: '';
+  content: "";
   padding: 0.4rem;
   background-color: #fff;
   border-radius: 50%;

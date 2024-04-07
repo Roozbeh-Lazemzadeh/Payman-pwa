@@ -28,7 +28,7 @@ export const DetailedDrawer: React.FC<DetailedDrawerProps> = ({
               text2={val.nameItem2}
             />
           ))}
-          <div>{children}</div>
+          <div className="drawer-children">{children}</div>
         </div>
       }
     </CustomDrawer>
