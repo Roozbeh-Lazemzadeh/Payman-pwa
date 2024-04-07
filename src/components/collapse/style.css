@@ -55,7 +55,7 @@
 
 .ant-collapse.ant-collapse-icon-position-start {
   overflow: scroll;
-  height: 70%;
+  height: 65%;
   direction: ltr;
 }
 
@@ -87,7 +87,11 @@
   font-weight: 500;
 }
 
-@media (max-height: 700px) {
+/* media gueries */
+
+/* SE phone */
+
+@media screen and (max-width: 376px), screen and (max-height: 668px) {
   .ant-collapse.ant-collapse-icon-position-start {
     overflow: scroll;
     height: 67%;
@@ -95,6 +99,28 @@
   }
   .question-title {
     padding-bottom: 20px;
+    margin-top: 1rem;
+  }
+
+  .ant-collapse-header-text {
+    font-size: 12px;
+  }
+
+  .ant-collapse-arrow {
+    width: 15px !important;
+    height: 15px !important;
+  }
+
+  .ant-collapse.ant-collapse-icon-position-start > .ant-collapse-item {
+    padding: 15px 0 15px 0;
+  }
+
+  .ant-collapse-content-box > span {
+    font-size: 11px;
+  }
+
+  .btn-faq {
+    font-size: 13px;
   }
 }
 
@@ -106,4 +132,7 @@
   .ant-btn {
     height: 29px !important;
   }
+  /* .ant-collapse.ant-collapse-icon-position-start {
+    height: 65%;
+  } */
 }

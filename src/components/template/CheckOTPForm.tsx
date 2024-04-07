@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-no-undef */
 // import { type FC, useState, type Dispatch, type SetStateAction } from 'react';
-import { Button } from 'antd';
-import { type FC, useState, useEffect } from 'react';
+import { Button } from "antd";
+import { type FC, useState, useEffect } from "react";
 
-import OtpInput from 'react-otp-input';
+import OtpInput from "react-otp-input";
 
 const CheckOTPForm: FC = () => {
   const [otp, setOtp] = useState<string>();
@@ -24,13 +24,27 @@ const CheckOTPForm: FC = () => {
       </p>
       <p className="check-number">۹۸۹۳۷۱۱۰۹۲۲۷+</p>
       <form className="check-wrapper">
-        <div className='form-items-wrapper'>
+        <div className="form-items-wrapper">
           <OtpInput
             value={otp}
             onChange={setOtp}
             numInputs={4}
-            renderSeparator={<span>{''}</span>}
-            renderInput={(props) => <input {...props} />}
+            renderSeparator={<span>{""}</span>}
+            renderInput={(props) => <input  {...props } />}
+            // renderInput={(props) => (
+            //   <input
+              
+            //     {...props}
+            //     style={{
+            //       border: "1px solid red",
+            //       borderRadius: "4px",
+            //       padding: "8px",
+            //       fontSize: "16px",
+            //       width: "50px",
+                 
+            //     }}
+            //   />
+            // )}
             containerStyle="check-otp-inputs"
             inputStyle="check-otp-input"
           />

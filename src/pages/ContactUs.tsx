@@ -4,7 +4,7 @@ import './style.css';
 function ContactUs() {
   return (
     <div className="contact-wrapper">
-      <img className="contact-banner" src="/assets/pics/contact.png" />
+      <img className="contact-banner" src="/assets/pics/contact.svg" />
       <div className="contact-details">
         <div className="contact-detail">
           <a href="tel:02122989880" className="contact-btn">

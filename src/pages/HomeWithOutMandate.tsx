@@ -56,7 +56,7 @@ function HomeWithOutMandate() {
         enterButton={
           <Button className="search-btn" disabled icon={<MagnifierIcon />} />
         }
-      />
+        />
 
       <div className="home-merchants-wrapper">
         <div className="home-merchants">
