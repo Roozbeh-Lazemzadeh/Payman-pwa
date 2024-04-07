@@ -74,6 +74,10 @@
   outline: none;
 } */
 
+.check-otp-inp {
+  border-bottom: 2px solid rgb(209, 26, 2) !important;
+}
+
 .otp-form_checked {
   display: block;
 }
