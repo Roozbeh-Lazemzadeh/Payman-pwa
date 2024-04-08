@@ -7,40 +7,42 @@ import { DetailedDrawer } from "../components/shared/Drawer/DetailedDrawer";
 
 function HomeWithMandate() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  // const handleOpenDetailedDrawer = () => {};
+  const [selectedItemIndex, setSelectedItemIndex] = useState(null);
+
   const DetailedDrawerArray = [
     { nameItem1: "بانک", nameItem2: "سامان" },
     { nameItem1: "شماره موبایل", nameItem2: "989385445348+" },
     { nameItem1: "شناسه پیمان", nameItem2: "Ajdfni830874p39vfndl" },
   ];
 
+  const HomedatepickersArray = [
+    { id: 1, month: "اردبیهشت" },
+    { id: 2, month: "خرداد" },
+    { id: 3, month: "تیر" },
+    { id: 4, month: "مرداد" },
+    { id: 5, month: "شهریور" },
+    { id: 6, month: "مهر" },
+  ];
+
+  const handleItemClick = (id: any) => {
+    setSelectedItemIndex(id === selectedItemIndex ? null : id);
+  };
+
   return (
     <div className="home-wrapper">
       <div className="home-datepickers">
-        <div className="home-datepicker">
-          <span className="home-datepicker-num">02</span>
-          <span className="home-datepicker-p">اردبیهشت</span>
-        </div>
-        <div className="home-datepicker">
-          <span className="home-datepicker-num">02</span>
-          <span className="home-datepicker-p">خرداد</span>
-        </div>
-        <div className="home-datepicker">
-          <span className="home-datepicker-num">02</span>
-          <span className="home-datepicker-p">تیر</span>
-        </div>
-        <div className="home-datepicker">
-          <span className="home-datepicker-num">02</span>
-          <span className="home-datepicker-p">مرداد</span>
-        </div>
-        <div className="home-datepicker">
-          <span className="home-datepicker-num">02</span>
-          <span className="home-datepicker-p">شهریور</span>
-        </div>
-        <div className="home-datepicker">
-          <span className="home-datepicker-num">02</span>
-          <span className="home-datepicker-p">مهر</span>
-        </div>
+        {HomedatepickersArray.map((item) => (
+          <div
+            className={`home-datepicker ${
+              item.id === selectedItemIndex ? "home-datepicker-click" : ""
+            }`}
+            key={item.id}
+            onClick={() => handleItemClick(item.id)}
+          >
+            <span className="home-datepicker-num">03</span>
+            <span className="home-datepicker-p">{item.month}</span>
+          </div>
+        ))}
       </div>
       <MerchantChartSection />
       <DetailedDrawer
