@@ -1,29 +1,42 @@
 import React, { useState, useEffect } from "react";
 import { RouterProvider } from "react-router-dom";
 import { ConfigProvider } from "antd";
-// import { Button, ConfigProvider, Input, Tag } from 'antd';
-import "./App.css";
-// import FilteredTag from './components/shared/Tags/Tag';
-// import {
-//   NotificationBadge,
-//   NumberedBadge,
-// } from './components/shared/Badges/Badge';
-// import { CustomDrawer } from './components/shared/Drawer/Drawer';
-// import { TransactionCard } from './components/shared/Cards/TransactionCards';
 import { router } from "./router/router";
 import SplashScreen from "./components/splash/SplashScreen";
+import "./App.css";
 
 function App(): JSX.Element {
   const [isAppLoaded, setIsAppLoaded] = useState<boolean>(false);
+  const [isAppLoading, setIsAppLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    // Simulate app loading
-    const loadApp = setTimeout(() => {
-      setIsAppLoaded(true);
-    }, 3000); // Adjust the delay as needed
+    // Check if the key "hasSplashShown" exists in sessionStorage
+    const hasSplashShownBefore = sessionStorage.getItem("hasSplashShown");
 
-    return () => clearTimeout(loadApp);
-  }, []);
+    // If the key doesn't exist, set it to true and render the splash screen
+    if (!hasSplashShownBefore) {
+      console.log("nist");
+      sessionStorage.setItem("hasSplashShown", "true");
+    } else {
+      // If the key exists, mark the app as loaded
+      setIsAppLoaded(true);
+    }
+
+    // Simulate app loading
+    const loadedApp = setTimeout(() => {
+      setIsAppLoaded(true);
+    }, 3000);
+
+    const loadingApp = setTimeout(() => {
+      setIsAppLoading(false);
+    }, 0);
+
+    return () => {
+      clearTimeout(loadedApp);
+      clearTimeout(loadingApp);
+    };
+  }, [isAppLoaded]);
+
   return (
     <>
       <ConfigProvider
@@ -59,151 +72,11 @@ function App(): JSX.Element {
           },
         }}
       >
-        {/* <div className="App">
-        <Button
-          type="primary"
-          style={{ width: 120, marginLeft: 5, marginTop: 10 }}
-        >
-          primary
-        </Button>
-        <Button size="middle" style={{ marginLeft: 5 }}>
-          default
-        </Button>
-        <Button size="small" disabled>
-          default
-        </Button>
-        <Input disabled style={{ width: 200 }} />
-        <Tag>فیلتر شده بر اساس نام کسب‌وکار : تپسی٬ اسنپ٬ فیلیمو</Tag>
-        <FilteredTag
-          text={'فیلتر شده بر اساس نام کسب‌وکار : تپسی٬ اسنپ٬ فیلیمو'}
-        />
-        <NumberedBadge number={2} />
-        <NotificationBadge />
-        <p>تومانءءء</p>
-        <CustomDrawer title={'توافق‌نامه کاربری پیمان'}>
-          <div style={{ fontWeight: 500 }}>
-            <div
-              style={{
-                height: 300,
-                overflow: 'scroll',
-                padding: '0px 20px',
-                color: 'rgba(16, 24, 40, 1)',
-                fontSize: 14,
-              }}
-            >
-              <div>
-                با سلام بسیار خوش‌آمدید به "پیمان". لطفاً قبل از ادامه، وقت
-                بگذارید و مقررات زیر را با دقت مطالعه فرمایید. این قوانین و
-                مقررات برای اطمینان از تجربه‌ای امن و محترمانه برای تمامی
-                کاربران ما وضع شده‌اند.
-              </div>
-              <br />
-              <div>
-                ۱. احترام به حریم خصوصی ما احترام کاملی به حریم خصوصی و اطلاعات
-                شما داریم. هیچگونه اطلاعات شخصی شما به اشتراک گذاشته نخواهد شد و
-                تنها برای بهبود خدمات ما استفاده می‌شود.
-              </div>
-              <br />
-              <div>
-                ۲. پذیرش و ارتقاء قوانین استفاده از این اپلیکیشن به معنی پذیرش
-                کامل قوانین و مقررات ما است. ما ممکن است این قوانین را به‌روز
-                کنیم، ولی هرگونه تغییری از طریق اطلاعیه به شما اطلاع داده خواهد
-                شد.
-              </div>
-              <br />
-              <div>
-                ۳. امنیت اطلاعات امنیت اطلاعات شما برای ما بسیار مهم است. ما
-                تمهیدات امنیتی لازم را انجام داده‌ایم تا اطلاعات شما در امان
-                باشد.
-              </div>
-              <br />
-              <div>
-                ۴. خاتمه با تشکر از اعتماد شما به ما و استفاده از اپلیکیشن
-                "پیمان". امیدواریم تجربه خوبی از خدمات ما داشته باشید. هرگونه
-                پرسش یا بازخوردی دارید، لطفاً با ما در تماس باشید.
-              </div>
-              <br></br>
-            </div>
-            <div
-              style={{
-                paddingTop: 40,
-                display: 'flex',
-                justifyContent: 'center',
-              }}
-            >
-              <Button
-                style={{ display: 'flex' }}
-                type="primary"
-                icon={
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M7.03369 10.0001L9.01202 11.9776L12.967 8.02258"
-                      stroke="white"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M2.2915 10.0001C2.2915 15.7809 4.219 17.7084 9.99984 17.7084C15.7807 17.7084 17.7082 15.7809 17.7082 10.0001C17.7082 4.21925 15.7807 2.29175 9.99984 2.29175C4.219 2.29175 2.2915 4.21925 2.2915 10.0001Z"
-                      stroke="white"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                }
-              >
-                توافق‌نامه کاربری پیمان را خوانده‌ام و می‌پذیرم.
-              </Button>
-            </div>
-          </div>
-        </CustomDrawer>
-        <div
-          style={{ display: 'flex', justifyContent: 'center', marginTop: 10 }}
-        >
-          <TransactionCard
-            merchant="تپسی"
-            price={4550}
-            transStatus="موفق"
-            transDate="سه‌شنبه، ۱۴۰۲/۰۷/۲۵- ۱۸:۴۸"
-            transStatusIcon={
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M7.03369 9.99996L9.01202 11.9775L12.967 8.02246"
-                  stroke="#12B76A"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M2.2915 10.0001C2.2915 15.7809 4.219 17.7084 9.99984 17.7084C15.7807 17.7084 17.7082 15.7809 17.7082 10.0001C17.7082 4.21925 15.7807 2.29175 9.99984 2.29175C4.219 2.29175 2.2915 4.21925 2.2915 10.0001Z"
-                  stroke="#12B76A"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            }
-          />
-        </div>
-      </div> */}
-        {isAppLoaded ? <RouterProvider router={router} /> : <SplashScreen />}
+        {isAppLoaded ? (
+          <RouterProvider router={router} />
+        ) : isAppLoading ? null : (
+          <SplashScreen />
+        )}
       </ConfigProvider>
     </>
   );
