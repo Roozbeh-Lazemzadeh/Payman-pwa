@@ -130,7 +130,7 @@
   height: 3rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   padding: 2.1rem 30px;
   font-weight: 500;
@@ -142,7 +142,18 @@
   transition: ease-in-out 0.3s all;
 }
 
-.home-datepicker:nth-child(6) {
+/* .home-datepicker:nth-child(6) {
+  background-color: #0072ff;
+  color: #fff;
+  border-radius: 10px;
+  padding: 2.1rem 30px;
+  width: 3rem;
+  height: 3rem;
+  opacity: 1;
+  transition: ease-in-out 0.3s all;
+} */
+
+.home-datepicker-click {
   background-color: #0072ff;
   color: #fff;
   border-radius: 10px;
@@ -153,22 +164,11 @@
   transition: ease-in-out 0.3s all;
 }
 
-.home-datepicker:hover {
-  background-color: #0072ff;
-  color: #fff;
-  border-radius: 10px;
-  padding: 2.1rem 30px;
-  width: 3rem;
-  height: 3rem;
-  opacity: 1;
-  transition: ease-in-out 0.3s all;
-}
-
-.home-datepicker-p:hover {
+/* .home-datepicker-p:hover {
   font-size: 12px;
   transition: ease-in-out 0.001s all;
   color: #fff;
-}
+} */
 
 .TransactionHomeCard-wrapper-cards {
   border-bottom: 1px solid gray;
