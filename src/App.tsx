@@ -8,23 +8,7 @@ import "./App.css";
 function App(): JSX.Element {
   const [isAppLoaded, setIsAppLoaded] = useState<boolean>(false);
   const [isAppLoading, setIsAppLoading] = useState<boolean>(true);
-  const [showSplash, setShowSplash] = useState(true);
-
-  useEffect(() => {
-    // Listen for the DOMContentLoaded event
-    const handleDOMContentLoaded = () => {
-      // Hide the splash screen after the DOM content has loaded
-      setShowSplash(false);
-    };
-
-    document.addEventListener("DOMContentLoaded", handleDOMContentLoaded);
-
-    return () => {
-      // Clean up the event listener when the component unmounts
-      document.removeEventListener("DOMContentLoaded", handleDOMContentLoaded);
-    };
-  }, []);
-
+  
   useEffect(() => {
     // Check if the key "hasSplashShown" exists in sessionStorage
     const hasSplashShownBefore = sessionStorage.getItem("hasSplashShown");
@@ -55,12 +39,6 @@ function App(): JSX.Element {
 
   return (
     <>
-      {showSplash && (
-        <div className="splash-screen">
-          {/* Your splash screen content goes here */}
-          <h1>Loading...</h1>
-        </div>
-      )}
       <ConfigProvider
         theme={{
           token: {
