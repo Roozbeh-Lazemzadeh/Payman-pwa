@@ -1,7 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
-import { type FC, type Dispatch, type SetStateAction, useState } from "react";
-import { Input, Checkbox, Button } from "antd";
+import {
+  type FC,
+  type Dispatch,
+  type SetStateAction,
+  useState,
+  useEffect,
+} from "react";
+import { Checkbox, Button } from "antd";
+import OtpInput from "react-otp-input";
 
 import "./style.css";
 import { CustomDrawer } from "../shared/Drawer/Drawer";
@@ -13,15 +20,43 @@ interface OnboardingProps {
 
 const SendOTPForm: FC<OnboardingProps> = ({ setStep }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [otp, setOtp] = useState<string>();
+
+  useEffect(() => {
+    console.log(otp);
+  }, [otp]);
+
+  // const onChange: GetProp<typeof Input.OTP, "onChange"> = (text: string) => {
+  //   console.log("onChange:", text);
+  // };
+
+  // const sharedProps = {
+  //   onChange,
+  // };
+
   return (
     <div className="send-otp-wrapper">
       <div className="send-otp-form__wrapper">
         <form className="send-otp-form">
+          {/* <Input.OTP formatter={(str) => str.toUpperCase()} {...sharedProps} /> */}
           <span className="send-otp__title">ورود یا ثبت نام</span>
           <div className="otp-form_input-wrapper">
-            <Input className="otp-form_input" />
-
-            <Input className="otp-form_input" />
+            <div className="otp-form_input">
+              <span className="form-input_title">شماره موبایل</span>
+              <span className="form-input_num">
+                <OtpInput
+                  value={otp}
+                  onChange={setOtp}
+                  numInputs={9}
+                  renderSeparator={<span>{""}</span>}
+                  renderInput={(props) => <input {...props} />}
+                  containerStyle="phone-num-inputs"
+                  inputStyle="phone-num-input"
+                />
+                <span>۰۹</span>
+              </span>
+            </div>
+            <div className="otp-form_input"></div>
           </div>
           {/* <input type="checkbox" className="otp-form_checked" /> */}
           <Checkbox className="otp-Checkbox">

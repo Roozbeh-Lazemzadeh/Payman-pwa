@@ -7,8 +7,10 @@ import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import { ReactComponent as TickSquarepro } from "../icons/TickSquarepro.svg";
 import { ReactComponent as Logout } from "../icons/Logout.svg";
+import DatePickerInput from "../components/DatePikerSreachedFooter";
 // import calendarIcon from "../icons/calendarDatepiker.svg";
 // import transition from "react-element-popper/animations/transition";
+// import "react-multi-date-picker/styles/layouts/mobile.css";
 
 const onChange = (value: string) => {
   console.log(`selected ${value}`);
@@ -116,8 +118,10 @@ const AccountPage: React.FC = () => {
           value={value}
           locale={persian_fa}
           calendar={persian}
+          // className="rmdp-mobile"
         />
       </div>
+      <DatePickerInput/>
       <Button
         className="contact-us-with-icon profile"
         type="primary"

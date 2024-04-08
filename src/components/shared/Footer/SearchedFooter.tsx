@@ -90,7 +90,7 @@ export const SearchedFooter: React.FC = () => {
                     searchItem === "103" ? <CalendarIcon /> : <BuyIcon />
                   }
                   placeholder={`${
-                    searchItem === "103" ? "از مبلغ" : "از تاریخ"
+                    searchItem === "103" ? "از تاریخ":"از مبلغ" 
                   }`}
                 />
                 <Input
@@ -99,7 +99,7 @@ export const SearchedFooter: React.FC = () => {
                     searchItem === "103" ? <CalendarIcon /> : <BuyIcon />
                   }
                   placeholder={`${
-                    searchItem === "103" ? "تا مبلغ" : "تا تاریخ"
+                    searchItem === "103" ?  "تا تاریخ":"تا مبلغ" 
                   }`}
                 />
               </>
