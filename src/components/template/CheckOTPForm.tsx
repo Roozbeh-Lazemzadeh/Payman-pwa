@@ -7,9 +7,10 @@ import OtpInput from "react-otp-input";
 
 const CheckOTPForm: FC = () => {
   const [otp, setOtp] = useState<string>();
+  // const [style, setStyle] = useState<string>();
 
   useEffect(() => {
-    console.log(otp);
+    console.log(otp)
   }, [otp]);
 
   // const handleOtp = (value: string) => {
@@ -30,21 +31,8 @@ const CheckOTPForm: FC = () => {
             onChange={setOtp}
             numInputs={4}
             renderSeparator={<span>{""}</span>}
-            renderInput={(props) => <input  {...props } />}
-            // renderInput={(props) => (
-            //   <input
-              
-            //     {...props}
-            //     style={{
-            //       border: "1px solid red",
-            //       borderRadius: "4px",
-            //       padding: "8px",
-            //       fontSize: "16px",
-            //       width: "50px",
-                 
-            //     }}
-            //   />
-            // )}
+            // renderInput={(props) => <input {...props} />}
+            renderInput={(props) => <input {...props} />}
             containerStyle="check-otp-inputs"
             inputStyle="check-otp-input"
           />

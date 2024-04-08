@@ -388,6 +388,46 @@
   .item-onboarding_img {
     width: 67% !important;
   }
+
+  .home-des_title {
+    font-size: 1rem;
+  }
+
+  .home-des_parghraf {
+    font-size: 0.7rem;
+  }
+
+  .home-search_input.payman {
+    margin-top: 0rem;
+  }
+
+  .home-merchants {
+    height: calc(100vh - 480px);
+  }
+
+  .contact-banner {
+    height: 120px;
+    width: auto;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3.4rem;
+  }
+
+  .contact-btn {
+    font-size: 11px;
+    width: 100px;
+  }
+
+  .contact-title {
+    font-size: 15px;
+  }
+
+  .info-login {
+    margin-top: 2.5rem;
+    font-size: 11px;
+  }
 }
 
 .embedded-video {
