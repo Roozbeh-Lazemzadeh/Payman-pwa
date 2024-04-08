@@ -1,12 +1,12 @@
-import { Modal } from 'antd';
-import React from 'react';
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import { Modal } from "antd";
+import React from "react";
+import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import {
   selectNotificationModal,
   toggleNotificationModal,
-} from '../../store/notification/notificationSlice';
-
-import './style.css';
+} from "../../store/notification/notificationSlice";
+import "./style.css";
+import Notification from "../notification/Notification";
 
 export const NotificationModal: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -30,13 +30,14 @@ export const NotificationModal: React.FC = () => {
       onCancel={handleCancel}
       closeIcon={false}
     >
-      <div className="empty-notification-content">
+      {/* <div className="empty-notification-content">
         <img
           src="/assets/pics/EmptyNotification.png"
           alt="Empty Notification"
         />
         <span>شما هیچ پیامی دریافت نکردید.</span>
-      </div>
+      </div> */}
+      <Notification />
     </Modal>
   );
 };
