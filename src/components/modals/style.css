@@ -10,11 +10,13 @@
   padding: 20px 0px;
   margin: 0 auto;
 }
+.ant-modal.notification-modal .ant-modal-header {
+  margin-bottom: 0px;
+}
 .notification-modal-title-content {
   padding-bottom: 20px;
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(172, 172, 172, 0.2);
 }
 .notification-modal-title-content > span:nth-child(1) {
   color: rgba(18, 25, 39, 1);
@@ -34,6 +36,7 @@
   justify-content: center;
   align-items: center;
   padding: 40px 90px;
+  border-top: 1px solid rgba(172, 172, 172, 0.2);
 }
 .empty-notification-content > span {
   color: rgba(18, 25, 39, 1);
