@@ -190,9 +190,7 @@
   width: 100%;
   height: 50%;
   padding: 15px 10px 13px;
-  padding: 15px 10px 13px;
   gap: 10px;
-  direction: rtl;
   direction: rtl;
 }
 .search-input .ant-input-group .ant-input {
@@ -203,6 +201,9 @@
 }
 .search-section .home-search_input.payman {
   margin-top: 0;
+}
+.search-datePicker .rmdp-container {
+  position: unset;
 }
 
 /* media gueries */
@@ -215,6 +216,6 @@
   }
 
   .ant-input-group {
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
   }
 }

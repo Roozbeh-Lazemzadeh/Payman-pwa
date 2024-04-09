@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useRef, useState } from "react";
 import SelectedMerchants from "../components/template/SelectedMerchants";
 import OtherMerchants from "../components/template/OtherMerchants";
@@ -14,9 +15,9 @@ import MerchantSearch from "../components/shared/Merchant/MerchantSearch";
 import "./style.css";
 import MerchantInfo from "../components/shared/Merchant/MerchantInfo";
 import { Merchant } from "../components/types/Merchant";
-import persian from "react-date-object/calendars/persian";
-import persian_fa from "react-date-object/locales/persian_fa";
-import DatePicker, { DatePickerRef } from "react-multi-date-picker";
+// import persian from "react-date-object/calendars/persian";
+// import persian_fa from "react-date-object/locales/persian_fa";
+// import DatePicker, { DatePickerRef } from "react-multi-date-picker";
 
 const HomeWithOutMandate: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -33,17 +34,18 @@ const HomeWithOutMandate: React.FC = () => {
     }
   };
 
-  interface CustomDatePickerRef extends DatePickerRef {
-    openCalendar: () => void;
-    closeCalendar: () => void;
-  }
+  // interface CustomDatePickerRef extends DatePickerRef {
+  //   openCalendar: () => void;
+  //   closeCalendar: () => void;
+  // }
 
   //  const datePickerRef = useRef(null) as unknown as MutableRefObject<HTMLDivElement>;
-  const datePickerRef = useRef<CustomDatePickerRef>(null);
+  // const datePickerRef = useRef<CustomDatePickerRef>(null);
 
   return (
     <div className="home-wrapper">
       <Slider ImgArray={homeSliderArray} />
+
       <div className="home-des">
         <div
           style={{
@@ -55,13 +57,7 @@ const HomeWithOutMandate: React.FC = () => {
           <p className="home-des_title">پیمان چیست؟</p>
           <Switch onChange={onChange} />
         </div>
-        <p className="home-des_parghraf">
-          «پیمان»، راهکار پرداخت مستقیم از حساب بانکی است که در آن، شما به
-          اپلیکیشن یا کسب‌وکار آنلاین مورد نظر خود اجازه می‌دهید طبق شرایطی که
-          در قرارداد بین طرفین ذکر می‌شود، در مدت زمان معینی از حساب بانکی‌تان
-          هزینه خدمات را پرداخت کند.
-        </p>
-        <div>
+        {/* <div>
           <DatePicker
             ref={datePickerRef}
             calendar={persian}
@@ -69,15 +65,15 @@ const HomeWithOutMandate: React.FC = () => {
             dateSeparator="     |     "
             calendarPosition="bottom-right"
             range
-          >
-            <button
-              style={{ margin: "5px" }}
-              onClick={() => datePickerRef.current?.closeCalendar()} // Use optional chaining
-            >
-              بستن
-            </button>
-          </DatePicker>
-        </div>
+            // className="rmdp-mobile"
+          />
+        </div> */}
+        <p className="home-des_parghraf">
+          «پیمان»، راهکار پرداخت مستقیم از حساب بانکی است که در آن، شما به
+          اپلیکیشن یا کسب‌وکار آنلاین مورد نظر خود اجازه می‌دهید طبق شرایطی که
+          در قرارداد بین طرفین ذکر می‌شود، در مدت زمان معینی از حساب بانکی‌تان
+          هزینه خدمات را پرداخت کند.
+        </p>
       </div>
       <MerchantSearch
         setSelectedMerchants={setSelectedMerchants}
