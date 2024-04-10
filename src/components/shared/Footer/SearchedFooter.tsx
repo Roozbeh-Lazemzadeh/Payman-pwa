@@ -10,12 +10,14 @@ import {
 import { ReactComponent as TickSquareIcon } from "../../../icons/tickSquare.svg";
 import { ReactComponent as BuyIcon } from "../../../icons/buy2.svg";
 import { ReactComponent as MagnifierIcon } from "../../../icons/magnifier2.svg";
+import { ReactComponent as CalendarIcon } from "../../../icons/calendar.svg";
 import "./style.css";
 import "../../Paymans/otherPaymans/style.css";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 
 import { Button, Input } from "antd";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import { weekDays } from "../../types/calendar";
 
@@ -23,14 +25,17 @@ export const SearchedFooter: React.FC = () => {
   const [firstTitle, setFirstTitle] = useState("");
   const [secondTitle, setSecondTitle] = useState("");
   const [thirdTitle, setThirdTitle] = useState("");
-  const [values] = useState([
-    new DateObject({ calendar: persian }).subtract(4, "days"),
-    new DateObject({ calendar: persian }).add(4, "days"),
+  const [values, setValues] = useState([
+    // new DateObject({ calendar: persian }).subtract(4, "days"),
+    // new DateObject({ calendar: persian }).add(4, "days"),
   ]);
   const isSearchedFooterShown = useAppSelector(selectSearchedFooter);
   const closeSearchFooter = useAppSelector(selectCloseSearchFooter);
   const searchItem = useAppSelector(selectSelectedSearchItem);
-
+  // const changeDateHandler = (values: any): void => {
+  //   //  const date = new Date(e);
+  //   setValues(values);
+  // };
   useEffect(() => {
     if (searchItem !== "")
       switch (searchItem) {
@@ -76,21 +81,25 @@ export const SearchedFooter: React.FC = () => {
         return (
           <div className="search-datePicker">
             <DatePicker
+              placeholder="از تاریخ             تا تاریخ"
               style={{
                 direction: "rtl",
-                fontFamily: "IranYekan",
-                // width: "90%",
               }}
-              // onChange={changeDateHandler}
               value={values}
-              monthYearSeparator="  "
+              onChange={() => setValues(values)}
+              dateSeparator="        "
               locale={persian_fa}
               calendar={persian}
               className="rmdp-mobile"
               calendarPosition="bottom-right"
               range
               weekDays={weekDays}
+              monthYearSeparator="  "
             />
+            <div className="icon">
+              <CalendarIcon />
+            </div>
+            <div className="divider"></div>
           </div>
         );
       case "102":
@@ -132,7 +141,13 @@ export const SearchedFooter: React.FC = () => {
             <span>{secondTitle}</span>
             <span>{thirdTitle}</span>
           </div>
-          <div className="search-section">{searchFooterFn()}</div>
+          <div
+            className={`search-section ${
+              searchItem === "103" ? "search-bar" : ""
+            } `}
+          >
+            {searchFooterFn()}
+          </div>
         </div>
       </div>
     </Footer>

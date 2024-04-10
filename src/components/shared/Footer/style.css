@@ -163,7 +163,7 @@
   height: 50%;
   display: flex;
   justify-content: space-between;
-  gap: 10px;
+  gap: 8px;
   padding: 10px 10px 10px;
   align-items: center;
   border-bottom: 1px solid rgba(172, 172, 172, 0.2);
@@ -193,6 +193,16 @@
   gap: 10px;
   direction: rtl;
 }
+.search-section.search-bar {
+  display: unset;
+  padding: 10px 10px 10px;
+}
+.search-datePicker .rmdp-container .rmdp-input {
+  padding: 0px 10px 0px 60px;
+}
+.search-datePicker .rmdp-container {
+  margin-top: unset;
+}
 .search-input .ant-input-group .ant-input {
   text-align: end;
 }
@@ -202,10 +212,47 @@
 .search-section .home-search_input.payman {
   margin-top: 0;
 }
+.search-datePicker {
+  position: relative;
+}
 .search-datePicker .rmdp-container {
   position: unset;
 }
-
+.search-datePicker .rmdp-container .rmdp-input {
+  background: #ffffff;
+  border-width: 1px !important;
+  border-style: solid;
+  border-color: #cdcdd0;
+  border-radius: 5px !important;
+  margin: unset !important;
+}
+.search-datePicker .icon {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  border-right: 1px solid #cdcdd0;
+  padding: 7px 10px;
+}
+.icon svg {
+  vertical-align: middle;
+}
+.search-datePicker .divider {
+  position: absolute;
+  height: 34px;
+  color: #cdcdd0;
+  right: 32%;
+  top: 5.5px;
+  border-right: 1px solid #cdcdd0;
+}
+.search-datePicker .rmdp-container input::placeholder {
+  color: rgba(16, 24, 40, 0.2);
+}
+.custom-input {
+  font-family: "IranYekan";
+  font-size: 12;
+  font-weight: 600;
+}
 /* media gueries */
 
 /* SE phone */
@@ -217,5 +264,15 @@
 
   .ant-input-group {
     margin-bottom: 0.5rem;
+  }
+}
+
+/* media gueries */
+
+/* 14 iphone */
+
+@media screen and (min-width: 400px) {
+  .search-datePicker .divider {
+    right: 29%;
   }
 }

@@ -339,8 +339,8 @@
 .rmdp-header {
   height: 50px !important;
   overflow: hidden;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   border-bottom: 2px solid hsl(220deg 90% 85%);
 }
 .rmdp-mobile .rmdp-day-picker {
@@ -348,7 +348,10 @@
 }
 
 .rmdp-day span {
-  border-radius: 20%;
+  -webkit-border-radius: 5px !important;
+  -moz-border-radius: 5px !important;
+  -ms-border-radius: 5px !important;
+  -o-border-radius: 5px !important;
 }
 .rmdp-mobile .rmdp-rtl .rmdp-action-button {
   background-color: rgba(239, 242, 255, 1);
@@ -362,9 +365,9 @@
   align-items: center;
 }
 .rmdp-day.rmdp-today span {
-  background-color: rgba(239, 242, 255, 1);
-  color: #0072ff;
-  border: 0.1px solid #0072ff;
+  background-color: rgba(239, 242, 255, 1) !important;
+  color: #0072ff !important;
+  border: 0.1px solid #0072ff !important;
 }
 .rmdp-ym .rmdp-day span {
   border-radius: 5px;
@@ -374,11 +377,11 @@
 .rmdp-year-picker {
   background-color: #fff;
   border-radius: 0 0 5px 5px;
-  bottom: 2px;
-  left: -4px;
+  bottom: 0px;
+  left: 0px;
   position: absolute;
-  right: -4px;
-  top: 20px;
+  right: 0px;
+  top: 25px;
 }
 .rmdp-mobile .rmdp-rtl .rmdp-action-button {
   margin-right: unset !important;
