@@ -81,7 +81,7 @@ export const SearchedFooter: React.FC = () => {
         return (
           <div className="search-datePicker">
             <DatePicker
-              placeholder="از تاریخ             تا تاریخ"
+              placeholder="از تاریخ                  تا تاریخ"
               style={{
                 direction: "rtl",
               }}
