@@ -87,7 +87,7 @@ export const SearchedFooter: React.FC = () => {
               }}
               value={values}
               onChange={() => setValues(values)}
-              dateSeparator="        "
+              dateSeparator="                  "
               locale={persian_fa}
               calendar={persian}
               className="rmdp-mobile"
