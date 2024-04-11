@@ -1,5 +1,5 @@
 import React from "react";
-import { Drawer, Menu } from "antd";
+import { Carousel, Drawer, Menu } from "antd";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { selectSidebar, toggleSidebar } from "../../store/sidebar/sidebarSlice";
 import { getItem } from "../helpers";
@@ -10,20 +10,20 @@ import { ReactComponent as InfoIcon } from "../../icons/defaultInfoIcon.svg";
 import { ReactComponent as BlogIcon } from "../../icons/defaultBlog.svg";
 import "./style.css";
 // import Slider from "../slider/Slider";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectCards, Pagination, EffectFlip } from "swiper/modules";
+// import { Swiper, SwiperSlide } from "swiper/react";
+// import { Autoplay, EffectCards, Pagination, EffectFlip } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/effect-cards";
 import "swiper/css/effect-flip";
-import { SliderButtons } from "../slider/Slider";
+// import { SliderButtons } from "../slider/Slider";
 
-const homeSliderArray = [
-  { img: "/assets/banner-home/home1.png", id: 1 },
-  { img: "/assets/banner-home/home2.png", id: 2 },
-  { img: "/assets/banner-home/home3.png", id: 3 },
-  { img: "/assets/banner-home/home4.png", id: 4 },
-];
+// const homeSliderArray = [
+//   { img: "/assets/banner-home/home1.png", id: 1 },
+//   { img: "/assets/banner-home/home2.png", id: 2 },
+//   { img: "/assets/banner-home/home3.png", id: 3 },
+//   { img: "/assets/banner-home/home4.png", id: 4 },
+// ];
 
 export const Sidebar: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -208,31 +208,33 @@ export const Sidebar: React.FC = () => {
       >
         <Slider ImgArray={homeSliderArray} />
       </div> */}
-      <Swiper
+      {/* <Swiper
         effect={"flip"}
         slidesOffsetAfter={3}
         spaceBetween={30}
         centeredSlides={true}
-        // autoplay={{
-        //   delay: 2500,
-        //   disableOnInteraction: false,
-        // }}
         pagination={{
           clickable: true,
         }}
         modules={[Autoplay, Pagination, EffectCards, EffectFlip]}
         className="slider-home"
       >
-        {/* <SwiperSlide className="banner-home">
-          <img src="/assets/pics/Baner-home.svg" className="banner-home-1" />
-        </SwiperSlide> */}
         {homeSliderArray.map((item) => (
           <SwiperSlide key={item.id}>
             <img src={item.img} className="banner-home-sidebar" />
           </SwiperSlide>
         ))}
         <SliderButtons />
-      </Swiper>
+      </Swiper> */}
+      <Carousel infinite>
+        <img src="/assets/banner-home/home1.png" />
+
+        <img src="/assets/banner-home/home2.png" />
+
+        <img src="/assets/banner-home/home3.png" />
+
+        <img src="/assets/banner-home/home4.png" />
+      </Carousel>
       <div
         style={{
           padding: "30px 10px",
