@@ -5,6 +5,8 @@
   overflow-y: hidden;
   overflow-x: hidden;
   direction: ltr !important;
+  margin: 0 auto;
+  max-width: 460px;
 }
 
 .headerOnboarding {

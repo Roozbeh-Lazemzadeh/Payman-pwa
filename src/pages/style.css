@@ -398,6 +398,7 @@
 }
 .rmdp-action-buttons > button:first-child {
   display: none;
+  visibility: hidden;
 }
 .rmdp-action-buttons > button {
   font-family: "IranYekan";

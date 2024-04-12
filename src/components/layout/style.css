@@ -6,6 +6,8 @@
 
 .ant-layout {
   height: 100vh;
+  max-width: 460px;
+  margin: 0 auto;
 }
 
 .ant-layout-header {
@@ -38,6 +40,8 @@
   bottom: 0;
   left: 0;
   right: 0;
+  max-width: 460px;
+  margin: 0 auto;
 }
 
 .content-wrapper {
@@ -55,6 +59,7 @@
 
 .content-wrapper.scroll {
   overflow: hidden !important;
+  max-width: 460px;
 }
 
 /* ::-webkit-scrollbar {

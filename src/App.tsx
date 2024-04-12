@@ -8,7 +8,7 @@ import "./App.css";
 function App(): JSX.Element {
   const [isAppLoaded, setIsAppLoaded] = useState<boolean>(false);
   const [isAppLoading, setIsAppLoading] = useState<boolean>(true);
-  
+
   useEffect(() => {
     // Check if the key "hasSplashShown" exists in sessionStorage
     const hasSplashShownBefore = sessionStorage.getItem("hasSplashShown");
