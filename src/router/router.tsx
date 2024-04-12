@@ -24,9 +24,9 @@ export const router = createBrowserRouter([
       {
         path: "home",
         children: [
-          { path: "with-mandate", element: <HomeWithMandate /> },
           { path: "", element: <Navigate to="without-mandate" /> },
           { path: "without-mandate", element: <HomeWithOutMandate /> },
+          { path: "with-mandate", element: <HomeWithMandate /> },
         ],
       },
 

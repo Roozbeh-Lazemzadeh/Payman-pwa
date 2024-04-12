@@ -13,6 +13,10 @@ import {
 } from "../../store/footer/footerSlice";
 import PrimaryFooter from "./PrimaryFooter";
 import { SearchedFooter } from "../shared/Footer/SearchedFooter";
+interface HeaderStyle {
+  background: boolean;
+  title: string;
+}
 
 // Define the main layout for the Progressive Web App (PWA)
 const PWALayout: React.FC = () => {
@@ -25,25 +29,26 @@ const PWALayout: React.FC = () => {
 
   // Define different headers (blue or white) based on the route
   const getHeader = (): JSX.Element => {
-    if (location.pathname === "/home/with-mandate") {
-      return <CustomHeader background title="خانه" />;
-    } else if (location.pathname === "/home/without-mandate") {
-      return <CustomHeader title="خانه" />;
-    } else if (location.pathname === "/profile") {
-      return <CustomHeader background title="حساب کاربری" />;
-    } else if (location.pathname === "/transactions") {
-      return <CustomHeader title=" تراکنش ها" />;
-    } else if (location.pathname === "/paymans/me") {
-      return <CustomHeader title="پیمان‌ها" />;
-    } else if (location.pathname === "/paymans/others") {
-      return <CustomHeader title="سایر ‌هم‌پیمان‌ها" />;
-    } else if (location.pathname === "/faq") {
-      return <CustomHeader background title="پرسش‌های متداول" />;
-    } else if (location.pathname === "/contact-us") {
-      return <CustomHeader title="تماس با پیمان" />;
-    } else {
-      return <CustomHeader background title="خانه" />;
-    }
+    const headerStyleMap: Record<string, HeaderStyle> = {
+      "/home/with-mandate": { background: true, title: "خانه" },
+      "/home/without-mandate": { background: false, title: "خانه" },
+      "/profile": { background: true, title: "حساب کاربری" },
+      "/transactions": { background: false, title: "تراکنش‌ها" },
+      "/paymans/me": { background: false, title: "پیمان‌ها" },
+      "/paymans/others": { background: false, title: "سایر ‌هم‌پیمان‌ها" },
+      "/faq": { background: true, title: "پرسش‌های متداول" },
+      "/contact-us": { background: false, title: "تماس با پیمان" },
+      "/": { background: true, title: "خانه" },
+    };
+
+    const getHeaderStyle = () => {
+      const currentPath = location.pathname;
+      const headerStyle = headerStyleMap[currentPath];
+      return headerStyle || { background: false, title: "خانه" }; // Default header style
+    };
+
+    const { background, title } = getHeaderStyle();
+    return <CustomHeader background={background} title={title} />;
   };
 
   // Handle different scenarios for showing filter and primary footer
