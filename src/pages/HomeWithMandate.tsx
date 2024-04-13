@@ -7,7 +7,7 @@ import { DetailedDrawer } from "../components/shared/Drawer/DetailedDrawer";
 
 function HomeWithMandate() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selectedItemIndex, setSelectedItemIndex] = useState(null);
+  const [selectedItemIndex, setSelectedItemIndex] = useState(1);
 
   const DetailedDrawerArray = [
     { nameItem1: "بانک", nameItem2: "سامان" },
