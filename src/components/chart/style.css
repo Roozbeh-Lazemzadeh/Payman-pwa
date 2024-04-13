@@ -106,3 +106,25 @@ svg.recharts-surface {
 .recharts-layer {
   outline: none !important;
 }
+
+/* media gueries */
+
+/* SE phone */
+
+@media screen and (max-width: 376px), screen and (max-height: 668px) {
+  svg.recharts-surface {
+    width: 65% !important;
+  }
+
+  .pay-title {
+    font-size: 12px;
+  }
+
+  .pay-price {
+    font-size: 18px;
+  }
+
+  .instance {
+    padding: 4px 8px;
+  }
+}

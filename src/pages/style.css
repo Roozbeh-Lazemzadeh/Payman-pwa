@@ -133,8 +133,6 @@
   justify-content: center;
   align-items: center;
   padding: 2.1rem 30px;
-  font-weight: 500;
-  font-size: 14px;
   opacity: 0.3;
   font-weight: 500;
   font-size: 14px;
@@ -375,6 +373,54 @@
 }
 /* end profile page style */
 
+.embedded-video {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+.embedded-video iframe {
+  border-radius: 10px;
+}
+
+.merchant-title {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding-bottom: 20px;
+}
+.merchant-title img {
+  width: 20px;
+}
+.merchant-title span {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(18, 25, 39, 1);
+}
+.merchant-description {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(16, 24, 40, 0.2);
+  padding-bottom: 20px;
+}
+.merchants-btn {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 36px;
+}
+
+.merchant-enter-btn {
+  width: 65%;
+}
+.merchant-enter-btn span {
+  font-size: 12px;
+  font-weight: 500;
+}
+.merchant-more-details span {
+  font-size: 12px;
+  font-weight: 500;
+}
+
 /* media gueries */
 
 /* SE phone */
@@ -428,52 +474,12 @@
     margin-top: 2.5rem;
     font-size: 11px;
   }
-}
 
-.embedded-video {
-  display: flex;
-  justify-content: center;
-  padding-bottom: 20px;
-}
+  .home-datepickers {
+    justify-content: center;
+  }
 
-.embedded-video iframe {
-  border-radius: 10px;
-}
-
-.merchant-title {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding-bottom: 20px;
-}
-.merchant-title img {
-  width: 20px;
-}
-.merchant-title span {
-  font-size: 14px;
-  font-weight: 500;
-  color: rgba(18, 25, 39, 1);
-}
-.merchant-description {
-  font-size: 12px;
-  font-weight: 500;
-  color: rgba(16, 24, 40, 0.2);
-  padding-bottom: 20px;
-}
-.merchants-btn {
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 36px;
-}
-
-.merchant-enter-btn {
-  width: 65%;
-}
-.merchant-enter-btn span {
-  font-size: 12px;
-  font-weight: 500;
-}
-.merchant-more-details span {
-  font-size: 12px;
-  font-weight: 500;
+  .home-datepicker {
+    font-size: 13px !important;
+  }
 }

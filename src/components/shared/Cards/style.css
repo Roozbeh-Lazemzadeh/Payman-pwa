@@ -126,6 +126,11 @@
   margin-top: 20px;
   padding: 10px 10px;
 }
+
+.near-expiration-card-wrapper:active {
+  width: 50%;
+}
+
 .near-expiration-card-wrapper.other {
   direction: rtl;
   border: unset;
