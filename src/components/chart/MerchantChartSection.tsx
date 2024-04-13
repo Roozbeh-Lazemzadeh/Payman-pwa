@@ -1,5 +1,5 @@
-import React from 'react';
-import { RechartPieChart } from './RechartPieChart';
+import React, { useState } from 'react';
+import { RechartPieChart, data } from './RechartPieChart';
 import './style.css';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import {
@@ -8,9 +8,10 @@ import {
 } from '../../store/chart/chartSlice';
 
 export const MerchantChartSection: React.FC = () => {
+  const [title, setTitle] = useState('اسنپ');
+  const [sum, setSum] = useState<number>(data[0].value);
   const dispatch = useAppDispatch();
   const selectedMerchant = useAppSelector(selectSelectedMerchant);
-  console.log(selectedMerchant);
   const handleSelectedMerchant = (
     e: React.MouseEvent<HTMLSpanElement, MouseEvent>
   ) => {
@@ -20,19 +21,27 @@ export const MerchantChartSection: React.FC = () => {
       case 'all':
         // Handle 'همه' (all) case
         dispatch(selectMerchant(3));
+        setTitle('این ماه');
+        setSum(data[0].value + data[1].value + data[2].value);
         break;
       case 'fil':
         // Handle 'فیلیمو' (fil) case
+        setTitle('فیلیمو');
+        setSum(data[2].value);
         dispatch(selectMerchant(2));
 
         break;
       case 'taps':
         // Handle 'تپسی' (taps) case
+        setTitle('تپسی');
+        setSum(data[1].value);
         dispatch(selectMerchant(1));
 
         break;
       case 'snap':
         // Handle 'اسنپ' (snap) case
+        setTitle('اسنپ');
+        setSum(data[0].value);
         dispatch(selectMerchant(0));
 
         break;
@@ -43,13 +52,13 @@ export const MerchantChartSection: React.FC = () => {
   };
   return (
     <>
-      <div className="chart-row-wrapper">
-        <div className="pay-info-wrapper">
-          <div className="pay-title-price-wrapper">
-            <span className="pay-title">کل پرداخت های شما در این ماه</span>
-            <span className="pay-price">۱۰٬۰۰۰٬۰۰۰ تومان</span>
+      <div className='chart-row-wrapper'>
+        <div className='pay-info-wrapper'>
+          <div className='pay-title-price-wrapper'>
+            <span className='pay-title'>{`کل پرداخت های شما در  ${title}`}</span>
+            <span className='pay-price'> {`${sum} تومان`}</span>
           </div>
-          <div className="merchants-wrapper">
+          <div className='merchants-wrapper'>
             <span
               className={`instance all ${
                 selectedMerchant === 3 ? 'active' : ''
