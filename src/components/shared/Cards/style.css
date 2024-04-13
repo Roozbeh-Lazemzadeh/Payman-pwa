@@ -127,7 +127,7 @@
 }
 
 .near-expiration-card-wrapper.shadow-ani {
-  animation: boxShadow 5s infinite;
+  animation: boxShadow 2s infinite;
 }
 
 @keyframes boxShadow {

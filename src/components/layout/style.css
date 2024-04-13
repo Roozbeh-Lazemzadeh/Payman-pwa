@@ -193,6 +193,29 @@
   visibility: hidden;
 }
 
+.slick-dots.slick-dots-bottom {
+  margin: 0 6rem !important;
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 1rem;
+}
+
+.ant-carousel .slick-dots li {
+  width: 25px;
+}
+
+.ant-carousel .slick-dots li button {
+  border-radius: 50%;
+  padding: 3px;
+  width: unset;
+  align-items: baseline;
+  position: absolute;
+  bottom: -2px;
+}
+
 /* media gueries */
 
 /* SE phone */
