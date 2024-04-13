@@ -191,7 +191,7 @@ export const Sidebar: React.FC = () => {
       footer={customFooter()}
     >
       <Menu
-        style={{ background: "none" }}
+        style={{ background: 'none' }}
         // onClick={handleNavLink}
         mode="inline"
         selectedKeys={[location.pathname]}
@@ -226,20 +226,17 @@ export const Sidebar: React.FC = () => {
         ))}
         <SliderButtons />
       </Swiper> */}
-      <Carousel infinite className="custom-sidebar">
+      <Carousel autoplay infinite className="custom-sidebar">
         <img src="/assets/banner-home/home1.png" />
-
         <img src="/assets/banner-home/home2.png" />
-
         <img src="/assets/banner-home/home3.png" />
-
         <img src="/assets/banner-home/home4.png" />
       </Carousel>
       <div
         style={{
-          padding: "30px 10px",
-          display: "flex",
-          alignItems: "center",
+          padding: '30px 10px',
+          display: 'flex',
+          alignItems: 'center',
         }}
       >
         <svg
