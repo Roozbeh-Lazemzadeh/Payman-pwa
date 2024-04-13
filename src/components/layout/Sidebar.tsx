@@ -226,7 +226,7 @@ export const Sidebar: React.FC = () => {
         ))}
         <SliderButtons />
       </Swiper> */}
-      <Carousel infinite>
+      <Carousel infinite className="custom-sidebar">
         <img src="/assets/banner-home/home1.png" />
 
         <img src="/assets/banner-home/home2.png" />

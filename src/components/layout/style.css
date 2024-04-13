@@ -181,6 +181,13 @@
   bottom: 0px;
   transition: ease-in-out 0.35s;
 }
+.slick-slider .custom-sidebar .slick-initialized {
+  margin-bottom: 30px;
+}
+.ant-drawer-body .ant-carousel {
+  margin-top: 30px;
+  border-bottom: 1px solid rgba(5, 5, 5, 0.06);
+}
 
 /* media gueries */
 
