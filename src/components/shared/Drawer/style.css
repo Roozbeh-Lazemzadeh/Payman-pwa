@@ -2,6 +2,8 @@
   border-top-right-radius: 15px !important;
   border-top-left-radius: 15px !important;
   height: auto !important;
+  max-width: 460px !important;
+  margin: 0 auto !important;
 }
 
 .detailed-drawer.merchant {

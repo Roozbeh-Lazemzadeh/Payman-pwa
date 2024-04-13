@@ -7,10 +7,8 @@ import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import { ReactComponent as TickSquarepro } from "../icons/TickSquarepro.svg";
 import { ReactComponent as Logout } from "../icons/Logout.svg";
-import DatePickerInput from "../components/DatePikerSreachedFooter";
-// import calendarIcon from "../icons/calendarDatepiker.svg";
-// import transition from "react-element-popper/animations/transition";
-// import "react-multi-date-picker/styles/layouts/mobile.css";
+import "react-multi-date-picker/styles/layouts/mobile.css";
+import { weekDays } from "../components/types/calendar";
 
 const onChange = (value: string) => {
   console.log(`selected ${value}`);
@@ -34,11 +32,6 @@ const AccountPage: React.FC = () => {
     const date = new Date(e);
     setValue(date);
   };
-
-  console.log(Icon);
-  //   const handleIconOnFocus = () => {
-  //     setIcon(!Icon)
-  //   }
 
   return (
     <div className="profile-wrapper">
@@ -81,18 +74,7 @@ const AccountPage: React.FC = () => {
           },
         ]}
       />
-      {/* <Input
-        placeholder="تاریخ تولد"
-        suffix={
-          <DatePiker
-            // animations={[transition({ duration: 800, from: 35 })]}
-            onChange={changeDateHandler}
-            value={value}
-            locale={persian_fa}
-            calendar={persian}
-          />
-        }
-      /> */}
+
       <div className="datepiker-wrapper">
         <span className="datepiker-title">تاریخ تولد</span>
         <span className="calendar-icon">
@@ -113,15 +95,16 @@ const AccountPage: React.FC = () => {
           </svg>
         </span>
         <DatePiker
-          // animations={[transition({ duration: 800, from: 35 })]}
+          monthYearSeparator="  "
           onChange={changeDateHandler}
           value={value}
           locale={persian_fa}
           calendar={persian}
-          // className="rmdp-mobile"
+          className="rmdp-mobile"
+          calendarPosition="bottom-right"
+          weekDays={weekDays}
         />
       </div>
-      <DatePickerInput/>
       <Button
         className="contact-us-with-icon profile"
         type="primary"
@@ -129,11 +112,7 @@ const AccountPage: React.FC = () => {
       >
         ذخیره تغییرات
       </Button>
-      <Button
-        className="contact-us-with-icon logout"
-        // type="danger"
-        icon={<Logout />}
-      >
+      <Button className="contact-us-with-icon logout" icon={<Logout />}>
         خروج از حساب کاربری
       </Button>
     </div>

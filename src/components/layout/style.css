@@ -6,6 +6,8 @@
 
 .ant-layout {
   height: 100vh;
+  max-width: 460px;
+  margin: 0 auto;
 }
 
 .ant-layout-header {
@@ -38,6 +40,8 @@
   bottom: 0;
   left: 0;
   right: 0;
+  max-width: 460px;
+  margin: 0 auto;
 }
 
 .content-wrapper {
@@ -55,6 +59,7 @@
 
 .content-wrapper.scroll {
   overflow: hidden !important;
+  max-width: 460px;
 }
 
 /* ::-webkit-scrollbar {
@@ -175,6 +180,13 @@
 .primary-footer-active {
   bottom: 0px;
   transition: ease-in-out 0.35s;
+}
+.slick-slider .custom-sidebar .slick-initialized {
+  margin-bottom: 30px;
+}
+.ant-drawer-body .ant-carousel {
+  margin-top: 30px;
+  border-bottom: 1px solid rgba(5, 5, 5, 0.06);
 }
 
 /* media gueries */

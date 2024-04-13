@@ -8,22 +8,34 @@ import {
   selectSelectedSearchItem,
 } from "../../../store/footer/footerSlice";
 import { ReactComponent as TickSquareIcon } from "../../../icons/tickSquare.svg";
-import { ReactComponent as CalendarIcon } from "../../../icons/calendar.svg";
 import { ReactComponent as BuyIcon } from "../../../icons/buy2.svg";
 import { ReactComponent as MagnifierIcon } from "../../../icons/magnifier2.svg";
+import { ReactComponent as CalendarIcon } from "../../../icons/calendar.svg";
 import "./style.css";
 import "../../Paymans/otherPaymans/style.css";
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
 
 import { Button, Input } from "antd";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import DatePicker, { DateObject } from "react-multi-date-picker";
+import { weekDays } from "../../types/calendar";
 
 export const SearchedFooter: React.FC = () => {
   const [firstTitle, setFirstTitle] = useState("");
   const [secondTitle, setSecondTitle] = useState("");
   const [thirdTitle, setThirdTitle] = useState("");
+  const [values, setValues] = useState([
+    // new DateObject({ calendar: persian }).subtract(4, "days"),
+    // new DateObject({ calendar: persian }).add(4, "days"),
+  ]);
   const isSearchedFooterShown = useAppSelector(selectSearchedFooter);
   const closeSearchFooter = useAppSelector(selectCloseSearchFooter);
   const searchItem = useAppSelector(selectSelectedSearchItem);
-
+  // const changeDateHandler = (values: any): void => {
+  //   //  const date = new Date(e);
+  //   setValues(values);
+  // };
   useEffect(() => {
     if (searchItem !== "")
       switch (searchItem) {
@@ -47,6 +59,68 @@ export const SearchedFooter: React.FC = () => {
           break;
       }
   }, [searchItem]);
+  const searchFooterFn = () => {
+    switch (searchItem) {
+      case "104":
+        return (
+          <Search
+            placeholder="جستجوی نام کسب‌وکار"
+            onSearch={onSearch}
+            style={{ width: "90%" }}
+            className="home-search_input payman"
+            enterButton={
+              <Button
+                className="search-btn"
+                disabled
+                icon={<MagnifierIcon />}
+              />
+            }
+          />
+        );
+      case "103":
+        return (
+          <div className="search-datePicker">
+            <DatePicker
+              placeholder="از تاریخ                  تا تاریخ"
+              style={{
+                direction: "rtl",
+              }}
+              value={values}
+              onChange={() => setValues(values)}
+              dateSeparator="                  "
+              locale={persian_fa}
+              calendar={persian}
+              className="rmdp-mobile"
+              calendarPosition="bottom-right"
+              range
+              weekDays={weekDays}
+              monthYearSeparator="  "
+            />
+            <div className="icon">
+              <CalendarIcon />
+            </div>
+            <div className="divider"></div>
+          </div>
+        );
+      case "102":
+        return (
+          <>
+            <Input
+              className="search-input"
+              addonBefore={<BuyIcon />}
+              placeholder="از مبلغ"
+            />
+            <Input
+              className="search-input"
+              addonBefore={<BuyIcon />}
+              placeholder="تا مبلغ"
+            />
+          </>
+        );
+      default:
+        return null;
+    }
+  };
 
   const onSearch: SearchProps["onSearch"] = (value, _e, info) =>
     console.log(info?.source, value);
@@ -67,43 +141,12 @@ export const SearchedFooter: React.FC = () => {
             <span>{secondTitle}</span>
             <span>{thirdTitle}</span>
           </div>
-          <div className="search-section">
-            {searchItem && searchItem === "104" ? (
-              <Search
-                placeholder="جستجوی نام کسب‌وکار"
-                onSearch={onSearch}
-                style={{ width: "90%" }}
-                className="home-search_input payman"
-                enterButton={
-                  <Button
-                    className="search-btn"
-                    disabled
-                    icon={<MagnifierIcon />}
-                  />
-                }
-              />
-            ) : (
-              <>
-                <Input
-                  className="search-input"
-                  addonBefore={
-                    searchItem === "103" ? <CalendarIcon /> : <BuyIcon />
-                  }
-                  placeholder={`${
-                    searchItem === "103" ? "از تاریخ":"از مبلغ" 
-                  }`}
-                />
-                <Input
-                  className="search-input"
-                  addonBefore={
-                    searchItem === "103" ? <CalendarIcon /> : <BuyIcon />
-                  }
-                  placeholder={`${
-                    searchItem === "103" ?  "تا تاریخ":"تا مبلغ" 
-                  }`}
-                />
-              </>
-            )}
+          <div
+            className={`search-section ${
+              searchItem === "103" ? "search-bar" : ""
+            } `}
+          >
+            {searchFooterFn()}
           </div>
         </div>
       </div>

@@ -8,6 +8,8 @@
   flex-direction: column;
   z-index: 9999;
   overflow: hidden;
+  margin: 0 auto;
+  max-width: 460px;
 }
 
 .logo-wrapper {
