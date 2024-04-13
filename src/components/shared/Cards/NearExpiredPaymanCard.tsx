@@ -19,7 +19,7 @@ export const NearExpiredPaymanCard: React.FC = () => {
   ];
   return (
     <div
-      className="near-expiration-card-wrapper"
+      className="near-expiration-card-wrapper shadow-ani"
       onClick={() => setIsOpen(!isOpen)}
     >
       <div className="merchant-row">

@@ -216,7 +216,7 @@ export const Sidebar: React.FC = () => {
         pagination={{
           clickable: true,
         }}
-        modules={[Autoplay, Pagination, EffectCards, EffectFlip]}
+        modules={[Autoplay, Pagination, EffectCards]}
         className="slider-home"
       >
         {homeSliderArray.map((item) => (

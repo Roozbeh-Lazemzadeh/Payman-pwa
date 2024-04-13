@@ -5,6 +5,7 @@
   justify-content: center;
   margin-bottom: 1.2rem;
   font-size: 10px;
+  overflow: hidden;
 }
 
 .footer-wrapper_img {
@@ -237,12 +238,12 @@
 .icon svg {
   vertical-align: middle;
 }
-.search-datePicker .divider {
+.divider {
   position: absolute;
   height: 34px;
   color: #cdcdd0;
-  right: 32%;
-  top: 5.5px;
+  right: 55%;
+  top: 5rem;
   border-right: 1px solid #cdcdd0;
 }
 .search-datePicker .rmdp-container input::placeholder {
@@ -252,6 +253,41 @@
   font-family: "IranYekan";
   font-size: 12;
   font-weight: 600;
+}
+
+.rmdp-mobile .rmdp-arrow-container {
+  height: 26px;
+  width: 26px;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  padding-top: 2px;
+}
+
+.rmdp-rtl .rmdp-range-hover.start:not(.force),
+.rmdp-rtl .rmdp-range.start:not(.force) {
+  border-bottom-left-radius: 5px !important;
+  border-bottom-right-radius: 5px !important;
+  border-top-left-radius: 5px !important;
+  border-top-right-radius: 5px !important;
+  background-color: hsl(226deg 32% 44%) !important;
+  color: #fff !important;
+}
+
+.rmdp-rtl .rmdp-range-hover.end:not(.force),
+.rmdp-rtl .rmdp-range.end:not(.force) {
+  border-bottom-left-radius: 5px !important;
+  border-bottom-right-radius: 5px !important;
+  border-top-left-radius: 5px !important;
+  border-top-right-radius: 5px !important;
+  background-color: hsl(226deg 32% 44%) !important;
+  color: #fff !important;
+}
+
+.rmdp-range {
+  background-color: hsl(220deg 90% 95%) !important;
+  box-shadow: unset !important;
+  color: #000 !important;
 }
 /* media gueries */
 

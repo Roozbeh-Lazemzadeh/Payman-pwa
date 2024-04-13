@@ -133,8 +133,6 @@
   justify-content: center;
   align-items: center;
   padding: 2.1rem 30px;
-  font-weight: 500;
-  font-size: 14px;
   opacity: 0.3;
   font-weight: 500;
   font-size: 14px;
@@ -339,8 +337,8 @@
 .rmdp-header {
   height: 50px !important;
   overflow: hidden;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
   border-bottom: 2px solid hsl(220deg 90% 85%);
 }
 .rmdp-mobile .rmdp-day-picker {
@@ -430,6 +428,12 @@
   outline: none !important;
 }
 
+.rmdp-day.rmdp-selected span:not(.highlight) {
+    box-shadow: 0 0 3px #8798ad;
+    color: #fff;
+    background-color: hsl(226deg 32% 44%) !important;
+}
+
 .calendar-icon {
   width: 7%;
   padding-left: 10px;
@@ -460,6 +464,54 @@
   justify-content: center;
 }
 /* end profile page style */
+
+.embedded-video {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+.embedded-video iframe {
+  border-radius: 10px;
+}
+
+.merchant-title {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding-bottom: 20px;
+}
+.merchant-title img {
+  width: 20px;
+}
+.merchant-title span {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(18, 25, 39, 1);
+}
+.merchant-description {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(16, 24, 40, 0.2);
+  padding-bottom: 20px;
+}
+.merchants-btn {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 36px;
+}
+
+.merchant-enter-btn {
+  width: 65%;
+}
+.merchant-enter-btn span {
+  font-size: 12px;
+  font-weight: 500;
+}
+.merchant-more-details span {
+  font-size: 12px;
+  font-weight: 500;
+}
 
 /* media gueries */
 
@@ -514,7 +566,6 @@
     margin-top: 2.5rem;
     font-size: 11px;
   }
-}
 
 .embedded-video {
   display: flex;
@@ -562,4 +613,5 @@
 .merchant-more-details span {
   font-size: 12px;
   font-weight: 500;
+}
 }

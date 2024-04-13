@@ -4,6 +4,8 @@
   height: auto !important;
   max-width: 460px !important;
   margin: 0 auto !important;
+  bottom: 0 !important;
+  transition: all 0.7ms !important;
 }
 
 .detailed-drawer.merchant {
