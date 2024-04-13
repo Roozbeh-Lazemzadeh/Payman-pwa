@@ -119,7 +119,6 @@
 .near-expiration-card-wrapper {
   direction: rtl;
   border: 1px solid rgba(0, 114, 255, 1);
-  box-shadow: 0px 5px 22px 0px rgba(0, 114, 255, 0.1);
   border-radius: 10px;
   width: 100%;
   height: 7.8rem;
@@ -127,8 +126,17 @@
   padding: 10px 10px;
 }
 
-.near-expiration-card-wrapper:active {
-  width: 50%;
+.near-expiration-card-wrapper.shadow-ani {
+  animation: boxShadow 5s infinite;
+}
+
+@keyframes boxShadow {
+  0% {
+    box-shadow: unset;
+  }
+  50% {
+    box-shadow: 0px 5px 15px 0px rgba(0, 114, 255, 0.2);
+  }
 }
 
 .near-expiration-card-wrapper.other {

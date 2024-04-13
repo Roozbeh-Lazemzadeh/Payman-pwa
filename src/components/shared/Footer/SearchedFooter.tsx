@@ -81,7 +81,7 @@ export const SearchedFooter: React.FC = () => {
         return (
           <div className="search-datePicker">
             <DatePicker
-              placeholder="از تاریخ                  تا تاریخ"
+              placeholder="از تاریخ                              تا تاریخ"
               style={{
                 direction: "rtl",
               }}
@@ -99,7 +99,6 @@ export const SearchedFooter: React.FC = () => {
             <div className="icon">
               <CalendarIcon />
             </div>
-            <div className="divider"></div>
           </div>
         );
       case "102":
@@ -147,6 +146,7 @@ export const SearchedFooter: React.FC = () => {
             } `}
           >
             {searchFooterFn()}
+            <div className="divider"></div>
           </div>
         </div>
       </div>

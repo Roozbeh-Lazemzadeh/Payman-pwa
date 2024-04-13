@@ -337,8 +337,8 @@
 .rmdp-header {
   height: 50px !important;
   overflow: hidden;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
   border-bottom: 2px solid hsl(220deg 90% 85%);
 }
 .rmdp-mobile .rmdp-day-picker {
@@ -426,6 +426,12 @@
   border: 1px solid #a4b3c5;
   box-shadow: 0 0 2px #a4b3c5;
   outline: none !important;
+}
+
+.rmdp-day.rmdp-selected span:not(.highlight) {
+    box-shadow: 0 0 3px #8798ad;
+    color: #fff;
+    background-color: hsl(226deg 32% 44%) !important;
 }
 
 .calendar-icon {
@@ -607,4 +613,5 @@
 .merchant-more-details span {
   font-size: 12px;
   font-weight: 500;
+}
 }
