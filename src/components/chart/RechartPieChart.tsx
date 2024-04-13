@@ -14,7 +14,7 @@ export const data = [
 export const RechartPieChart: React.FC = () => {
   const activeIndex = useAppSelector(selectSelectedMerchant);
 
-  const COLORS = ['#00E261', '#FF683B', '#FFAA1B', '#0072FF'];
+  const COLORS = ['#00E261', '#FF683B', '#FFAA1B', '#bbb'];
 
   const renderActiveShape = (props: any) => {
     const { cx, cy, innerRadius, startAngle, endAngle, fill, percent } = props;
@@ -29,7 +29,7 @@ export const RechartPieChart: React.FC = () => {
           textAnchor='middle'
           fill={fill}
         >
-          {`${activeIndex !== 3 ? `%${(percent * 100).toFixed(0)}` : ''}`}
+          {`%${activeIndex !== 3 ? (percent * 100).toFixed(0) : '100'}`}
         </text>
         <Sector
           cx={cx}
