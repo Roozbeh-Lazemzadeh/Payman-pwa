@@ -145,8 +145,8 @@ export const SearchedFooter: React.FC = () => {
               searchItem === "103" ? "search-bar" : ""
             } `}
           >
-            {searchFooterFn()}
             <div className="divider"></div>
+            {searchFooterFn()}
           </div>
         </div>
       </div>

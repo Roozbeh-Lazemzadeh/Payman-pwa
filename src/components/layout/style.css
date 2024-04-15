@@ -231,5 +231,9 @@
     padding: 40px 20px 46px !important;
     overflow: hidden;
   }
+
+  .ant-drawer-content.custom-sidebar .ant-drawer-header {
+    padding: 15px 0px 10px 0px;
+}
 }
 /* media gueries */

@@ -4,7 +4,17 @@
 
 .trans-list {
   overflow-y: auto;
-  max-height: 70vh;
+  max-height: 72vh;
   padding-bottom: 30px;
   direction: ltr;
+}
+
+/* media gueries */
+
+/* SE phone */
+
+@media screen and (max-width: 376px), screen and (max-height: 668px) {
+  .trans-list {
+    max-height: 62vh;
+  }
 }

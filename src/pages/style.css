@@ -115,7 +115,7 @@
 }
 
 .home-merchants.payman {
-  height: calc(100vh - 510px);
+  height: calc(100vh - 533px);
 }
 
 .home-datepickers {
@@ -400,7 +400,7 @@
   visibility: hidden;
 }
 .rmdp-action-buttons > button {
-  font-family: "IranYekan";
+  font-family: 'IranYekan';
 }
 
 .rmdp-input {
@@ -415,7 +415,7 @@
   padding: 2px 5px;
   width: 100%;
   background: transparent;
-  font-family: "IranYekan";
+  font-family: 'IranYekan';
   padding-left: 2rem !important;
   -webkit-border-radius: 10px !important;
   -moz-border-radius: 10px !important;
@@ -615,4 +615,13 @@
     font-size: 12px;
     font-weight: 500;
   }
+
+  .home-merchants.payman {
+    height: calc(100vh - 474px);
+  }
+
+  .business-content {
+    position: relative;
+    margin: 8px 0;
+}
 }
