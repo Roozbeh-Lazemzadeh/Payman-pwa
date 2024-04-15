@@ -8,9 +8,9 @@ interface FilterToolsProps {
 
 const FilterTools: FC<FilterToolsProps> = ({ title }) => {
   return (
-    <div className="filter-tools-wrapper">
-      <p className="filter-tools-title">{title}</p>
-      <div className="filter-tools-component">
+    <div className='filter-tools-wrapper'>
+      <p className='filter-tools-title'>{title}</p>
+      <div className='filter-tools-component'>
         <Sort />
         <Filter />
       </div>

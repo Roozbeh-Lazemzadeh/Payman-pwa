@@ -181,6 +181,10 @@
   display: flex;
   justify-content: center;
 }
+.quick-access-section .selected {
+  background-color: #0072ff;
+  color: #fff;
+}
 
 .ant-input-group {
   margin-bottom: 1rem;
@@ -250,7 +254,7 @@
   color: rgba(16, 24, 40, 0.2);
 }
 .custom-input {
-  font-family: "IranYekan";
+  font-family: 'IranYekan';
   font-size: 12;
   font-weight: 600;
 }

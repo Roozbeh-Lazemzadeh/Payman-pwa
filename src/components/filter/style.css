@@ -1,3 +1,22 @@
 .filter-icon svg {
   vertical-align: middle;
 }
+
+.filtered-wrapper {
+  position: relative;
+}
+.filtered-circle {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+}
+.filter-number {
+  color: #fff;
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  font-size: 10px;
+}
+.filter-number.number-one {
+  right: 0px;
+}
