@@ -43,7 +43,7 @@
 }
 
 .form-input_num span {
-  font-size: 14px;
+  font-size: 18px;
   margin-left: 1rem;
 }
 
@@ -52,7 +52,7 @@
   flex-direction: row-reverse;
   width: 13rem;
   padding-left: 8px;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
 }
 
 .phone-num-input {
@@ -61,13 +61,55 @@
   color: rgba(16, 24, 40, 0.2);
   width: 6px !important;
   outline: none !important;
-  /* color: black !important; */
+  color: black !important;
 }
 
 /* .check-otp-input:focus {
   border-bottom: 2px solid blue !important;
   outline: none;
 } */
+
+input.checks-otp-inputs {
+  width: 482px;
+  height: 40px;
+  direction: ltr;
+  font-size: 1.4rem;
+  letter-spacing: 98px;
+  margin-left: 9rem;
+  border: none;
+  overflow: hidden;
+  position: relative;
+  outline: none;
+  text-align: left;
+  caret-color: #0072FF;
+}
+
+span.otp-inputs-border {
+  width: 50px;
+  /* height: 50px; */
+  display: inline-block;
+  /* position: absolute; */
+  border-bottom: 1px solid black;
+  margin-right: 3rem;
+}
+.otp-inputs-border.selected{
+
+  border-bottom: 1px solid #0072FF;
+}
+
+.otp-inputs-borders {
+  /* position: relative; */
+  margin-left: 60px;
+}
+
+span.otp-inputs-border {
+  width: 50px;
+  /* height: 50px; */
+  display: inline-block;
+  /* position: absolute; */
+  border-bottom: 1px solid black;
+  margin-right: 60px;
+}
 
 /* .check-otp-input{
   border-bottom: 2px solid rgb(209, 26, 2) !important;
@@ -93,7 +135,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 395px;
   height: 40px;
   margin-top: 1.5rem;
 }
