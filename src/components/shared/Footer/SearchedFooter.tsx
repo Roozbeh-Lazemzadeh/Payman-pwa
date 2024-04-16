@@ -3,7 +3,10 @@ import Search, { type SearchProps } from 'antd/es/input/Search';
 import { Footer } from 'antd/es/layout/layout';
 import { useAppSelector } from '../../hooks/reduxHooks';
 import {
+  filteredToggle,
+  searchedToggle,
   selectCloseSearchFooter,
+  selectFilteredFooter,
   selectSearchedFooter,
   selectSelectedSearchItem,
 } from '../../../store/footer/footerSlice';
@@ -11,6 +14,7 @@ import { ReactComponent as TickSquareIcon } from '../../../icons/tickSquare.svg'
 import { ReactComponent as BuyIcon } from '../../../icons/buy2.svg';
 import { ReactComponent as MagnifierIcon } from '../../../icons/magnifier2.svg';
 import { ReactComponent as CalendarIcon } from '../../../icons/calendar.svg';
+import { ReactComponent as RemoveIcon } from '../../../icons/delete.svg';
 import '../../Paymans/otherPaymans/style.css';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
@@ -26,72 +30,68 @@ import { useDispatch } from 'react-redux';
 
 export const SearchedFooter: React.FC = () => {
   const allFilter = useAppSelector(selectAllFilter);
-  const [firstTitle, setFirstTitle] = useState('');
-  const [secondTitle, setSecondTitle] = useState('');
-  const [thirdTitle, setThirdTitle] = useState('');
+  const filteredFooter = useAppSelector(selectFilteredFooter);
+
   const [values, setValues] = useState([]);
   const isSearchedFooterShown = useAppSelector(selectSearchedFooter);
   const closeSearchFooter = useAppSelector(selectCloseSearchFooter);
   const searchItem = useAppSelector(selectSelectedSearchItem);
-  const [selectedTitles, setSelectedTitles] = useState<string[]>([]);
+  const [selectedQuickItems, setSelectedQuickItems] = useState<
+    { title: string; id: number }[]
+  >([]);
+  console.log(selectedQuickItems);
   const dispatch = useDispatch();
-  console.log(allFilter.merchants);
-  const { merchants } = allFilter;
-  console.log(merchants);
 
   const selectedQuickAccess = (title: string, id: number) => {
     // handle merchants case
     if (searchItem === '104') {
-      // handle only selected merchants UI (change the background color to blue)
-      // if (selectedTitles.includes(title)) {
-      //   setSelectedTitles(selectedTitles.filter((t) => t !== title));
-      // } else {
-      //   setSelectedTitles([...selectedTitles, title]);
-      // }
+      // Create a new array of selected items with the new title and id
+      const updatedSelectedItems = selectedQuickItems.some(
+        (item) => item.title === title && item.id === id
+      )
+        ? // If the item already exists, filter it out
+          selectedQuickItems.filter(
+            (item) => !(item.title === title && item.id === id)
+          )
+        : // If the item doesn't exist, add it to the array
+          [...selectedQuickItems, { title, id }];
 
-      // fill the store with the selected merchant
-      dispatch(allFilterHandler({ title, id }));
-      // handle date case
-    } else if (searchItem === '103') {
-      if (selectedTitles.includes(title)) {
-        setSelectedTitles(selectedTitles.filter((t) => t !== title));
-      } else {
-        setSelectedTitles([title]);
-      }
+      // Update the state with the new array of selected items
+      setSelectedQuickItems(updatedSelectedItems);
     }
   };
+
+  useEffect(() => {
+    setSelectedQuickItems([]);
+  }, [filteredFooter]);
+
+  useEffect(() => {
+    // Check the search item and initialize the selectedQuickItems state
+    if (searchItem === '104') {
+      setSelectedQuickItems(allFilter.merchants);
+    } else {
+      setSelectedQuickItems([]);
+    }
+  }, [searchItem, allFilter.merchants]);
+
+  const secondaryImplementFiltering = () => {
+    dispatch(allFilterHandler(selectedQuickItems));
+    dispatch(searchedToggle(''));
+    dispatch(filteredToggle());
+  };
+  console.log(allFilter);
   const handleMerchantSearch = (e: any): void => {
     console.log(e.target.value);
   };
-  // const handleSelectedMerchant = (e: any) => {
-  //   const selectedTitle = e.target.innerText;
-  //   console.log(selectedTitle);
-  //   setIsSelected(true);
-  // };
+  const handleRemoveFilter = () => {
+    setSelectedQuickItems([]);
+    // dispatch(allFilterHandler([]));
+  };
+  const primaryImplementFiltering = () => {
+    // setSelectedQuickItems([]);
+    dispatch(allFilterHandler(selectedQuickItems));
+  };
 
-  useEffect(() => {
-    if (searchItem !== '')
-      switch (searchItem) {
-        case '104':
-          setThirdTitle('فیلیمو');
-          setSecondTitle('تپسی');
-          setFirstTitle('اسنپ');
-          break;
-        case '103':
-          setFirstTitle('هفتگی');
-          setSecondTitle('ماهانه');
-          setThirdTitle('۳ ماهه');
-          break;
-        case '102':
-          setFirstTitle('۱۰۰هزار تومانءءء');
-          setSecondTitle('۲۰۰هزار تومانءءء');
-          setThirdTitle('۳۰۰هزار تومانءءء');
-          break;
-
-        default:
-          break;
-      }
-  }, [searchItem]);
   const searchFooterFn = () => {
     switch (searchItem) {
       case '104':
@@ -133,6 +133,7 @@ export const SearchedFooter: React.FC = () => {
             <div className='icon'>
               <CalendarIcon />
             </div>
+            <div className='divider'></div>
           </div>
         );
       case '102':
@@ -158,27 +159,6 @@ export const SearchedFooter: React.FC = () => {
   const onSearch: SearchProps['onSearch'] = (value, _e, info) =>
     console.log(info?.source, value);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleQuickAccessStyle = () => {
-    if (searchItem !== '')
-      switch (searchItem) {
-        case '104':
-          break;
-        case '103':
-          setFirstTitle('هفتگی');
-          setSecondTitle('ماهانه');
-          setThirdTitle('۳ ماهه');
-          break;
-        case '102':
-          setFirstTitle('۱۰۰هزار تومانءءء');
-          setSecondTitle('۲۰۰هزار تومانءءء');
-          setThirdTitle('۳۰۰هزار تومانءءء');
-          break;
-
-        default:
-          break;
-      }
-  };
   return (
     <Footer
       className={`searched-footer${isSearchedFooterShown ? ' active' : ''} ${
@@ -186,48 +166,79 @@ export const SearchedFooter: React.FC = () => {
       }`}
     >
       <div className='searched-footer-wrapper'>
-        <div className='implement-button'>
-          <TickSquareIcon />
-          <span>اعمال</span>
-        </div>
+        {selectedQuickItems.length > 0 ? (
+          <div className='implement-remove-wrapper'>
+            <div className='remove-button' onClick={handleRemoveFilter}>
+              <RemoveIcon />
+              <span>حذف فیلتر</span>
+            </div>
+            <div
+              className='implement-button half'
+              onClick={secondaryImplementFiltering}
+            >
+              <TickSquareIcon />
+              <span>اعمال</span>
+            </div>
+          </div>
+        ) : (
+          <div className='implement-button' onClick={primaryImplementFiltering}>
+            <TickSquareIcon />
+            <span>اعمال</span>
+          </div>
+        )}
         <div className='searched-footer-content'>
           <div className='quick-access-section'>
-            {[firstTitle, secondTitle, thirdTitle].map((title, index) => (
-              <span
-                key={index}
-                // className={
-                //   selectedTitles.includes(firstTitle) ? 'selected' : ''
-                // }
-                className={`${handleQuickAccessStyle}`}
-                onClick={() => selectedQuickAccess(title, index)}
-              >
-                {title}
-              </span>
-            ))}
-            {/* <span
-              key={1}
-              // onClick={() => selectedQuickAccess(firstTitle)}
-              onClick={(e) => console.log(e)}
-              className={selectedTitles.includes(firstTitle) ? 'selected' : ''}
-            >
-              {firstTitle}
-            </span>
-            <span
-              key={2}
-              // onClick={() => selectedQuickAccess(secondTitle)}
-              onClick={(e) => console.log(e)}
-              className={selectedTitles.includes(secondTitle) ? 'selected' : ''}
-            >
-              {secondTitle}
-            </span>
-            <span
-              key={3}
-              onClick={() => selectedQuickAccess(thirdTitle)}
-              // onClick={(e) => console.log(e)}
-              className={selectedTitles.includes(thirdTitle) ? 'selected' : ''}
-            >
-              {thirdTitle}
-            </span> */}
+            {/* merchants  */}
+            {searchItem === '104' && (
+              <>
+                <span
+                  className={
+                    selectedQuickItems.some((item) => item.id === 0)
+                      ? 'selected'
+                      : ''
+                  }
+                  onClick={() => selectedQuickAccess('اسنپ', 0)}
+                >
+                  اسنپ
+                </span>
+                <span
+                  className={
+                    selectedQuickItems.some((item) => item.id === 1)
+                      ? 'selected'
+                      : ''
+                  }
+                  onClick={() => selectedQuickAccess('تپسی', 1)}
+                >
+                  تپسی
+                </span>
+                <span
+                  className={
+                    selectedQuickItems.some((item) => item.id === 2)
+                      ? 'selected'
+                      : ''
+                  }
+                  onClick={() => selectedQuickAccess('فیلیمو', 2)}
+                >
+                  فیلیمو
+                </span>
+              </>
+            )}
+            {/* date  */}
+            {searchItem === '103' && (
+              <>
+                <span>هفتگی</span>
+                <span>ماهانه</span>
+                <span>3 ماهه</span>
+              </>
+            )}
+            {/* price  */}
+            {searchItem === '102' && (
+              <>
+                <span>۱۰۰هزار تومانءءء</span>
+                <span>2۰۰هزار تومانءءء</span>
+                <span>3۰۰هزار تومانءءء</span>
+              </>
+            )}
           </div>
           <div
             className={`search-section ${
@@ -235,7 +246,7 @@ export const SearchedFooter: React.FC = () => {
             } `}
           >
             {searchFooterFn()}
-            <div className='divider'></div>
+            {/* <div className='divider'></div> */}
           </div>
         </div>
       </div>

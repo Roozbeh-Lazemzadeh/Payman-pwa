@@ -129,6 +129,7 @@
 
 .searched-footer-wrapper {
   display: flex;
+  justify-content: space-between;
   width: 100%;
   height: 100%;
 }
@@ -149,7 +150,31 @@
 .implement-button span {
   font-size: 10px;
 }
-
+.implement-button.half {
+  width: 100%;
+  height: 50%;
+}
+.remove-button {
+  width: 100%;
+  height: 50%;
+  background-color: #ff3672;
+  color: #fff;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: -6px 0px 7px -4px rgba(0, 0, 0, 0.2);
+  padding: 10px 10px;
+}
+.remove-button span {
+  font-size: 10px;
+}
+.implement-remove-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
 .searched-footer-content {
   width: 80%;
 }
@@ -246,8 +271,8 @@
   position: absolute;
   height: 34px;
   color: #cdcdd0;
-  right: 55%;
-  top: 5rem;
+  right: 42%;
+  top: 5px;
   border-right: 1px solid #cdcdd0;
 }
 .search-datePicker .rmdp-container input::placeholder {
@@ -292,6 +317,17 @@
   background-color: hsl(220deg 90% 95%) !important;
   box-shadow: unset !important;
   color: #000 !important;
+}
+.ant-badge .ant-badge-count {
+  width: 10px !important;
+  min-width: 10px;
+  height: 10px;
+  font-size: 10px;
+  background: #ff3672 !important;
+  right: -5px;
+}
+.ant-menu .ant-menu-item .ant-menu-item-icon > * {
+  line-height: 1.3;
 }
 /* media gueries */
 

@@ -8,9 +8,10 @@ interface ItemProps {
   key: string;
   icon: React.ReactNode;
   children?: React.ReactNode;
+  badge?: number;
 }
 
-export function getItem({ label, key, icon, children }: ItemProps) {
+export function getItem({ label, key, icon, children, badge }: ItemProps) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleClick = () => {
@@ -38,10 +39,10 @@ export function getItem({ label, key, icon, children }: ItemProps) {
     // Deselect the active tab for "/profile", "/faq", "/contact-us"
     // const deselectedRoutes = ["/profile", "/faq", "/contact-us"];
     if (key === '4' || key === '2' || key === '3') {
-      return { key: '', icon, children, label, onClick: handleClick };
+      return { key: '', icon, children, label, badge, onClick: handleClick };
     }
 
-    return { key, icon, children, label, onClick: handleClick };
+    return { key, icon, children, label, badge, onClick: handleClick };
   };
 
   return {
@@ -49,6 +50,7 @@ export function getItem({ label, key, icon, children }: ItemProps) {
     icon,
     children,
     label,
+    badge,
     onClick: handleClick,
   };
 }
