@@ -13,10 +13,10 @@
 .filter-number {
   color: #fff;
   position: absolute;
-  top: -1px;
+  top: -1.5px;
   right: -1px;
   font-size: 10px;
 }
 .filter-number.number-one {
-  right: 0px;
+  right: 0.5px;
 }

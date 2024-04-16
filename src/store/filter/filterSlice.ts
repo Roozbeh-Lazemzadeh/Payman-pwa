@@ -29,23 +29,12 @@ export const filterSlice = createSlice({
   name: 'filter',
   initialState,
   reducers: {
-    allFilterHandler: (state, action: PayloadAction<filterProp>) => {
-      const { title, id } = action.payload;
+    allFilterHandler: (state, action: PayloadAction<filterProp[]>) => {
+      const newMerchants = action.payload;
 
-      // Check if the merchant already exists in the array
-      const existingMerchantIndex = state.allFilter.merchants.findIndex(
-        (merchant) => merchant.id === id
-      );
+      // Assign the new array of merchants directly to the state
+      state.allFilter.merchants = newMerchants;
 
-      // If the merchant doesn't exist, add it to the array
-      if (existingMerchantIndex === -1) {
-        state.allFilter.merchants.push({ title, id });
-      } else {
-        // If the merchant exists, remove all occurrences of it from the array
-        state.allFilter.merchants = state.allFilter.merchants.filter(
-          (merchant) => merchant.id !== id
-        );
-      }
       if (state.allFilter.merchants.length === 0) {
         state.isFiltered = false;
       } else {
