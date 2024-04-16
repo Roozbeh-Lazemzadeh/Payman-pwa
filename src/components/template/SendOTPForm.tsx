@@ -21,6 +21,7 @@ interface OnboardingProps {
 const SendOTPForm: FC<OnboardingProps> = ({ setStep }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [otp, setOtp] = useState<string>();
+  const [otpVal, setOtpVal] = useState<string>();
 
   useEffect(() => {
     console.log(otp);
@@ -48,7 +49,7 @@ const SendOTPForm: FC<OnboardingProps> = ({ setStep }) => {
                   value={otp}
                   onChange={setOtp}
                   numInputs={9}
-                  renderSeparator={<span>{""}</span>}
+                  renderSeparator={<span>{''}</span>}
                   renderInput={(props) => <input {...props} />}
                   containerStyle="phone-num-inputs"
                   inputStyle="phone-num-input"
@@ -56,13 +57,27 @@ const SendOTPForm: FC<OnboardingProps> = ({ setStep }) => {
                 <span>۰۹</span>
               </span>
             </div>
-            <div className="otp-form_input"></div>
+            <div className="otp-form_input">
+              <span className="form-input_title">کد ملی</span>
+              <span className="form-input_num">
+                <OtpInput
+                  value={otpVal}
+                  onChange={setOtpVal}
+                  numInputs={10}
+                  renderSeparator={<span>{''}</span>}
+                  renderInput={(props) => <input {...props} />}
+                  containerStyle="phone-num-inputs"
+                  inputStyle="phone-num-input"
+                />
+                {/* <span>۰۹</span> */}
+              </span>
+            </div>
           </div>
           {/* <input type="checkbox" className="otp-form_checked" /> */}
           <Checkbox className="otp-Checkbox">
             <span onClick={() => setIsOpen(!isOpen)}>
               <span className="otp-Checkbox__open-drawer">
-                توافق‌نامه کاربری پیمان{" "}
+                توافق‌نامه کاربری پیمان{' '}
               </span>
               را خوانده‌ام و می‌پذیرم.
             </span>
@@ -91,15 +106,15 @@ const SendOTPForm: FC<OnboardingProps> = ({ setStep }) => {
       <CustomDrawer
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        title={"توافق‌نامه کاربری پیمان"}
+        title={'توافق‌نامه کاربری پیمان'}
       >
         <div style={{ fontWeight: 500 }}>
           <div
             style={{
               height: 300,
-              overflow: "scroll",
-              padding: "0px 20px",
-              color: "rgba(16, 24, 40, 1)",
+              overflow: 'scroll',
+              padding: '0px 20px',
+              color: 'rgba(16, 24, 40, 1)',
               fontSize: 14,
             }}
           >
@@ -139,12 +154,12 @@ const SendOTPForm: FC<OnboardingProps> = ({ setStep }) => {
             style={{
               paddingTop: 40,
               paddingBottom: 40,
-              display: "flex",
-              justifyContent: "center",
+              display: 'flex',
+              justifyContent: 'center',
             }}
           >
             <Button
-              style={{ display: "flex" }}
+              style={{ display: 'flex' }}
               type="primary"
               icon={
                 <svg

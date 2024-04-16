@@ -81,7 +81,7 @@ input.checks-otp-inputs {
   position: relative;
   outline: none;
   text-align: left;
-  caret-color: #0072FF;
+  caret-color: #0072ff;
 }
 
 span.otp-inputs-border {
@@ -92,9 +92,8 @@ span.otp-inputs-border {
   border-bottom: 1px solid black;
   margin-right: 3rem;
 }
-.otp-inputs-border.selected{
-
-  border-bottom: 1px solid #0072FF;
+.otp-inputs-border.selected {
+  border-bottom: 1px solid #0072ff;
 }
 
 .otp-inputs-borders {
@@ -138,6 +137,7 @@ span.otp-inputs-border {
   width: 395px;
   height: 40px;
   margin-top: 1.5rem;
+  font-family: 'IranYekan';
 }
 
 .otp-form_submit {
@@ -146,6 +146,7 @@ span.otp-inputs-border {
   border: none;
   width: 100%;
   height: 100%;
+  font-family: 'IranYekan';
 }
 
 .cover-customer__login {
@@ -192,6 +193,10 @@ span.otp-inputs-border {
   width: 90vw;
 }
 
+.otp-form_submit.colorBtn {
+  color: #fff;
+}
+
 .check-otp-input {
   width: 4rem !important;
   padding: 0.5rem 0.2rem !important;
@@ -201,6 +206,11 @@ span.otp-inputs-border {
   text-align: center !important;
   background-color: transparent !important;
   color: black !important;
+}
+
+.logo-login-swap {
+    position: absolute;
+    right: 90px;
 }
 
 .check-otp-input:focus {
@@ -322,5 +332,66 @@ span.otp-inputs-border {
   .selected-merchant {
     height: 6rem;
     margin-top: 0.8rem;
+  }
+
+  .otp-inputs-border {
+    width: 30px;
+  }
+
+  .login-header__logo {
+    margin-top: 14px;
+    width: 6rem;
+  }
+
+  .login-header__title {
+    font-size: 16px !important;
+  }
+
+  .check-title {
+    color: rgba(16, 24, 40, 0.2);
+    margin-top: 0px;
+    font-size: 14px;
+  }
+
+  .form-items-wrapper {
+    margin-top: 0rem;
+  }
+
+  span.otp-inputs-border {
+    width: 34px;
+  }
+
+  .check-number {
+    font-weight: 500;
+  }
+
+  .btns-wrapper-check-otp {
+    margin-top: 0rem;
+  }
+
+  .otp-form_btn-wrapper {
+    width: 335px;
+    margin-top: 1.2rem;
+  }
+
+  .footer-wrapper {
+    margin-bottom: 5px;
+  }
+
+  input.checks-otp-inputs {
+    letter-spacing: 87px;
+    font-size: 1rem;
+    margin-left: 181px;
+    margin-bottom: -1rem;
+  }
+
+  .check-timer {
+    font-weight: 500;
+    margin-top: 3rem;
+    font-size: 13px;
+  }
+
+  .otp-inputs-borders {
+    margin-left: 60px;
   }
 }

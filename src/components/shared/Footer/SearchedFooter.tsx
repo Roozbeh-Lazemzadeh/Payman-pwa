@@ -34,6 +34,7 @@ export const SearchedFooter: React.FC = () => {
   const closeSearchFooter = useAppSelector(selectCloseSearchFooter);
   const searchItem = useAppSelector(selectSelectedSearchItem);
   const [selectedTitles, setSelectedTitles] = useState<string[]>([]);
+  const [stylebtns, setStylebtns] = useState<string>();
   const dispatch = useDispatch();
   console.log(allFilter.merchants);
   const { merchants } = allFilter;
@@ -163,8 +164,13 @@ export const SearchedFooter: React.FC = () => {
     if (searchItem !== '')
       switch (searchItem) {
         case '104':
-          break;
-        case '103':
+         if(merchants[0].title.length>0){
+          setStylebtns('selected');
+         } else {
+          setStylebtns('');
+         }
+         break;
+            case '103':
           setFirstTitle('هفتگی');
           setSecondTitle('ماهانه');
           setThirdTitle('۳ ماهه');
@@ -198,7 +204,7 @@ export const SearchedFooter: React.FC = () => {
                 // className={
                 //   selectedTitles.includes(firstTitle) ? 'selected' : ''
                 // }
-                className={`${handleQuickAccessStyle}`}
+                className={stylebtns}
                 onClick={() => selectedQuickAccess(title, index)}
               >
                 {title}

@@ -127,7 +127,7 @@ const CheckOTPForm = () => {
             <input
               type="submit"
               value="ورود یا ثبت‌نام"
-              className="otp-form_submit"
+              className="otp-form_submit colorBtn"
             />
           </Button>
           <Button
@@ -135,6 +135,7 @@ const CheckOTPForm = () => {
             type="default"
             // icon="/assets/pics/swap-login-icon.svg"
           >
+            <img src="/assets/login/swap.svg" alt="" className='logo-login-swap'/>
             <input
               type="submit"
               value="تغییر شماره موبایل"

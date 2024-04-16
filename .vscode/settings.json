@@ -1,4 +1,7 @@
 {
   "prettier.singleQuote": true,
-  "cSpell.words": ["پیمان"]
+  "cSpell.words": [
+    "datepicker",
+    "پیمان"
+  ]
 }

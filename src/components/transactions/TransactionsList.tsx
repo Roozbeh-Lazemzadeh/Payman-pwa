@@ -6,13 +6,31 @@ import { ReactComponent as UnsuccessfulIcon } from "../../icons/unsuccess.svg";
 import { ReactComponent as UnclearIcon } from "../../icons/unclearStatus.svg";
 import "./style.css";
 
-export const TransactionsList: React.FC = () => {
+interface TransactionsListProps {
+  transactionList: {
+    id: number;
+    creditor: string;
+    currency: string;
+    source_bank: string;
+    status: string;
+    transaction_amount: number;
+    transaction_date: string;
+    transaction_id: string;
+    client_transaction_date?: string; // Make client_transaction_date optional
+    phone_number: string;
+  }[];
+}
+
+export const TransactionsList: React.FC<TransactionsListProps> = ({
+  transactionList
+}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const DetailedDrawerArray = [
-    { nameItem1: "بانک", nameItem2: "سامان" },
-    { nameItem1: "شماره موبایل", nameItem2: "989385445348+" },
-    { nameItem1: "شناسه پیمان", nameItem2: "Ajdfni830874p39vfndl" },
+    { nameItem1: 'بانک', nameItem2: 'سامان' },
+    { nameItem1: 'شماره موبایل', nameItem2: '989385445348+' },
+    { nameItem1: 'شناسه پیمان', nameItem2: 'Ajdfni830874p39vfndl' },
   ];
+  console.log(transactionList);
   const UnknownTextInfo: React.FC = () => {
     return (
       <div className="info-login detail">
@@ -30,7 +48,7 @@ export const TransactionsList: React.FC = () => {
       <DetailedDrawer
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        title={"جزئیات بیشتر"}
+        title={'جزئیات بیشتر'}
         data={DetailedDrawerArray}
       >
         <UnknownTextInfo />
@@ -39,7 +57,7 @@ export const TransactionsList: React.FC = () => {
         <div
           key={index}
           onClick={() => setIsOpen(!isOpen)}
-          style={{ direction: "rtl" }}
+          style={{ direction: 'rtl' }}
         >
           <TransactionCard
             merchant="تپسی"
@@ -50,7 +68,8 @@ export const TransactionsList: React.FC = () => {
           />
         </div>
       ))}
-      <div onClick={() => setIsOpen(!isOpen)} style={{ direction: "rtl" }}>
+      {/* {transactionList.map((item) =>())} */}
+      <div onClick={() => setIsOpen(!isOpen)} style={{ direction: 'rtl' }}>
         <TransactionCard
           merchant="تپسی"
           price={4550}
@@ -59,7 +78,7 @@ export const TransactionsList: React.FC = () => {
           transStatusIcon={<UnsuccessfulIcon />}
         />
       </div>
-      <div onClick={() => setIsOpen(!isOpen)} style={{ direction: "rtl" }}>
+      <div onClick={() => setIsOpen(!isOpen)} style={{ direction: 'rtl' }}>
         <TransactionCard
           merchant="تپسی"
           price={4550}
