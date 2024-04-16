@@ -22,7 +22,7 @@ interface TransactionsListProps {
 }
 
 export const TransactionsList: React.FC<TransactionsListProps> = ({
-  transactionList
+  ...transactionList
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const DetailedDrawerArray = [
@@ -68,7 +68,7 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
           />
         </div>
       ))}
-      {/* {transactionList.map((item) =>())} */}
+      {/* {transactionList.map((item) =>console.log(item))} */}
       <div onClick={() => setIsOpen(!isOpen)} style={{ direction: 'rtl' }}>
         <TransactionCard
           merchant="تپسی"
