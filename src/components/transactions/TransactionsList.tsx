@@ -20,13 +20,11 @@ interface TransactionsListProps {
     transaction_id: string;
     phone_number: string;
   }[];
-  sortBy: string; // Add sortBy prop
+  sortBy: string;
 }
 
-const dateStr = '16-05-24 11.48.20.000000000 AM';
-const x = new Date(dateStr);
-console.log(x);
-const formattedDate = moment(dateStr, 'DD-MM-YY hh.mm.ss.SSS A')
+const dateStr = '16-APR-24 11.48.20.000000000 AM';
+const formattedDate = moment(dateStr, 'DD-MMM-YY hh.mm.ss.SSSSSSSSS A')
   .locale('fa')
   .format('dddd، YYYY/MM/DD- HH:mm');
 
@@ -50,16 +48,13 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
   // console.log(transactionList);
 
   useEffect(() => {
-    // Call sortTransactions function when sortBy changes
     sortTransactions();
   }, [sortBy, transactionList]);
 
-  // Function to sort transactions based on sorting criteria
   const sortTransactions = () => {
     const sortedList = [...transactionList];
 
     if (sortBy === '0') {
-      // Sort by latest transaction
       sortedList.sort((a, b) => {
         return (
           new Date(b.transaction_date).getTime() -
@@ -67,7 +62,6 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
         );
       });
     } else if (sortBy === '1') {
-      // Sort by transaction amount
       sortedList.sort((a, b) => b.transaction_amount - a.transaction_amount);
     }
 
