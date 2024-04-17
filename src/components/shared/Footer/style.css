@@ -65,13 +65,20 @@
   font-size: 10px;
   color: #acacac;
 }
-.footer-filtered-menu .ant-menu-item:first-child .ant-menu-item-icon + span {
+/* .footer-filtered-menu .ant-menu-item:first-child .ant-menu-item-icon + span {
   color: #fff;
-}
-.footer-filtered-menu .ant-menu-item:first-child {
-  background-color: #0072ff;
+} */
+/* .footer-filtered-menu .ant-menu-item:first-child {
+  background-color: #ff3672;
   width: 70%;
   box-shadow: -6px 0px 7px -4px rgba(0, 0, 0, 0.2);
+} */
+.ant-menu-item.remove-filter-item {
+  color: #fff;
+  background-color: #ff3672;
+}
+.ant-menu-item.remove-filter-item .ant-menu-title-content {
+  color: #fff !important;
 }
 
 .footer-filtered-menu .ant-menu-item {
