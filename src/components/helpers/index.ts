@@ -1,7 +1,9 @@
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { toggleSidebar } from '../../store/sidebar/sidebarSlice';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import { searchedToggle } from '../../store/footer/footerSlice';
+import { NavigateFunction } from 'react-router-dom';
+import { Dispatch } from '@reduxjs/toolkit';
 
 interface ItemProps {
   label: string;
@@ -9,11 +11,23 @@ interface ItemProps {
   icon: React.ReactNode;
   children?: React.ReactNode;
   badge?: number;
+  style?: React.CSSProperties;
+  className?: string;
+  dispatch: Dispatch<any>;
+  navigate: NavigateFunction;
 }
 
-export function getItem({ label, key, icon, children, badge }: ItemProps) {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+export function getItem({
+  label,
+  key,
+  icon,
+  children,
+  badge,
+  style,
+  dispatch,
+  navigate,
+  className,
+}: ItemProps) {
   const handleClick = () => {
     // for closing sidebar
     if (key.length === 1) {
@@ -33,16 +47,36 @@ export function getItem({ label, key, icon, children, badge }: ItemProps) {
 
     // for filtering price , date, merchants
     if (key.length === 3) {
+      if (key === '101') return null;
+
       dispatch(searchedToggle(key));
     }
 
     // Deselect the active tab for "/profile", "/faq", "/contact-us"
     // const deselectedRoutes = ["/profile", "/faq", "/contact-us"];
     if (key === '4' || key === '2' || key === '3') {
-      return { key: '', icon, children, label, badge, onClick: handleClick };
+      return {
+        key: '',
+        icon,
+        children,
+        label,
+        badge,
+        style,
+        className,
+        onClick: handleClick,
+      };
     }
 
-    return { key, icon, children, label, badge, onClick: handleClick };
+    return {
+      key,
+      icon,
+      children,
+      label,
+      badge,
+      style,
+      className,
+      onClick: handleClick,
+    };
   };
 
   return {
@@ -51,6 +85,8 @@ export function getItem({ label, key, icon, children, badge }: ItemProps) {
     children,
     label,
     badge,
+    className,
     onClick: handleClick,
+    style,
   };
 }

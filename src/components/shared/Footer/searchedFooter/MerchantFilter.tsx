@@ -21,6 +21,7 @@ import '../style.css';
 
 export const MerchantFilter: React.FC = () => {
   const allFilter = useAppSelector(selectAllFilter);
+  console.log(allFilter.merchants);
   const filteredFooter = useAppSelector(selectFilteredFooter);
   const searchItem = useAppSelector(selectSelectedSearchItem);
   const [selectedQuickItems, setSelectedQuickItems] = useState<
@@ -62,6 +63,8 @@ export const MerchantFilter: React.FC = () => {
   }, [searchItem, allFilter.merchants]);
 
   const secondaryImplementFiltering = () => {
+    console.log('first', selectedQuickItems);
+
     dispatch(allFilterHandler(selectedQuickItems));
     dispatch(searchedToggle(''));
     dispatch(filteredToggle());
@@ -72,12 +75,14 @@ export const MerchantFilter: React.FC = () => {
   };
   const handleRemoveFilter = () => {
     setSelectedQuickItems([]);
-    // dispatch(allFilterHandler([]));
+    dispatch(allFilterHandler([]));
+    dispatch(searchedToggle(''));
+    dispatch(filteredToggle());
   };
-  const primaryImplementFiltering = () => {
-    // setSelectedQuickItems([]);
-    dispatch(allFilterHandler(selectedQuickItems));
-  };
+  // const primaryImplementFiltering = () => {
+
+  //   dispatch(allFilterHandler(selectedQuickItems));
+  // };
 
   const onSearch: SearchProps['onSearch'] = (value, _e, info) =>
     console.log(info?.source, value);
@@ -99,7 +104,8 @@ export const MerchantFilter: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div className='implement-button' onClick={primaryImplementFiltering}>
+        // <div className='implement-button' onClick={primaryImplementFiltering}>
+        <div className='implement-button'>
           <TickSquareIcon />
           <span>اعمال</span>
         </div>
@@ -140,11 +146,7 @@ export const MerchantFilter: React.FC = () => {
             </span>
           </>
         </div>
-        <div
-          className={`search-section ${
-            searchItem === '103' ? 'search-bar' : ''
-          } `}
-        >
+        <div className='search-section '>
           <Search
             onChange={(e) => handleMerchantSearch(e)}
             placeholder='جستجوی نام کسب‌وکار'
