@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import moment from 'moment';
-import 'moment/locale/fa';
+import jalaliMoment from 'jalali-moment';
 import { TransactionCard } from '../shared/Cards/TransactionCards';
 import { DetailedDrawer } from '../shared/Drawer/DetailedDrawer';
 import { ReactComponent as SuccessfulIcon } from '../../icons/success.svg';
 import { ReactComponent as UnsuccessfulIcon } from '../../icons/unsuccess.svg';
 import { ReactComponent as UnclearIcon } from '../../icons/unclearStatus.svg';
+import { parse, format } from 'date-fns';
 import './style.css';
 
 interface TransactionsListProps {
@@ -22,15 +22,6 @@ interface TransactionsListProps {
   }[];
   sortBy: string; // Add sortBy prop
 }
-
-const dateStr = '16-05-24 11.48.20.000000000 AM';
-const x = new Date(dateStr);
-console.log(x);
-const formattedDate = moment(dateStr, 'DD-MM-YY hh.mm.ss.SSS A')
-  .locale('fa')
-  .format('dddd، YYYY/MM/DD- HH:mm');
-
-console.log(formattedDate);
 
 export const TransactionsList: React.FC<TransactionsListProps> = ({
   transactionList,
@@ -76,7 +67,7 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
 
   const UnknownTextInfo: React.FC = () => {
     return (
-      <div className="info-login detail">
+      <div className='info-login detail'>
         <div>دلیل نامشخص بودن تراکنش :</div>‌
         <div>
           سرویس بانکی شما ( سامان ) در حال حاظر پاسخگو نمی‌باشد . در صورت کم شدن
@@ -102,8 +93,22 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
     }
   };
 
+  const transDate = (inputDate: string) => {
+    const parsedDate = parse(
+      inputDate,
+      'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
+      new Date()
+    );
+    const formattedDate = format(parsedDate, 'yyyy-MM-dd HH:mm:ss');
+    const jalaliDate = jalaliMoment(formattedDate).format(
+      'jYYYY/jMM/jDD - HH:mm:ss'
+    );
+    const weekday = jalaliMoment(formattedDate).locale('fa').format('dddd');
+    return `${weekday} ، ${jalaliDate}`;
+  };
+
   return (
-    <div className="trans-list">
+    <div className='trans-list'>
       <DetailedDrawer
         isOpen={isOpen}
         setIsOpen={setIsOpen}
@@ -122,12 +127,7 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
             merchant={transaction.creditor}
             price={transaction.transaction_amount}
             transStatus={transaction.status}
-            transDate={moment(
-              transaction.transaction_date,
-              'DD-MMM-YY hh.mm.ss.SSS A'
-            )
-              .locale('fa')
-              .format('dddd، jYYYY/jMM/jDD- HH:mm')}
+            transDate={transDate(transaction.transaction_date)}
             transStatusIcon={
               transaction.status === 'موفق' ? (
                 <SuccessfulIcon />

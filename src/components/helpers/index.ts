@@ -11,7 +11,6 @@ interface ItemProps {
   icon: React.ReactNode;
   children?: React.ReactNode;
   badge?: number;
-  style?: React.CSSProperties;
   className?: string;
   dispatch: Dispatch<any>;
   navigate: NavigateFunction;
@@ -23,7 +22,6 @@ export function getItem({
   icon,
   children,
   badge,
-  style,
   dispatch,
   navigate,
   className,
@@ -61,7 +59,6 @@ export function getItem({
         children,
         label,
         badge,
-        style,
         className,
         onClick: handleClick,
       };
@@ -73,7 +70,6 @@ export function getItem({
       children,
       label,
       badge,
-      style,
       className,
       onClick: handleClick,
     };
@@ -87,6 +83,5 @@ export function getItem({
     badge,
     className,
     onClick: handleClick,
-    style,
   };
 }
