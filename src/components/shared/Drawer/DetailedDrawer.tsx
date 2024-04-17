@@ -10,6 +10,8 @@ interface DetailedDrawerProps {
   children?: React.ReactNode;
 }
 
+
+
 export const DetailedDrawer: React.FC<DetailedDrawerProps> = ({
   isOpen,
   setIsOpen,
