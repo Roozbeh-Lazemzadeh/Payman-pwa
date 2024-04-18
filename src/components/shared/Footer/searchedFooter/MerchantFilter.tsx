@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Search, { type SearchProps } from 'antd/es/input/Search';
-import { Button } from 'antd';
+import { Select, SelectProps } from 'antd';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../../hooks/reduxHooks';
 import {
@@ -10,16 +9,18 @@ import {
   selectSelectedSearchItem,
 } from '../../../../store/footer/footerSlice';
 import { ReactComponent as TickSquareIcon } from '../../../../icons/tickSquare.svg';
-import { ReactComponent as MagnifierIcon } from '../../../../icons/magnifier2.svg';
+// import { ReactComponent as MagnifierIcon } from '../../../../icons/magnifier2.svg';
 import { ReactComponent as RemoveIcon } from '../../../../icons/delete.svg';
 import {
   allFilterHandler,
   selectAllFilter,
 } from '../../../../store/filter/filterSlice';
 import '../../../Paymans/otherPaymans/style.css';
+import jsonData from '../../../../transaction.json';
 import '../style.css';
 
 export const MerchantFilter: React.FC = () => {
+  const dispatch = useDispatch();
   const allFilter = useAppSelector(selectAllFilter);
   console.log(allFilter.merchants);
   const filteredFooter = useAppSelector(selectFilteredFooter);
@@ -27,8 +28,8 @@ export const MerchantFilter: React.FC = () => {
   const [selectedQuickItems, setSelectedQuickItems] = useState<
     { title: string; id: number }[]
   >([]);
-
-  const dispatch = useDispatch();
+  const [options, setOptions] = useState<SelectProps['options']>([]);
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
 
   const selectedQuickAccess = (title: string, id: number) => {
     // handle merchants case
@@ -63,40 +64,53 @@ export const MerchantFilter: React.FC = () => {
   }, [searchItem, allFilter.merchants]);
 
   const secondaryImplementFiltering = () => {
-    console.log('first', selectedQuickItems);
-
     dispatch(allFilterHandler(selectedQuickItems));
     dispatch(searchedToggle(''));
     dispatch(filteredToggle());
   };
   console.log(allFilter);
-  const handleMerchantSearch = (e: any): void => {
-    console.log(e.target.value);
-  };
+
   const handleRemoveFilter = () => {
     setSelectedQuickItems([]);
     dispatch(allFilterHandler([]));
     dispatch(searchedToggle(''));
     dispatch(filteredToggle());
   };
-  // const primaryImplementFiltering = () => {
 
-  //   dispatch(allFilterHandler(selectedQuickItems));
-  // };
+  useEffect(() => {
+    // Extract the unique creditor values from the JSON data
+    const uniqueCreditors = Array.from(
+      new Set(jsonData.map((item) => item.creditor))
+    );
 
-  const onSearch: SearchProps['onSearch'] = (value, _e, info) =>
-    console.log(info?.source, value);
+    // Convert the unique creditor values to the format required by the Select component
+    const selectOptions = uniqueCreditors.map((creditor) => ({
+      value: creditor,
+    }));
+
+    setOptions(selectOptions);
+    console.log(selectOptions);
+  }, []);
+
+  const handleSelectedOptions = (newSelectedOptions: string[]) => {
+    // Check if the number of selected options exceeds 3
+    console.log(newSelectedOptions.slice(0, 3));
+    if (newSelectedOptions.length > 3) {
+      return;
+    }
+    setSelectedOptions(newSelectedOptions.slice(0, 3));
+  };
 
   return (
     <>
       {selectedQuickItems.length > 0 ? (
-        <div className='implement-remove-wrapper'>
-          <div className='remove-button' onClick={handleRemoveFilter}>
+        <div className="implement-remove-wrapper">
+          <div className="remove-button" onClick={handleRemoveFilter}>
             <RemoveIcon />
             <span>حذف فیلتر</span>
           </div>
           <div
-            className='implement-button half'
+            className="implement-button half"
             onClick={secondaryImplementFiltering}
           >
             <TickSquareIcon />
@@ -105,13 +119,13 @@ export const MerchantFilter: React.FC = () => {
         </div>
       ) : (
         // <div className='implement-button' onClick={primaryImplementFiltering}>
-        <div className='implement-button'>
+        <div className="implement-button">
           <TickSquareIcon />
           <span>اعمال</span>
         </div>
       )}
-      <div className='searched-footer-content'>
-        <div className='quick-access-section'>
+      <div className="searched-footer-content">
+        <div className="quick-access-section">
           {/* merchants  */}
           <>
             <span
@@ -146,20 +160,15 @@ export const MerchantFilter: React.FC = () => {
             </span>
           </>
         </div>
-        <div className='search-section '>
-          <Search
-            onChange={(e) => handleMerchantSearch(e)}
-            placeholder='جستجوی نام کسب‌وکار'
-            onSearch={onSearch}
-            style={{ width: '90%' }}
-            className='home-search_input payman'
-            enterButton={
-              <Button
-                className='search-btn'
-                disabled
-                icon={<MagnifierIcon />}
-              />
-            }
+        <div className="search-section ">
+          <Select
+            placeholder="جستجوی نام کسب‌وکار"
+            mode="multiple"
+            style={{ width: '100%' }}
+            options={options}
+            onChange={handleSelectedOptions}
+            maxTagCount={2}
+            value={selectedOptions}
           />
         </div>
       </div>

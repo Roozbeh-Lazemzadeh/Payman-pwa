@@ -42,6 +42,13 @@ export const filterSlice = createSlice({
         state.filterNumber = state.allFilter.merchants.length;
       }
     },
+    removeAllFiltersHandler: (state) => {
+      state.allFilter.merchants = [];
+      state.allFilter.date = [];
+      state.allFilter.price = [];
+      state.isFiltered = false;
+      state.filterNumber = 0;
+    },
   },
 });
 
@@ -51,5 +58,6 @@ export const selectShowFilterIcon = (state: RootState) =>
 export const selectFilterNumber = (state: RootState) =>
   state.filter?.filterNumber;
 
-export const { allFilterHandler } = filterSlice.actions;
+export const { allFilterHandler, removeAllFiltersHandler } =
+  filterSlice.actions;
 export default filterSlice.reducer;
