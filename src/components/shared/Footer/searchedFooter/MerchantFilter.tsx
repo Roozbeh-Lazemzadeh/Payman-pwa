@@ -22,33 +22,110 @@ import '../style.css';
 export const MerchantFilter: React.FC = () => {
   const dispatch = useDispatch();
   const allFilter = useAppSelector(selectAllFilter);
-  console.log(allFilter.merchants);
   const filteredFooter = useAppSelector(selectFilteredFooter);
   const searchItem = useAppSelector(selectSelectedSearchItem);
-  const [selectedQuickItems, setSelectedQuickItems] = useState<
-    { title: string; id: number }[]
-  >([]);
+  const [selectedQuickItems, setSelectedQuickItems] = useState<string[]>([]);
   const [options, setOptions] = useState<SelectProps['options']>([]);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  console.log(
+    allFilter.merchants?.filter((merchant) =>
+      options?.some((option) => option.value === merchant)
+    )
+  );
 
-  const selectedQuickAccess = (title: string, id: number) => {
-    // handle merchants case
-    if (searchItem === '104') {
+  console.log(allFilter.merchants);
+
+  const selectedQuickAccess = (title: string) => {
+    // if (selectedOptions.length === 0) return null;
+
+    const currentOptionsLength = selectedOptions.length;
+
+    // Check if the total length (selectedQuickItems + selectedOptions) is less than 3
+    const totalSelectedItems = selectedQuickItems.length + currentOptionsLength;
+
+    if (totalSelectedItems < 3) {
       // Create a new array of selected items with the new title and id
       const updatedSelectedItems = selectedQuickItems.some(
-        (item) => item.title === title && item.id === id
+        (item) => item === title
       )
         ? // If the item already exists, filter it out
-          selectedQuickItems.filter(
-            (item) => !(item.title === title && item.id === id)
-          )
+          selectedQuickItems.filter((item) => !(item === title))
         : // If the item doesn't exist, add it to the array
-          [...selectedQuickItems, { title, id }];
+          [...selectedQuickItems, title];
 
       // Update the state with the new array of selected items
       setSelectedQuickItems(updatedSelectedItems);
+    } else if (totalSelectedItems === 3 && selectedQuickItems.length > 0) {
+      // If the total number of selected items is 3, check if the clicked item is already in the selectedQuickItems array
+      if (selectedQuickItems.includes(title)) {
+        // If the item is already selected, filter it out
+        const updatedSelectedItems = selectedQuickItems.filter(
+          (item) => item !== title
+        );
+        setSelectedQuickItems(updatedSelectedItems);
+      } else {
+        // If the item is not selected, replace one of the existing items with the clicked item
+        const copySelectedQuickItems = [...selectedQuickItems];
+        copySelectedQuickItems.splice(0, 1);
+        const updatedSelectedItems = [...copySelectedQuickItems, title];
+        setSelectedQuickItems(updatedSelectedItems);
+      }
     }
   };
+
+  const secondaryImplementFiltering = () => {
+    // Combine the selected quick items and selected options
+    const combinedSelectedItems = [...selectedQuickItems, ...selectedOptions];
+    dispatch(allFilterHandler(combinedSelectedItems));
+    dispatch(searchedToggle(''));
+    dispatch(filteredToggle());
+  };
+
+  const handleRemoveFilter = () => {
+    setSelectedQuickItems([]);
+    dispatch(allFilterHandler([]));
+    dispatch(searchedToggle(''));
+    dispatch(filteredToggle());
+  };
+
+  const handleSelectedOptions = (newSelectedOptions: string[]) => {
+    // Get the current selected quick items
+    const currentQuickItems = selectedQuickItems.map((item) => item);
+
+    // Calculate the total number of selected items (quick items + new options)
+    const totalSelectedItems =
+      currentQuickItems.length + newSelectedOptions.length;
+
+    // If the total number of selected items exceeds 3, limit the new options to ensure the total is 3
+    if (totalSelectedItems > 3) {
+      const maxNewOptions = 3 - currentQuickItems.length;
+      setSelectedOptions(newSelectedOptions.slice(0, maxNewOptions));
+    } else {
+      setSelectedOptions(newSelectedOptions);
+    }
+  };
+
+  // useEffects :
+
+  //fetching unique merchants
+  useEffect(() => {
+    // Extract the unique creditor values from the JSON data
+    const uniqueCreditors = Array.from(
+      new Set(jsonData.map((item) => item.creditor))
+    );
+
+    // Remove the specified items from the uniqueCreditors array
+    const filteredCreditors = uniqueCreditors.filter(
+      (creditor) => !['اسنپ', 'تپسی', 'فیلیمو'].includes(creditor)
+    );
+
+    // Convert the filtered creditor values to the format required by the Select component
+    const selectOptions = filteredCreditors.map((creditor) => ({
+      value: creditor,
+    }));
+
+    setOptions(selectOptions);
+  }, []);
 
   useEffect(() => {
     setSelectedQuickItems([]);
@@ -63,47 +140,17 @@ export const MerchantFilter: React.FC = () => {
     }
   }, [searchItem, allFilter.merchants]);
 
-  const secondaryImplementFiltering = () => {
-    dispatch(allFilterHandler(selectedQuickItems));
-    dispatch(searchedToggle(''));
-    dispatch(filteredToggle());
-  };
-  console.log(allFilter);
-
-  const handleRemoveFilter = () => {
-    setSelectedQuickItems([]);
-    dispatch(allFilterHandler([]));
-    dispatch(searchedToggle(''));
-    dispatch(filteredToggle());
-  };
-
   useEffect(() => {
-    // Extract the unique creditor values from the JSON data
-    const uniqueCreditors = Array.from(
-      new Set(jsonData.map((item) => item.creditor))
+    setSelectedOptions(
+      allFilter.merchants?.filter((merchant) =>
+        options?.some((option) => option.value === merchant)
+      )
     );
-
-    // Convert the unique creditor values to the format required by the Select component
-    const selectOptions = uniqueCreditors.map((creditor) => ({
-      value: creditor,
-    }));
-
-    setOptions(selectOptions);
-    console.log(selectOptions);
-  }, []);
-
-  const handleSelectedOptions = (newSelectedOptions: string[]) => {
-    // Check if the number of selected options exceeds 3
-    console.log(newSelectedOptions.slice(0, 3));
-    if (newSelectedOptions.length > 3) {
-      return;
-    }
-    setSelectedOptions(newSelectedOptions.slice(0, 3));
-  };
+  }, [options]);
 
   return (
     <>
-      {selectedQuickItems.length > 0 ? (
+      {selectedQuickItems.length > 0 || selectedOptions.length > 0 ? (
         <div className="implement-remove-wrapper">
           <div className="remove-button" onClick={handleRemoveFilter}>
             <RemoveIcon />
@@ -118,7 +165,6 @@ export const MerchantFilter: React.FC = () => {
           </div>
         </div>
       ) : (
-        // <div className='implement-button' onClick={primaryImplementFiltering}>
         <div className="implement-button">
           <TickSquareIcon />
           <span>اعمال</span>
@@ -130,31 +176,31 @@ export const MerchantFilter: React.FC = () => {
           <>
             <span
               className={
-                selectedQuickItems.some((item) => item.id === 0)
+                selectedQuickItems.some((item) => item === 'اسنپ')
                   ? 'selected'
                   : ''
               }
-              onClick={() => selectedQuickAccess('اسنپ', 0)}
+              onClick={() => selectedQuickAccess('اسنپ')}
             >
               اسنپ
             </span>
             <span
               className={
-                selectedQuickItems.some((item) => item.id === 1)
+                selectedQuickItems.some((item) => item === 'تپسی')
                   ? 'selected'
                   : ''
               }
-              onClick={() => selectedQuickAccess('تپسی', 1)}
+              onClick={() => selectedQuickAccess('تپسی')}
             >
               تپسی
             </span>
             <span
               className={
-                selectedQuickItems.some((item) => item.id === 2)
+                selectedQuickItems.some((item) => item === 'فیلیمو')
                   ? 'selected'
                   : ''
               }
-              onClick={() => selectedQuickAccess('فیلیمو', 2)}
+              onClick={() => selectedQuickAccess('فیلیمو')}
             >
               فیلیمو
             </span>
@@ -168,7 +214,8 @@ export const MerchantFilter: React.FC = () => {
             options={options}
             onChange={handleSelectedOptions}
             maxTagCount={2}
-            value={selectedOptions}
+            // value={selectedOptions}
+            // defaultValue={allFilter.merchants}
           />
         </div>
       </div>

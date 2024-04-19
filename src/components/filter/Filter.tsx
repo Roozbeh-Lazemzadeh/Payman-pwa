@@ -19,12 +19,13 @@ import './style.css';
 
 export const Filter: React.FC = () => {
   const dispatch = useAppDispatch();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const allFilter = useAppSelector(selectAllFilter);
   const filteredIcon = useAppSelector(selectShowFilterIcon);
   const filterNumber = useAppSelector(selectFilterNumber);
   const isFilteredFooterShown = useAppSelector(selectFilteredFooter);
   const isSearchedFooterShown = useAppSelector(selectSearchedFooter);
-  console.log(allFilter);
+
   useEffect(() => {}, []);
 
   const handlePrimaryFooterShow = () => {

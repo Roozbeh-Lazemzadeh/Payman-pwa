@@ -12,7 +12,7 @@ import { ReactComponent as TickSquareIcon } from '../../../../icons/tickSquare.s
 import { ReactComponent as BuyIcon } from '../../../../icons/buy2.svg';
 import { ReactComponent as RemoveIcon } from '../../../../icons/delete.svg';
 import {
-  allFilterHandler,
+  // allFilterHandler,
   selectAllFilter,
 } from '../../../../store/filter/filterSlice';
 import '../style.css';
@@ -25,7 +25,7 @@ export const PriceFilter: React.FC = () => {
   const [selectedQuickItems, setSelectedQuickItems] = useState<
     { title: string; id: number }[]
   >([]);
-  console.log(selectedQuickItems);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -35,38 +35,37 @@ export const PriceFilter: React.FC = () => {
   useEffect(() => {
     // Check the search item and initialize the selectedQuickItems state
     if (searchItem === '104') {
-      setSelectedQuickItems(allFilter.merchants);
+      // setSelectedQuickItems(allFilter.merchants);
     } else {
       setSelectedQuickItems([]);
     }
   }, [searchItem, allFilter.merchants]);
 
   const secondaryImplementFiltering = () => {
-    dispatch(allFilterHandler(selectedQuickItems));
+    // dispatch(allFilterHandler(selectedQuickItems));
     dispatch(searchedToggle(''));
     dispatch(filteredToggle());
   };
-  console.log(allFilter);
 
   const handleRemoveFilter = () => {
     setSelectedQuickItems([]);
     // dispatch(allFilterHandler([]));
   };
-  const primaryImplementFiltering = () => {
-    // setSelectedQuickItems([]);
-    dispatch(allFilterHandler(selectedQuickItems));
-  };
+  // const primaryImplementFiltering = () => {
+  //   // setSelectedQuickItems([]);
+  //   dispatch(allFilterHandler(selectedQuickItems));
+  // };
 
   return (
     <>
       {selectedQuickItems.length > 0 ? (
-        <div className='implement-remove-wrapper'>
-          <div className='remove-button' onClick={handleRemoveFilter}>
+        <div className="implement-remove-wrapper">
+          <div className="remove-button" onClick={handleRemoveFilter}>
             <RemoveIcon />
             <span>حذف فیلتر</span>
           </div>
           <div
-            className='implement-button half'
+            className="implement-button half"
             onClick={secondaryImplementFiltering}
           >
             <TickSquareIcon />
@@ -74,13 +73,13 @@ export const PriceFilter: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div className='implement-button' onClick={primaryImplementFiltering}>
+        <div className="implement-button">
           <TickSquareIcon />
           <span>اعمال</span>
         </div>
       )}
-      <div className='searched-footer-content'>
-        <div className='quick-access-section'>
+      <div className="searched-footer-content">
+        <div className="quick-access-section">
           {/* price  */}
           <>
             <span>۱۰۰هزار تومانءءء</span>
@@ -88,17 +87,17 @@ export const PriceFilter: React.FC = () => {
             <span>3۰۰هزار تومانءءء</span>
           </>
         </div>
-        <div className='search-section '>
+        <div className="search-section ">
           <>
             <Input
-              className='search-input'
+              className="search-input"
               addonBefore={<BuyIcon />}
-              placeholder='از مبلغ'
+              placeholder="از مبلغ"
             />
             <Input
-              className='search-input'
+              className="search-input"
               addonBefore={<BuyIcon />}
-              placeholder='تا مبلغ'
+              placeholder="تا مبلغ"
             />
           </>
         </div>

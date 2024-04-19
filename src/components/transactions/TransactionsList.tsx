@@ -38,7 +38,6 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
   //   { nameItem1: 'شماره موبایل', nameItem2: '989385445348+' },
   //   { nameItem1: 'شناسه پیمان', nameItem2: 'Ajdfni830874p39vfndl' },
   // ];
-  // console.log(transactionList);
 
   useEffect(() => {
     // Call sortTransactions function when sortBy changes
@@ -67,7 +66,7 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
 
   const UnknownTextInfo: React.FC = () => {
     return (
-      <div className='info-login detail'>
+      <div className="info-login detail">
         <div>دلیل نامشخص بودن تراکنش :</div>‌
         <div>
           سرویس بانکی شما ( سامان ) در حال حاظر پاسخگو نمی‌باشد . در صورت کم شدن
@@ -108,7 +107,7 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
   };
 
   return (
-    <div className='trans-list'>
+    <div className="trans-list">
       <DetailedDrawer
         isOpen={isOpen}
         setIsOpen={setIsOpen}

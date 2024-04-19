@@ -21,7 +21,7 @@ const FilteredFooter: React.FC = () => {
   const isFilteredFooterShown = useAppSelector(selectFilteredFooter);
   const isSearchedFooterShown = useAppSelector(selectSearchedFooter);
   const allFilter = useAppSelector(selectAllFilter);
-  console.log(allFilter);
+
   const removeFilterItem =
     allFilter?.merchants?.length !== 0
       ? getItem({
@@ -73,7 +73,7 @@ const FilteredFooter: React.FC = () => {
       <Menu
         style={{ background: 'none' }}
         // onClick={handleTabClick}
-        mode='inline'
+        mode="inline"
         selectedKeys={[location.pathname]}
         items={items.map((item) => ({
           ...item,
@@ -85,7 +85,7 @@ const FilteredFooter: React.FC = () => {
               item.icon
             ),
         }))}
-        className='footer-filtered-menu'
+        className="footer-filtered-menu"
       />
     </Footer>
   );

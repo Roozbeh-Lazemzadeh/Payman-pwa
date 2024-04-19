@@ -15,7 +15,7 @@ import persian_fa from 'react-date-object/locales/persian_fa';
 import DatePicker from 'react-multi-date-picker';
 import { weekDays } from '../../../types/calendar';
 import {
-  allFilterHandler,
+  // allFilterHandler,
   selectAllFilter,
 } from '../../../../store/filter/filterSlice';
 import '../../../Paymans/otherPaymans/style.css';
@@ -29,7 +29,7 @@ export const DateFilter: React.FC = () => {
   const [selectedQuickItems, setSelectedQuickItems] = useState<
     { title: string; id: number }[]
   >([]);
-  console.log(selectedQuickItems);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -39,14 +39,14 @@ export const DateFilter: React.FC = () => {
   useEffect(() => {
     // Check the search item and initialize the selectedQuickItems state
     if (searchItem === '104') {
-      setSelectedQuickItems(allFilter.merchants);
+      // setSelectedQuickItems(allFilter.merchants);
     } else {
       setSelectedQuickItems([]);
     }
   }, [searchItem, allFilter.merchants]);
 
   const secondaryImplementFiltering = () => {
-    dispatch(allFilterHandler(selectedQuickItems));
+    // dispatch(allFilterHandler(selectedQuickItems));
     dispatch(searchedToggle(''));
     dispatch(filteredToggle());
   };
@@ -57,19 +57,19 @@ export const DateFilter: React.FC = () => {
   };
   const primaryImplementFiltering = () => {
     // setSelectedQuickItems([]);
-    dispatch(allFilterHandler(selectedQuickItems));
+    // dispatch(allFilterHandler(selectedQuickItems));
   };
 
   return (
     <>
       {selectedQuickItems.length > 0 ? (
-        <div className='implement-remove-wrapper'>
-          <div className='remove-button' onClick={handleRemoveFilter}>
+        <div className="implement-remove-wrapper">
+          <div className="remove-button" onClick={handleRemoveFilter}>
             <RemoveIcon />
             <span>حذف فیلتر</span>
           </div>
           <div
-            className='implement-button half'
+            className="implement-button half"
             onClick={secondaryImplementFiltering}
           >
             <TickSquareIcon />
@@ -77,13 +77,13 @@ export const DateFilter: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div className='implement-button' onClick={primaryImplementFiltering}>
+        <div className="implement-button" onClick={primaryImplementFiltering}>
           <TickSquareIcon />
           <span>اعمال</span>
         </div>
       )}
-      <div className='searched-footer-content'>
-        <div className='quick-access-section'>
+      <div className="searched-footer-content">
+        <div className="quick-access-section">
           {/* date  */}
           <>
             <span>هفتگی</span>
@@ -91,28 +91,28 @@ export const DateFilter: React.FC = () => {
             <span>3 ماهه</span>
           </>
         </div>
-        <div className='search-section search-bar'>
-          <div className='search-datePicker'>
+        <div className="search-section search-bar">
+          <div className="search-datePicker">
             <DatePicker
-              placeholder='از تاریخ                              تا تاریخ'
+              placeholder="از تاریخ                              تا تاریخ"
               style={{
                 direction: 'rtl',
               }}
               value={values}
               onChange={() => setValues(values)}
-              dateSeparator='                  '
+              dateSeparator="                  "
               locale={persian_fa}
               calendar={persian}
-              className='rmdp-mobile'
-              calendarPosition='bottom-right'
+              className="rmdp-mobile"
+              calendarPosition="bottom-right"
               range
               weekDays={weekDays}
-              monthYearSeparator='  '
+              monthYearSeparator="  "
             />
-            <div className='icon'>
+            <div className="icon">
               <CalendarIcon />
             </div>
-            <div className='divider'></div>
+            <div className="divider"></div>
           </div>
         </div>
       </div>
