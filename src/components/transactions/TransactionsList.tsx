@@ -23,16 +23,6 @@ interface TransactionsListProps {
   sortBy: string;
 }
 
-<<<<<<< HEAD
-const dateStr = '16-APR-24 11.48.20.000000000 AM';
-const formattedDate = moment(dateStr, 'DD-MMM-YY hh.mm.ss.SSSSSSSSS A')
-  .locale('fa')
-  .format('dddd، YYYY/MM/DD- HH:mm');
-
-console.log(formattedDate);
-
-=======
->>>>>>> 7db713793dcc7c4613cdfe9e7f48870b3c05acfb
 export const TransactionsList: React.FC<TransactionsListProps> = ({
   transactionList,
   sortBy,
@@ -72,7 +62,7 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
 
   const UnknownTextInfo: React.FC = () => {
     return (
-      <div className="info-login detail">
+      <div className='info-login detail'>
         <div>دلیل نامشخص بودن تراکنش :</div>‌
         <div>
           سرویس بانکی شما ( سامان ) در حال حاظر پاسخگو نمی‌باشد . در صورت کم شدن
@@ -113,7 +103,7 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
   };
 
   return (
-    <div className="trans-list">
+    <div className='trans-list'>
       <DetailedDrawer
         isOpen={isOpen}
         setIsOpen={setIsOpen}
