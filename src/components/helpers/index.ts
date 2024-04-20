@@ -1,9 +1,10 @@
 // import { useNavigate } from 'react-router-dom';
 import { toggleSidebar } from '../../store/sidebar/sidebarSlice';
 // import { useDispatch } from 'react-redux';
-import { searchedToggle } from '../../store/footer/footerSlice';
+import { filteredToggle, searchedToggle } from '../../store/footer/footerSlice';
 import { NavigateFunction } from 'react-router-dom';
 import { Dispatch } from '@reduxjs/toolkit';
+import { removeAllFiltersHandler } from '../../store/filter/filterSlice';
 
 interface ItemProps {
   label: string;
@@ -11,7 +12,6 @@ interface ItemProps {
   icon: React.ReactNode;
   children?: React.ReactNode;
   badge?: number;
-  style?: React.CSSProperties;
   className?: string;
   dispatch: Dispatch<any>;
   navigate: NavigateFunction;
@@ -23,7 +23,6 @@ export function getItem({
   icon,
   children,
   badge,
-  style,
   dispatch,
   navigate,
   className,
@@ -47,7 +46,11 @@ export function getItem({
 
     // for filtering price , date, merchants
     if (key.length === 3) {
-      if (key === '101') return null;
+      if (key === '101') {
+        dispatch(removeAllFiltersHandler());
+        dispatch(searchedToggle(''));
+        dispatch(filteredToggle());
+      }
 
       dispatch(searchedToggle(key));
     }
@@ -61,7 +64,6 @@ export function getItem({
         children,
         label,
         badge,
-        style,
         className,
         onClick: handleClick,
       };
@@ -73,7 +75,6 @@ export function getItem({
       children,
       label,
       badge,
-      style,
       className,
       onClick: handleClick,
     };
@@ -87,6 +88,5 @@ export function getItem({
     badge,
     className,
     onClick: handleClick,
-    style,
   };
 }

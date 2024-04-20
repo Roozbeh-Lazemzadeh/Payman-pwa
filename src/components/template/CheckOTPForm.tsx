@@ -13,10 +13,6 @@ const CheckOTPForm = () => {
 
   // const [style, setStyle] = useState<string>();
 
-  // useEffect(() => {
-  //   console.log(otp);
-  // }, [otp]);
-
   useEffect(() => {
     const intervalId = setInterval(() => {
       // If both minutes and seconds are 0, clear the interval
@@ -64,8 +60,6 @@ const CheckOTPForm = () => {
         break;
     }
   };
-
-  console.log(otp);
 
   return (
     <div className="check-otp__style">
@@ -135,7 +129,11 @@ const CheckOTPForm = () => {
             type="default"
             // icon="/assets/pics/swap-login-icon.svg"
           >
-            <img src="/assets/login/swap.svg" alt="" className='logo-login-swap'/>
+            <img
+              src="/assets/login/swap.svg"
+              alt=""
+              className="logo-login-swap"
+            />
             <input
               type="submit"
               value="تغییر شماره موبایل"

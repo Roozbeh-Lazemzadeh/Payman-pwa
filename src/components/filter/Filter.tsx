@@ -10,21 +10,22 @@ import {
   searchedToggle,
 } from '../../store/footer/footerSlice';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
-import './style.css';
 import {
   selectAllFilter,
   selectFilterNumber,
   selectShowFilterIcon,
 } from '../../store/filter/filterSlice';
+import './style.css';
 
 export const Filter: React.FC = () => {
+  const dispatch = useAppDispatch();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const allFilter = useAppSelector(selectAllFilter);
   const filteredIcon = useAppSelector(selectShowFilterIcon);
   const filterNumber = useAppSelector(selectFilterNumber);
-  const dispatch = useAppDispatch();
   const isFilteredFooterShown = useAppSelector(selectFilteredFooter);
   const isSearchedFooterShown = useAppSelector(selectSearchedFooter);
-  console.log(allFilter);
+
   useEffect(() => {}, []);
 
   const handlePrimaryFooterShow = () => {
@@ -40,13 +41,13 @@ export const Filter: React.FC = () => {
     }
   };
   return (
-    <span className='filter-icon'>
+    <span className="filter-icon">
       {filteredIcon ? (
-        <div className='filtered-wrapper'>
-          <div className='filtered'>
+        <div className="filtered-wrapper">
+          <div className="filtered">
             <FilterIcon onClick={handlePrimaryFooterShow} />
           </div>
-          <div className='filtered-circle'>
+          <div className="filtered-circle">
             <FilteredCircleIcon />
           </div>
           <span

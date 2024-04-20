@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import moment from 'moment';
-import 'moment/locale/fa';
+import jalaliMoment from 'jalali-moment';
 import { TransactionCard } from '../shared/Cards/TransactionCards';
 import { DetailedDrawer } from '../shared/Drawer/DetailedDrawer';
 import { ReactComponent as SuccessfulIcon } from '../../icons/success.svg';
 import { ReactComponent as UnsuccessfulIcon } from '../../icons/unsuccess.svg';
 import { ReactComponent as UnclearIcon } from '../../icons/unclearStatus.svg';
+import { parse, format } from 'date-fns';
 import './style.css';
 
 interface TransactionsListProps {
@@ -23,6 +23,7 @@ interface TransactionsListProps {
   sortBy: string;
 }
 
+<<<<<<< HEAD
 const dateStr = '16-APR-24 11.48.20.000000000 AM';
 const formattedDate = moment(dateStr, 'DD-MMM-YY hh.mm.ss.SSSSSSSSS A')
   .locale('fa')
@@ -30,6 +31,8 @@ const formattedDate = moment(dateStr, 'DD-MMM-YY hh.mm.ss.SSSSSSSSS A')
 
 console.log(formattedDate);
 
+=======
+>>>>>>> 7db713793dcc7c4613cdfe9e7f48870b3c05acfb
 export const TransactionsList: React.FC<TransactionsListProps> = ({
   transactionList,
   sortBy,
@@ -45,7 +48,6 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
   //   { nameItem1: 'شماره موبایل', nameItem2: '989385445348+' },
   //   { nameItem1: 'شناسه پیمان', nameItem2: 'Ajdfni830874p39vfndl' },
   // ];
-  // console.log(transactionList);
 
   useEffect(() => {
     sortTransactions();
@@ -96,6 +98,20 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
     }
   };
 
+  const transDate = (inputDate: string) => {
+    const parsedDate = parse(
+      inputDate,
+      'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
+      new Date()
+    );
+    const formattedDate = format(parsedDate, 'yyyy-MM-dd HH:mm:ss');
+    const jalaliDate = jalaliMoment(formattedDate).format(
+      'jYYYY/jMM/jDD - HH:mm:ss'
+    );
+    const weekday = jalaliMoment(formattedDate).locale('fa').format('dddd');
+    return `${weekday} ، ${jalaliDate}`;
+  };
+
   return (
     <div className="trans-list">
       <DetailedDrawer
@@ -116,12 +132,7 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
             merchant={transaction.creditor}
             price={transaction.transaction_amount}
             transStatus={transaction.status}
-            transDate={moment(
-              transaction.transaction_date,
-              'DD-MMM-YY hh.mm.ss.SSS A'
-            )
-              .locale('fa')
-              .format('dddd، jYYYY/jMM/jDD- HH:mm')}
+            transDate={transDate(transaction.transaction_date)}
             transStatusIcon={
               transaction.status === 'موفق' ? (
                 <SuccessfulIcon />
