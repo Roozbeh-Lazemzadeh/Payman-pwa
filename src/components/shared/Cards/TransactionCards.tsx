@@ -46,7 +46,10 @@ export const TransactionCard: React.FC<TransactionCardProps> = ({
   return (
     <div className="transaction-card">
       <div className="card-merchant-wrapper">
-        <img className="card-icon" src={img} />
+        <img
+          className="card-icon"
+          src={img.length ? img : '/assets/pics/icon-default.png'}
+        />
         <span className="card-merchant-name">{merchant}</span>
       </div>
       <div className="card-content">

@@ -141,7 +141,7 @@
     "transaction_date": "24-JUN-28 11.49.56.000000000 AM",
     "transaction_id": "lujluiah4CGU",
     "phone_number": "09100022528",
-    "img": "./assets/transactions-logo/OnboardingImg3.svg"
+    "img": ""
   },
   {
     "id": 13,
@@ -153,6 +153,6 @@
     "transaction_date": "24-JUN-28 11.49.55.000000000 AM",
     "transaction_id": "lujhtdctcjkjkGU",
     "phone_number": "09100022528",
-    "img": "./assets/transactions-logo/OnboardingImg3.svg"
+    "img": ""
   }
 ]
