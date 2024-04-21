@@ -27,13 +27,6 @@ export const MerchantFilter: React.FC = () => {
   const [selectedQuickItems, setSelectedQuickItems] = useState<string[]>([]);
   const [options, setOptions] = useState<SelectProps['options']>([]);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
-  console.log(
-    allFilter.merchants?.filter((merchant) =>
-      options?.some((option) => option.value === merchant)
-    )
-  );
-
-  console.log(allFilter.merchants);
 
   const selectedQuickAccess = (title: string) => {
     // if (selectedOptions.length === 0) return null;
@@ -72,7 +65,6 @@ export const MerchantFilter: React.FC = () => {
       }
     }
   };
-
   const secondaryImplementFiltering = () => {
     // Combine the selected quick items and selected options
     const combinedSelectedItems = [...selectedQuickItems, ...selectedOptions];
@@ -89,6 +81,7 @@ export const MerchantFilter: React.FC = () => {
   };
 
   const handleSelectedOptions = (newSelectedOptions: string[]) => {
+    const currentSelectedOptions = selectedOptions;
     // Get the current selected quick items
     const currentQuickItems = selectedQuickItems.map((item) => item);
 
@@ -96,10 +89,22 @@ export const MerchantFilter: React.FC = () => {
     const totalSelectedItems =
       currentQuickItems.length + newSelectedOptions.length;
 
-    // If the total number of selected items exceeds 3, limit the new options to ensure the total is 3
     if (totalSelectedItems > 3) {
-      const maxNewOptions = 3 - currentQuickItems.length;
-      setSelectedOptions(newSelectedOptions.slice(0, maxNewOptions));
+      console.log('selectedQuickItems.length', selectedQuickItems.length);
+      const maxNewOptions = 3 - selectedQuickItems.length;
+      console.log('maxNewOptions', maxNewOptions);
+      const limitedNewOptions = newSelectedOptions.slice(0, maxNewOptions);
+      console.log('limitedNewOptions', limitedNewOptions);
+
+      // Check if any options were deselected
+      const deselectedOptions = currentSelectedOptions.filter(
+        (option) => !newSelectedOptions.includes(option)
+      );
+      console.log('deselectedOptions', deselectedOptions);
+
+      const updatedOptions = [...deselectedOptions, ...limitedNewOptions];
+
+      setSelectedOptions(updatedOptions);
     } else {
       setSelectedOptions(newSelectedOptions);
     }
@@ -134,7 +139,12 @@ export const MerchantFilter: React.FC = () => {
   useEffect(() => {
     // Check the search item and initialize the selectedQuickItems state
     if (searchItem === '104') {
-      setSelectedQuickItems(allFilter.merchants);
+      const filteredMerchants = allFilter.merchants.filter(
+        (merchant) =>
+          merchant === 'اسنپ' || merchant === 'تپسی' || merchant === 'فیلیمو'
+      );
+      console.log(filteredMerchants);
+      setSelectedQuickItems(filteredMerchants);
     } else {
       setSelectedQuickItems([]);
     }
@@ -151,13 +161,13 @@ export const MerchantFilter: React.FC = () => {
   return (
     <>
       {selectedQuickItems.length > 0 || selectedOptions.length > 0 ? (
-        <div className="implement-remove-wrapper">
-          <div className="remove-button" onClick={handleRemoveFilter}>
+        <div className='implement-remove-wrapper'>
+          <div className='remove-button' onClick={handleRemoveFilter}>
             <RemoveIcon />
             <span>حذف فیلتر</span>
           </div>
           <div
-            className="implement-button half"
+            className='implement-button half'
             onClick={secondaryImplementFiltering}
           >
             <TickSquareIcon />
@@ -165,13 +175,13 @@ export const MerchantFilter: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div className="implement-button">
+        <div className='implement-button'>
           <TickSquareIcon />
           <span>اعمال</span>
         </div>
       )}
-      <div className="searched-footer-content">
-        <div className="quick-access-section">
+      <div className='searched-footer-content'>
+        <div className='quick-access-section'>
           {/* merchants  */}
           <>
             <span
@@ -206,16 +216,16 @@ export const MerchantFilter: React.FC = () => {
             </span>
           </>
         </div>
-        <div className="search-section ">
+        <div className='search-section '>
           <Select
-            placeholder="جستجوی نام کسب‌وکار"
-            mode="multiple"
+            placeholder='جستجوی نام کسب‌وکار'
+            mode='multiple'
             style={{ width: '100%' }}
             options={options}
             onChange={handleSelectedOptions}
             maxTagCount={2}
-            // value={selectedOptions}
-            // defaultValue={allFilter.merchants}
+            value={selectedOptions}
+            placement='topRight'
           />
         </div>
       </div>
