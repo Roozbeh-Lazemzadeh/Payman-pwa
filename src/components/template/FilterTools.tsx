@@ -4,7 +4,7 @@ import { Filter } from '../filter/Filter';
 
 interface FilterToolsProps {
   title: string;
-  onSortChange?: (criteria: string) => void; // Define the onSortChange event handler
+  onSortChange?: (keyNum: string) => void; // Define the onSortChange event handler
 }
 
 const FilterTools: React.FC<FilterToolsProps> = ({ title, onSortChange }) => {

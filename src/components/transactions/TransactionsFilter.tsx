@@ -5,10 +5,10 @@ import { TransactionsList } from './TransactionsList';
 import mock from '../../transaction.json';
 
 export const TransactionsFilter: React.FC = () => {
-  const [sortBy, setSortBy] = useState<string>(''); // State variable to manage sort criteria
+  const [sortBy, setSortBy] = useState<string>('0'); // State variable to manage sort keyNum
 
-  const handleSortChange = (criteria: string) => {
-    setSortBy(criteria);
+  const handleSortChange = (keyNum: string) => {
+    setSortBy(keyNum);
   };
 
   return (

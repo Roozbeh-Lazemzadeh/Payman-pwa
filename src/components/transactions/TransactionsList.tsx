@@ -19,20 +19,11 @@ interface TransactionsListProps {
     transaction_date: string;
     transaction_id: string;
     phone_number: string;
+    img: string;
   }[];
   sortBy: string;
 }
 
-<<<<<<< HEAD
-const dateStr = '16-APR-24 11.48.20.000000000 AM';
-const formattedDate = moment(dateStr, 'DD-MMM-YY hh.mm.ss.SSSSSSSSS A')
-  .locale('fa')
-  .format('dddd، YYYY/MM/DD- HH:mm');
-
-console.log(formattedDate);
-
-=======
->>>>>>> 7db713793dcc7c4613cdfe9e7f48870b3c05acfb
 export const TransactionsList: React.FC<TransactionsListProps> = ({
   transactionList,
   sortBy,
@@ -43,12 +34,6 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
     TransactionsListProps['transactionList']
   >([]);
 
-  // const DetailedDrawerArray = [
-  //   { nameItem1: 'بانک', nameItem2: 'سامان' },
-  //   { nameItem1: 'شماره موبایل', nameItem2: '989385445348+' },
-  //   { nameItem1: 'شناسه پیمان', nameItem2: 'Ajdfni830874p39vfndl' },
-  // ];
-
   useEffect(() => {
     sortTransactions();
   }, [sortBy, transactionList]);
@@ -58,10 +43,19 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
 
     if (sortBy === '0') {
       sortedList.sort((a, b) => {
-        return (
-          new Date(b.transaction_date).getTime() -
-          new Date(a.transaction_date).getTime()
+        const dateA = parse(
+          a.transaction_date,
+          'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
+          new Date()
         );
+        const dateB = parse(
+          b.transaction_date,
+          'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
+          new Date()
+        );
+
+        // Compare dates
+        return dateB.getTime() - dateA.getTime();
       });
     } else if (sortBy === '1') {
       sortedList.sort((a, b) => b.transaction_amount - a.transaction_amount);
@@ -133,6 +127,7 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
             price={transaction.transaction_amount}
             transStatus={transaction.status}
             transDate={transDate(transaction.transaction_date)}
+            img={transaction.img}
             transStatusIcon={
               transaction.status === 'موفق' ? (
                 <SuccessfulIcon />
@@ -150,24 +145,3 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
     </div>
   );
 };
-
-{
-  /* {transactionList.map((transaction) => (
-  <div key={transaction.id}>
-    <p>ID: {transaction.id}</p>
-    <p>Creditor: {transaction.creditor}</p>
-    <p>Currency: {transaction.currency}</p>
-    <p>Source Bank: {transaction.source_bank}</p>
-    <p>Status: {transaction.status}</p>
-    <p>Transaction Amount: {transaction.transaction_amount}</p>
-    <p>
-      Transaction Date:{' '}
-      {moment(transaction.transaction_date, 'DD-MMM-YY HH:mm:ss.SSS A')
-        .locale('fa')
-        .format('dddd، jYYYY/jMM/jDD- HH:mm')}
-    </p>
-    <p>Transaction ID: {transaction.transaction_id}</p>
-    <p>Phone Number: {transaction.phone_number}</p>
-  </div>
-))} */
-}

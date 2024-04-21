@@ -1,6 +1,5 @@
-import PropTypes from "prop-types";
-import "./style.css";
-import IconSvg from "./icon.svg";
+import PropTypes from 'prop-types';
+import './style.css';
 
 interface TransactionCardProps {
   merchant: string;
@@ -8,6 +7,7 @@ interface TransactionCardProps {
   transStatus: string;
   transStatusIcon: React.ReactNode;
   price: number;
+  img: string;
 }
 
 export const TransactionCard: React.FC<TransactionCardProps> = ({
@@ -16,6 +16,7 @@ export const TransactionCard: React.FC<TransactionCardProps> = ({
   transStatus,
   transStatusIcon,
   price,
+  img,
 }) => {
   TransactionCard.propTypes = {
     merchant: PropTypes.string.isRequired,
@@ -23,17 +24,19 @@ export const TransactionCard: React.FC<TransactionCardProps> = ({
     transStatus: PropTypes.string.isRequired,
     transStatusIcon: PropTypes.node.isRequired,
     price: PropTypes.number.isRequired,
+    img: PropTypes.string.isRequired, // Add img to propTypes
   };
+
   let color;
   switch (transStatus) {
-    case "موفق":
-      color = "green";
+    case 'موفق':
+      color = 'green';
       break;
-    case "ناموفق":
-      color = "red";
+    case 'ناموفق':
+      color = 'red';
       break;
-    case "نامشخص":
-      color = "yellow";
+    case 'نامشخص':
+      color = 'yellow';
       break;
 
     default:
@@ -43,7 +46,7 @@ export const TransactionCard: React.FC<TransactionCardProps> = ({
   return (
     <div className="transaction-card">
       <div className="card-merchant-wrapper">
-        <img className="card-icon" src={IconSvg} />
+        <img className="card-icon" src={img} />
         <span className="card-merchant-name">{merchant}</span>
       </div>
       <div className="card-content">
@@ -59,7 +62,7 @@ export const TransactionCard: React.FC<TransactionCardProps> = ({
           </div>
         </div>
         <div>
-          <div style={{ display: "flex", alignItems: "center" }}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
             <span className="transaction-title">تاریخ تراکنش:‌</span>
             <span className="card-date">{transDate}</span>
           </div>

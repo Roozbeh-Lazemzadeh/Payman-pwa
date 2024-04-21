@@ -188,6 +188,7 @@
 .ant-drawer-body .ant-carousel {
   margin-top: 30px;
   border-bottom: 1px solid rgba(5, 5, 5, 0.06);
+  padding-bottom: 23px;
 }
 .unselected-tabs .ant-tabs-ink-bar.ant-tabs-ink-bar-animated {
   visibility: hidden;

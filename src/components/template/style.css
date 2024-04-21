@@ -134,7 +134,7 @@ span.otp-inputs-border {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 395px;
+  width: 100%;
   height: 40px;
   margin-top: 1.5rem;
   font-family: 'IranYekan';
@@ -175,6 +175,8 @@ span.otp-inputs-border {
 }
 .info-login.payman {
   margin-top: 2rem;
+  width: 100%;
+  max-width: 373px;
 }
 
 .check-wrapper {
@@ -209,8 +211,8 @@ span.otp-inputs-border {
 }
 
 .logo-login-swap {
-    position: absolute;
-    right: 90px;
+  position: absolute;
+  right: 90px;
 }
 
 .check-otp-input:focus {
