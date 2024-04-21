@@ -63,13 +63,13 @@ export const DateFilter: React.FC = () => {
   return (
     <>
       {selectedQuickItems.length > 0 ? (
-        <div className="implement-remove-wrapper">
-          <div className="remove-button" onClick={handleRemoveFilter}>
+        <div className='implement-remove-wrapper'>
+          <div className='remove-button' onClick={handleRemoveFilter}>
             <RemoveIcon />
             <span>حذف فیلتر</span>
           </div>
           <div
-            className="implement-button half"
+            className='implement-button half'
             onClick={secondaryImplementFiltering}
           >
             <TickSquareIcon />
@@ -77,42 +77,42 @@ export const DateFilter: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div className="implement-button" onClick={primaryImplementFiltering}>
+        <div className='implement-button' onClick={primaryImplementFiltering}>
           <TickSquareIcon />
           <span>اعمال</span>
         </div>
       )}
-      <div className="searched-footer-content">
-        <div className="quick-access-section">
+      <div className='searched-footer-content'>
+        <div className='quick-access-section'>
           {/* date  */}
           <>
-            <span>هفتگی</span>
-            <span>ماهانه</span>
-            <span>3 ماهه</span>
+            <span>روز گذشته</span>
+            <span>۳ روز گذشته</span>
+            <span>هفته گذشته</span>
           </>
         </div>
-        <div className="search-section search-bar">
-          <div className="search-datePicker">
+        <div className='search-section search-bar'>
+          <div className='search-datePicker'>
             <DatePicker
-              placeholder="از تاریخ                              تا تاریخ"
+              placeholder='از تاریخ                              تا تاریخ'
               style={{
                 direction: 'rtl',
               }}
               value={values}
               onChange={() => setValues(values)}
-              dateSeparator="                  "
+              dateSeparator='                  '
               locale={persian_fa}
               calendar={persian}
-              className="rmdp-mobile"
-              calendarPosition="bottom-right"
+              className='rmdp-mobile'
+              calendarPosition='bottom-right'
               range
               weekDays={weekDays}
-              monthYearSeparator="  "
+              monthYearSeparator='  '
             />
-            <div className="icon">
+            <div className='icon'>
               <CalendarIcon />
             </div>
-            <div className="divider"></div>
+            <div className='divider'></div>
           </div>
         </div>
       </div>

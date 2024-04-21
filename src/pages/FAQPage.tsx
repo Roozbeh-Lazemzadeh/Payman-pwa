@@ -3,7 +3,7 @@ import { CustomCollapse } from '../components/collapse/CustomCollapse';
 import '../components/collapse/style.css';
 import { Button } from 'antd';
 import { ReactComponent as ContactIcon } from '../icons/calling.svg';
-import './style.css'
+import './style/style.css';
 interface CollapseItem {
   label: string;
   text: string;
@@ -41,25 +41,22 @@ const items: CollapseItem[] = [
     key: '6',
   },
 ];
-// const handleCallSupport = () => {
-//   window.location.href = 'tel:+982188332216';
-// };
 
 export const FAQPage: React.FC = () => {
   return (
     <>
       <CustomCollapse list={items} />
-      <div className="question-title">
+      <div className='question-title'>
         به تعدادی از پرسش‌های احتمالی شما در زمینه راهکار پرداخت مستقیم پیمان
         پاسخ داده‌ایم. اگر هم‌چنان به کمک یا راهنمایی نیاز داشتید، از طریق دکمه
         زیر با ما ارتباط بگیرید.
       </div>
       <Button
-        className="contact-us-with-icon"
-        type="primary"
+        className='contact-us-with-icon'
+        type='primary'
         // icon={}
       >
-        <a href="tel:02122989880" className="btn-faq">
+        <a href='tel:02122989880' className='btn-faq'>
           <ContactIcon />
           تماس با پشتیبانی
         </a>
