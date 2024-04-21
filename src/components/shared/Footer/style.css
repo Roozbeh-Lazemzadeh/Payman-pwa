@@ -94,7 +94,7 @@
 
 .footer-filtered-menu li.ant-menu-item {
   margin-inline: 0px;
-  padding: 14px 0px !important;
+  padding: 14px 12px !important;
 }
 
 .ant-menu-light.footer-filtered-menu:not(.ant-menu-horizontal)

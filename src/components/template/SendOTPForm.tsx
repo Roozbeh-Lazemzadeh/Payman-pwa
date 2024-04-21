@@ -6,12 +6,12 @@ import {
   type SetStateAction,
   useState,
   useEffect,
-} from "react";
-import { Checkbox, Button } from "antd";
-import OtpInput from "react-otp-input";
+} from 'react';
+import { Checkbox, Button } from 'antd';
+import OtpInput from 'react-otp-input';
 
-import "./style.css";
-import { CustomDrawer } from "../shared/Drawer/Drawer";
+import './style.css';
+import { CustomDrawer } from '../shared/Drawer/Drawer';
 // import { Button } from 'antd/es/radio';
 
 interface OnboardingProps {
@@ -27,62 +27,58 @@ const SendOTPForm: FC<OnboardingProps> = ({ setStep }) => {
     console.log(otp);
   }, [otp]);
 
-  // const onChange: GetProp<typeof Input.OTP, "onChange"> = (text: string) => {
-  //   console.log("onChange:", text);
-  // };
-
   // const sharedProps = {
   //   onChange,
   // };
 
   return (
-    <div className="send-otp-wrapper">
-      <div className="send-otp-form__wrapper">
-        <form className="send-otp-form">
+    <div className='send-otp-wrapper'>
+      <div className='send-otp-form__wrapper'>
+        <form className='send-otp-form'>
           {/* <Input.OTP formatter={(str) => str.toUpperCase()} {...sharedProps} /> */}
-          <span className="send-otp__title">ورود یا ثبت نام</span>
-          <div className="otp-form_input-wrapper">
-            <div className="otp-form_input">
-              <span className="form-input_title">شماره موبایل</span>
-              <span className="form-input_num">
+          <span className='send-otp__title'>ورود یا ثبت نام</span>
+          <div className='otp-form_input-wrapper'>
+            <div className='otp-form_input'>
+              <span className='form-input_title'>شماره موبایل</span>
+              <span className='form-input_num'>
                 <OtpInput
                   value={otp}
                   onChange={setOtp}
                   numInputs={9}
                   renderSeparator={<span>{''}</span>}
                   renderInput={(props) => <input {...props} />}
-                  containerStyle="phone-num-inputs"
-                  inputStyle="phone-num-input"
+                  containerStyle='phone-num-inputs'
+                  inputStyle='phone-num-input'
                 />
                 <span>۰۹</span>
               </span>
             </div>
-            <div className="otp-form_input">
-              <span className="form-input_title">کد ملی</span>
-              <span className="form-input_num">
+            <div className='otp-form_input'>
+              <span className='form-input_title'>کد ملی</span>
+              <span className='form-input_num'>
                 <OtpInput
                   value={otpVal}
                   onChange={setOtpVal}
                   numInputs={10}
                   renderSeparator={<span>{''}</span>}
                   renderInput={(props) => <input {...props} />}
-                  containerStyle="phone-num-inputs"
-                  inputStyle="phone-num-input"
+                  containerStyle='phone-num-inputs'
+                  inputStyle='phone-num-input'
                 />
                 {/* <span>۰۹</span> */}
               </span>
             </div>
           </div>
           {/* <input type="checkbox" className="otp-form_checked" /> */}
-          <Checkbox className="otp-Checkbox">
+          <Checkbox className='otp-Checkbox'>
             <span onClick={() => setIsOpen(!isOpen)}>
-              <span className="otp-Checkbox__open-drawer">
+              <span className='otp-Checkbox__open-drawer'>
                 توافق‌نامه کاربری پیمان{' '}
               </span>
               را خوانده‌ام و می‌پذیرم.
             </span>
           </Checkbox>
-          <Button className="otp-form_btn-wrapper" type="primary">
+          <Button className='otp-form_btn-wrapper' type='primary'>
             {/* <input
               type="submit"
               value="تایید و ادامه"
@@ -92,13 +88,13 @@ const SendOTPForm: FC<OnboardingProps> = ({ setStep }) => {
           </Button>
         </form>
       </div>
-      <div className="cover-customer__login">
-        <p className="cover-customer__login-p">
+      <div className='cover-customer__login'>
+        <p className='cover-customer__login-p'>
           نیاز به کمک دارید؟
-          <span className="cover-customer__login-link">پشتیبانی</span>
+          <span className='cover-customer__login-link'>پشتیبانی</span>
         </p>
       </div>
-      <p className="info-login login">
+      <p className='info-login login'>
         پیمان برای استعلام اطلاعات هویتی شما، از سامانه شاهکار بانک مرکزی
         استفاده می‌کند؛ بنابراین توجه کنید که کد ملی و شماره موبایل، متعلق به یک
         نفر باشد.
@@ -160,30 +156,30 @@ const SendOTPForm: FC<OnboardingProps> = ({ setStep }) => {
           >
             <Button
               style={{ display: 'flex' }}
-              type="primary"
+              type='primary'
               icon={
                 <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+                  width='20'
+                  height='20'
+                  viewBox='0 0 20 20'
+                  fill='none'
+                  xmlns='http://www.w3.org/2000/svg'
                 >
                   <path
-                    d="M7.03369 10.0001L9.01202 11.9776L12.967 8.02258"
-                    stroke="white"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+                    d='M7.03369 10.0001L9.01202 11.9776L12.967 8.02258'
+                    stroke='white'
+                    strokeWidth='1.5'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
                   />
                   <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M2.2915 10.0001C2.2915 15.7809 4.219 17.7084 9.99984 17.7084C15.7807 17.7084 17.7082 15.7809 17.7082 10.0001C17.7082 4.21925 15.7807 2.29175 9.99984 2.29175C4.219 2.29175 2.2915 4.21925 2.2915 10.0001Z"
-                    stroke="white"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+                    fillRule='evenodd'
+                    clipRule='evenodd'
+                    d='M2.2915 10.0001C2.2915 15.7809 4.219 17.7084 9.99984 17.7084C15.7807 17.7084 17.7082 15.7809 17.7082 10.0001C17.7082 4.21925 15.7807 2.29175 9.99984 2.29175C4.219 2.29175 2.2915 4.21925 2.2915 10.0001Z'
+                    stroke='white'
+                    strokeWidth='1.5'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
                   />
                 </svg>
               }

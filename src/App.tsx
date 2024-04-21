@@ -3,6 +3,7 @@ import { RouterProvider } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import { router } from './router/router';
 import SplashScreen from './components/splash/SplashScreen';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
 function App(): JSX.Element {

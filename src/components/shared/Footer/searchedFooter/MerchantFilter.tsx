@@ -9,8 +9,10 @@ import {
   selectSelectedSearchItem,
 } from '../../../../store/footer/footerSlice';
 import { ReactComponent as TickSquareIcon } from '../../../../icons/tickSquare.svg';
-// import { ReactComponent as MagnifierIcon } from '../../../../icons/magnifier2.svg';
+import { ToastContainer } from 'react-toastify';
+import { showNotifyToast } from '../../Toast/CustomToast';
 import { ReactComponent as RemoveIcon } from '../../../../icons/delete.svg';
+import { ReactComponent as InfoIcon } from '../../../../icons/yellowInfo.svg';
 import {
   allFilterHandler,
   selectAllFilter,
@@ -90,17 +92,18 @@ export const MerchantFilter: React.FC = () => {
       currentQuickItems.length + newSelectedOptions.length;
 
     if (totalSelectedItems > 3) {
-      console.log('selectedQuickItems.length', selectedQuickItems.length);
+      showNotifyToast(
+        'شما مجاز به انتخاب سه کسب و کار می باشید.',
+        <InfoIcon />
+      );
+
       const maxNewOptions = 3 - selectedQuickItems.length;
-      console.log('maxNewOptions', maxNewOptions);
       const limitedNewOptions = newSelectedOptions.slice(0, maxNewOptions);
-      console.log('limitedNewOptions', limitedNewOptions);
 
       // Check if any options were deselected
       const deselectedOptions = currentSelectedOptions.filter(
         (option) => !newSelectedOptions.includes(option)
       );
-      console.log('deselectedOptions', deselectedOptions);
 
       const updatedOptions = [...deselectedOptions, ...limitedNewOptions];
 
@@ -143,7 +146,6 @@ export const MerchantFilter: React.FC = () => {
         (merchant) =>
           merchant === 'اسنپ' || merchant === 'تپسی' || merchant === 'فیلیمو'
       );
-      console.log(filteredMerchants);
       setSelectedQuickItems(filteredMerchants);
     } else {
       setSelectedQuickItems([]);
@@ -160,6 +162,7 @@ export const MerchantFilter: React.FC = () => {
 
   return (
     <>
+      <ToastContainer rtl />
       {selectedQuickItems.length > 0 || selectedOptions.length > 0 ? (
         <div className='implement-remove-wrapper'>
           <div className='remove-button' onClick={handleRemoveFilter}>
