@@ -227,6 +227,7 @@ export const MerchantFilter: React.FC = () => {
             options={options}
             onChange={handleSelectedOptions}
             maxTagCount={2}
+            maxTagTextLength={7}
             value={selectedOptions}
             placement='topRight'
           />
