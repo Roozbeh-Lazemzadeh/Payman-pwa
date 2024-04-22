@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Select, SelectProps } from 'antd';
-import { useDispatch } from 'react-redux';
-import { useAppSelector } from '../../../hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import {
   filteredToggle,
   searchedToggle,
@@ -14,7 +13,7 @@ import { showNotifyToast } from '../../Toast/CustomToast';
 import { ReactComponent as RemoveIcon } from '../../../../icons/delete.svg';
 import { ReactComponent as InfoIcon } from '../../../../icons/yellowInfo.svg';
 import {
-  allFilterHandler,
+  merchantHandler,
   selectAllFilter,
 } from '../../../../store/filter/filterSlice';
 import '../../../Paymans/otherPaymans/style.css';
@@ -22,7 +21,7 @@ import jsonData from '../../../../transaction.json';
 import '../style.css';
 
 export const MerchantFilter: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const allFilter = useAppSelector(selectAllFilter);
   const filteredFooter = useAppSelector(selectFilteredFooter);
   const searchItem = useAppSelector(selectSelectedSearchItem);
@@ -70,14 +69,14 @@ export const MerchantFilter: React.FC = () => {
   const secondaryImplementFiltering = () => {
     // Combine the selected quick items and selected options
     const combinedSelectedItems = [...selectedQuickItems, ...selectedOptions];
-    dispatch(allFilterHandler(combinedSelectedItems));
+    dispatch(merchantHandler(combinedSelectedItems));
     dispatch(searchedToggle(''));
     dispatch(filteredToggle());
   };
 
   const handleRemoveFilter = () => {
     setSelectedQuickItems([]);
-    dispatch(allFilterHandler([]));
+    dispatch(merchantHandler([]));
     dispatch(searchedToggle(''));
     dispatch(filteredToggle());
   };
