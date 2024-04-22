@@ -14,8 +14,11 @@
 }
 
 .card-merchant-wrapper .card-icon {
-  padding-left: 10px;
+    padding-left: 10px;
+    width: 42px;
+    height: auto;
 }
+
 .more-trans-btn-wrapper {
   width: 90%;
   margin: 0 auto;

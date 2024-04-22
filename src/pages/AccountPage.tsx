@@ -32,6 +32,7 @@ const AccountPage: React.FC = () => {
     const date = new Date(e);
     setValue(date);
   };
+  console.log(value)
 
   return (
     <div className='profile-wrapper'>
@@ -103,6 +104,7 @@ const AccountPage: React.FC = () => {
           className='rmdp-mobile'
           calendarPosition='bottom-right'
           weekDays={weekDays}
+          range 
         />
       </div>
       <Button

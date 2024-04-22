@@ -10,6 +10,8 @@ import './style.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../hooks/reduxHooks';
 import { selectFilteredFooter } from '../../store/footer/footerSlice';
+import { removeAllFiltersHandler } from '../../store/filter/filterSlice';
+import { useDispatch } from 'react-redux';
 
 const { Footer } = Layout;
 interface TabData {
@@ -25,6 +27,7 @@ const PrimaryFooter: React.FC = () => {
   const location = useLocation();
   const isPrimaryFooterShown = !useAppSelector(selectFilteredFooter);
   const [activeTab, setActiveTab] = useState('2');
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // Get the path from the current location
@@ -53,6 +56,7 @@ const PrimaryFooter: React.FC = () => {
   }, [location.pathname]); // Re-run the effect when the pathname changes
   const handleTabChange = (key: string): void => {
     setActiveTab(key);
+    dispatch(removeAllFiltersHandler());
   };
 
   const tabData: TabData[] = [

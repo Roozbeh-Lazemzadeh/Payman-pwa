@@ -123,6 +123,7 @@
   justify-content: space-between;
   padding-bottom: 1.2rem;
   border-bottom: 1px solid #d3d3d3;
+  /* overflow: scroll; */
 }
 
 .home-datepicker {

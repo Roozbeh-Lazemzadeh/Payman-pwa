@@ -7,6 +7,7 @@ import { ReactComponent as UnsuccessfulIcon } from '../../icons/unsuccess.svg';
 import { ReactComponent as UnclearIcon } from '../../icons/unclearStatus.svg';
 import { parse, format } from 'date-fns';
 import './style.css';
+import useDrawerTransaction from '../hooks/useDrawerTransaction '; // Import the custom hook
 
 interface TransactionsListProps {
   transactionList: {
@@ -20,6 +21,7 @@ interface TransactionsListProps {
     transaction_id: string;
     phone_number: string;
     img: string;
+    transaction_mag: string;
   }[];
   sortBy: string;
 }
@@ -28,11 +30,16 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
   transactionList,
   sortBy,
 }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [detailedDrawerData, setDetailedDrawerData] = useState<object[]>([]);
   const [sortedTransactionList, setSortedTransactionList] = useState<
     TransactionsListProps['transactionList']
   >([]);
+  const {
+    isOpen,
+    detailedDrawerData,
+    handleDrawerTransaction,
+    handleCloseDrawer,
+    selectedTransactionId,
+  } = useDrawerTransaction(sortedTransactionList);
 
   useEffect(() => {
     sortTransactions();
@@ -64,34 +71,6 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
     setSortedTransactionList(sortedList);
   };
 
-  const UnknownTextInfo: React.FC = () => {
-    return (
-      <div className='info-login detail'>
-        <div>دلیل نامشخص بودن تراکنش :</div>‌
-        <div>
-          سرویس بانکی شما ( سامان ) در حال حاظر پاسخگو نمی‌باشد . در صورت کم شدن
-          موجودی مبلغ شما طی ۴۸ ساعت آینده برای شما واریز میشود .
-        </div>
-      </div>
-    );
-  };
-
-  const handleDrawerTransaction = (id: number) => {
-    const selectedTransaction = sortedTransactionList.find(
-      (transaction) => transaction.id === id
-    );
-    if (selectedTransaction) {
-      const { phone_number, transaction_id, source_bank } = selectedTransaction;
-      setIsOpen(!isOpen);
-      const detailedDrawerData = [
-        { nameItem1: 'بانک', nameItem2: source_bank },
-        { nameItem1: 'شماره موبایل', nameItem2: phone_number },
-        { nameItem1: 'شناسه پیمان', nameItem2: transaction_id },
-      ];
-      setDetailedDrawerData(detailedDrawerData);
-    }
-  };
-
   const transDate = (inputDate: string) => {
     const parsedDate = parse(
       inputDate,
@@ -107,14 +86,22 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
   };
 
   return (
-    <div className='trans-list'>
+    <div className="trans-list">
       <DetailedDrawer
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
+        isOpen={isOpen && selectedTransactionId !== null}
+        setIsOpen={handleCloseDrawer}
         title={'جزئیات بیشتر'}
         data={detailedDrawerData}
       >
-        <UnknownTextInfo />
+        <div className="info-login detail">
+          <div>{`دلیل نامشخص بودن تراکنش :`}</div>‌
+          <div>
+            {selectedTransactionId &&
+              sortedTransactionList.find(
+                (transaction) => transaction.id === selectedTransactionId
+              )?.transaction_mag}
+          </div>
+        </div>
       </DetailedDrawer>
       {sortedTransactionList.map((transaction) => (
         <div
