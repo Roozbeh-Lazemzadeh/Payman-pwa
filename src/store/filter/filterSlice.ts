@@ -1,14 +1,10 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { type RootState } from '../store';
 
-// interface filterProp {
-//   title: string;
-//   id: number;
-// }
 interface FilterState {
   allFilter: {
     merchants: string[];
-    date: Date[]; // Assuming 'date' will store Date objects
+    date: string[]; // Assuming 'date' will store Date objects
     price: number[]; // Assuming 'price' will store numbers
   };
   isFiltered: boolean;
@@ -31,7 +27,7 @@ export const filterSlice = createSlice({
   name: 'filter',
   initialState,
   reducers: {
-    allFilterHandler: (state, action: PayloadAction<string[]>) => {
+    merchantHandler: (state, action: PayloadAction<string[]>) => {
       const newMerchants = action.payload;
 
       // Assign the new array of merchants directly to the state
@@ -44,6 +40,12 @@ export const filterSlice = createSlice({
         state.filterNumber = state.allFilter.merchants.length;
       }
     },
+    dateHandler: (state, action: PayloadAction<string[]>) => {
+      const stringDates = action.payload;
+
+      state.allFilter.date = stringDates;
+    },
+
     removeAllFiltersHandler: (state) => {
       state.allFilter.merchants = [];
       state.allFilter.date = [];
@@ -66,7 +68,8 @@ export const selectMerchantsFilterLength = (state: RootState) =>
   state.filter?.merchantsFilter.length;
 
 export const {
-  allFilterHandler,
+  merchantHandler,
+  dateHandler,
   removeAllFiltersHandler,
   handleMerchantsLength,
 } = filterSlice.actions;

@@ -6,6 +6,8 @@ import { ReactComponent as SuccessfulIcon } from '../../icons/success.svg';
 import { ReactComponent as UnsuccessfulIcon } from '../../icons/unsuccess.svg';
 import { ReactComponent as UnclearIcon } from '../../icons/unclearStatus.svg';
 import { parse, format } from 'date-fns';
+import { useAppSelector } from '../hooks/reduxHooks';
+import { selectAllFilter } from '../../store/filter/filterSlice';
 import './style.css';
 
 interface TransactionsListProps {
@@ -28,15 +30,43 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
   transactionList,
   sortBy,
 }) => {
+  const allFilter = useAppSelector(selectAllFilter);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [detailedDrawerData, setDetailedDrawerData] = useState<object[]>([]);
-  const [sortedTransactionList, setSortedTransactionList] = useState<
-    TransactionsListProps['transactionList']
-  >([]);
+  const [sortedTransactionList, setSortedTransactionList] =
+    useState<TransactionsListProps['transactionList']>(transactionList);
 
   useEffect(() => {
     sortTransactions();
-  }, [sortBy, transactionList]);
+  }, [sortBy, transactionList, allFilter.date]);
+
+  useEffect(() => {
+    const sortedList = [...sortedTransactionList];
+
+    if (allFilter.date && allFilter.date.length === 2) {
+      // const startDate = allFilter.date[0];
+      // const endDate = allFilter.date[1];
+      const parsedDates: Date[] = allFilter.date.map((date) =>
+        parse(date, 'yy-MMM-dd hh:mm:ss a', new Date())
+      );
+
+      // Parse the date strings into Date objects
+
+      // Filter transactions between the specified dates
+      const filteredSortedList = sortedList.filter((transaction) => {
+        const transactionDate = parse(
+          transaction.transaction_date,
+          'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
+          new Date()
+        );
+
+        return (
+          transactionDate >= parsedDates[0] && transactionDate <= parsedDates[1]
+        );
+      });
+      setSortedTransactionList(filteredSortedList);
+    }
+  }, [allFilter.date]);
 
   const sortTransactions = () => {
     const sortedList = [...transactionList];

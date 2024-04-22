@@ -153,6 +153,9 @@
   width: 100%;
   height: 50%;
 }
+.implement-button.half.disabled {
+  background-color: #acacac;
+}
 .remove-button {
   width: 100%;
   height: 50%;
@@ -165,6 +168,9 @@
   align-items: center;
   box-shadow: -6px 0px 7px -4px rgba(0, 0, 0, 0.2);
   padding: 10px 10px;
+}
+.remove-button.disabled {
+  background-color: #acacac;
 }
 .remove-button span {
   font-size: 10px;

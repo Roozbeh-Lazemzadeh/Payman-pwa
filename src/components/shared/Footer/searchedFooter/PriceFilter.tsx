@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Input } from 'antd';
-import { useAppSelector } from '../../../hooks/reduxHooks';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import {
   filteredToggle,
   searchedToggle,
@@ -26,7 +25,7 @@ export const PriceFilter: React.FC = () => {
     { title: string; id: number }[]
   >([]);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     setSelectedQuickItems([]);
@@ -59,13 +58,13 @@ export const PriceFilter: React.FC = () => {
   return (
     <>
       {selectedQuickItems.length > 0 ? (
-        <div className="implement-remove-wrapper">
-          <div className="remove-button" onClick={handleRemoveFilter}>
+        <div className='implement-remove-wrapper'>
+          <div className='remove-button' onClick={handleRemoveFilter}>
             <RemoveIcon />
             <span>حذف فیلتر</span>
           </div>
           <div
-            className="implement-button half"
+            className='implement-button half'
             onClick={secondaryImplementFiltering}
           >
             <TickSquareIcon />
@@ -73,13 +72,13 @@ export const PriceFilter: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div className="implement-button">
+        <div className='implement-button'>
           <TickSquareIcon />
           <span>اعمال</span>
         </div>
       )}
-      <div className="searched-footer-content">
-        <div className="quick-access-section">
+      <div className='searched-footer-content'>
+        <div className='quick-access-section'>
           {/* price  */}
           <>
             <span>۱۰۰هزار تومانءءء</span>
@@ -87,17 +86,17 @@ export const PriceFilter: React.FC = () => {
             <span>3۰۰هزار تومانءءء</span>
           </>
         </div>
-        <div className="search-section ">
+        <div className='search-section '>
           <>
             <Input
-              className="search-input"
+              className='search-input'
               addonBefore={<BuyIcon />}
-              placeholder="از مبلغ"
+              placeholder='از مبلغ'
             />
             <Input
-              className="search-input"
+              className='search-input'
               addonBefore={<BuyIcon />}
-              placeholder="تا مبلغ"
+              placeholder='تا مبلغ'
             />
           </>
         </div>
