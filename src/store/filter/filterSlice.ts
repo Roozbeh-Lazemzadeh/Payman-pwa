@@ -9,7 +9,7 @@ interface FilterState {
   };
   isFiltered: boolean;
   filterNumber: number;
-  merchantsFilter: string[];
+  datePeriod: string;
 }
 
 const initialState: FilterState = {
@@ -20,7 +20,7 @@ const initialState: FilterState = {
   },
   isFiltered: false,
   filterNumber: 0,
-  merchantsFilter: [],
+  datePeriod: '',
 };
 
 export const filterSlice = createSlice({
@@ -42,19 +42,17 @@ export const filterSlice = createSlice({
     },
     dateHandler: (state, action: PayloadAction<string[]>) => {
       const stringDates = action.payload;
-
       state.allFilter.date = stringDates;
     },
-
+    dateQuickAccessHandler: (state, action: PayloadAction<string>) => {
+      state.datePeriod = action.payload;
+    },
     removeAllFiltersHandler: (state) => {
       state.allFilter.merchants = [];
       state.allFilter.date = [];
       state.allFilter.price = [];
       state.isFiltered = false;
       state.filterNumber = 0;
-    },
-    handleMerchantsLength: (state, action) => {
-      state.merchantsFilter = action.payload;
     },
   },
 });
@@ -65,12 +63,13 @@ export const selectShowFilterIcon = (state: RootState) =>
 export const selectFilterNumber = (state: RootState) =>
   state.filter?.filterNumber;
 export const selectMerchantsFilterLength = (state: RootState) =>
-  state.filter?.merchantsFilter.length;
+  state.filter?.allFilter.merchants.length;
+export const selectDatePeriod = (state: RootState) => state.filter?.datePeriod;
 
 export const {
   merchantHandler,
   dateHandler,
   removeAllFiltersHandler,
-  handleMerchantsLength,
+  dateQuickAccessHandler,
 } = filterSlice.actions;
 export default filterSlice.reducer;

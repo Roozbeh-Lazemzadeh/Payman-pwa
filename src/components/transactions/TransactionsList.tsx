@@ -116,14 +116,14 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
   };
 
   return (
-    <div className="trans-list">
+    <div className='trans-list'>
       <DetailedDrawer
         isOpen={isOpen && selectedTransactionId !== null}
         setIsOpen={handleCloseDrawer}
         title={'جزئیات بیشتر'}
         data={detailedDrawerData}
       >
-        <div className="info-login detail">
+        <div className='info-login detail'>
           <div>{`دلیل نامشخص بودن تراکنش :`}</div>‌
           <div>
             {selectedTransactionId &&
