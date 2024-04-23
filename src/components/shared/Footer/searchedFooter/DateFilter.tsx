@@ -35,7 +35,7 @@ export const DateFilter: React.FC = () => {
     // new DateObject({ calendar: gregorian }),
     // new DateObject({ calendar: gregorian }).add(2, 'day'),
   ]);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   const [selectedQuickItems, setSelectedQuickItems] = useState<string>('');
 
   const handleDateChange = (dates: DateObject[]) => {
@@ -57,6 +57,7 @@ export const DateFilter: React.FC = () => {
     }
   };
   const handleDateFilter = () => {
+    if (dates.length === 0) return null;
     dispatch(dateHandler(dates));
     dispatch(searchedToggle(''));
     dispatch(filteredToggle());
@@ -136,6 +137,7 @@ export const DateFilter: React.FC = () => {
   };
 
   const handleRemoveFilter = () => {
+    if (dates.length === 0) return null;
     setSelectedQuickItems('');
     setDates([]);
     setValues([]);
@@ -153,7 +155,6 @@ export const DateFilter: React.FC = () => {
 
   return (
     <>
-      {}
       <div className='implement-remove-wrapper'>
         <div
           className={`remove-button ${dates.length === 0 ? 'disabled' : ''}`}
@@ -214,6 +215,10 @@ export const DateFilter: React.FC = () => {
               range
               weekDays={weekDays}
               monthYearSeparator='  '
+              mobileLabels={{
+                OK: 'تایید',
+                CANCEL: 'انصراف',
+              }}
             />
             <div className='icon'>
               <CalendarIcon />

@@ -17,7 +17,7 @@
     "jsx": "react-jsx",
     "strictNullChecks": true
   },
-  "include": ["src", ".eslintrc.js", "public/sw.ts"],
+  "include": ["src", ".eslintrc.js", "public/sw.js"],
   "exclude": [
     "**/build",
     "node_modules",
