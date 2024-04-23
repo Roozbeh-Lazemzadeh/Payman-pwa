@@ -6,9 +6,11 @@ import { TransactionHomeCard } from "../components/shared/Cards/TransactionHomeC
 import { DetailedDrawer } from "../components/shared/Drawer/DetailedDrawer";
 import transactionData from '../transaction.json'; // Import the JSON file
 import useDrawerTransaction from "../components/hooks/useDrawerTransaction";
+import jalaliMoment from "jalali-moment";
+
 
 function HomeWithMandate() {
-  const [selectedItemIndex, setSelectedItemIndex] = useState(1);
+  const [selectedItemIndex, setSelectedItemIndex] = useState(0);
   const {
     isOpen,
     detailedDrawerData,
@@ -17,43 +19,47 @@ function HomeWithMandate() {
     selectedTransactionId,
   } = useDrawerTransaction(transactionData);
 
-  // const DetailedDrawerArray = [
-  //   { nameItem1: "بانک", nameItem2: "سامان" },
-  //   { nameItem1: "شماره موبایل", nameItem2: "989385445348+" },
-  //   { nameItem1: "شناسه پیمان", nameItem2: "Ajdfni830874p39vfndl" },
-  // ];
+  
+const monthsList: { id: number; year: string; month: string; }[] = [];
+const monthsList2: any[] = [];
 
-  const HomedatepickersArray = [
-    { id: 1, month: 'فروردین' },
-    { id: 2, month: 'اردبیهشت' },
-    { id: 3, month: 'خرداد' },
-    { id: 4, month: 'تیر' },
-    { id: 5, month: 'مرداد' },
-    { id: 6, month: 'شهریور' },
-    { id: 7, month: 'مهر' },
-    { id: 8, month: 'آبان' },
-    { id: 9, month: 'آذر' },
-    { id: 10, month: 'دی' },
-    { id: 11, month: 'بهمن' },
-    { id: 12, month: 'اسفند' }
-  ];
+for (let i = 0; i < 6; i++) {
+  const currentDate = jalaliMoment();
+  const pastDate = currentDate.subtract(i, 'jMonth');
+  monthsList.push({
+    id: i,
+    year: pastDate.locale('fa').format('jYY'),
+    month: pastDate.locale('fa').format('jMMMM'),
+  });
+   monthsList2.push(pastDate.format('jYYYY/jMM'));
+}
 
-  const handleItemClick = (id: any) => {
-    setSelectedItemIndex(id === selectedItemIndex ? null : id);
-    const selectedMonth = HomedatepickersArray.find(
-      (item) => item.id === selectedItemIndex
-    );
-    if (selectedMonth) {
-      console.log(selectedMonth.month);
-    } else {
-      console.log('Error: Month not found');
-    }
-  };
 
+  // const handleItemClick = (id: any) => {
+  //   setSelectedItemIndex(id === selectedItemIndex ? selectedItemIndex : id);
+  //   const selectedMonth = monthsList.find(
+  //     (item) => item.id === selectedItemIndex
+  //   );
+  //   if (selectedMonth) {
+  //     console.log(selectedMonth.month);
+  //   } else {
+  //     console.log('Error: Month not found');
+  //   }
+  // };
+const handleItemClick = (id: any) => {
+  setSelectedItemIndex(id === selectedItemIndex ? selectedItemIndex : id);
+  const selectedMonth = monthsList.find((item) => item.id === id);
+  if (selectedMonth) {
+    const selectedYearMonth = monthsList2[selectedMonth.id];
+    console.log(typeof selectedYearMonth);
+  } else {
+    console.log('Error: Month not found');
+  }
+};
   return (
     <div className="home-wrapper">
       <div className="home-datepickers">
-        {HomedatepickersArray.map((item) => (
+        {monthsList.reverse().map((item) => (
           <div
             className={`home-datepicker ${
               item.id === selectedItemIndex ? 'home-datepicker-click' : ''
@@ -61,7 +67,7 @@ function HomeWithMandate() {
             key={item.id}
             onClick={() => handleItemClick(item.id)}
           >
-            <span className="home-datepicker-num">03</span>
+            <span className="home-datepicker-num">{item.year}</span>
             <span className="home-datepicker-p">{item.month}</span>
           </div>
         ))}

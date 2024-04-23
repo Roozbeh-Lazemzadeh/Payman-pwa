@@ -19,12 +19,12 @@ export const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Navigate to='onboarding' />,
+        element: <Navigate to="onboarding" />,
       },
       {
         path: 'home',
         children: [
-          { path: '', element: <Navigate to='without-mandate' /> },
+          { path: '', element: <Navigate to="with-mandate" /> },
           { path: 'without-mandate', element: <HomeWithOutMandate /> },
           { path: 'with-mandate', element: <HomeWithMandate /> },
         ],
@@ -38,7 +38,7 @@ export const router = createBrowserRouter([
         path: 'paymans',
         element: <PaymansLayout />,
         children: [
-          { path: '', element: <Navigate to='me' /> },
+          { path: '', element: <Navigate to="me" /> },
           { path: 'me', element: <MyPaymans /> },
           { path: 'others', element: <OtherPaymans /> },
         ],
