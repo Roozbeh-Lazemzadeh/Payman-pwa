@@ -30,12 +30,8 @@ export const MerchantFilter: React.FC = () => {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
 
   const selectedQuickAccess = (title: string) => {
-    // if (selectedOptions.length === 0) return null;
-
     const currentOptionsLength = selectedOptions.length;
-
-    // Check if the total length (selectedQuickItems + selectedOptions) is less than 3
-    const totalSelectedItems = selectedQuickItems.length + currentOptionsLength;
+    const totalSelectedItems = selectedQuickItems.length + currentOptionsLength; // Check if the total length (selectedQuickItems + selectedOptions) is less than 3
 
     if (totalSelectedItems < 3) {
       // Create a new array of selected items with the new title and id
@@ -58,23 +54,25 @@ export const MerchantFilter: React.FC = () => {
         );
         setSelectedQuickItems(updatedSelectedItems);
       } else {
-        // If the item is not selected, replace one of the existing items with the clicked item
-        const copySelectedQuickItems = [...selectedQuickItems];
+        const copySelectedQuickItems = [...selectedQuickItems]; // If the item is not selected, replace one of the existing items with the clicked item
         copySelectedQuickItems.splice(0, 1);
         const updatedSelectedItems = [...copySelectedQuickItems, title];
         setSelectedQuickItems(updatedSelectedItems);
       }
     }
   };
-  const secondaryImplementFiltering = () => {
-    // Combine the selected quick items and selected options
-    const combinedSelectedItems = [...selectedQuickItems, ...selectedOptions];
+  const handleMerchantFilter = () => {
+    if (selectedQuickItems.length === 0 && selectedOptions.length === 0)
+      return null;
+    const combinedSelectedItems = [...selectedQuickItems, ...selectedOptions]; // Combine the selected quick items and selected options
     dispatch(merchantHandler(combinedSelectedItems));
     dispatch(searchedToggle(''));
     dispatch(filteredToggle());
   };
 
   const handleRemoveFilter = () => {
+    if (selectedQuickItems.length === 0 && selectedOptions.length === 0)
+      return null;
     setSelectedQuickItems([]);
     dispatch(merchantHandler([]));
     dispatch(searchedToggle(''));
@@ -83,8 +81,7 @@ export const MerchantFilter: React.FC = () => {
 
   const handleSelectedOptions = (newSelectedOptions: string[]) => {
     const currentSelectedOptions = selectedOptions;
-    // Get the current selected quick items
-    const currentQuickItems = selectedQuickItems.map((item) => item);
+    const currentQuickItems = selectedQuickItems.map((item) => item); // Get the current selected quick items
 
     // Calculate the total number of selected items (quick items + new options)
     const totalSelectedItems =
@@ -162,26 +159,31 @@ export const MerchantFilter: React.FC = () => {
   return (
     <>
       <ToastContainer rtl />
-      {selectedQuickItems.length > 0 || selectedOptions.length > 0 ? (
-        <div className='implement-remove-wrapper'>
-          <div className='remove-button' onClick={handleRemoveFilter}>
-            <RemoveIcon />
-            <span>حذف فیلتر</span>
-          </div>
-          <div
-            className='implement-button half'
-            onClick={secondaryImplementFiltering}
-          >
-            <TickSquareIcon />
-            <span>اعمال</span>
-          </div>
+      <div className='implement-remove-wrapper'>
+        <div
+          className={`remove-button ${
+            selectedQuickItems.length === 0 && selectedOptions.length === 0
+              ? 'disabled'
+              : ''
+          }`}
+          onClick={handleRemoveFilter}
+        >
+          <RemoveIcon />
+          <span>حذف فیلتر</span>
         </div>
-      ) : (
-        <div className='implement-button'>
+        <div
+          className={`implement-button half ${
+            selectedQuickItems.length === 0 && selectedOptions.length === 0
+              ? 'disabled'
+              : ''
+          }`}
+          onClick={handleMerchantFilter}
+        >
           <TickSquareIcon />
           <span>اعمال</span>
         </div>
-      )}
+      </div>
+
       <div className='searched-footer-content'>
         <div className='quick-access-section'>
           {/* merchants  */}

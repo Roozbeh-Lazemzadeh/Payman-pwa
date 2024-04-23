@@ -4,8 +4,8 @@ import { type RootState } from '../store';
 interface FilterState {
   allFilter: {
     merchants: string[];
-    date: string[]; // Assuming 'date' will store Date objects
-    price: number[]; // Assuming 'price' will store numbers
+    date: string[];
+    price: number[];
   };
   isFiltered: boolean;
   filterNumber: number;
@@ -47,6 +47,10 @@ export const filterSlice = createSlice({
     dateQuickAccessHandler: (state, action: PayloadAction<string>) => {
       state.datePeriod = action.payload;
     },
+    priceHandler: (state, action: PayloadAction<number[]>) => {
+      const prices = action.payload;
+      state.allFilter.price = prices;
+    },
     removeAllFiltersHandler: (state) => {
       state.allFilter.merchants = [];
       state.allFilter.date = [];
@@ -70,6 +74,7 @@ export const {
   merchantHandler,
   dateHandler,
   removeAllFiltersHandler,
+  priceHandler,
   dateQuickAccessHandler,
 } = filterSlice.actions;
 export default filterSlice.reducer;
