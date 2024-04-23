@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import useDrawerTransaction from '../hooks/useDrawerTransaction ';
+import useDrawerTransaction from '../hooks/useDrawerTransaction';
 import jalaliMoment from 'jalali-moment';
 import { TransactionCard } from '../shared/Cards/TransactionCards';
 import { DetailedDrawer } from '../shared/Drawer/DetailedDrawer';
