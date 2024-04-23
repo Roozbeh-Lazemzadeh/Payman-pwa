@@ -15,7 +15,7 @@ export interface SliderProps {
 const Slider: FC<SliderProps> = ({ ImgArray }) => {
   return (
     <Swiper
-      effect={"cards"}
+      effect={'cards'}
       slidesOffsetAfter={3}
       spaceBetween={30}
       centeredSlides={true}
@@ -32,8 +32,8 @@ const Slider: FC<SliderProps> = ({ ImgArray }) => {
       {/* <SwiperSlide className="banner-home">
           <img src="/assets/pics/Baner-home.svg" className="banner-home-1" />
         </SwiperSlide> */}
-      {ImgArray.map((item) => (
-        <SwiperSlide key={item.id}>
+      {ImgArray.map((item, index) => (
+        <SwiperSlide key={index}>
           <img src={item.img} className="banner-home-1" />
         </SwiperSlide>
       ))}

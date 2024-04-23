@@ -9,7 +9,7 @@
     "transaction_date": "24-MAR-20 11.48.20.000000000 AM",
     "transaction_id": "YdfgsdfRgh4CGU",
     "phone_number": "09100022528",
-    "img": "./assets/transactions-logo/tapsi.svg",
+    "img": "/assets/transactions-logo/tapsi.svg",
     "transaction_mag": ""
   },
   {
@@ -22,7 +22,7 @@
     "transaction_date": "24-MAR-05 11.48.20.000000000 AM",
     "transaction_id": "Ydfjgyjgh4CGU",
     "phone_number": "09100022528",
-    "img": "./assets/transactions-logo/snapIcon.svg",
+    "img": "/assets/transactions-logo/snapIcon.svg",
     "transaction_mag": ""
   },
   {
@@ -35,7 +35,7 @@
     "transaction_date": "24-MAR-17 11.48.20.000000000 AM",
     "transaction_id": "YdfunRwwwerfg",
     "phone_number": "09100022528",
-    "img": "./assets/transactions-logo/cafe-bazar.png",
+    "img": "/assets/transactions-logo/cafe-bazar.png",
     "transaction_mag": ""
   },
   {
@@ -48,7 +48,7 @@
     "transaction_date": "24-APR-06 11.48.20.000000000 AM",
     "transaction_id": "YdfunRssdsdf",
     "phone_number": "09100022528",
-    "img": "./assets/transactions-logo/filimo.png",
+    "img": "/assets/transactions-logo/filimo.png",
     "transaction_mag": ""
   },
   {
@@ -61,7 +61,7 @@
     "transaction_date": "24-APR-12 11.48.20.000000000 AM",
     "transaction_id": "sdfsdfsdRgh4CGU",
     "phone_number": "09100022528",
-    "img": "./assets/transactions-logo/FILMNET.svg",
+    "img": "/assets/transactions-logo/FILMNET.svg",
     "transaction_mag": ""
   },
   {
@@ -74,7 +74,7 @@
     "transaction_date": "24-APR-29 11.48.20.000000000 AM",
     "transaction_id": "Ydeeers4CGU",
     "phone_number": "09100022528",
-    "img": "./assets/transactions-logo/HIWEB.svg",
+    "img": "/assets/transactions-logo/HIWEB.svg",
     "transaction_mag": ""
   },
   {
@@ -87,7 +87,7 @@
     "transaction_date": "24-MAY-02 11.48.20.000000000 AM",
     "transaction_id": "YdfkhckljoCGU",
     "phone_number": "09100022528",
-    "img": "./assets/transactions-logo/ITOLL.svg",
+    "img": "/assets/transactions-logo/ITOLL.svg",
     "transaction_mag": ""
   },
   {
@@ -100,7 +100,7 @@
     "transaction_date": "24-MAY-17 11.48.20.000000000 AM",
     "transaction_id": "YkufkyukkCGU",
     "phone_number": "09100022528",
-    "img": "./assets/transactions-logo/MTN-Logo.png",
+    "img": "/assets/transactions-logo/MTN-Logo.png",
     "transaction_mag" : ""
   },
   {
@@ -113,7 +113,7 @@
     "transaction_date": "24-MAY-26 11.48.20.000000000 AM",
     "transaction_id": "Ydfunpoihkbvgkj",
     "phone_number": "09100022528",
-    "img": "./assets/transactions-logo/myket.png",
+    "img": "/assets/transactions-logo/myket.png",
     "transaction_mag": "سرویس بانکی شما ( سامان ) در حال حاظر پاسخگو نمی‌باشد . در صورت کم شدن موجودی مبلغ شما طی ۴۸ ساعت آینده برای شما واریز میشود ."
   },
   {
@@ -126,7 +126,7 @@
     "transaction_date": "24-JUN-03 11.48.20.000000000 AM",
     "transaction_id": "lulbuiulgh4CGU",
     "phone_number": "09100022528",
-    "img": "./assets/transactions-logo/shatel.png",
+    "img": "/assets/transactions-logo/shatel.png",
     "transaction_mag": "سرویس بانکی شما ( سامان ) در حال حاظر پاسخگو نمی‌باشد . در صورت کم شدن موجودی مبلغ شما طی ۴۸ ساعت آینده برای شما واریز میشود ."
   },
   {
@@ -139,7 +139,7 @@
     "transaction_date": "24-JUN-16 11.48.20.000000000 AM",
     "transaction_id": "fhgdghdfh4CGU",
     "phone_number": "09100022528",
-    "img": "./assets/transactions-logo/SIBCH.svg",
+    "img": "/assets/transactions-logo/SIBCH.svg",
     "transaction_mag": "سرویس بانکی شما ( سامان ) در حال حاظر پاسخگو نمی‌باشد . در صورت کم شدن موجودی مبلغ شما طی ۴۸ ساعت آینده برای شما واریز میشود ."
   },
   {
