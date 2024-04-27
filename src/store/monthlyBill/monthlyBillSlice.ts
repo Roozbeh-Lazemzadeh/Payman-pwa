@@ -13,7 +13,7 @@ const monthlyBillSlice = createSlice({
   initialState,
   reducers: {
     getMonthBillHandler: (state, action) => {
-      state.monthlyBill=action.payload
+      state.monthlyBill = action.payload;
     },
   },
 });

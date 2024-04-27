@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Select, SelectProps } from 'antd';
+import { Select, type SelectProps } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import {
   filteredToggle,
@@ -38,10 +38,8 @@ export const MerchantFilter: React.FC = () => {
       const updatedSelectedItems = selectedQuickItems.some(
         (item) => item === title
       )
-        ? // If the item already exists, filter it out
-          selectedQuickItems.filter((item) => !(item === title))
-        : // If the item doesn't exist, add it to the array
-          [...selectedQuickItems, title];
+        ? selectedQuickItems.filter((item) => !(item === title))
+        : [...selectedQuickItems, title];
 
       // Update the state with the new array of selected items
       setSelectedQuickItems(updatedSelectedItems);
@@ -62,8 +60,9 @@ export const MerchantFilter: React.FC = () => {
     }
   };
   const handleMerchantFilter = () => {
-    if (selectedQuickItems.length === 0 && selectedOptions.length === 0)
+    if (selectedQuickItems.length === 0 && selectedOptions.length === 0) {
       return null;
+    }
     const combinedSelectedItems = [...selectedQuickItems, ...selectedOptions]; // Combine the selected quick items and selected options
     dispatch(merchantHandler(combinedSelectedItems));
     dispatch(searchedToggle(''));
@@ -71,8 +70,9 @@ export const MerchantFilter: React.FC = () => {
   };
 
   const handleRemoveFilter = () => {
-    if (selectedQuickItems.length === 0 && selectedOptions.length === 0)
+    if (selectedQuickItems.length === 0 && selectedOptions.length === 0) {
       return null;
+    }
     setSelectedQuickItems([]);
     dispatch(merchantHandler([]));
     dispatch(searchedToggle(''));
@@ -111,7 +111,7 @@ export const MerchantFilter: React.FC = () => {
 
   // useEffects :
 
-  //fetching unique merchants
+  // fetching unique merchants
   useEffect(() => {
     // Extract the unique creditor values from the JSON data
     const uniqueCreditors = Array.from(

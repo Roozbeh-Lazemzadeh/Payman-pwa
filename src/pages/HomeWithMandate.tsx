@@ -12,7 +12,7 @@ import { useDispatch } from 'react-redux';
 import { getMonthBillHandler } from '../store/monthlyBill/monthlyBillSlice';
 
 function HomeWithMandate() {
-  const [selectedItemIndex, setSelectedItemIndex] = useState(0);
+  const [selectedItemIndex, setSelectedItemIndex] = useState<number | null>(0);
   const {
     isOpen,
     detailedDrawerData,
@@ -21,9 +21,9 @@ function HomeWithMandate() {
     selectedTransactionId,
   } = useDrawerTransaction(transactionData);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const monthsList: { id: number; year: string; month: string }[] = [];
+  const monthsList: Array<{ id: number; year: string; month: string }> = [];
   const monthsList2: any[] = [];
 
   for (let i = 0; i < 6; i++) {
@@ -63,14 +63,13 @@ function HomeWithMandate() {
     return `${weekday} ، ${jalaliDate}`;
   };
 
-
   const getCurrentJalaliDate = () => {
     const currentDate = jalaliMoment();
     const formattedDate = currentDate.locale('fa').format('jD jMMMM');
     return `امروز، ${formattedDate}`;
   };
 
-  const handleItemClick = (id: any) => {
+  const handleItemClick = (id: number | null) => {
     setSelectedItemIndex(id === selectedItemIndex ? selectedItemIndex : id);
     const selectedMonth = monthsList.find((item) => item.id === id);
     if (selectedMonth) {
@@ -82,8 +81,8 @@ function HomeWithMandate() {
     }
   };
   return (
-    <div className="home-wrapper">
-      <div className="home-datepickers">
+    <div className='home-wrapper'>
+      <div className='home-datepickers'>
         {monthsList.reverse().map((item) => (
           <div
             className={`home-datepicker ${
@@ -92,8 +91,8 @@ function HomeWithMandate() {
             key={item.id}
             onClick={() => handleItemClick(item.id)}
           >
-            <span className="home-datepicker-num">{item.year}</span>
-            <span className="home-datepicker-p">{item.month}</span>
+            <span className='home-datepicker-num'>{item.year}</span>
+            <span className='home-datepicker-p'>{item.month}</span>
           </div>
         ))}
       </div>
@@ -104,11 +103,11 @@ function HomeWithMandate() {
         title={'جزئیات بیشتر'}
         data={detailedDrawerData}
       />
-      <FilterTools title="تراکنش‌های پرداخت مستقیم" />
-      <div className="TransactionHomeCard-wrapper">
-        <div className="TransactionHomeCard">
-          <div className="TransactionHomeCard-wrapper-cards">
-            <p className="TransactionHomeCard-p">{getCurrentJalaliDate()}</p>
+      <FilterTools title='تراکنش‌های پرداخت مستقیم' />
+      <div className='TransactionHomeCard-wrapper'>
+        <div className='TransactionHomeCard'>
+          <div className='TransactionHomeCard-wrapper-cards'>
+            <p className='TransactionHomeCard-p'>{getCurrentJalaliDate()}</p>
             {transactionData.map((transaction) => (
               <div
                 key={transaction.id}

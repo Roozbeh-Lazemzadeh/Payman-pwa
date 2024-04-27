@@ -8,7 +8,7 @@ interface SortProps {
 }
 
 export const Sort: React.FC<SortProps> = ({ onSortChange }) => {
-  const [ , setSelectedKey] = useState<string>('0');
+  const [, setSelectedKey] = useState<string>('0');
 
   const handleClick = (key: string) => {
     setSelectedKey(() => {

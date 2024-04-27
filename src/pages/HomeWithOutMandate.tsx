@@ -12,7 +12,7 @@ import {
 } from '../components/shared/Constant';
 import MerchantSearch from '../components/shared/Merchant/MerchantSearch';
 import MerchantInfo from '../components/shared/Merchant/MerchantInfo';
-import { Merchant } from '../components/types/Merchant';
+import { type Merchant } from '../components/types/Merchant';
 import './style/style.css';
 
 const HomeWithOutMandate: React.FC = () => {

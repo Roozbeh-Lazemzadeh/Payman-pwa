@@ -1,36 +1,36 @@
-import React from "react";
-import "./style.css";
+import React from 'react';
+import './style.css';
 
 const SplashScreen: React.FC = () => {
   return (
-    <div className="splash-container">
-      <div className="logo-wrapper">
-        <div className="logo-animation">
-          <div className="logo-wrapper__top">
+    <div className='splash-container'>
+      <div className='logo-wrapper'>
+        <div className='logo-animation'>
+          <div className='logo-wrapper__top'>
             <img
-              src="/assets/logo-splash/logo-top.svg"
-              alt=""
-              className="logo-top"
+              src='/assets/logo-splash/logo-top.svg'
+              alt=''
+              className='logo-top'
             />
           </div>
           <img
-            src="/assets/logo-splash/logo-Mid.svg"
-            alt=""
-            className="logo-mid"
+            src='/assets/logo-splash/logo-Mid.svg'
+            alt=''
+            className='logo-mid'
           />
           <img
-            src="/assets/logo-splash/logo-Bottom.svg"
-            alt=""
-            className="logo-bottom"
+            src='/assets/logo-splash/logo-Bottom.svg'
+            alt=''
+            className='logo-bottom'
           />
         </div>
       </div>
-      <div className="footer-wrapper splash">
+      <div className='footer-wrapper splash'>
         <span>توسعه‌یافته توسط پیمان</span>
         <img
-          className="footer-wrapper__img"
-          src="/assets/logo-splash/Payman.svg"
-          alt="توسعه‌یافته توسط پیمان"
+          className='footer-wrapper__img'
+          src='/assets/logo-splash/Payman.svg'
+          alt='توسعه‌یافته توسط پیمان'
         />
       </div>
     </div>

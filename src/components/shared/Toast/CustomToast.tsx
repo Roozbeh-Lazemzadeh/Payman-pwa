@@ -1,7 +1,7 @@
-import { toast, ToastOptions } from 'react-toastify';
+import { toast, type ToastOptions } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './style.css';
-import { ToastIcon } from 'react-toastify/dist/types';
+import { type ToastIcon } from 'react-toastify/dist/types';
 
 const toastOptions: ToastOptions = {
   position: 'top-right',
