@@ -12,6 +12,7 @@ export const MerchantChartSection: React.FC = () => {
   const [sum, setSum] = useState<number>(data[0].value);
   const dispatch = useAppDispatch();
   const selectedMerchant = useAppSelector(selectSelectedMerchant);
+  const monthBillValue = useAppSelector((state) => state.monthly);
   const handleSelectedMerchant = (
     e: React.MouseEvent<HTMLSpanElement, MouseEvent>
   ) => {
@@ -50,15 +51,17 @@ export const MerchantChartSection: React.FC = () => {
         break;
     }
   };
+
+  console.log(monthBillValue.monthlyBill);
   return (
     <>
-      <div className='chart-row-wrapper'>
-        <div className='pay-info-wrapper'>
-          <div className='pay-title-price-wrapper'>
-            <span className='pay-title'>{`کل پرداخت های شما در  ${title}`}</span>
-            <span className='pay-price'> {`${sum} تومان`}</span>
+      <div className="chart-row-wrapper">
+        <div className="pay-info-wrapper">
+          <div className="pay-title-price-wrapper">
+            <span className="pay-title">{`کل پرداخت های شما در  ${title}`}</span>
+            <span className="pay-price"> {`${sum} تومان`}</span>
           </div>
-          <div className='merchants-wrapper'>
+          <div className="merchants-wrapper">
             <span
               className={`instance all ${
                 selectedMerchant === 3 ? 'active' : ''

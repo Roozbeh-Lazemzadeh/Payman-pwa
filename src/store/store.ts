@@ -5,6 +5,7 @@ import notificationReducer from './notification/notificationSlice';
 import chartReducer from './chart/chartSlice';
 import merchantReducer from './merchant/merchantSlice';
 import filterReducer from './filter/filterSlice';
+import monthlyBillSlice from './monthlyBill/monthlyBillSlice';
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     chart: chartReducer,
     merchant: merchantReducer,
     filter: filterReducer,
+    monthly: monthlyBillSlice,
   },
 });
 

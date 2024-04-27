@@ -1,13 +1,15 @@
 /* eslint-disable react/jsx-key */
-import React, { useState } from "react";
-import { MerchantChartSection } from "../components/chart/MerchantChartSection";
-import FilterTools from "../components/template/FilterTools";
-import { TransactionHomeCard } from "../components/shared/Cards/TransactionHomeCards";
-import { DetailedDrawer } from "../components/shared/Drawer/DetailedDrawer";
+import React, { useState } from 'react';
+import { MerchantChartSection } from '../components/chart/MerchantChartSection';
+import FilterTools from '../components/template/FilterTools';
+import { TransactionHomeCard } from '../components/shared/Cards/TransactionHomeCards';
+import { DetailedDrawer } from '../components/shared/Drawer/DetailedDrawer';
 import transactionData from '../transaction.json'; // Import the JSON file
-import useDrawerTransaction from "../components/hooks/useDrawerTransaction";
-import jalaliMoment from "jalali-moment";
-
+import useDrawerTransaction from '../components/hooks/useDrawerTransaction';
+import jalaliMoment from 'jalali-moment';
+import { format, parse } from 'date-fns';
+import { useDispatch } from 'react-redux';
+import { getMonthBillHandler } from '../store/monthlyBill/monthlyBillSlice';
 
 function HomeWithMandate() {
   const [selectedItemIndex, setSelectedItemIndex] = useState(0);
@@ -19,21 +21,21 @@ function HomeWithMandate() {
     selectedTransactionId,
   } = useDrawerTransaction(transactionData);
 
-  
-const monthsList: { id: number; year: string; month: string; }[] = [];
-const monthsList2: any[] = [];
+  const dispatch = useDispatch()
 
-for (let i = 0; i < 6; i++) {
-  const currentDate = jalaliMoment();
-  const pastDate = currentDate.subtract(i, 'jMonth');
-  monthsList.push({
-    id: i,
-    year: pastDate.locale('fa').format('jYY'),
-    month: pastDate.locale('fa').format('jMMMM'),
-  });
-   monthsList2.push(pastDate.format('jYYYY/jMM'));
-}
+  const monthsList: { id: number; year: string; month: string }[] = [];
+  const monthsList2: any[] = [];
 
+  for (let i = 0; i < 6; i++) {
+    const currentDate = jalaliMoment();
+    const pastDate = currentDate.subtract(i, 'jMonth');
+    monthsList.push({
+      id: i,
+      year: pastDate.locale('fa').format('jYY'),
+      month: pastDate.locale('fa').format('jMMMM'),
+    });
+    monthsList2.push(pastDate.format('jYYYY/jMM'));
+  }
 
   // const handleItemClick = (id: any) => {
   //   setSelectedItemIndex(id === selectedItemIndex ? selectedItemIndex : id);
@@ -46,16 +48,39 @@ for (let i = 0; i < 6; i++) {
   //     console.log('Error: Month not found');
   //   }
   // };
-const handleItemClick = (id: any) => {
-  setSelectedItemIndex(id === selectedItemIndex ? selectedItemIndex : id);
-  const selectedMonth = monthsList.find((item) => item.id === id);
-  if (selectedMonth) {
-    const selectedYearMonth = monthsList2[selectedMonth.id];
-    console.log(typeof selectedYearMonth);
-  } else {
-    console.log('Error: Month not found');
-  }
-};
+
+  const transDate = (inputDate: string) => {
+    const parsedDate = parse(
+      inputDate,
+      'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
+      new Date()
+    );
+    const formattedDate = format(parsedDate, 'yyyy-MM-dd HH:mm:ss');
+    const jalaliDate = jalaliMoment(formattedDate).format(
+      'jYYYY/jMM/jDD - HH:mm:ss'
+    );
+    const weekday = jalaliMoment(formattedDate).locale('fa').format('dddd');
+    return `${weekday} ، ${jalaliDate}`;
+  };
+
+
+  const getCurrentJalaliDate = () => {
+    const currentDate = jalaliMoment();
+    const formattedDate = currentDate.locale('fa').format('jD jMMMM');
+    return `امروز، ${formattedDate}`;
+  };
+
+  const handleItemClick = (id: any) => {
+    setSelectedItemIndex(id === selectedItemIndex ? selectedItemIndex : id);
+    const selectedMonth = monthsList.find((item) => item.id === id);
+    if (selectedMonth) {
+      const selectedYearMonth = monthsList2[selectedMonth.id];
+      console.log(selectedYearMonth);
+      dispatch(getMonthBillHandler(selectedYearMonth));
+    } else {
+      console.log('Error: Month not found');
+    }
+  };
   return (
     <div className="home-wrapper">
       <div className="home-datepickers">
@@ -83,7 +108,7 @@ const handleItemClick = (id: any) => {
       <div className="TransactionHomeCard-wrapper">
         <div className="TransactionHomeCard">
           <div className="TransactionHomeCard-wrapper-cards">
-            <p className="TransactionHomeCard-p">امروز، ۱۸ آبان</p>
+            <p className="TransactionHomeCard-p">{getCurrentJalaliDate()}</p>
             {transactionData.map((transaction) => (
               <div
                 key={transaction.id}
@@ -92,7 +117,7 @@ const handleItemClick = (id: any) => {
                 <TransactionHomeCard
                   merchant={transaction.creditor}
                   price={transaction.transaction_amount}
-                  transDate={transaction.transaction_date}
+                  transDate={transDate(transaction.transaction_date)}
                   img={transaction.img}
                 />
               </div>

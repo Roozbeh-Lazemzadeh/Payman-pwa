@@ -12,12 +12,12 @@ const monthlyBillSlice = createSlice({
   name: 'monthlyBill',
   initialState,
   reducers: {
-    // getMonthBillHandler: (state, action) => {
-    //   const newMonthBill = action.payload;
-    // },
+    getMonthBillHandler: (state, action) => {
+      state.monthlyBill=action.payload
+    },
   },
 });
 
-// export const { getMonthBillHandler } = monthlyBillSlice.actions;
+export const { getMonthBillHandler } = monthlyBillSlice.actions;
 
 export default monthlyBillSlice.reducer;
