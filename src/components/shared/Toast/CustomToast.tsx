@@ -18,21 +18,21 @@ const toastOptions: ToastOptions = {
 const showErrorToast = (message: string, icon: ToastIcon) => {
   toast.error(message, {
     ...toastOptions,
-    icon: icon,
+    icon,
   });
 };
 
 const showNotifyToast = (message: string, icon: ToastIcon) => {
   toast.info(message, {
     ...toastOptions,
-    icon: icon,
+    icon,
   });
 };
 
 const showSuccessToast = (message: string, icon: ToastIcon) => {
   toast.success(message, {
     ...toastOptions,
-    icon: icon,
+    icon,
   });
 };
 
