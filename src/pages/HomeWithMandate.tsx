@@ -1,14 +1,13 @@
-/* eslint-disable react/jsx-key */
-import React, { useState } from "react";
-import { MerchantChartSection } from "../components/chart/MerchantChartSection";
-import FilterTools from "../components/template/FilterTools";
-import { TransactionHomeCard } from "../components/shared/Cards/TransactionHomeCards";
-import { DetailedDrawer } from "../components/shared/Drawer/DetailedDrawer";
+import React, { useState } from 'react';
+import { MerchantChartSection } from '../components/chart/MerchantChartSection';
+import FilterTools from '../components/template/FilterTools';
+import { TransactionHomeCard } from '../components/shared/Cards/TransactionHomeCards';
+import { DetailedDrawer } from '../components/shared/Drawer/DetailedDrawer';
 import transactionData from '../transaction.json'; // Import the JSON file
-import useDrawerTransaction from "../components/hooks/useDrawerTransaction";
+import useDrawerTransaction from '../components/hooks/useDrawerTransaction';
 
 function HomeWithMandate() {
-  const [selectedItemIndex, setSelectedItemIndex] = useState(1);
+  const [selectedItemIndex, setSelectedItemIndex] = useState<number | null>(1);
   const {
     isOpen,
     detailedDrawerData,
@@ -35,10 +34,10 @@ function HomeWithMandate() {
     { id: 9, month: 'آذر' },
     { id: 10, month: 'دی' },
     { id: 11, month: 'بهمن' },
-    { id: 12, month: 'اسفند' }
+    { id: 12, month: 'اسفند' },
   ];
 
-  const handleItemClick = (id: any) => {
+  const handleItemClick = (id: number | null) => {
     setSelectedItemIndex(id === selectedItemIndex ? null : id);
     const selectedMonth = HomedatepickersArray.find(
       (item) => item.id === selectedItemIndex
@@ -51,8 +50,8 @@ function HomeWithMandate() {
   };
 
   return (
-    <div className="home-wrapper">
-      <div className="home-datepickers">
+    <div className='home-wrapper'>
+      <div className='home-datepickers'>
         {HomedatepickersArray.map((item) => (
           <div
             className={`home-datepicker ${
@@ -61,8 +60,8 @@ function HomeWithMandate() {
             key={item.id}
             onClick={() => handleItemClick(item.id)}
           >
-            <span className="home-datepicker-num">03</span>
-            <span className="home-datepicker-p">{item.month}</span>
+            <span className='home-datepicker-num'>03</span>
+            <span className='home-datepicker-p'>{item.month}</span>
           </div>
         ))}
       </div>
@@ -73,11 +72,11 @@ function HomeWithMandate() {
         title={'جزئیات بیشتر'}
         data={detailedDrawerData}
       />
-      <FilterTools title="تراکنش‌های پرداخت مستقیم" />
-      <div className="TransactionHomeCard-wrapper">
-        <div className="TransactionHomeCard">
-          <div className="TransactionHomeCard-wrapper-cards">
-            <p className="TransactionHomeCard-p">امروز، ۱۸ آبان</p>
+      <FilterTools title='تراکنش‌های پرداخت مستقیم' />
+      <div className='TransactionHomeCard-wrapper'>
+        <div className='TransactionHomeCard'>
+          <div className='TransactionHomeCard-wrapper-cards'>
+            <p className='TransactionHomeCard-p'>امروز، ۱۸ آبان</p>
             {transactionData.map((transaction) => (
               <div
                 key={transaction.id}
@@ -92,8 +91,8 @@ function HomeWithMandate() {
               </div>
             ))}
           </div>
-          <div className="TransactionHomeCard-wrapper-cards active">
-            <p className="TransactionHomeCard-p">امروز، ۱۸ آبان</p>
+          <div className='TransactionHomeCard-wrapper-cards active'>
+            <p className='TransactionHomeCard-p'>امروز، ۱۸ آبان</p>
             {/* {Array.from({ length: 1 }, (value) => value).map((item, index) => (
               <div onClick={() => setIsOpen(!isOpen)} key={index}>
                 <TransactionHomeCard

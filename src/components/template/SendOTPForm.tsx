@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable react/no-unescaped-entities */
 import {
   type FC,
   type Dispatch,
@@ -9,10 +7,8 @@ import {
 } from 'react';
 import { Checkbox, Button } from 'antd';
 import OtpInput from 'react-otp-input';
-
-import './style.css';
 import { CustomDrawer } from '../shared/Drawer/Drawer';
-// import { Button } from 'antd/es/radio';
+import './style.css';
 
 interface OnboardingProps {
   setStep: Dispatch<SetStateAction<number>>;
@@ -115,10 +111,10 @@ const SendOTPForm: FC<OnboardingProps> = ({ setStep }) => {
             }}
           >
             <div>
-              با سلام بسیار خوش‌آمدید به "پیمان". لطفاً قبل از ادامه، وقت
-              بگذارید و مقررات زیر را با دقت مطالعه فرمایید. این قوانین و مقررات
-              برای اطمینان از تجربه‌ای امن و محترمانه برای تمامی کاربران ما وضع
-              شده‌اند.
+              با سلام بسیار خوش‌آمدید به &quotپیمان&quot. لطفاً قبل از ادامه،
+              وقت بگذارید و مقررات زیر را با دقت مطالعه فرمایید. این قوانین و
+              مقررات برای اطمینان از تجربه‌ای امن و محترمانه برای تمامی کاربران
+              ما وضع شده‌اند.
             </div>
             <br />
             <div>
@@ -141,8 +137,8 @@ const SendOTPForm: FC<OnboardingProps> = ({ setStep }) => {
             <br />
             <div>
               ۴. خاتمه با تشکر از اعتماد شما به ما و استفاده از اپلیکیشن
-              "پیمان". امیدواریم تجربه خوبی از خدمات ما داشته باشید. هرگونه پرسش
-              یا بازخوردی دارید، لطفاً با ما در تماس باشید.
+              &quotپیمان&quot. امیدواریم تجربه خوبی از خدمات ما داشته باشید.
+              هرگونه پرسش یا بازخوردی دارید، لطفاً با ما در تماس باشید.
             </div>
             <br></br>
           </div>

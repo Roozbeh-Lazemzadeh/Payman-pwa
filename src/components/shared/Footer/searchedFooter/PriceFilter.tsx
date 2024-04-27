@@ -176,7 +176,7 @@ export const PriceFilter: React.FC = () => {
               addonBefore={<BuyIcon />}
               placeholder='از مبلغ'
               onChange={(e) => handlePriceFrom(e)}
-              value={priceFrom || prices[0]}
+              value={priceFrom ?? prices[0]}
             />
             <Input
               type='number'
@@ -184,7 +184,7 @@ export const PriceFilter: React.FC = () => {
               addonBefore={<BuyIcon />}
               placeholder='تا مبلغ'
               onChange={(e) => handlePriceTo(e)}
-              value={priceTo || prices[1]}
+              value={priceTo ?? prices[1]}
             />
           </>
         </div>

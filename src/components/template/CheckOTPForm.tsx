@@ -1,17 +1,10 @@
-/* eslint-disable react/jsx-no-undef */
-// import { type FC, useState, type Dispatch, type SetStateAction } from 'react';
 import { Button } from 'antd';
 import { useEffect, useState } from 'react';
-// import { type FC, useState, useEffect } from 'react';
-
-// import OtpInput from 'react-otp-input';
 
 const CheckOTPForm = () => {
   const [otp, setOtp] = useState<number>();
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const [time, setTime] = useState({ minutes: 2, seconds: 33 });
-
-  // const [style, setStyle] = useState<string>();
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -41,9 +34,10 @@ const CheckOTPForm = () => {
     time.seconds
   }`;
 
-  const handleSelectedSpot = (e: any) => {
+  const handleSelectedSpot = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    setOtp(e.target.value);
+    const newValue = parseInt(e.target.value);
+    setOtp(isNaN(newValue) ? undefined : newValue);
     const otpInputLength = e.target.value.length;
     switch (otpInputLength) {
       case 0:
@@ -62,13 +56,13 @@ const CheckOTPForm = () => {
   };
 
   return (
-    <div className="check-otp__style">
-      <p className="check-title">
+    <div className='check-otp__style'>
+      <p className='check-title'>
         کاربر گرامی لطفا کد ۴رقمی پیامک‌شده را وارد کنید.
       </p>
-      <p className="check-number">۹۸۹۳۷۱۱۰۹۲۲۷+</p>
-      <form className="check-wrapper">
-        <div className="form-items-wrapper">
+      <p className='check-number'>۹۸۹۳۷۱۱۰۹۲۲۷+</p>
+      <form className='check-wrapper'>
+        <div className='form-items-wrapper'>
           {/* <OtpInput
             value={otp}
             onChange={setOtp}
@@ -79,15 +73,15 @@ const CheckOTPForm = () => {
             containerStyle='check-otp-inputs'
             inputStyle='check-otp-input'
           /> */}
-          <div className="otp-inputs-wrapper">
+          <div className='otp-inputs-wrapper'>
             <input
-              type="text"
-              className="checks-otp-inputs"
+              type='text'
+              className='checks-otp-inputs'
               maxLength={4}
               value={otp}
               onChange={(e) => handleSelectedSpot(e)}
             />
-            <div className="otp-inputs-borders">
+            <div className='otp-inputs-borders'>
               <span
                 className={`otp-inputs-border ${
                   selectedIndex === 3 ? 'selected' : ''
@@ -111,33 +105,33 @@ const CheckOTPForm = () => {
             </div>
           </div>
 
-          <p className="check-timer"> {formattedTime} ثانیه باقی مانده</p>
+          <p className='check-timer'> {formattedTime} ثانیه باقی مانده</p>
         </div>
-        <div className="btns-wrapper-check-otp">
+        <div className='btns-wrapper-check-otp'>
           <Button
-            type="default"
-            className="otp-form_btn-wrapper customer-login-btn"
+            type='default'
+            className='otp-form_btn-wrapper customer-login-btn'
           >
             <input
-              type="submit"
-              value="ورود یا ثبت‌نام"
-              className="otp-form_submit colorBtn"
+              type='submit'
+              value='ورود یا ثبت‌نام'
+              className='otp-form_submit colorBtn'
             />
           </Button>
           <Button
-            className="otp-form_btn-wrapper"
-            type="default"
+            className='otp-form_btn-wrapper'
+            type='default'
             // icon="/assets/pics/swap-login-icon.svg"
           >
             <img
-              src="/assets/login/swap.svg"
-              alt=""
-              className="logo-login-swap"
+              src='/assets/login/swap.svg'
+              alt=''
+              className='logo-login-swap'
             />
             <input
-              type="submit"
-              value="تغییر شماره موبایل"
-              className="otp-form_submit"
+              type='submit'
+              value='تغییر شماره موبایل'
+              className='otp-form_submit'
             />
           </Button>
         </div>

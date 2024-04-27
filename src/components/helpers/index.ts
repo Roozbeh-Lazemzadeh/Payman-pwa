@@ -1,9 +1,7 @@
-// import { useNavigate } from 'react-router-dom';
 import { toggleSidebar } from '../../store/sidebar/sidebarSlice';
-// import { useDispatch } from 'react-redux';
 import { filteredToggle, searchedToggle } from '../../store/footer/footerSlice';
-import { NavigateFunction } from 'react-router-dom';
-import { Dispatch } from '@reduxjs/toolkit';
+import { type NavigateFunction } from 'react-router-dom';
+import { type Dispatch } from '@reduxjs/toolkit';
 import { removeAllFiltersHandler } from '../../store/filter/filterSlice';
 
 interface ItemProps {

@@ -12,7 +12,7 @@ import { selectAllFilter } from '../../store/filter/filterSlice';
 import './style.css';
 
 interface TransactionsListProps {
-  transactionList: {
+  transactionList: Array<{
     id: number;
     creditor: string;
     currency: string;
@@ -24,7 +24,7 @@ interface TransactionsListProps {
     phone_number: string;
     img: string;
     transaction_mag: string;
-  }[];
+  }>;
   sortBy: string;
 }
 
@@ -156,7 +156,7 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
         data={detailedDrawerData}
       >
         <div className='info-login detail'>
-          <div>{`دلیل نامشخص بودن تراکنش :`}</div>‌
+          <div>دلیل نامشخص بودن تراکنش </div>‌
           <div>
             {selectedTransactionId &&
               sortedTransactionList.find(
