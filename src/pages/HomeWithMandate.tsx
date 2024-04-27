@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-key */
 import React, { useState } from 'react';
 import { MerchantChartSection } from '../components/chart/MerchantChartSection';
 import FilterTools from '../components/template/FilterTools';

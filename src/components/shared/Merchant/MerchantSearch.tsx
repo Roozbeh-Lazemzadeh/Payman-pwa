@@ -1,9 +1,9 @@
-import React from "react";
-import { Button } from "antd";
-import Search from "antd/es/input/Search";
-import { ReactComponent as MagnifierIcon } from "../../../icons/magnifier.svg";
-import { otherMerchantsArray, selectedMerchantsArray } from "../Constant";
-import { Merchant } from "../../types/Merchant";
+import React from 'react';
+import { Button } from 'antd';
+import Search from 'antd/es/input/Search';
+import { ReactComponent as MagnifierIcon } from '../../../icons/magnifier.svg';
+import { otherMerchantsArray, selectedMerchantsArray } from '../Constant';
+import { type Merchant } from '../../types/Merchant';
 
 interface MerchantSearchProps {
   setSelectedMerchants: (merchants: Merchant[]) => void;
@@ -35,11 +35,11 @@ const MerchantSearch: React.FC<MerchantSearchProps> = ({
   return (
     <Search
       onChange={(e) => handleOnChange(e)}
-      placeholder="جستجوی نام کسب‌وکار"
-      style={{ width: "90%" }}
-      className="home-search_input payman others"
+      placeholder='جستجوی نام کسب‌وکار'
+      style={{ width: '90%' }}
+      className='home-search_input payman others'
       enterButton={
-        <Button className="search-btn" disabled icon={<MagnifierIcon />} />
+        <Button className='search-btn' disabled icon={<MagnifierIcon />} />
       }
     />
   );
