@@ -1,15 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { type RootState } from "../store";
+import { createSlice } from '@reduxjs/toolkit';
+import { type RootState } from '../store';
 
 const initialState = {
   isFilteredShown: false,
   isSearchedShown: false,
   closingSearchFooter: false,
-  searchItem: "",
+  searchItem: '',
 };
 
 export const footerSlice = createSlice({
-  name: "footer",
+  name: 'footer',
   initialState,
   reducers: {
     filteredToggle: (state) => {

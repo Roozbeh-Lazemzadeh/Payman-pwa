@@ -1,13 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { type RootState } from "../store";
+import { createSlice } from '@reduxjs/toolkit';
+import { type RootState } from '../store';
 
 const initialState = {
-  img: "",
-  title: "",
+  img: '',
+  title: '',
 };
 
 export const merchantSlice = createSlice({
-  name: "merchant",
+  name: 'merchant',
   initialState,
   reducers: {
     merchantDetails: (state, { payload }) => {

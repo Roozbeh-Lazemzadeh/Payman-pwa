@@ -12,7 +12,7 @@ import { selectAllFilter } from '../../store/filter/filterSlice';
 import './style.css';
 
 interface TransactionsListProps {
-  transactionList: {
+  transactionList: Array<{
     id: number;
     creditor: string;
     currency: string;
@@ -24,7 +24,7 @@ interface TransactionsListProps {
     phone_number: string;
     img: string;
     transaction_mag: string;
-  }[];
+  }>;
   sortBy: string;
 }
 
@@ -47,17 +47,34 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
     sortTransactions();
   }, [sortBy, transactionList, allFilter.date]);
 
+  // temporary it needs to refactor start
+  useEffect(() => {
+    const sortedList = [...transactionList];
+
+    if (allFilter.price && allFilter.price.length === 2) {
+      const [minPrice, maxPrice] = allFilter.price;
+
+      const filteredSortedList = sortedList.filter((transaction) => {
+        const transactionAmount = transaction.transaction_amount;
+        return transactionAmount >= minPrice && transactionAmount <= maxPrice;
+      });
+
+      filteredSortedList.sort(
+        (a, b) => b.transaction_amount - a.transaction_amount
+      );
+      setSortedTransactionList(filteredSortedList);
+    } else {
+      setSortedTransactionList(transactionList);
+    }
+  }, [allFilter.price]);
+
   useEffect(() => {
     const sortedList = [...sortedTransactionList];
 
     if (allFilter.date && allFilter.date.length === 2) {
-      // const startDate = allFilter.date[0];
-      // const endDate = allFilter.date[1];
       const parsedDates: Date[] = allFilter.date.map((date) =>
         parse(date, 'yy-MMM-dd hh:mm:ss a', new Date())
       );
-
-      // Parse the date strings into Date objects
 
       // Filter transactions between the specified dates
       const filteredSortedList = sortedList.filter((transaction) => {
@@ -74,6 +91,21 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
       setSortedTransactionList(filteredSortedList);
     }
   }, [allFilter.date]);
+
+  useEffect(() => {
+    const sortedList = [...transactionList];
+
+    if (allFilter.merchants && allFilter.merchants.length > 0) {
+      const filteredSortedList = sortedList.filter((transaction) =>
+        allFilter.merchants.includes(transaction.creditor)
+      );
+      setSortedTransactionList(filteredSortedList);
+    } else {
+      setSortedTransactionList(transactionList);
+    }
+  }, [allFilter.merchants]);
+
+  // temporary it needs to refactor end
 
   const sortTransactions = () => {
     const sortedList = [...transactionList];
@@ -124,7 +156,7 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
         data={detailedDrawerData}
       >
         <div className='info-login detail'>
-          <div>{`دلیل نامشخص بودن تراکنش :`}</div>‌
+          <div>دلیل نامشخص بودن تراکنش </div>‌
           <div>
             {selectedTransactionId &&
               sortedTransactionList.find(

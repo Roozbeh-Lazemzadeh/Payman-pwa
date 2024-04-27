@@ -1,4 +1,3 @@
-/* eslint-disable multiline-ternary */
 import { type FC, useState } from 'react';
 import { Progress } from 'antd';
 import { useSwiper } from 'swiper/react';
@@ -51,22 +50,22 @@ const OnboardingSliderButtons: FC<OnboardingSliderButtonsProps> = ({
   };
 
   return (
-    <div className="btn-slid">
-      <span onClick={handlePrevClick} className="prevClick">
-        {btnShow ? <img src="/assets/onboarding-img/Arrow-Left.svg" /> : null}
+    <div className='btn-slid'>
+      <span onClick={handlePrevClick} className='prevClick'>
+        {btnShow ? <img src='/assets/onboarding-img/Arrow-Left.svg' /> : null}
       </span>
       <Progress
-        className="progress-wrapper"
-        type="circle"
+        className='progress-wrapper'
+        type='circle'
         percent={circle}
-        strokeColor="#0072FF"
+        strokeColor='#0072FF'
         strokeWidth={2}
-        size={[62, 69]}
+        size={62}
         format={() => (
-          <span onClick={handleNextClick} className="nextClick">
+          <span onClick={handleNextClick} className='nextClick'>
             {tickShow ? (
               <img
-                src="/assets/onboarding-img/Path.svg"
+                src='/assets/onboarding-img/Path.svg'
                 style={{
                   backgroundColor: '#0072FF',
                   padding: '1rem',
@@ -78,7 +77,7 @@ const OnboardingSliderButtons: FC<OnboardingSliderButtonsProps> = ({
               />
             ) : (
               <img
-                src="/assets/onboarding-img/Arrow-Right.svg"
+                src='/assets/onboarding-img/Arrow-Right.svg'
                 style={{
                   backgroundColor: '#0072FF',
                   padding: '1rem',

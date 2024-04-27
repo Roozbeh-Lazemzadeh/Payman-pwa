@@ -123,8 +123,8 @@ function HomeWithMandate() {
               </div>
             ))}
           </div>
-          <div className="TransactionHomeCard-wrapper-cards active">
-            <p className="TransactionHomeCard-p">امروز، ۱۸ آبان</p>
+          <div className='TransactionHomeCard-wrapper-cards active'>
+            <p className='TransactionHomeCard-p'>امروز، ۱۸ آبان</p>
             {/* {Array.from({ length: 1 }, (value) => value).map((item, index) => (
               <div onClick={() => setIsOpen(!isOpen)} key={index}>
                 <TransactionHomeCard

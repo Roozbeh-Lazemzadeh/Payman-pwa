@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Input } from 'antd';
-import { Select } from 'antd';
+import { Button, Input, Select } from 'antd';
 import { CaretLeftOutlined, SearchOutlined } from '@ant-design/icons';
 import DatePiker from 'react-multi-date-picker';
 import persian from 'react-date-object/calendars/persian';
@@ -28,8 +27,8 @@ const AccountPage: React.FC = () => {
   const [Icon, setIcon] = useState(true);
   const [value, setValue] = useState(new Date());
 
-  const changeDateHandler = (e: any): void => {
-    const date = new Date(e);
+  const changeDateHandler = (): void => {
+    const date = new Date();
     setValue(date);
   };
 

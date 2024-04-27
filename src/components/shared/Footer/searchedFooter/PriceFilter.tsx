@@ -39,14 +39,20 @@ export const PriceFilter: React.FC = () => {
 
     switch (value) {
       case 100000:
+        setPriceFrom(0); // Update priceFrom to 0
+        setPriceTo(100000); // Update priceTo to 100000
         setPrices([0, 100000]);
         break;
 
       case 200000:
+        setPriceFrom(0); // Update priceFrom to 0
+        setPriceTo(200000); // Update priceTo to 200000
         setPrices([0, 200000]);
         break;
 
       case 300000:
+        setPriceFrom(0); // Update priceFrom to 0
+        setPriceTo(300000); // Update priceTo to 300000
         setPrices([0, 300000]);
         break;
 
@@ -72,7 +78,12 @@ export const PriceFilter: React.FC = () => {
   const handlePriceFrom = (e: any) => {
     const { value } = e.target;
     const parsedValue = Number(value);
-
+    if (parsedValue !== 0) {
+      // Remove the selected class when priceFrom changes from 0 to any other number
+      setSelectedQuickItems([]);
+    } else {
+      setSelectedQuickItems([0, prices[1]]);
+    }
     if (!isNaN(parsedValue)) {
       // Update the state only if the input value is a valid number
       setPriceFrom(parsedValue);
@@ -83,6 +94,17 @@ export const PriceFilter: React.FC = () => {
   const handlePriceTo = (e: any) => {
     const { value } = e.target;
     const parsedValue = Number(value);
+
+    if (
+      parsedValue !== 100000 &&
+      parsedValue !== 200000 &&
+      parsedValue !== 300000
+    ) {
+      // Remove the selected class when priceTo changes to a value other than 100000, 200000, or 300000
+      setSelectedQuickItems([]);
+    } else {
+      setSelectedQuickItems([prices[0], parsedValue]);
+    }
 
     if (!isNaN(parsedValue)) {
       // Update the state only if the input value is a valid number
@@ -154,7 +176,7 @@ export const PriceFilter: React.FC = () => {
               addonBefore={<BuyIcon />}
               placeholder='از مبلغ'
               onChange={(e) => handlePriceFrom(e)}
-              value={priceFrom || prices[0]}
+              value={priceFrom ?? prices[0]}
             />
             <Input
               type='number'
@@ -162,7 +184,7 @@ export const PriceFilter: React.FC = () => {
               addonBefore={<BuyIcon />}
               placeholder='تا مبلغ'
               onChange={(e) => handlePriceTo(e)}
-              value={priceTo || prices[1]}
+              value={priceTo ?? prices[1]}
             />
           </>
         </div>
