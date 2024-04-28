@@ -1,6 +1,6 @@
-import React, { type Dispatch, type SetStateAction } from "react";
-import { CustomDrawer } from "./Drawer";
-import "./style.css";
+import React, { type Dispatch, type SetStateAction } from 'react';
+import { CustomDrawer } from './Drawer';
+import './style.css';
 
 interface DetailedDrawerProps {
   title: string;
@@ -14,9 +14,9 @@ export const MerchantBottomSheet: React.FC<DetailedDrawerProps> = ({
   children,
 }) => {
   return (
-    <CustomDrawer isOpen={isOpen} title={""} setIsOpen={setIsOpen}>
+    <CustomDrawer isOpen={isOpen} title={''} setIsOpen={setIsOpen}>
       {
-        <div className="detailed-drawer merchant">
+        <div className='detailed-drawer merchant'>
           <div>{children}</div>
         </div>
       }

@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { ReactComponent as SnapIcon } from '../../../icons/snapIcon.svg';
-
-import './style.css';
 import { DetailedDrawer } from '../Drawer/DetailedDrawer';
 import { Button } from 'antd';
+import './style.css';
 
 export const OtherPaymansCard: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);

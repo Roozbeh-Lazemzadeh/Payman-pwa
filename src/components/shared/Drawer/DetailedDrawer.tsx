@@ -1,16 +1,14 @@
-import React, { type Dispatch, type SetStateAction } from "react";
-import { CustomDrawer } from "./Drawer";
-import { DotLeader } from "../../helpers/DotLeader";
+import React, { type Dispatch, type SetStateAction } from 'react';
+import { CustomDrawer } from './Drawer';
+import { DotLeader } from '../../helpers/DotLeader';
 
 interface DetailedDrawerProps {
   title: string;
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-  data: Array<any>;
+  data: any[];
   children?: React.ReactNode;
 }
-
-
 
 export const DetailedDrawer: React.FC<DetailedDrawerProps> = ({
   isOpen,
@@ -22,7 +20,7 @@ export const DetailedDrawer: React.FC<DetailedDrawerProps> = ({
   return (
     <CustomDrawer isOpen={isOpen} title={title} setIsOpen={setIsOpen}>
       {
-        <div className="detailed-drawer">
+        <div className='detailed-drawer'>
           {data.map((val, index) => (
             <DotLeader
               key={index}
@@ -30,7 +28,7 @@ export const DetailedDrawer: React.FC<DetailedDrawerProps> = ({
               text2={val.nameItem2}
             />
           ))}
-          <div className="drawer-children">{children}</div>
+          <div className='drawer-children'>{children}</div>
         </div>
       }
     </CustomDrawer>

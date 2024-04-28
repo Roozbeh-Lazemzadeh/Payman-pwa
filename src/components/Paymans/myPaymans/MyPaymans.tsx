@@ -9,14 +9,14 @@ import './style.css';
 export const MyPaymans: React.FC = () => {
   return (
     <>
-      <div className="payman-filter-title">
-        <FilterTools title="پیمان‌های رو به اتمام" />
+      <div className='payman-filter-title'>
+        <FilterTools title='پیمان‌های رو به اتمام' />
       </div>
-      <div className="scrollable-section-wrapper">
-        <div className="scrollable-section">
+      <div className='scrollable-section-wrapper'>
+        <div className='scrollable-section'>
           <NearExpiredPaymanCard />
           <Divider />
-          <span className="other-payman-title">سایر ‌‌پیمان‌ها</span>
+          <span className='other-payman-title'>سایر ‌‌پیمان‌ها</span>
           <OtherPaymansCard />
           <ExpiredPaymansCard />
         </div>

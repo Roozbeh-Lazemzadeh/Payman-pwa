@@ -1,12 +1,12 @@
-import { Modal } from "antd";
-import React from "react";
-import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
+import { Modal } from 'antd';
+import React from 'react';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import {
   selectNotificationModal,
   toggleNotificationModal,
-} from "../../store/notification/notificationSlice";
-import "./style.css";
-import Notification from "../notification/Notification";
+} from '../../store/notification/notificationSlice';
+import Notification from '../notification/Notification';
+import './style.css';
 
 export const NotificationModal: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -16,14 +16,14 @@ export const NotificationModal: React.FC = () => {
     dispatch(toggleNotificationModal());
   };
   const modalTitle = (
-    <div className="notification-modal-title-content">
+    <div className='notification-modal-title-content'>
       <span>پیام ها</span>
       <span>خواندن همه</span>
     </div>
   );
   return (
     <Modal
-      className="notification-modal"
+      className='notification-modal'
       title={modalTitle}
       open={isModalOpen}
       footer={null}

@@ -12,20 +12,21 @@ import { selectAllFilter } from '../../store/filter/filterSlice';
 import './style.css';
 
 interface TransactionsListProps {
-  transactionList: Array<{
-    id: number;
-    creditor: string;
-    currency: string;
-    source_bank: string;
-    status: string;
-    transaction_amount: number;
-    transaction_date: string;
-    transaction_id: string;
-    phone_number: string;
-    img: string;
-    transaction_mag: string;
-  }>;
+  transactionList: Transaction[];
   sortBy: string;
+}
+interface Transaction {
+  id: number;
+  creditor: string;
+  currency: string;
+  source_bank: string;
+  status: string;
+  transaction_amount: number;
+  transaction_date: string;
+  transaction_id: string;
+  phone_number: string;
+  img: string;
+  transaction_mag: string;
 }
 
 export const TransactionsList: React.FC<TransactionsListProps> = ({
@@ -34,7 +35,7 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
 }) => {
   const allFilter = useAppSelector(selectAllFilter);
   const [sortedTransactionList, setSortedTransactionList] =
-    useState<TransactionsListProps['transactionList']>(transactionList);
+    useState<Transaction[]>(transactionList);
   const {
     isOpen,
     detailedDrawerData,

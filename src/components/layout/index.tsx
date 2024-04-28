@@ -52,7 +52,7 @@ const PWALayout: React.FC = () => {
   };
 
   // Handle different scenarios for showing filter and primary footer
-  const handleClosingFooters = (e: any): void | null => {
+  const handleClosingFooters = (e: any): void => {
     e.stopPropagation();
     const targetElement = e.target as Element;
     const filterIcon = targetElement?.closest('.filter-icon');
@@ -65,7 +65,7 @@ const PWALayout: React.FC = () => {
     const selectDropdown = targetElement?.closest(
       '.ant-select-item.ant-select-item-option'
     );
-    if (selectDropdown) return null;
+    if (selectDropdown) return;
     if (!filterIcon) {
       if (
         !filteredFooterWrapper &&
@@ -89,7 +89,7 @@ const PWALayout: React.FC = () => {
       <div>
         {getHeader()}
         <Content>
-          <div className="content-wrapper scroll">
+          <div className='content-wrapper scroll'>
             <Outlet />
           </div>
         </Content>

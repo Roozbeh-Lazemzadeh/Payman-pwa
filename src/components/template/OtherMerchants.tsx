@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
-import "./style.css";
-import { merchantDetails } from "../../store/merchant/merchantSlice";
-import { useAppDispatch } from "../hooks/reduxHooks";
-import { Merchant } from "../types/Merchant";
+import React from 'react';
+import PropTypes from 'prop-types';
+import './style.css';
+import { merchantDetails } from '../../store/merchant/merchantSlice';
+import { useAppDispatch } from '../hooks/reduxHooks';
+import { type Merchant } from '../types/Merchant';
 
 interface OtherMerchantsProps {
   merchants: Merchant[];
@@ -17,21 +17,21 @@ function OtherMerchants({ merchants, setIsOpen }: OtherMerchantsProps) {
     dispatch(merchantDetails(merchant));
   };
   return (
-    <div className="selected-merchants-wrapper">
-      <p className="selected-merchants-title">سایر کسب‌وکارها</p>
+    <div className='selected-merchants-wrapper'>
+      <p className='selected-merchants-title'>سایر کسب‌وکارها</p>
 
-      <div className="selected-merchants">
+      <div className='selected-merchants'>
         {merchants.map((merchant, index) => (
           <div
             key={index}
-            className="selected-merchant"
-            style={{ backgroundImage: "url(/assets/pics/mask-group.svg)" }}
+            className='selected-merchant'
+            style={{ backgroundImage: 'url(/assets/pics/mask-group.svg)' }}
             onClick={() => handleMerchantDetails(merchant)}
           >
-            <div className="img-wrapper">
-              <img className="selected-merchant-img" src={merchant.img} />
+            <div className='img-wrapper'>
+              <img className='selected-merchant-img' src={merchant.img} />
             </div>
-            <p className="selected-merchant-title">{merchant.title}</p>
+            <p className='selected-merchant-title'>{merchant.title}</p>
           </div>
         ))}
       </div>

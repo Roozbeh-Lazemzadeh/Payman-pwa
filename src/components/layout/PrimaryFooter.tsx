@@ -84,12 +84,13 @@ const PrimaryFooter: React.FC = () => {
     },
   ];
 
-  const handleTabClick = (key: string): null | void => {
+  const handleTabClick = (key: string): null => {
     // find label by key
     if (key === activeTab) return null;
     const tab = tabData.filter((tab) => tab.key === key)[0];
     const { path } = tab;
     navigate(path);
+    return null;
   };
   return (
     <Footer
