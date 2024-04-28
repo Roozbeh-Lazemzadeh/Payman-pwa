@@ -1,13 +1,16 @@
 import React from 'react';
 import { Carousel, Drawer, Menu } from 'antd';
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
-import { selectSidebar, toggleSidebar } from '../../store/sidebar/sidebarSlice';
-import { getItem } from '../helpers';
-import { ReactComponent as DashboardIcon } from '../../icons/defaultHome.svg';
-import { ReactComponent as ContactIcon } from '../../icons/defaultContact.svg';
-import { ReactComponent as ProfileIcon } from '../../icons/defaultProfile.svg';
-import { ReactComponent as InfoIcon } from '../../icons/defaultInfoIcon.svg';
-import { ReactComponent as BlogIcon } from '../../icons/defaultBlog.svg';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
+import {
+  selectSidebar,
+  toggleSidebar,
+} from '../../../store/sidebar/sidebarSlice';
+import { getItem } from '../../helpers';
+import { ReactComponent as DashboardIcon } from '../../../icons/defaultHome.svg';
+import { ReactComponent as ContactIcon } from '../../../icons/defaultContact.svg';
+import { ReactComponent as ProfileIcon } from '../../../icons/defaultProfile.svg';
+import { ReactComponent as InfoIcon } from '../../../icons/defaultInfoIcon.svg';
+import { ReactComponent as BlogIcon } from '../../../icons/defaultBlog.svg';
 import './style.css';
 // import Slider from "../slider/Slider";
 // import { Swiper, SwiperSlide } from "swiper/react";

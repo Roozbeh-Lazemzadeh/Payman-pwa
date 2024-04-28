@@ -2,25 +2,25 @@ import React, { useEffect, useState } from 'react';
 import { Input } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import {
-  filteredToggle,
-  searchedToggle,
-  selectSelectedSearchItem,
-} from '../../../../store/footer/footerSlice';
+  transactionFilteredToggle,
+  transactionSearchedToggle,
+  selectTransactionSearchItem,
+} from '../../../../store/filterMenu/transactionFilterMenuSlice';
 import { ReactComponent as TickSquareIcon } from '../../../../icons/tickSquare.svg';
 import { ReactComponent as BuyIcon } from '../../../../icons/buy2.svg';
 import { ReactComponent as RemoveIcon } from '../../../../icons/delete.svg';
 import {
   priceHandler,
   selectAllFilter,
-} from '../../../../store/filter/filterSlice';
+} from '../../../../store/filterPage/transactionFilterSlice';
 
-import '../style.css';
+import '../../style.css';
 import '../../../Paymans/otherPaymans/style.css';
 
 export const PriceFilter: React.FC = () => {
   const dispatch = useAppDispatch();
   const allFilter = useAppSelector(selectAllFilter);
-  const searchItem = useAppSelector(selectSelectedSearchItem);
+  const searchItem = useAppSelector(selectTransactionSearchItem);
   const [selectedQuickItems, setSelectedQuickItems] = useState<number[]>([]);
   const [prices, setPrices] = useState<number[]>([]);
   const [priceFrom, setPriceFrom] = useState<number>();
@@ -30,8 +30,8 @@ export const PriceFilter: React.FC = () => {
     if (prices.length === 0) return null;
     setSelectedQuickItems([]);
     dispatch(priceHandler([]));
-    dispatch(searchedToggle(''));
-    dispatch(filteredToggle());
+    dispatch(transactionSearchedToggle(''));
+    dispatch(transactionFilteredToggle());
   };
 
   const selectedQuickAccess = (value: number) => {
@@ -62,10 +62,15 @@ export const PriceFilter: React.FC = () => {
   };
   const handlePriceFilter = () => {
     if (prices.length === 0) return null;
-
-    dispatch(priceHandler(prices));
-    dispatch(searchedToggle(''));
-    dispatch(filteredToggle());
+    if (!prices[0] && prices[1]) {
+      dispatch(priceHandler([0, prices[1]]));
+    } else if (prices[0] && !prices[1]) {
+      dispatch(priceHandler([prices[0], 100000000]));
+    } else {
+      dispatch(priceHandler(prices));
+    }
+    dispatch(transactionSearchedToggle(''));
+    dispatch(transactionFilteredToggle());
   };
 
   useEffect(() => {
@@ -117,14 +122,18 @@ export const PriceFilter: React.FC = () => {
     <>
       <div className='implement-remove-wrapper'>
         <div
-          className={`remove-button ${!prices[1] ? 'disabled' : ''}`}
+          className={`remove-button ${
+            !prices[1] && !prices[0] ? 'disabled' : ''
+          }`}
           onClick={handleRemoveFilter}
         >
           <RemoveIcon />
           <span>حذف فیلتر</span>
         </div>
         <div
-          className={`implement-button half ${!prices[1] ? 'disabled' : ''}`}
+          className={`implement-button half ${
+            !prices[1] && !prices[0] ? 'disabled' : ''
+          }`}
           onClick={handlePriceFilter}
         >
           <TickSquareIcon />

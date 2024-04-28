@@ -1,7 +1,7 @@
 import { type FC, useState } from 'react';
 import SendOTPForm from '../components/template/SendOTPForm';
 import CheckOTPForm from '../components/template/CheckOTPForm';
-import FooterApp from '../components/shared/Footer/FooterApp';
+import FooterApp from '../components/layout/sidebar/SidebarFooter';
 import './style/style.css';
 
 const LoginPage: FC = () => {

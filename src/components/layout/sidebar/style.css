@@ -1,0 +1,16 @@
+.footer-wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+  font-size: 10px;
+  overflow: hidden;
+}
+
+.footer-wrapper_img {
+  width: 10px;
+  height: 10px;
+  margin-right: 5px;
+  color: blue;
+}

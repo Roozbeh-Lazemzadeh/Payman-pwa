@@ -1,9 +1,6 @@
 {
   "prettier.singleQuote": true,
-  "cSpell.words": [
-    "datepicker",
-    "پیمان"
-  ],
+  "cSpell.words": ["datepicker", "payman", "پیمان"],
   "prettier.jsxSingleQuote": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode"
 }

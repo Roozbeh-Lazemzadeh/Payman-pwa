@@ -2,29 +2,29 @@ import React, { useEffect, useState } from 'react';
 import { Select, type SelectProps } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import {
-  filteredToggle,
-  searchedToggle,
-  selectFilteredFooter,
-  selectSelectedSearchItem,
-} from '../../../../store/footer/footerSlice';
+  transactionFilteredToggle,
+  transactionSearchedToggle,
+  selectTransactionFilter,
+  selectTransactionSearchItem,
+} from '../../../../store/filterMenu/transactionFilterMenuSlice';
 import { ReactComponent as TickSquareIcon } from '../../../../icons/tickSquare.svg';
 import { ToastContainer } from 'react-toastify';
-import { showNotifyToast } from '../../Toast/CustomToast';
+import { showNotifyToast } from '../../../shared/Toast/CustomToast';
 import { ReactComponent as RemoveIcon } from '../../../../icons/delete.svg';
 import { ReactComponent as InfoIcon } from '../../../../icons/yellowInfo.svg';
 import {
   merchantHandler,
   selectAllFilter,
-} from '../../../../store/filter/filterSlice';
+} from '../../../../store/filterPage/transactionFilterSlice';
 import '../../../Paymans/otherPaymans/style.css';
 import jsonData from '../../../../transaction.json';
-import '../style.css';
+import '../../style.css';
 
 export const MerchantFilter: React.FC = () => {
   const dispatch = useAppDispatch();
   const allFilter = useAppSelector(selectAllFilter);
-  const filteredFooter = useAppSelector(selectFilteredFooter);
-  const searchItem = useAppSelector(selectSelectedSearchItem);
+  const filteredFooter = useAppSelector(selectTransactionFilter);
+  const searchItem = useAppSelector(selectTransactionSearchItem);
   const [selectedQuickItems, setSelectedQuickItems] = useState<string[]>([]);
   const [options, setOptions] = useState<SelectProps['options']>([]);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
@@ -65,8 +65,8 @@ export const MerchantFilter: React.FC = () => {
     }
     const combinedSelectedItems = [...selectedQuickItems, ...selectedOptions]; // Combine the selected quick items and selected options
     dispatch(merchantHandler(combinedSelectedItems));
-    dispatch(searchedToggle(''));
-    dispatch(filteredToggle());
+    dispatch(transactionSearchedToggle(''));
+    dispatch(transactionFilteredToggle());
   };
 
   const handleRemoveFilter = () => {
@@ -75,8 +75,8 @@ export const MerchantFilter: React.FC = () => {
     }
     setSelectedQuickItems([]);
     dispatch(merchantHandler([]));
-    dispatch(searchedToggle(''));
-    dispatch(filteredToggle());
+    dispatch(transactionSearchedToggle(''));
+    dispatch(transactionFilteredToggle());
   };
 
   const handleSelectedOptions = (newSelectedOptions: string[]) => {

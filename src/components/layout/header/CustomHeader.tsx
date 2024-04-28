@@ -1,15 +1,15 @@
 import React from 'react';
 import { Layout } from 'antd';
-import { ReactComponent as BorderedNotificationIcon } from '../../icons/borderedNotification.svg';
-import { ReactComponent as BorderedSideBarIcon } from '../../icons/borderedHamburgerMenu.svg';
-import { ReactComponent as NotificationIcon } from '../../icons/notification.svg';
-import { ReactComponent as SideBarIcon } from '../../icons/HamburgerMenu.svg';
+import { ReactComponent as BorderedNotificationIcon } from '../../../icons/borderedNotification.svg';
+import { ReactComponent as BorderedSideBarIcon } from '../../../icons/borderedHamburgerMenu.svg';
+import { ReactComponent as NotificationIcon } from '../../../icons/notification.svg';
+import { ReactComponent as SideBarIcon } from '../../../icons/HamburgerMenu.svg';
+import { useAppDispatch } from '../../hooks/reduxHooks';
+import { toggleSidebar } from '../../../store/sidebar/sidebarSlice';
+import { NotificationModal } from '../../modals/NotificationModal';
+import { toggleNotificationModal } from '../../../store/notification/notificationSlice';
 
-import './style.css';
-import { useAppDispatch } from '../hooks/reduxHooks';
-import { toggleSidebar } from '../../store/sidebar/sidebarSlice';
-import { NotificationModal } from '../modals/NotificationModal';
-import { toggleNotificationModal } from '../../store/notification/notificationSlice';
+import '../style.css';
 
 interface CustomHeaderProps {
   background?: boolean | string;
@@ -41,7 +41,7 @@ const CustomHeader: React.FC<CustomHeaderProps> = ({ background, title }) => {
           backgroundSize: 'content',
         }}
       >
-        <div className="Header-content-wrapper">
+        <div className='Header-content-wrapper'>
           {background ? (
             <SideBarIcon onClick={handleShowSidebar} />
           ) : (

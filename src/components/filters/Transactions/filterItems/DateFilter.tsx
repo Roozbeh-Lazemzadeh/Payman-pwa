@@ -14,21 +14,21 @@ import {
   dateQuickAccessHandler,
   selectAllFilter,
   selectDatePeriod,
-} from '../../../../store/filter/filterSlice';
+} from '../../../../store/filterPage/transactionFilterSlice';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import {
-  filteredToggle,
-  searchedToggle,
-  selectSelectedSearchItem,
-} from '../../../../store/footer/footerSlice';
+  transactionFilteredToggle,
+  transactionSearchedToggle,
+  selectTransactionSearchItem,
+} from '../../../../store/filterMenu/transactionFilterMenuSlice';
 
 import '../../../Paymans/otherPaymans/style.css';
-import '../style.css';
+import '../../style.css';
 
 export const DateFilter: React.FC = () => {
   const dispatch = useAppDispatch();
   const allFilter = useAppSelector(selectAllFilter);
-  const searchItem = useAppSelector(selectSelectedSearchItem);
+  const searchItem = useAppSelector(selectTransactionSearchItem);
   const datePeriod = useAppSelector(selectDatePeriod);
   const [dates, setDates] = useState<string[]>([]);
   const [values, setValues] = useState<Date[]>([
@@ -59,8 +59,8 @@ export const DateFilter: React.FC = () => {
   const handleDateFilter = () => {
     if (dates.length === 0) return null;
     dispatch(dateHandler(dates));
-    dispatch(searchedToggle(''));
-    dispatch(filteredToggle());
+    dispatch(transactionSearchedToggle(''));
+    dispatch(transactionFilteredToggle());
   };
 
   useEffect(() => {
@@ -142,8 +142,8 @@ export const DateFilter: React.FC = () => {
     setDates([]);
     setValues([]);
     dispatch(dateHandler([]));
-    dispatch(searchedToggle(''));
-    dispatch(filteredToggle());
+    dispatch(transactionSearchedToggle(''));
+    dispatch(transactionFilteredToggle());
     dispatch(dateQuickAccessHandler(''));
   };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Sort } from '../sort/Sort';
-import { Filter } from '../filter/Filter';
+import { Filter } from '../filters/Filter';
 
 interface FilterToolsProps {
   title: string;
@@ -9,10 +9,10 @@ interface FilterToolsProps {
 
 const FilterTools: React.FC<FilterToolsProps> = ({ title, onSortChange }) => {
   return (
-    <div className="filter-tools-wrapper">
-      <p className="filter-tools-title">{title}</p>
-      <div className="filter-tools-component">
-        <Sort onSortChange={onSortChange} />{' '}
+    <div className='filter-tools-wrapper'>
+      <p className='filter-tools-title'>{title}</p>
+      <div className='filter-tools-component'>
+        <Sort onSortChange={onSortChange} />
         {/* Pass the onSortChange event handler to the Sort component */}
         <Filter />
       </div>

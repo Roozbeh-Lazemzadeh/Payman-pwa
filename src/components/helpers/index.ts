@@ -1,8 +1,11 @@
 import { toggleSidebar } from '../../store/sidebar/sidebarSlice';
-import { filteredToggle, searchedToggle } from '../../store/footer/footerSlice';
+import {
+  transactionFilteredToggle,
+  transactionSearchedToggle,
+} from '../../store/filterMenu/transactionFilterMenuSlice';
 import { type NavigateFunction } from 'react-router-dom';
 import { type Dispatch } from '@reduxjs/toolkit';
-import { removeAllFiltersHandler } from '../../store/filter/filterSlice';
+import { removeAllFiltersHandler } from '../../store/filterPage/transactionFilterSlice';
 
 interface ItemProps {
   label: string;
@@ -46,11 +49,11 @@ export function getItem({
     if (key.length === 3) {
       if (key === '101') {
         dispatch(removeAllFiltersHandler());
-        dispatch(searchedToggle(''));
-        dispatch(filteredToggle());
+        dispatch(transactionSearchedToggle(''));
+        dispatch(transactionFilteredToggle());
       }
 
-      dispatch(searchedToggle(key));
+      dispatch(transactionSearchedToggle(key));
     }
 
     // Deselect the active tab for "/profile", "/faq", "/contact-us"

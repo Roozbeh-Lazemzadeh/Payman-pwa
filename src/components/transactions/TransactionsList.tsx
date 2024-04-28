@@ -8,7 +8,7 @@ import { ReactComponent as UnsuccessfulIcon } from '../../icons/unsuccess.svg';
 import { ReactComponent as UnclearIcon } from '../../icons/unclearStatus.svg';
 import { parse, format } from 'date-fns';
 import { useAppSelector } from '../hooks/reduxHooks';
-import { selectAllFilter } from '../../store/filter/filterSlice';
+import { selectAllFilter } from '../../store/filterPage/transactionFilterSlice';
 import './style.css';
 
 interface TransactionsListProps {
