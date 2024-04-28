@@ -1,15 +1,19 @@
-/* eslint-disable react/jsx-key */
-import React, { useState } from 'react';
+// HomeWithMandate.tsx
+
+import React, { useEffect, useState } from 'react';
 import { MerchantChartSection } from '../components/chart/MerchantChartSection';
 import FilterTools from '../components/template/FilterTools';
 import { TransactionHomeCard } from '../components/shared/Cards/TransactionHomeCards';
 import { DetailedDrawer } from '../components/shared/Drawer/DetailedDrawer';
-import transactionData from '../transaction.json'; // Import the JSON file
+import transactionData from '../transaction.json';
 import useDrawerTransaction from '../components/hooks/useDrawerTransaction';
 import jalaliMoment from 'jalali-moment';
 import { format, parse } from 'date-fns';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getMonthBillHandler } from '../store/monthlyBill/monthlyBillSlice';
+import { setArrayHomeWithMandate } from '../store/arrayHomeWithMandate/arrayHomeWithMandateSlice';
+import { type RootState } from '../store/store';
+import { type TransactionItem } from '../store/arrayHomeWithMandate/types';
 
 function HomeWithMandate() {
   const [selectedItemIndex, setSelectedItemIndex] = useState<number | null>(0);
@@ -20,6 +24,10 @@ function HomeWithMandate() {
     handleCloseDrawer,
     selectedTransactionId,
   } = useDrawerTransaction(transactionData);
+
+  const groupedTransactions = useSelector(
+    (state: RootState) => state.arrayHome.groupsTransactions
+  );
 
   const dispatch = useDispatch();
 
@@ -36,18 +44,6 @@ function HomeWithMandate() {
     });
     monthsList2.push(pastDate.format('jYYYY/jMM'));
   }
-
-  // const handleItemClick = (id: any) => {
-  //   setSelectedItemIndex(id === selectedItemIndex ? selectedItemIndex : id);
-  //   const selectedMonth = monthsList.find(
-  //     (item) => item.id === selectedItemIndex
-  //   );
-  //   if (selectedMonth) {
-  //     console.log(selectedMonth.month);
-  //   } else {
-  //     console.log('Error: Month not found');
-  //   }
-  // };
 
   const transDate = (inputDate: string) => {
     const parsedDate = parse(
@@ -74,12 +70,16 @@ function HomeWithMandate() {
     const selectedMonth = monthsList.find((item) => item.id === id);
     if (selectedMonth) {
       const selectedYearMonth = monthsList2[selectedMonth.id];
-      console.log(selectedYearMonth);
       dispatch(getMonthBillHandler(selectedYearMonth));
     } else {
       console.log('Error: Month not found');
     }
   };
+
+  useEffect(() => {
+    dispatch(setArrayHomeWithMandate(transactionData));
+  }, [dispatch]);
+
   return (
     <div className='home-wrapper'>
       <div className='home-datepickers'>
@@ -107,32 +107,52 @@ function HomeWithMandate() {
       <div className='TransactionHomeCard-wrapper'>
         <div className='TransactionHomeCard'>
           <div className='TransactionHomeCard-wrapper-cards'>
-            <p className='TransactionHomeCard-p'>{getCurrentJalaliDate()}</p>
-            {transactionData.map((transaction) => (
-              <div
-                key={transaction.id}
-                onClick={() => handleDrawerTransaction(transaction.id)}
-              >
-                <TransactionHomeCard
-                  merchant={transaction.creditor}
-                  price={transaction.transaction_amount}
-                  transDate={transDate(transaction.transaction_date)}
-                  img={transaction.img}
-                />
-              </div>
-            ))}
-          </div>
-          <div className='TransactionHomeCard-wrapper-cards active'>
-            <p className='TransactionHomeCard-p'>امروز، ۱۸ آبان</p>
-            {/* {Array.from({ length: 1 }, (value) => value).map((item, index) => (
-              <div onClick={() => setIsOpen(!isOpen)} key={index}>
-                <TransactionHomeCard
-                  merchant="خودرو"
-                  price={4550}
-                  transDate="سه‌شنبه، ۱۴۰۲/۰۷/۲۵- ۱۸:۴۸"
-                />
-              </div>
-            ))} */}
+            {groupedTransactions?.map(
+              (group: {
+                key: React.Key | null | undefined;
+                value: TransactionItem[];
+              }) => {
+                return (
+                  <div key={group.key} className='TransactionHomeCard-wrapper'>
+                    <p className='TransactionHomeCard-p'>
+                      {group.value[0].transaction_date.startsWith(
+                        format(new Date(), 'yy-MMM-dd').toUpperCase()
+                      )
+                        ? getCurrentJalaliDate()
+                        : `${jalaliMoment(
+                            format(
+                              parse(
+                                group.value[0].transaction_date,
+                                'yy-MMM-dd hh.mm.ss.SSSSSSSSSS a',
+                                new Date()
+                              ),
+                              'yyyy-MM-dd HH:mm:ss'
+                            )
+                          )
+                            .locale('fa')
+                            .format('dddd ، jD jMMMM')}`}
+                    </p>
+                    <div className='TransactionHomeCard-wrapper-cards'>
+                      {group.value.map((transaction: TransactionItem) => (
+                        <div
+                          key={transaction.id}
+                          onClick={() =>
+                            handleDrawerTransaction(transaction.id)
+                          }
+                        >
+                          <TransactionHomeCard
+                            merchant={transaction.creditor}
+                            price={transaction.transaction_amount}
+                            transDate={transDate(transaction.transaction_date)}
+                            img={transaction.img}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              }
+            )}
           </div>
         </div>
       </div>

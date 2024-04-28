@@ -6,6 +6,8 @@ import chartReducer from './chart/chartSlice';
 import merchantReducer from './merchant/merchantSlice';
 import filterReducer from './filter/filterSlice';
 import monthlyBillSlice from './monthlyBill/monthlyBillSlice';
+// import { getArrayHomeWithMandate } from './arrayHomeWithMandate/arrayHomeWithMandateSlice';
+import arrayHomeWithMandateReducer from './arrayHomeWithMandate/arrayHomeWithMandateSlice'; // Import the slice reducer
 
 const store = configureStore({
   reducer: {
@@ -16,6 +18,7 @@ const store = configureStore({
     merchant: merchantReducer,
     filter: filterReducer,
     monthly: monthlyBillSlice,
+    arrayHome: arrayHomeWithMandateReducer,
   },
 });
 

@@ -15,10 +15,15 @@
 
 .card-merchant-wrapper .card-icon {
   padding-left: 10px;
-  width: 42px;
+  width: 35px;
   height: auto;
   z-index: 2;
-    position: relative;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  margin-left: 50%;
+  margin-right: 12%;
 }
 
 .more-trans-btn-wrapper {
@@ -303,32 +308,31 @@
 }
 
 .card-icon-wrapper {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  margin-inline-end: 10px;
   position: relative;
+  border-radius: 10px;
+  z-index: 2;
 }
 
 .card-icon-filter {
-    width: 50px;
-    height: 50px;
-    background-repeat: no-repeat;
-    background-position: center;
-    /* background-size: cover; */
-    /* display: flex; */
-    /* align-items: center; */
-    /* justify-content: end; */
-    filter: blur(24px);
-    position: absolute;
-    top: -8px;
-    right: -7px;
-    /* mask-repeat: no-repeat; */
-    transform: scale(1.5);
-    /* mask-size: 3rem; */
-    mask-size: 10em 10em
-    /* mask-repeat: no-repeat;
-    mask-position: center;
-    z-index: 1; */
+  scale: 10;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: right bottom;
+  z-index: 0;
+  filter: blur(9px);
 }
-
-
 
 @media (min-width: 400px) {
   .merchant-expiration-wrapper {
@@ -351,6 +355,32 @@
   }
 }
 
+@media (max-width: 400px) {
+  .card-date {
+    font-size: 10px;
+    padding-right: 10px;
+  }
+  .card-merchant-name {
+    font-size: 12px;
+  }
+  .card-merchant-wrapper {
+    padding-left: 8px;
+    width: 45px;
+  }
+  .card-home-content {
+    margin-right: 40px;
+  }
+}
+
+@media (max-width: 375px) {
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+    margin-right: 3rem;
+  }
+}
 .merchant-expiration-title {
   font-size: 12px;
   font-weight: 400;

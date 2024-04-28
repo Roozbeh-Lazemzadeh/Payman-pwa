@@ -55,7 +55,6 @@ export const TransactionCard: React.FC<TransactionCardProps> = ({
             className="card-icon-filter"
             style={{
               backgroundImage: `url(${img})`,
-              maskImage: `url(${img})`
             }}
           ></span>
         </div>

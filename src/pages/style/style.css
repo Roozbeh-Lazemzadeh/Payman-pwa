@@ -170,16 +170,19 @@
 } */
 
 .TransactionHomeCard-wrapper-cards {
-  border-bottom: 1px solid gray;
   padding-bottom: 1.2rem;
 }
 
-.TransactionHomeCard-wrapper-cards.active {
+.active {
   border: unset;
 }
 
 .TransactionHomeCard-wrapper {
-  height: 35rem;
+  border-bottom: 1px solid #cbcbcb;
+}
+
+.TransactionHomeCard-wrapper:last-child {
+  border-bottom: unset;
 }
 
 .TransactionHomeCard {
@@ -638,5 +641,32 @@
   .business-content {
     position: relative;
     margin: 8px 0;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .home-datepicker {
+    width: 52px;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem 15px;
+    opacity: 0.3;
+    font-weight: 500;
+    font-size: 12px;
+    border-radius: 10px;
+    transition: ease-in-out 0.3s all;
+  }
+  .home-datepicker-click {
+    background-color: #0072ff;
+    color: #fff;
+    border-radius: 10px;
+    padding: 1.5rem 15px;
+    width: 52px;
+    height: 60px;
+    opacity: 1;
+    transition: ease-in-out 0.3s all;
   }
 }

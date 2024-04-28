@@ -29,6 +29,7 @@ const useDrawerTransaction = (sortedTransactionList: Transaction[]) => {
     );
 
     if (selectedTransaction) {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       const { phone_number, transaction_id, source_bank } = selectedTransaction;
       const detailedDrawerData = [
         { nameItem1: 'بانک', nameItem2: source_bank },

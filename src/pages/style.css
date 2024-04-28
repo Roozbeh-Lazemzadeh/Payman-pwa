@@ -171,7 +171,7 @@
 } */
 
 .TransactionHomeCard-wrapper-cards {
-  border-bottom: 1px solid gray;
+  /* border-bottom: 1px solid gray; */
   padding-bottom: 1.2rem;
 }
 
@@ -180,7 +180,7 @@
 }
 
 .TransactionHomeCard-wrapper {
-  height: 35rem;
+  /* height: 35rem; */
 }
 
 .TransactionHomeCard {

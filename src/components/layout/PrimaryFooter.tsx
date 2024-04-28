@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-invalid-void-type */
 import { useEffect, useState } from 'react';
 import { Layout, Tabs } from 'antd';
 import { ReactComponent as DefaultPaymanIcon } from '../../icons/defaultPayman.svg';

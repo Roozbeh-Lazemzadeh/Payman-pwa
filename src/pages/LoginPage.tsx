@@ -5,7 +5,7 @@ import FooterApp from '../components/shared/Footer/FooterApp';
 import './style/style.css';
 
 const LoginPage: FC = () => {
-  const [step, setStep] = useState<number>(1);
+  const [step, setStep] = useState<number>(2);
 
   return (
     <div
