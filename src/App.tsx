@@ -78,6 +78,8 @@ function App(): JSX.Element {
           <SplashScreen />
         )}
       </ConfigProvider>
+      {/* Load the manifest.json file */}
+      {isAppLoaded && <link rel='manifest' href='%PUBLIC_URL%/manifest.json' />}
     </>
   );
 }
