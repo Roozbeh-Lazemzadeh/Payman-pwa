@@ -1,24 +1,30 @@
-.footer-wrapper {
-  display: flex;
-  align-items: center;
-  flex-direction: row-reverse;
-  justify-content: center;
-  margin-bottom: 1.2rem;
+.filter-icon svg {
+  vertical-align: middle;
+}
+
+.filtered-wrapper {
+  position: relative;
+}
+.filtered-circle {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+}
+.filter-number {
+  color: #fff;
+  position: absolute;
+  top: -1.5px;
+  right: -1px;
   font-size: 10px;
-  overflow: hidden;
 }
-
-.footer-wrapper_img {
-  width: 10px;
-  height: 10px;
-  margin-right: 5px;
-  color: blue;
+.filter-number.number-one {
+  right: 0.5px;
 }
-
+/* //  */
 .ant-layout-footer.filtered-footer {
   padding: 0px;
   margin: 0 auto;
-  width: 80%;
+  width: 90%;
   border-radius: 10px;
   height: 67px;
   bottom: -75px;
@@ -28,6 +34,7 @@
 .filtered-footer.active {
   bottom: 20px;
   transition: ease-in-out 0.25s;
+  z-index: 3;
 }
 .filtered-footer.invisible {
   transition: ease-in-out 0.24s;
@@ -45,7 +52,7 @@
   align-items: center;
   height: 100%;
   justify-content: space-between;
-  width: 80vw;
+  width: 90vw;
 }
 
 .ant-menu.ant-menu-root.ant-menu-inline.ant-menu-light.footer-filtered-menu

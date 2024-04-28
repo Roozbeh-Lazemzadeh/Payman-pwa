@@ -1,18 +1,18 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import { Layout } from 'antd';
-import CustomHeader from './CustomHeader';
-import { Sidebar } from './Sidebar';
-import FilteredFooter from '../shared/Footer/FilteredFooter';
+import CustomHeader from './header/CustomHeader';
+import { Sidebar } from './sidebar/Sidebar';
+import FilteredUI from '../filters/Transactions/filterMenu/FilterMenu';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import {
-  closeSearchFooterToggle,
-  filteredToggle,
-  searchedToggle,
-  selectFilteredFooter,
-  selectSearchedFooter,
-} from '../../store/footer/footerSlice';
-import PrimaryFooter from './PrimaryFooter';
-import { SearchedFooter } from '../shared/Footer/SearchedFooter';
+  transactionFilteredToggle,
+  transactionSearchedToggle,
+  transactionCloseSearchToggle,
+  selectTransactionSearchedFilter,
+  selectTransactionFilter,
+} from '../../store/filterMenu/transactionFilterMenuSlice';
+import PrimaryFooter from './footer/PrimaryFooter';
+import { SearchedUI } from '../filters/Transactions/filterItems';
 interface HeaderStyle {
   background: boolean;
   title: string;
@@ -23,8 +23,8 @@ const PWALayout: React.FC = () => {
   const { Content } = Layout;
   const location = useLocation();
   const dispatch = useAppDispatch();
-  const isFilteredFooterShown = useAppSelector(selectFilteredFooter);
-  const isSearchedFooterShown = useAppSelector(selectSearchedFooter);
+  const isFilteredFooterShown = useAppSelector(selectTransactionFilter);
+  const isSearchedFooterShown = useAppSelector(selectTransactionSearchedFilter);
   // const isUserRegistered = true; // todo replace with corresponding API
 
   // Define different headers (blue or white) based on the route
@@ -72,12 +72,12 @@ const PWALayout: React.FC = () => {
         isFilteredFooterShown &&
         !isSearchedFooterShown
       ) {
-        dispatch(filteredToggle());
+        dispatch(transactionFilteredToggle());
       }
       if (!searchFooterWrapper && isSearchedFooterShown) {
-        dispatch(closeSearchFooterToggle());
-        dispatch(searchedToggle(''));
-        dispatch(filteredToggle());
+        dispatch(transactionCloseSearchToggle());
+        dispatch(transactionSearchedToggle(''));
+        dispatch(transactionFilteredToggle());
       }
     }
   };
@@ -95,8 +95,8 @@ const PWALayout: React.FC = () => {
         </Content>
       </div>
       <PrimaryFooter />
-      <FilteredFooter />
-      <SearchedFooter />
+      <FilteredUI />
+      <SearchedUI />
     </Layout>
   );
 };

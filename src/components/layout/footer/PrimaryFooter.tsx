@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import { Layout, Tabs } from 'antd';
-import { ReactComponent as DefaultPaymanIcon } from '../../icons/defaultPayman.svg';
-import { ReactComponent as DefaultPaperIcon } from '../../icons/defaultPaper.svg';
-import { ReactComponent as DefaultHomeIcon } from '../../icons/defaultHome.svg';
-import { ReactComponent as ActivePaperIcon } from '../../icons/activePaper.svg';
-import { ReactComponent as ActivePaymanIcon } from '../../icons/activePayman.svg';
-import { ReactComponent as ActiveHomeIcon } from '../../icons/activeHome.svg';
-import './style.css';
+import { ReactComponent as DefaultPaymanIcon } from '../../../icons/defaultPayman.svg';
+import { ReactComponent as DefaultPaperIcon } from '../../../icons/defaultPaper.svg';
+import { ReactComponent as DefaultHomeIcon } from '../../../icons/defaultHome.svg';
+import { ReactComponent as ActivePaperIcon } from '../../../icons/activePaper.svg';
+import { ReactComponent as ActivePaymanIcon } from '../../../icons/activePayman.svg';
+import { ReactComponent as ActiveHomeIcon } from '../../../icons/activeHome.svg';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useAppSelector } from '../hooks/reduxHooks';
-import { selectFilteredFooter } from '../../store/footer/footerSlice';
-import { removeAllFiltersHandler } from '../../store/filter/filterSlice';
+import { useAppSelector } from '../../hooks/reduxHooks';
+import { selectTransactionFilter } from '../../../store/filterMenu/transactionFilterMenuSlice';
+import { removeAllFiltersHandler } from '../../../store/filterPage/transactionFilterSlice';
 import { useDispatch } from 'react-redux';
+import '../style.css';
 
 const { Footer } = Layout;
 interface TabData {
@@ -25,7 +25,7 @@ interface TabData {
 const PrimaryFooter: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const isPrimaryFooterShown = !useAppSelector(selectFilteredFooter);
+  const isPrimaryFooterShown = !useAppSelector(selectTransactionFilter);
   const [activeTab, setActiveTab] = useState('2');
   const dispatch = useDispatch();
 

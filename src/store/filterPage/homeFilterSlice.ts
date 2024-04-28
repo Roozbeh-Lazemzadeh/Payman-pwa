@@ -23,8 +23,8 @@ const initialState: FilterState = {
   datePeriod: '',
 };
 
-export const filterSlice = createSlice({
-  name: 'filter',
+export const homeFilterSlice = createSlice({
+  name: 'homeFilter',
   initialState,
   reducers: {
     merchantHandler: (state, action: PayloadAction<string[]>) => {
@@ -61,14 +61,16 @@ export const filterSlice = createSlice({
   },
 });
 
-export const selectAllFilter = (state: RootState) => state.filter?.allFilter;
+export const selectAllFilter = (state: RootState) =>
+  state.homeFilter?.allFilter;
 export const selectShowFilterIcon = (state: RootState) =>
-  state.filter?.isFiltered;
+  state.homeFilter?.isFiltered;
 export const selectFilterNumber = (state: RootState) =>
-  state.filter?.filterNumber;
+  state.homeFilter?.filterNumber;
 export const selectMerchantsFilterLength = (state: RootState) =>
-  state.filter?.allFilter.merchants.length;
-export const selectDatePeriod = (state: RootState) => state.filter?.datePeriod;
+  state.homeFilter?.allFilter.merchants.length;
+export const selectDatePeriod = (state: RootState) =>
+  state.homeFilter?.datePeriod;
 
 export const {
   merchantHandler,
@@ -76,5 +78,5 @@ export const {
   removeAllFiltersHandler,
   priceHandler,
   dateQuickAccessHandler,
-} = filterSlice.actions;
-export default filterSlice.reducer;
+} = homeFilterSlice.actions;
+export default homeFilterSlice.reducer;
