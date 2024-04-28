@@ -102,7 +102,6 @@ const AccountPage: React.FC = () => {
           className='rmdp-mobile'
           calendarPosition='bottom-right'
           weekDays={weekDays}
-          range
         />
       </div>
       <Button
