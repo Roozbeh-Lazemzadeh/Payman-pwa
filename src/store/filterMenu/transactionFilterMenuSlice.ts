@@ -6,7 +6,6 @@ const initialState = {
   isSearchedShown: false,
   closingSearchFilter: false,
   searchItem: '',
-  onSelectFocus: false,
 };
 
 export const transactionFilterMenuSlice = createSlice({
@@ -26,12 +25,6 @@ export const transactionFilterMenuSlice = createSlice({
     transactionCloseSearchFalse: (state) => {
       state.closingSearchFilter = false;
     },
-    transactionOnSelectFocus: (state) => {
-      state.onSelectFocus = true;
-    },
-    transactionOnCloseMerchantFilter: (state) => {
-      state.onSelectFocus = false;
-    },
   },
 });
 
@@ -43,15 +36,11 @@ export const selectTransactionCloseSearchedFilter = (state: RootState) =>
   state.transactionFilterMenu?.closingSearchFilter;
 export const selectTransactionSearchItem = (state: RootState) =>
   state.transactionFilterMenu?.searchItem;
-export const selectTransactionOnSelectFocus = (state: RootState) =>
-  state.transactionFilterMenu?.onSelectFocus;
 
 export const {
   transactionFilteredToggle,
   transactionSearchedToggle,
   transactionCloseSearchToggle,
   transactionCloseSearchFalse,
-  transactionOnSelectFocus,
-  transactionOnCloseMerchantFilter,
 } = transactionFilterMenuSlice.actions;
 export default transactionFilterMenuSlice.reducer;
