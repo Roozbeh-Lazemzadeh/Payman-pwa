@@ -12,7 +12,7 @@ import {
   selectTransactionFilter,
 } from '../../store/filterMenu/transactionFilterMenuSlice';
 import PrimaryFooter from './footer/PrimaryFooter';
-import { SearchedUI } from '../filters/Transactions/filterItems';
+import { SearchedItems } from '../filters/Transactions/filterItems';
 interface HeaderStyle {
   background: boolean;
   title: string;
@@ -96,7 +96,7 @@ const PWALayout: React.FC = () => {
       </div>
       <PrimaryFooter />
       <FilteredUI />
-      <SearchedUI />
+      <SearchedItems />
     </Layout>
   );
 };

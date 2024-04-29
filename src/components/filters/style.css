@@ -132,6 +132,9 @@
   transition: ease-in-out 0.4s;
   height: 128px;
 }
+.searched-footer.active.focus {
+  bottom: 430px;
+}
 
 .searched-footer-wrapper {
   display: flex;

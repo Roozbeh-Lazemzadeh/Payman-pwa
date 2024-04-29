@@ -5,6 +5,7 @@ import {
   selectTransactionSearchedFilter,
   selectTransactionCloseSearchedFilter,
   selectTransactionSearchItem,
+  selectTransactionOnSelectFocus,
 } from '../../../../store/filterMenu/transactionFilterMenuSlice';
 import { PriceFilter } from './PriceFilter';
 import { DateFilter } from './DateFilter';
@@ -12,7 +13,8 @@ import { MerchantFilter } from './MerchantFilter';
 import '../../../Paymans/otherPaymans/style.css';
 import '../../style.css';
 
-export const SearchedUI: React.FC = () => {
+export const SearchedItems: React.FC = () => {
+  const merchantSelectFocus = useAppSelector(selectTransactionOnSelectFocus);
   const searchItem = useAppSelector(selectTransactionSearchItem);
   const isSearchedFooterShown = useAppSelector(selectTransactionSearchedFilter);
   const closeSearchFooter = useAppSelector(
@@ -37,6 +39,7 @@ export const SearchedUI: React.FC = () => {
     <Footer
       className={`searched-footer${isSearchedFooterShown ? ' active' : ''} ${
         closeSearchFooter ? 'close' : ''
+      } ${merchantSelectFocus ? 'focus' : ''}
       }`}
     >
       <div className='searched-footer-wrapper'>{footerBody()}</div>

@@ -6,6 +6,8 @@ import {
   transactionSearchedToggle,
   selectTransactionFilter,
   selectTransactionSearchItem,
+  transactionOnSelectFocus,
+  transactionOnCloseMerchantFilter,
 } from '../../../../store/filterMenu/transactionFilterMenuSlice';
 import { ReactComponent as TickSquareIcon } from '../../../../icons/tickSquare.svg';
 import { ToastContainer } from 'react-toastify';
@@ -67,6 +69,7 @@ export const MerchantFilter: React.FC = () => {
     dispatch(merchantHandler(combinedSelectedItems));
     dispatch(transactionSearchedToggle(''));
     dispatch(transactionFilteredToggle());
+    dispatch(transactionOnCloseMerchantFilter());
   };
 
   const handleRemoveFilter = () => {
@@ -156,6 +159,10 @@ export const MerchantFilter: React.FC = () => {
     );
   }, [options]);
 
+  const handleFilterPosition = () => {
+    dispatch(transactionOnSelectFocus());
+  };
+
   return (
     <>
       <ToastContainer rtl />
@@ -231,6 +238,7 @@ export const MerchantFilter: React.FC = () => {
             maxTagTextLength={7}
             value={selectedOptions}
             placement='topRight'
+            onFocus={handleFilterPosition}
           />
         </div>
       </div>
