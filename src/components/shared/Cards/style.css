@@ -10,7 +10,7 @@
 .card-merchant-wrapper {
   display: flex;
   align-items: center;
-  padding-left: 25px;
+  padding-left: 40px;
 }
 
 .card-merchant-wrapper .card-icon {
@@ -119,6 +119,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  /* margin-right: 1rem; */
   width: 100%;
   gap: 8px;
 }
@@ -334,6 +335,15 @@
   filter: blur(9px);
 }
 
+.merchant-expiration-title {
+  font-size: 12px;
+  font-weight: 400;
+  transform: rotate(180deg);
+  writing-mode: vertical-rl;
+  color: #fff;
+  display: block;
+}
+
 @media (min-width: 400px) {
   .merchant-expiration-wrapper {
     margin-right: 20px; /* Margin for min width 400px */
@@ -378,15 +388,21 @@
     flex-direction: column;
     justify-content: space-around;
     width: 100%;
-    margin-right: 3rem;
   }
-}
-.merchant-expiration-title {
-  font-size: 12px;
-  font-weight: 400;
-  transform: rotate(180deg);
-  writing-mode: vertical-rl;
-  color: #fff;
-  display: block;
+  .card-date {
+    font-size: 10px;
+    padding-right: 4px;
+  }
+  .card-home-content {
+    margin-right: 25px;
+  }
+  .card-status-wrapper .card-status {
+    font-size: 12px;
+  }
+  .card-status-icon svg {
+    vertical-align: middle;
+    width: 18px;
+    height: 18px;
+  }
 }
 /*  end Near Expired card style */

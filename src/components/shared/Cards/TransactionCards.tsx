@@ -44,39 +44,39 @@ export const TransactionCard: React.FC<TransactionCardProps> = ({
   }
 
   return (
-    <div className="transaction-card">
-      <div className="card-merchant-wrapper">
-        <div className="card-icon-wrapper">
+    <div className='transaction-card'>
+      <div className='card-merchant-wrapper'>
+        <div className='card-icon-wrapper'>
           <img
-            className="card-icon"
+            className='card-icon'
             src={img.length ? img : '/assets/pics/icon-default.png'}
           />
           <span
-            className="card-icon-filter"
+            className='card-icon-filter'
             style={{
               backgroundImage: `url(${img})`,
             }}
           ></span>
         </div>
 
-        <span className="card-merchant-name">{merchant}</span>
+        <span className='card-merchant-name'>{merchant}</span>
       </div>
-      <div className="card-content">
-        <div className="transaction-titles">
+      <div className='card-content'>
+        <div className='transaction-titles'>
           <div>
-            <span className="transaction-title">مبلغ تراکنش ها: </span>
-            <span className="card-price">{price}</span>
-            <span className="card-price"> تومانءءء</span>
+            <span className='transaction-title'>مبلغ تراکنش ها: </span>
+            <span className='card-price'>{price}</span>
+            <span className='card-price'> تومانءءء</span>
           </div>
-          <div>
+          <div className='card-status-wrapper'>
             <span className={`card-status ${color}`}>{transStatus}</span>
-            <span className="card-status-icon">{transStatusIcon}</span>
+            <span className='card-status-icon'>{transStatusIcon}</span>
           </div>
         </div>
         <div>
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <span className="transaction-title">تاریخ تراکنش:‌</span>
-            <span className="card-date">{transDate}</span>
+            <span className='transaction-title'>تاریخ تراکنش:‌</span>
+            <span className='card-date'>{transDate}</span>
           </div>
         </div>
       </div>

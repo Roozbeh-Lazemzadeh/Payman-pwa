@@ -8,7 +8,9 @@ import { ReactComponent as TickSquarepro } from '../icons/TickSquarepro.svg';
 import { ReactComponent as Logout } from '../icons/Logout.svg';
 import 'react-multi-date-picker/styles/layouts/mobile.css';
 import { weekDays } from '../components/types/calendar';
+import provinces from '../provinces.js';
 
+import './style.css';
 const onChange = (value: string) => {
   console.log(`selected ${value}`);
 };
@@ -58,20 +60,7 @@ const AccountPage: React.FC = () => {
         onChange={onChange}
         onSearch={onSearch}
         filterOption={filterOption}
-        options={[
-          {
-            value: 'تهران',
-            label: 'تهران',
-          },
-          {
-            value: 'کرج',
-            label: 'کرج',
-          },
-          {
-            value: 'اصفهان',
-            label: 'اصفهان',
-          },
-        ]}
+        options={provinces}
       />
 
       <div className='datepiker-wrapper'>
