@@ -12,7 +12,7 @@ import { MerchantFilter } from './MerchantFilter';
 import '../../../Paymans/otherPaymans/style.css';
 import '../../style.css';
 
-export const SearchedUI: React.FC = () => {
+export const SearchedItems: React.FC = () => {
   const searchItem = useAppSelector(selectTransactionSearchItem);
   const isSearchedFooterShown = useAppSelector(selectTransactionSearchedFilter);
   const closeSearchFooter = useAppSelector(
