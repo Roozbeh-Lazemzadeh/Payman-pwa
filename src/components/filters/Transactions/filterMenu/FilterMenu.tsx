@@ -12,6 +12,7 @@ import {
 import { selectAllFilter } from '../../../../store/filterPage/transactionFilterSlice';
 import { useNavigate } from 'react-router-dom';
 import '../../style.css';
+import './style.css';
 
 const { Footer } = Layout;
 
@@ -23,7 +24,9 @@ const FilterMenu: React.FC = () => {
   const allFilter = useAppSelector(selectAllFilter);
 
   const removeFilterItem =
-    allFilter?.merchants?.length !== 0
+    allFilter?.merchants?.length !== 0 ||
+    allFilter?.date?.length !== 0 ||
+    allFilter?.price?.length !== 0
       ? getItem({
           key: '101',
           label: 'حذف فیلترها',
@@ -42,7 +45,7 @@ const FilterMenu: React.FC = () => {
       key: '102',
       label: 'مبلغ',
       icon: <ActivityIcon />,
-      badge: 0,
+      badge: allFilter.price.length === 2 ? 1 : 0,
       dispatch,
       navigate,
     }),
@@ -50,7 +53,7 @@ const FilterMenu: React.FC = () => {
       key: '103',
       label: 'تاریخ',
       icon: <CalendarIcon />,
-      badge: 0,
+      badge: allFilter.date.length === 2 ? 1 : 0,
       dispatch,
       navigate,
     }),
@@ -67,20 +70,7 @@ const FilterMenu: React.FC = () => {
   return (
     <>
       {/* Overlay */}
-      {isFilteredFooterShown && (
-        <div
-          className='overlay'
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            background: 'rgba(0, 0, 0, 0.1)',
-            zIndex: 2,
-          }}
-        />
-      )}
+      {isFilteredFooterShown && <div className='filter-overlay' />}
       <Footer
         className={`filtered-footer${isFilteredFooterShown ? ' active' : ''} ${
           isSearchedFooterShown ? 'invisible' : ''

@@ -3,6 +3,7 @@ import FilterTools from '../components/template/FilterTools';
 import { TransactionsList } from '../components/transactions/TransactionsList';
 import mock from '../transaction.json';
 import './style/style.css';
+import { TransactionFilterList } from '../components/transactions/TransactionFilterList';
 
 function TransactionsPage() {
   const [sortBy, setSortBy] = useState<string>('0'); // State variable to manage sort keyNum
@@ -14,6 +15,7 @@ function TransactionsPage() {
   return (
     <div className='transaction-filter'>
       <FilterTools title='تراکنش‌های اخیر' onSortChange={handleSortChange} />
+      <TransactionFilterList />
       <TransactionsList transactionList={mock} sortBy={sortBy} />
     </div>
   );
