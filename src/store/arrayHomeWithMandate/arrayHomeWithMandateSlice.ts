@@ -36,6 +36,7 @@ const arrayHomeWithMandateSlice = createSlice({
         const month = date.getMonth() + 1;
         const year = date.getFullYear();
         const key = `${year}-${month}-${day}`;
+        console.log(key);
 
         if (!groupedTransactions[key]) {
           groupedTransactions[key] = [];

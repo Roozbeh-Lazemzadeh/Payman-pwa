@@ -10,7 +10,7 @@ import 'react-multi-date-picker/styles/layouts/mobile.css';
 import { weekDays } from '../components/types/calendar';
 import provinces from '../provinces.js';
 
-import './style.css';
+import './style/style.css';
 const onChange = (value: string) => {
   console.log(`selected ${value}`);
 };

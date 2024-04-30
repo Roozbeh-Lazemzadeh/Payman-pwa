@@ -8,6 +8,12 @@
   padding-bottom: 30px;
   direction: ltr;
 }
+.transaction-filter-list-wrapper {
+  margin-top: 0.4rem;
+}
+.transaction-filter-item {
+  margin-top: 0.6rem;
+}
 
 /* media gueries */
 

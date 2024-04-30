@@ -5,7 +5,10 @@ import {
 } from '../../store/filterMenu/transactionFilterMenuSlice';
 import { type NavigateFunction } from 'react-router-dom';
 import { type Dispatch } from '@reduxjs/toolkit';
-import { removeAllFiltersHandler } from '../../store/filterPage/transactionFilterSlice';
+import {
+  dateQuickAccessHandler,
+  removeAllFiltersHandler,
+} from '../../store/filterPage/transactionFilterSlice';
 
 interface ItemProps {
   label: string;
@@ -51,13 +54,12 @@ export function getItem({
         dispatch(removeAllFiltersHandler());
         dispatch(transactionSearchedToggle(''));
         dispatch(transactionFilteredToggle());
+        dispatch(dateQuickAccessHandler(''));
       }
 
       dispatch(transactionSearchedToggle(key));
     }
 
-    // Deselect the active tab for "/profile", "/faq", "/contact-us"
-    // const deselectedRoutes = ["/profile", "/faq", "/contact-us"];
     if (key === '4' || key === '2' || key === '3') {
       return {
         key: '',

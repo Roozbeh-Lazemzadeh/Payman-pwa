@@ -23,7 +23,9 @@ const FilterMenu: React.FC = () => {
   const allFilter = useAppSelector(selectAllFilter);
 
   const removeFilterItem =
-    allFilter?.merchants?.length !== 0
+    allFilter?.merchants?.length !== 0 ||
+    allFilter?.date?.length !== 0 ||
+    allFilter?.price?.length !== 0
       ? getItem({
           key: '101',
           label: 'حذف فیلترها',
@@ -42,7 +44,7 @@ const FilterMenu: React.FC = () => {
       key: '102',
       label: 'مبلغ',
       icon: <ActivityIcon />,
-      badge: 0,
+      badge: allFilter.price.length === 2 ? 1 : 0,
       dispatch,
       navigate,
     }),
@@ -50,7 +52,7 @@ const FilterMenu: React.FC = () => {
       key: '103',
       label: 'تاریخ',
       icon: <CalendarIcon />,
-      badge: 0,
+      badge: allFilter.date.length === 2 ? 1 : 0,
       dispatch,
       navigate,
     }),

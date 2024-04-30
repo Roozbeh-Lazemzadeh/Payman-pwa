@@ -21,11 +21,10 @@ export const Filter: React.FC = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
   const currentPath = location.pathname;
-  console.log(currentPath);
 
   // transaction filter
   const filteredIcon = useAppSelector(selectShowFilterIcon);
-  const filterNumber = useAppSelector(selectFilterNumber);
+  const totalFilterNumber = useAppSelector(selectFilterNumber);
   const isTransactionFilterShown = useAppSelector(selectTransactionFilter);
   const isTransactionSearchedFilterShown = useAppSelector(
     selectTransactionSearchedFilter
@@ -37,7 +36,6 @@ export const Filter: React.FC = () => {
   const handlePrimaryFilterShow = () => {
     switch (currentPath) {
       case '/transactions':
-        console.log('yes');
         if (!isTransactionFilterShown && !isTransactionSearchedFilterShown) {
           dispatch(transactionFilteredToggle());
           dispatch(transactionCloseSearchFalse());
@@ -50,10 +48,8 @@ export const Filter: React.FC = () => {
         }
         break;
       case '/home/with-mandate':
-        console.log('yes');
         break;
       case '/paymans/me':
-        console.log('yes');
         break;
 
       default:
@@ -73,10 +69,10 @@ export const Filter: React.FC = () => {
           </div>
           <span
             className={`filter-number ${
-              filterNumber === 1 ? 'number-one' : ''
+              totalFilterNumber === 1 ? 'number-one' : ''
             }`}
           >
-            {filterNumber}
+            {totalFilterNumber}
           </span>
         </div>
       ) : (

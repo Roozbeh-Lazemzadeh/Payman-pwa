@@ -14,6 +14,7 @@ import { getMonthBillHandler } from '../store/monthlyBill/monthlyBillSlice';
 import { setArrayHomeWithMandate } from '../store/arrayHomeWithMandate/arrayHomeWithMandateSlice';
 import { type RootState } from '../store/store';
 import { type TransactionItem } from '../store/arrayHomeWithMandate/types';
+import { transDate } from '../components/helpers/transDate';
 
 function HomeWithMandate() {
   const [selectedItemIndex, setSelectedItemIndex] = useState<number | null>(0);
@@ -44,20 +45,6 @@ function HomeWithMandate() {
     });
     monthsList2.push(pastDate.format('jYYYY/jMM'));
   }
-
-  const transDate = (inputDate: string) => {
-    const parsedDate = parse(
-      inputDate,
-      'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
-      new Date()
-    );
-    const formattedDate = format(parsedDate, 'yyyy-MM-dd HH:mm:ss');
-    const jalaliDate = jalaliMoment(formattedDate).format(
-      'jYYYY/jMM/jDD - HH:mm:ss'
-    );
-    const weekday = jalaliMoment(formattedDate).locale('fa').format('dddd');
-    return `${weekday} ، ${jalaliDate}`;
-  };
 
   const getCurrentJalaliDate = () => {
     const currentDate = jalaliMoment();
