@@ -29,7 +29,7 @@
       <div class="footer-wrapper"><img class="footer-wrapper_img" src="./assets/logo-splash/payman-bottom-page.svg" alt="">توسعه‌یافته توسط پیمان</div>
   </div> -->
     <div id="root"></div>
-    <script>
+    <!-- <script>
       if('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('./sw.js').then((reg) => {
@@ -39,5 +39,19 @@
           })
         })
       }
-    </script>
+    </script> -->
+    <script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js').then((reg) => {
+                console.log('Service worker registered successfully');
+            }).catch((err) => {
+                console.error('Error in service worker registration:', err);
+            });
+        });
+    } else {
+        console.log('Service workers are not supported in this browser.');
+    }
+</script>
+    <script src="./js/script.js"></script>
 </html>
