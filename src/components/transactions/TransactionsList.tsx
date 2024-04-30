@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import useDrawerTransaction from '../hooks/useDrawerTransaction';
-import jalaliMoment from 'jalali-moment';
 import { TransactionCard } from '../shared/Cards/TransactionCards';
 import { DetailedDrawer } from '../shared/Drawer/DetailedDrawer';
 import { ReactComponent as SuccessfulIcon } from '../../icons/success.svg';
 import { ReactComponent as UnsuccessfulIcon } from '../../icons/unsuccess.svg';
 import { ReactComponent as UnclearIcon } from '../../icons/unclearStatus.svg';
-import { parse, format } from 'date-fns';
+import { parse } from 'date-fns';
 import { useAppSelector } from '../hooks/reduxHooks';
 import { selectAllFilter } from '../../store/filterPage/transactionFilterSlice';
 import './style.css';
+import { transDate } from '../helpers/transDate';
 
 interface TransactionsListProps {
   transactionList: Transaction[];
@@ -132,20 +132,6 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
     }
 
     setSortedTransactionList(sortedList);
-  };
-
-  const transDate = (inputDate: string) => {
-    const parsedDate = parse(
-      inputDate,
-      'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
-      new Date()
-    );
-    const formattedDate = format(parsedDate, 'yyyy-MM-dd HH:mm:ss');
-    const jalaliDate = jalaliMoment(formattedDate).format(
-      'jYYYY/jMM/jDD - HH:mm:ss'
-    );
-    const weekday = jalaliMoment(formattedDate).locale('fa').format('dddd');
-    return `${weekday} ، ${jalaliDate}`;
   };
 
   return (

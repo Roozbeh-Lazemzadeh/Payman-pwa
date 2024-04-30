@@ -12,6 +12,7 @@ import {
 import { selectAllFilter } from '../../../../store/filterPage/transactionFilterSlice';
 import { useNavigate } from 'react-router-dom';
 import '../../style.css';
+import './style.css';
 
 const { Footer } = Layout;
 
@@ -69,20 +70,7 @@ const FilterMenu: React.FC = () => {
   return (
     <>
       {/* Overlay */}
-      {isFilteredFooterShown && (
-        <div
-          className='overlay'
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            background: 'rgba(0, 0, 0, 0.1)',
-            zIndex: 2,
-          }}
-        />
-      )}
+      {isFilteredFooterShown && <div className='filter-overlay' />}
       <Footer
         className={`filtered-footer${isFilteredFooterShown ? ' active' : ''} ${
           isSearchedFooterShown ? 'invisible' : ''
