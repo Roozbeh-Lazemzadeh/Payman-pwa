@@ -22,7 +22,7 @@
     "transaction_date": "24-MAR-05 11.48.20.000000000 AM",
     "transaction_id": "Ydfjgyjgh4CGU",
     "phone_number": "09100022528",
-    "img": "/assets/transactions-logo/snapIcon.svg",
+    "img": "/assets/transactions-logo/snap.svg",
     "transaction_mag": ""
   },
   {
@@ -45,7 +45,7 @@
     "source_bank": "بلوبانک",
     "status": "موفق",
     "transaction_amount": 11200,
-    "transaction_date": "24-APR-28 11.48.20.000000000 AM",
+    "transaction_date": "24-APR-30 11.48.20.000000000 AM",
     "transaction_id": "YdfunRssdsdf",
     "phone_number": "09100022528",
     "img": "/assets/transactions-logo/filimo.png",
@@ -191,7 +191,7 @@
     "transaction_date": "24-APR-2 9.48.20.000000000 AM",
     "transaction_id": "Ydfjgyjgh4CGU",
     "phone_number": "09100022528",
-    "img": "/assets/transactions-logo/snapIcon.svg",
+    "img": "/assets/transactions-logo/snap.svg",
     "transaction_mag": ""
   },
   {
@@ -204,7 +204,7 @@
     "transaction_date": "24-APR-1 9.48.20.000000000 AM",
     "transaction_id": "Ydfjgyjgh4CGU",
     "phone_number": "09100022528",
-    "img": "/assets/transactions-logo/snapIcon.svg",
+    "img": "/assets/transactions-logo/snap.svg",
     "transaction_mag": ""
   }
 ]

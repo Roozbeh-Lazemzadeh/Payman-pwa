@@ -37,3 +37,13 @@ body {
   user-select: none;
   background: #fff;
 }
+
+@media screen and (orientation: landscape) {
+  body {
+    overflow: hidden;
+    transform: rotate(-90deg);
+    width: 100vh;
+    height: 100vw;
+    margin: calc((100vw - 100vh) / 2) 0;
+  }
+}

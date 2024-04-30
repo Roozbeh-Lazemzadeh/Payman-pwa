@@ -47,16 +47,22 @@ export const TransactionCard: React.FC<TransactionCardProps> = ({
     <div className='transaction-card'>
       <div className='card-merchant-wrapper'>
         <div className='card-icon-wrapper'>
-          <img
-            className='card-icon'
-            src={img.length ? img : '/assets/pics/icon-default.png'}
-          />
-          <span
-            className='card-icon-filter'
-            style={{
-              backgroundImage: `url(${img})`,
-            }}
-          ></span>
+          {img.length ? (
+            <div className='card-icon-style'>
+              <img className='card-icon' src={img} />
+              <span
+                className='card-icon-filter'
+                style={{
+                  backgroundImage: `url(${img})`,
+                }}
+              ></span>
+            </div>
+          ) : (
+            <img
+              className='card-icon-default'
+              src='/assets/pics/Icon-default.svg'
+            />
+          )}
         </div>
 
         <span className='card-merchant-name'>{merchant}</span>
