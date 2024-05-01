@@ -13,11 +13,13 @@ function TransactionsPage() {
   };
 
   return (
-    <div className='transaction-filter'>
-      <FilterTools title='تراکنش‌های اخیر' onSortChange={handleSortChange} />
-      <TransactionFilterList />
+    <>
+      <div className='transaction-filter'>
+        <FilterTools title='تراکنش‌های اخیر' onSortChange={handleSortChange} />
+        <TransactionFilterList />
+      </div>
       <TransactionsList transactionList={mock} sortBy={sortBy} />
-    </div>
+    </>
   );
 }
 

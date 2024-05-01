@@ -5,11 +5,11 @@ import { DetailedDrawer } from '../shared/Drawer/DetailedDrawer';
 import { ReactComponent as SuccessfulIcon } from '../../icons/success.svg';
 import { ReactComponent as UnsuccessfulIcon } from '../../icons/unsuccess.svg';
 import { ReactComponent as UnclearIcon } from '../../icons/unclearStatus.svg';
+import { transDate } from '../helpers/transDate';
 import { parse } from 'date-fns';
 import { useAppSelector } from '../hooks/reduxHooks';
-import { selectAllFilter } from '../../store/filterPage/transactionFilterSlice';
+import { selectAllFilter, selectShowFilterIcon } from '../../store/filterPage/transactionFilterSlice';
 import './style.css';
-import { transDate } from '../helpers/transDate';
 
 interface TransactionsListProps {
   transactionList: Transaction[];
@@ -43,6 +43,7 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
     handleCloseDrawer,
     selectedTransactionId,
   } = useDrawerTransaction(sortedTransactionList);
+    const isFiltered = useAppSelector(selectShowFilterIcon);
 
   useEffect(() => {
     sortTransactions();
@@ -135,7 +136,7 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
   };
 
   return (
-    <div className='trans-list'>
+    <div className={`trans-list ${isFiltered ? 'active' : null}`}>
       <DetailedDrawer
         isOpen={isOpen && selectedTransactionId !== null}
         setIsOpen={handleCloseDrawer}

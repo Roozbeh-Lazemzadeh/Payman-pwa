@@ -8,6 +8,11 @@
   padding-bottom: 30px;
   direction: ltr;
 }
+
+.trans-list.active {
+  height: calc(100vh - 350px) !important;
+}
+
 .transaction-filter-list-wrapper {
   position: relative;
   background-color: white;
