@@ -8,7 +8,10 @@ import { ReactComponent as UnclearIcon } from '../../icons/unclearStatus.svg';
 import { transDate } from '../helpers/transDate';
 import { parse } from 'date-fns';
 import { useAppSelector } from '../hooks/reduxHooks';
-import { selectAllFilter, selectShowFilterIcon } from '../../store/filterPage/transactionFilterSlice';
+import {
+  selectAllFilter,
+  selectShowFilterIcon,
+} from '../../store/filterPage/transactionFilterSlice';
 import './style.css';
 
 interface TransactionsListProps {
@@ -43,7 +46,7 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
     handleCloseDrawer,
     selectedTransactionId,
   } = useDrawerTransaction(sortedTransactionList);
-    const isFiltered = useAppSelector(selectShowFilterIcon);
+  const isFiltered = useAppSelector(selectShowFilterIcon);
 
   useEffect(() => {
     sortTransactions();
