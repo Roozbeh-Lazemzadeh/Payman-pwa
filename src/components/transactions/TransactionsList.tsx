@@ -8,10 +8,7 @@ import { ReactComponent as UnclearIcon } from '../../icons/unclearStatus.svg';
 import { transDate } from '../helpers/transDate';
 import { parse } from 'date-fns';
 import { useAppSelector } from '../hooks/reduxHooks';
-import {
-  selectAllFilter,
-  selectShowFilterIcon,
-} from '../../store/filterPage/transactionFilterSlice';
+import { selectAllFilter } from '../../store/filterPage/transactionFilterSlice';
 import './style.css';
 
 interface TransactionsListProps {
@@ -37,6 +34,8 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
   sortBy,
 }) => {
   const allFilter = useAppSelector(selectAllFilter);
+  const { merchants, date, price } = allFilter;
+  console.log(merchants, date, price);
   const [sortedTransactionList, setSortedTransactionList] =
     useState<Transaction[]>(transactionList);
   const {
@@ -46,7 +45,6 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
     handleCloseDrawer,
     selectedTransactionId,
   } = useDrawerTransaction(sortedTransactionList);
-  const isFiltered = useAppSelector(selectShowFilterIcon);
 
   useEffect(() => {
     sortTransactions();
@@ -138,8 +136,31 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
     setSortedTransactionList(sortedList);
   };
 
+  const handleFilterLabelStyle: () => string = () => {
+    let filterNumbers = 0;
+    if (merchants.length > 0) {
+      filterNumbers = filterNumbers + 1;
+    }
+    if (date.length > 0) {
+      filterNumbers = filterNumbers + 1;
+    }
+    if (price.length > 0) {
+      filterNumbers = filterNumbers + 1;
+    }
+
+    switch (filterNumbers) {
+      case 1:
+        return 'active-one';
+      case 2:
+        return 'active-two';
+      case 3:
+        return 'active-three';
+      default:
+        return '';
+    }
+  };
   return (
-    <div className={`trans-list ${isFiltered ? 'active' : null}`}>
+    <div className={`trans-list ${handleFilterLabelStyle()}`}>
       <DetailedDrawer
         isOpen={isOpen && selectedTransactionId !== null}
         setIsOpen={handleCloseDrawer}

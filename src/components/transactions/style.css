@@ -9,8 +9,16 @@
   direction: ltr;
 }
 
-.trans-list.active {
-  height: calc(100vh - 350px) !important;
+.trans-list.active-one {
+  height: calc(100vh - 310px) !important;
+}
+
+.trans-list.active-two {
+  height: calc(100vh - 340px) !important;
+}
+
+.trans-list.active-three {
+  height: calc(100vh - 370px) !important;
 }
 
 .transaction-filter-list-wrapper {
