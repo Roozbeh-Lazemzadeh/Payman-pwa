@@ -12,8 +12,8 @@ import paymanFilterMenuReducer from './filterMenu/paymanFilterMenuSlice';
 import transactionFilterReducer from './filterPage/transactionFilterSlice';
 import homeFilterReducer from './filterPage/homeFilterSlice';
 import paymanFilterReducer from './filterPage/paymanFilterSlice';
-// import { getArrayHomeWithMandate } from './arrayHomeWithMandate/arrayHomeWithMandateSlice';
-import arrayHomeWithMandateReducer from './arrayHomeWithMandate/arrayHomeWithMandateSlice'; // Import the slice reducer
+
+import arrayHomeWithMandateReducer from './arrayHomeWithMandate/arrayHomeWithMandateSlice';
 
 const store = configureStore({
   reducer: {
@@ -30,6 +30,7 @@ const store = configureStore({
     transactionFilter: transactionFilterReducer,
     homeFilter: homeFilterReducer,
     paymanFilter: paymanFilterReducer,
+
     arrayHome: arrayHomeWithMandateReducer,
   },
 });

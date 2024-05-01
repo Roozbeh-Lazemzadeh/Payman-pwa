@@ -1,5 +1,8 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { type RootState } from '../store';
+import { type Transaction } from '../../components/transactions/TransactionsList';
+import transactions from '../../transaction.json';
+import { parse } from 'date-fns';
 
 // Interface for the filter state
 interface FilterState {
@@ -11,6 +14,7 @@ interface FilterState {
   isFiltered: boolean;
   totalFilterNumber: number;
   datePeriod: string;
+  transactionList: Transaction[];
 }
 
 // Initial state for the filter
@@ -23,6 +27,7 @@ const initialState: FilterState = {
   isFiltered: false,
   totalFilterNumber: 0,
   datePeriod: '',
+  transactionList: transactions,
 };
 
 export const transactionFilterSlice = createSlice({
@@ -101,21 +106,83 @@ export const transactionFilterSlice = createSlice({
       state.isFiltered = false;
       state.totalFilterNumber = 0;
       state.datePeriod = '';
+      state.transactionList = transactions;
+    },
+
+    handleListFiltering: (
+      state,
+      action: PayloadAction<{
+        merchants?: string[];
+        prices?: number[];
+        dates?: string[];
+      }>
+    ) => {
+      const { merchants, prices, dates } = action.payload;
+      const { allFilter } = state;
+      let filteredList = transactions;
+      const merchantsToFilter = merchants ?? allFilter.merchants;
+      const pricesToFilter = prices ?? allFilter.price;
+      const datesToFilter = dates ?? allFilter.date;
+
+      // filtering based on merchants
+      if (merchantsToFilter.length > 0) {
+        filteredList = filteredList.filter((transaction) =>
+          merchantsToFilter.includes(transaction.creditor)
+        );
+      }
+
+      // filtering based on prices
+      if (pricesToFilter.length > 0 && pricesToFilter.length === 2) {
+        const [minPrice, maxPrice] = pricesToFilter;
+
+        filteredList = filteredList.filter((transaction) => {
+          const transactionAmount = transaction.transaction_amount;
+          return transactionAmount >= minPrice && transactionAmount <= maxPrice;
+        });
+
+        filteredList.sort(
+          (a, b) => b.transaction_amount - a.transaction_amount
+        );
+      }
+
+      // filtering based on dates
+      if (datesToFilter.length > 0 && datesToFilter.length === 2) {
+        const parsedDates: Date[] = datesToFilter.map((date) =>
+          parse(date, 'yy-MMM-dd hh:mm:ss a', new Date())
+        );
+
+        // Filter transactions between the specified dates
+        filteredList = filteredList.filter((transaction) => {
+          const transactionDate = parse(
+            transaction.transaction_date,
+            'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
+            new Date()
+          );
+
+          return (
+            transactionDate >= parsedDates[0] &&
+            transactionDate <= parsedDates[1]
+          );
+        });
+      }
+      state.transactionList = filteredList;
     },
   },
 });
 
 // Selectors for accessing the state
 export const selectAllFilter = (state: RootState) =>
-  state.transactionFilter?.allFilter;
+  state.transactionFilter.allFilter;
 export const selectShowFilterIcon = (state: RootState) =>
-  state.transactionFilter?.isFiltered;
+  state.transactionFilter.isFiltered;
 export const selectFilterNumber = (state: RootState) =>
-  state.transactionFilter?.totalFilterNumber;
+  state.transactionFilter.totalFilterNumber;
 export const selectMerchantsFilterLength = (state: RootState) =>
-  state.transactionFilter?.allFilter.merchants.length;
+  state.transactionFilter.allFilter.merchants.length;
 export const selectDatePeriod = (state: RootState) =>
-  state.transactionFilter?.datePeriod;
+  state.transactionFilter.datePeriod;
+export const selectTransactionList = (state: RootState) =>
+  state.transactionFilter.transactionList;
 
 // Export the action creators
 export const {
@@ -124,6 +191,7 @@ export const {
   removeAllFiltersHandler,
   priceHandler,
   dateQuickAccessHandler,
+  handleListFiltering,
 } = transactionFilterSlice.actions;
 
 export default transactionFilterSlice.reducer;

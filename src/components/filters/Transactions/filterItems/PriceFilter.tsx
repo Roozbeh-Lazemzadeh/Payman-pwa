@@ -10,6 +10,7 @@ import { ReactComponent as TickSquareIcon } from '../../../../icons/tickSquare.s
 import { ReactComponent as BuyIcon } from '../../../../icons/buy2.svg';
 import { ReactComponent as RemoveIcon } from '../../../../icons/delete.svg';
 import {
+  handleListFiltering,
   priceHandler,
   selectAllFilter,
 } from '../../../../store/filterPage/transactionFilterSlice';
@@ -64,10 +65,13 @@ export const PriceFilter: React.FC = () => {
     if (prices.length === 0) return null;
     if (!prices[0] && prices[1]) {
       dispatch(priceHandler([0, prices[1]]));
+      dispatch(handleListFiltering({ prices: [0, prices[1]] }));
     } else if (prices[0] && !prices[1]) {
       dispatch(priceHandler([prices[0], 100000000]));
+      dispatch(handleListFiltering({ prices: [prices[0], 100000000] }));
     } else {
       dispatch(priceHandler(prices));
+      dispatch(handleListFiltering({ prices }));
     }
     dispatch(transactionSearchedToggle(''));
     dispatch(transactionFilteredToggle());

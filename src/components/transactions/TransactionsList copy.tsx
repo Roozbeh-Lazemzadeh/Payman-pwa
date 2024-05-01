@@ -8,10 +8,7 @@ import { ReactComponent as UnclearIcon } from '../../icons/unclearStatus.svg';
 import { transDate } from '../helpers/transDate';
 import { parse } from 'date-fns';
 import { useAppSelector } from '../hooks/reduxHooks';
-import {
-  selectAllFilter,
-  selectTransactionList,
-} from '../../store/filterPage/transactionFilterSlice';
+import { selectAllFilter } from '../../store/filterPage/transactionFilterSlice';
 import './style.css';
 
 interface TransactionsListProps {
@@ -36,7 +33,6 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
   transactionList,
   sortBy,
 }) => {
-  const TransactioList = useAppSelector(selectTransactionList);
   const allFilter = useAppSelector(selectAllFilter);
   const { merchants, date, price } = allFilter;
   const [sortedTransactionList, setSortedTransactionList] =
@@ -180,7 +176,7 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
           </div>
         </div>
       </DetailedDrawer>
-      {TransactioList.map((transaction) => (
+      {sortedTransactionList.map((transaction) => (
         <div
           key={transaction.id}
           onClick={() => handleDrawerTransaction(transaction.id)}
