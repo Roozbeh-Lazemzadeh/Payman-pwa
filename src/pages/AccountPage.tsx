@@ -6,11 +6,12 @@ import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
 import { ReactComponent as TickSquarepro } from '../icons/TickSquarepro.svg';
 import { ReactComponent as Logout } from '../icons/Logout.svg';
-import 'react-multi-date-picker/styles/layouts/mobile.css';
 import { weekDays } from '../components/types/calendar';
-import provinces from '../provinces.js';
+import { provinces } from '../components/shared/Constant/provinces';
 
+import 'react-multi-date-picker/styles/layouts/mobile.css';
 import './style/style.css';
+
 const onChange = (value: string) => {
   console.log(`selected ${value}`);
 };
@@ -49,7 +50,7 @@ const AccountPage: React.FC = () => {
         className='profile-input-disabled'
       />
       <Input placeholder='نام و نام خانوادگی' className='profile-input' />
-      <Input placeholder='ایمیل' className='profile-input' />
+      <Input placeholder='ایمیل' className='profile-input' type='email' />
       <Select
         showSearch
         placeholder='محل سکونت'
