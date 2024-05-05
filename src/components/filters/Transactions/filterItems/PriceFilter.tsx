@@ -33,6 +33,7 @@ export const PriceFilter: React.FC = () => {
     dispatch(priceHandler([]));
     dispatch(transactionSearchedToggle(''));
     dispatch(transactionFilteredToggle());
+    dispatch(handleListFiltering({ prices: [] }));
   };
 
   const selectedQuickAccess = (value: number) => {

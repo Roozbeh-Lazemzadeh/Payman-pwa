@@ -1,30 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Dropdown, Space } from 'antd';
 import { ReactComponent as ArrowDownIcon } from '../../icons/arrowDown2.svg';
+import { useAppDispatch } from '../hooks/reduxHooks';
+import { handleSortKey } from '../../store/filterPage/transactionFilterSlice';
 import './style.css';
 
-interface SortProps {
-  onSortChange?: (keyNum: string) => void; // Define the onSortChange event handler
+interface MenuItems {
+  label: string;
+  key: string;
+  onClick: () => void;
 }
 
-export const Sort: React.FC<SortProps> = ({ onSortChange }) => {
-  const [, setSelectedKey] = useState<string>('0');
+export const Sort: React.FC = () => {
+  const dispatch = useAppDispatch();
 
   const handleClick = (key: string) => {
-    setSelectedKey(() => {
-      return key; // Update selected key
-    });
-    if (onSortChange) {
-      onSortChange(key);
-    }
+    dispatch(handleSortKey(key));
   };
-
-  interface MenuItems {
-    label: string;
-    key: string;
-    onClick: () => void;
-  }
-
   const items: MenuItems[] = [
     {
       label: 'آخرین تراکنش',
@@ -50,8 +42,8 @@ export const Sort: React.FC<SortProps> = ({ onSortChange }) => {
       }}
       trigger={['click']}
     >
-      <Space className="sort-wrapper">
-        <span className="title">براساس</span>
+      <Space className='sort-wrapper'>
+        <span className='title'>براساس</span>
         <ArrowDownIcon />
       </Space>
     </Dropdown>

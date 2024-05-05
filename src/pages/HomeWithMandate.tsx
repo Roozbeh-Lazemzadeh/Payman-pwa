@@ -4,9 +4,9 @@ import React, { useEffect, useState } from 'react';
 import { MerchantChartSection } from '../components/chart/MerchantChartSection';
 import FilterTools from '../components/template/FilterTools';
 import { TransactionHomeCard } from '../components/shared/Cards/TransactionHomeCards';
-import { DetailedDrawer } from '../components/shared/Drawer/DetailedDrawer';
+// import { DetailedDrawer } from '../components/shared/Drawer/DetailedDrawer';
 import transactionData from '../transaction.json';
-import useDrawerTransaction from '../components/hooks/useDrawerTransaction';
+// import useDrawerTransaction from '../components/hooks/useDrawerTransaction';
 import jalaliMoment from 'jalali-moment';
 import { format, parse } from 'date-fns';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,13 +18,13 @@ import { transDate } from '../components/helpers/transDate';
 
 function HomeWithMandate() {
   const [selectedItemIndex, setSelectedItemIndex] = useState<number | null>(0);
-  const {
-    isOpen,
-    detailedDrawerData,
-    handleDrawerTransaction,
-    handleCloseDrawer,
-    selectedTransactionId,
-  } = useDrawerTransaction(transactionData);
+  // const {
+  //   isOpen,
+  //   detailedDrawerData,
+  //   handleDrawerTransaction,
+  //   handleCloseDrawer,
+  //   selectedTransactionId,
+  // } = useDrawerTransaction(transactionData);
 
   const groupedTransactions = useSelector(
     (state: RootState) => state.arrayHome.groupsTransactions
@@ -84,12 +84,12 @@ function HomeWithMandate() {
         ))}
       </div>
       <MerchantChartSection />
-      <DetailedDrawer
+      {/* <DetailedDrawer
         isOpen={isOpen && selectedTransactionId !== null}
         setIsOpen={handleCloseDrawer}
         title={'جزئیات بیشتر'}
         data={detailedDrawerData}
-      />
+      /> */}
       <FilterTools title='تراکنش‌های پرداخت مستقیم' />
       <div className='TransactionHomeCard-wrapper'>
         <div className='TransactionHomeCard'>
@@ -123,9 +123,9 @@ function HomeWithMandate() {
                       {group.value.map((transaction: TransactionItem) => (
                         <div
                           key={transaction.id}
-                          onClick={() =>
-                            handleDrawerTransaction(transaction.id)
-                          }
+                          // onClick={() =>
+                          //   handleDrawerTransaction(transaction.id)
+                          // }
                         >
                           <TransactionHomeCard
                             merchant={transaction.creditor}

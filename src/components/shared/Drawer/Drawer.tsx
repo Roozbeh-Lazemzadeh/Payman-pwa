@@ -1,35 +1,34 @@
-import PropTypes from 'prop-types';
 import Sheet from 'react-modal-sheet';
-import { type Dispatch, type SetStateAction, type ReactNode } from 'react';
-import './style.css';
+import { type ReactNode } from 'react';
+import { useAppDispatch } from '../../hooks/reduxHooks';
+import { closeBottomSheet } from '../../../store/bottomSheet/bottomSheetSlice';
+import { handleSelectedTransaction } from '../../../store/transaction/transactionSlice';
 
+import './style.css';
 interface CustomDrawerProps {
   title?: string;
   isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
   children: ReactNode;
 }
 
 export const CustomDrawer: React.FC<CustomDrawerProps> = ({
   isOpen,
-  setIsOpen,
   title,
   children,
 }) => {
-  CustomDrawer.propTypes = {
-    isOpen: PropTypes.bool.isRequired,
-    setIsOpen: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired,
-    children: PropTypes.node.isRequired,
+  const dispatch = useAppDispatch();
+
+  const handleCloseBottomSheet = () => {
+    dispatch(closeBottomSheet());
+    dispatch(handleSelectedTransaction(null));
   };
+
   return (
     <>
       <Sheet
         tweenConfig={{ ease: 'circInOut', duration: 0.45 }}
         isOpen={isOpen}
-        onClose={() => {
-          setIsOpen(false);
-        }}
+        onClose={handleCloseBottomSheet}
       >
         <Sheet.Container>
           <Sheet.Header>
@@ -48,9 +47,7 @@ export const CustomDrawer: React.FC<CustomDrawerProps> = ({
                 viewBox='0 0 20 20'
                 fill='none'
                 xmlns='http://www.w3.org/2000/svg'
-                onClick={() => {
-                  setIsOpen(false);
-                }}
+                onClick={handleCloseBottomSheet}
               >
                 <path
                   d='M11.9953 7.99561L8.00195 11.9889'
@@ -101,7 +98,7 @@ export const CustomDrawer: React.FC<CustomDrawerProps> = ({
           </Sheet.Header>
           <Sheet.Content>{children}</Sheet.Content>
         </Sheet.Container>
-        <Sheet.Backdrop onTap={() => setIsOpen(false)} />
+        <Sheet.Backdrop onTap={handleCloseBottomSheet} />
       </Sheet>
     </>
   );

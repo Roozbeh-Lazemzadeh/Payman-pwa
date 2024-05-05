@@ -1,12 +1,20 @@
 import { Tag } from 'antd';
-import { useAppSelector } from '../../hooks/reduxHooks';
-import { selectAllFilter } from '../../../store/filterPage/transactionFilterSlice';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
+import {
+  dateHandler,
+  dateQuickAccessHandler,
+  handleListFiltering,
+  merchantHandler,
+  priceHandler,
+  selectAllFilter,
+} from '../../../store/filterPage/transactionFilterSlice';
 import { ReactComponent as CrossIcon } from '../../../icons/cross.svg';
 import { filterConvertDate } from '../../helpers/transDate';
 
 import './style.css';
 
 const TransactionFilterTag: React.FC = () => {
+  const dispatch = useAppDispatch();
   const { merchants, price, date } = useAppSelector(selectAllFilter);
 
   const priceRange =
@@ -21,10 +29,34 @@ const TransactionFilterTag: React.FC = () => {
         )}`
       : '';
 
+  const onClick = (label: string) => {
+    switch (label) {
+      case 'merchant':
+        dispatch(merchantHandler([]));
+        dispatch(handleListFiltering({ merchants: [] }));
+        break;
+      case 'date':
+        dispatch(dateHandler([]));
+        dispatch(handleListFiltering({ dates: [] }));
+        dispatch(dateQuickAccessHandler(''));
+        break;
+      case 'price':
+        dispatch(priceHandler([]));
+        dispatch(handleListFiltering({ prices: [] }));
+        break;
+
+      default:
+        break;
+    }
+  };
+
   return (
     <div className='filtered_tag'>
       {merchants.length > 0 && (
-        <Tag icon={<CrossIcon style={{ marginLeft: 5 }} />}>
+        <Tag
+          icon={<CrossIcon style={{ marginLeft: 5 }} />}
+          onClick={() => onClick('merchant')}
+        >
           <span>فیلتر شده بر اساس نام کسب‌وکار : </span>
           {merchants.map((merchant, index) => (
             <span key={`merchant-${index}`}>
@@ -35,14 +67,20 @@ const TransactionFilterTag: React.FC = () => {
         </Tag>
       )}
       {date.length > 0 && (
-        <Tag icon={<CrossIcon style={{ marginLeft: 5 }} />}>
+        <Tag
+          icon={<CrossIcon style={{ marginLeft: 5 }} />}
+          onClick={() => onClick('date')}
+        >
           <>
             <span>{`فیلتر شده بر اساس تاریخ : ${dateRange}`}</span>
           </>
         </Tag>
       )}
       {price.length > 0 && (
-        <Tag icon={<CrossIcon style={{ marginLeft: 5 }} />}>
+        <Tag
+          icon={<CrossIcon style={{ marginLeft: 5 }} />}
+          onClick={() => onClick('price')}
+        >
           <>
             <span>{`فیلتر شده بر اساس مبلغ: ${priceRange}`}</span>
           </>

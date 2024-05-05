@@ -79,6 +79,7 @@ export const MerchantFilter: React.FC = () => {
     dispatch(merchantHandler([]));
     dispatch(transactionSearchedToggle(''));
     dispatch(transactionFilteredToggle());
+    dispatch(handleListFiltering({ merchants: [] }));
   };
 
   const handleSelectedOptions = (newSelectedOptions: string[]) => {

@@ -1,31 +1,35 @@
-import React, { type Dispatch, type SetStateAction } from 'react';
+import React from 'react';
 import { CustomDrawer } from './Drawer';
 import { DotLeader } from '../../helpers/DotLeader';
+import { useAppSelector } from '../../hooks/reduxHooks';
+import { selectBottomSheetIsOpen } from '../../../store/bottomSheet/bottomSheetSlice';
 
+interface DetailedDrawerItem {
+  firstWord: string;
+  secondWord: string;
+}
 interface DetailedDrawerProps {
   title: string;
   isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
-  data: any[];
+  data: DetailedDrawerItem[];
   children?: React.ReactNode;
 }
 
 export const DetailedDrawer: React.FC<DetailedDrawerProps> = ({
-  isOpen,
-  setIsOpen,
   title,
   data,
   children,
 }) => {
+  const isOpen = useAppSelector(selectBottomSheetIsOpen);
   return (
-    <CustomDrawer isOpen={isOpen} title={title} setIsOpen={setIsOpen}>
+    <CustomDrawer isOpen={isOpen} title={title}>
       {
         <div className='detailed-drawer'>
-          {data.map((val, index) => (
+          {data.map((value, index) => (
             <DotLeader
               key={index}
-              text1={val.nameItem1}
-              text2={val.nameItem2}
+              firstWord={value.firstWord}
+              secondWord={value.secondWord}
             />
           ))}
           <div className='drawer-children'>{children}</div>

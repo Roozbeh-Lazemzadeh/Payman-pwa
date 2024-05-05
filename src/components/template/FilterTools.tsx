@@ -4,16 +4,14 @@ import { Filter } from '../filters/Filter';
 
 interface FilterToolsProps {
   title: string;
-  onSortChange?: (keyNum: string) => void; // Define the onSortChange event handler
 }
 
-const FilterTools: React.FC<FilterToolsProps> = ({ title, onSortChange }) => {
+const FilterTools: React.FC<FilterToolsProps> = ({ title }) => {
   return (
     <div className='filter-tools-wrapper'>
       <p className='filter-tools-title'>{title}</p>
       <div className='filter-tools-component'>
-        <Sort onSortChange={onSortChange} />
-        {/* Pass the onSortChange event handler to the Sort component */}
+        <Sort />
         <Filter />
       </div>
     </div>
