@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Select, type SelectProps } from 'antd';
+import {
+  Button,
+  Dropdown,
+  type MenuProps,
+  Select,
+  Space,
+  type SelectProps,
+} from 'antd';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import {
   transactionFilteredToggle,
@@ -159,6 +166,37 @@ export const MerchantFilter: React.FC = () => {
     );
   }, [options]);
 
+  const items: MenuProps['items'] = [
+    {
+      label: '1st menu item',
+      key: '1',
+      // icon: <UserOutlined />,
+    },
+    {
+      label: '2nd menu item',
+      key: '2',
+      // icon: <UserOutlined />,
+    },
+    {
+      label: '3rd menu item',
+      key: '3',
+      // icon: <UserOutlined />,
+      danger: true,
+    },
+    {
+      label: '4rd menu item',
+      key: '4',
+      // icon: <UserOutlined />,
+      danger: true,
+      disabled: true,
+    },
+  ];
+
+  const menuProps = {
+    items,
+    // onClick: handleMenuClick,
+  };
+
   return (
     <>
       <ToastContainer rtl />
@@ -224,6 +262,11 @@ export const MerchantFilter: React.FC = () => {
           </>
         </div>
         <div className='search-section '>
+          <Dropdown menu={menuProps}>
+            <Button>
+              <Space>Button</Space>
+            </Button>
+          </Dropdown>
           <Select
             placeholder='جستجوی نام کسب‌وکار'
             mode='multiple'
