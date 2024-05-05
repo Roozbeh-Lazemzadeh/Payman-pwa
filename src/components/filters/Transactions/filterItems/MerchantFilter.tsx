@@ -167,13 +167,13 @@ export const MerchantFilter: React.FC = () => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
-    function myStopFunction() {
-      if (inputRef.current) {
-        inputRef.current.disabled = true;
-      }
-    }
-    setTimeout(myStopFunction, 500);
-    console.log('first1');
+  //   function myStopFunction() {
+  //     if (inputRef.current) {
+  //       inputRef.current.disabled = true;
+  //     }
+  //   }
+  //   setTimeout(myStopFunction, 500);
+  //   console.log('first1');
   };
   return (
     <>
