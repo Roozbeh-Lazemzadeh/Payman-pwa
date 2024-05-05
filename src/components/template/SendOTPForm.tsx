@@ -95,11 +95,7 @@ const SendOTPForm: FC<OnboardingProps> = ({ setStep }) => {
         استفاده می‌کند؛ بنابراین توجه کنید که کد ملی و شماره موبایل، متعلق به یک
         نفر باشد.
       </p>
-      <CustomDrawer
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        title={'توافق‌نامه کاربری پیمان'}
-      >
+      <CustomDrawer isOpen={isOpen} title={'توافق‌نامه کاربری پیمان'}>
         <div style={{ fontWeight: 500 }}>
           <div
             style={{

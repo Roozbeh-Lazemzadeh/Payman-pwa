@@ -2,18 +2,21 @@ import React from 'react';
 import './style.css';
 
 interface DotLeaderProps {
-  text1: string;
-  text2: string;
+  firstWord: string;
+  secondWord: string;
 }
 
-export const DotLeader: React.FC<DotLeaderProps> = ({ text1, text2 }) => {
+export const DotLeader: React.FC<DotLeaderProps> = ({
+  firstWord,
+  secondWord,
+}) => {
   return (
-    <div className="dot-leader-wrapper">
-      <span className="start-text">{text1}</span>
-      <span className="dots">
+    <div className='dot-leader-wrapper'>
+      <span className='start-text'>{firstWord}</span>
+      <span className='dots'>
         {Array.from({ length: 1000 }, (value) => value).map(() => '.')}
       </span>
-      <span className="end-text">{text2} </span>
+      <span className='end-text'>{secondWord} </span>
     </div>
   );
 };

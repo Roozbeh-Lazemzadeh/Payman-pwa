@@ -10,7 +10,7 @@ export interface TransactionItem {
   transaction_id: string;
   phone_number: string;
   img: string;
-  transaction_mag: string;
+  transaction_msg: string;
 }
 
 // Define the GroupedTransaction type

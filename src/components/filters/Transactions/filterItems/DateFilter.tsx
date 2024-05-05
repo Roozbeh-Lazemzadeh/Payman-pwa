@@ -147,6 +147,7 @@ export const DateFilter: React.FC = () => {
     dispatch(transactionSearchedToggle(''));
     dispatch(transactionFilteredToggle());
     dispatch(dateQuickAccessHandler(''));
+    dispatch(handleListFiltering({ dates: [] }));
   };
 
   useEffect(() => {

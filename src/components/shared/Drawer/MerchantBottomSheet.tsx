@@ -10,11 +10,10 @@ interface DetailedDrawerProps {
 }
 export const MerchantBottomSheet: React.FC<DetailedDrawerProps> = ({
   isOpen,
-  setIsOpen,
   children,
 }) => {
   return (
-    <CustomDrawer isOpen={isOpen} title={''} setIsOpen={setIsOpen}>
+    <CustomDrawer isOpen={isOpen} title={''}>
       {
         <div className='detailed-drawer merchant'>
           <div>{children}</div>

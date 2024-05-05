@@ -10,7 +10,7 @@
     "transaction_id": "YdfgsdfRgh4CGU",
     "phone_number": "09100022528",
     "img": "/assets/transactions-logo/tapsi.svg",
-    "transaction_mag": ""
+    "transaction_msg": ""
   },
   {
     "id": 2,
@@ -23,7 +23,7 @@
     "transaction_id": "Ydfjgyjgh4CGU",
     "phone_number": "09100022528",
     "img": "/assets/transactions-logo/snap.svg",
-    "transaction_mag": ""
+    "transaction_msg": ""
   },
   {
     "id": 3,
@@ -36,7 +36,7 @@
     "transaction_id": "YdfunRwwwerfg",
     "phone_number": "09100022528",
     "img": "/assets/transactions-logo/cafe-bazar.png",
-    "transaction_mag": ""
+    "transaction_msg": ""
   },
   {
     "id": 4,
@@ -49,7 +49,7 @@
     "transaction_id": "YdfunRssdsdf",
     "phone_number": "09100022528",
     "img": "/assets/transactions-logo/filimo.png",
-    "transaction_mag": ""
+    "transaction_msg": ""
   },
   {
     "id": 5,
@@ -62,7 +62,7 @@
     "transaction_id": "sdfsdfsdRgh4CGU",
     "phone_number": "09100022528",
     "img": "/assets/transactions-logo/FILMNET.svg",
-    "transaction_mag": ""
+    "transaction_msg": ""
   },
   {
     "id": 6,
@@ -75,7 +75,7 @@
     "transaction_id": "Ydeeers4CGU",
     "phone_number": "09100022528",
     "img": "/assets/transactions-logo/HIWEB.svg",
-    "transaction_mag": ""
+    "transaction_msg": ""
   },
   {
     "id": 7,
@@ -88,7 +88,7 @@
     "transaction_id": "YdfkhckljoCGU",
     "phone_number": "09100022528",
     "img": "/assets/transactions-logo/ITOLL.svg",
-    "transaction_mag": ""
+    "transaction_msg": ""
   },
   {
     "id": 8,
@@ -101,7 +101,7 @@
     "transaction_id": "YkufkyukkCGU",
     "phone_number": "09100022528",
     "img": "/assets/transactions-logo/MTN-Logo.png",
-    "transaction_mag": ""
+    "transaction_msg": ""
   },
   {
     "id": 9,
@@ -114,7 +114,7 @@
     "transaction_id": "Ydfunpoihkbvgkj",
     "phone_number": "09100022528",
     "img": "/assets/transactions-logo/myket.png",
-    "transaction_mag": "سرویس بانکی شما ( سامان ) در حال حاظر پاسخگو نمی‌باشد . در صورت کم شدن موجودی مبلغ شما طی ۴۸ ساعت آینده برای شما واریز میشود ."
+    "transaction_msg": "سرویس بانکی شما ( سامان ) در حال حاظر پاسخگو نمی‌باشد . در صورت کم شدن موجودی مبلغ شما طی ۴۸ ساعت آینده برای شما واریز میشود ."
   },
   {
     "id": 10,
@@ -127,7 +127,7 @@
     "transaction_id": "lulbuiulgh4CGU",
     "phone_number": "09100022528",
     "img": "/assets/transactions-logo/shatel.png",
-    "transaction_mag": "سرویس بانکی شما ( سامان ) در حال حاظر پاسخگو نمی‌باشد . در صورت کم شدن موجودی مبلغ شما طی ۴۸ ساعت آینده برای شما واریز میشود ."
+    "transaction_msg": "سرویس بانکی شما ( سامان ) در حال حاظر پاسخگو نمی‌باشد . در صورت کم شدن موجودی مبلغ شما طی ۴۸ ساعت آینده برای شما واریز میشود ."
   },
   {
     "id": 11,
@@ -140,7 +140,7 @@
     "transaction_id": "fhgdghdfh4CGU",
     "phone_number": "09100022528",
     "img": "/assets/transactions-logo/SIBCH.svg",
-    "transaction_mag": "سرویس بانکی شما ( سامان ) در حال حاظر پاسخگو نمی‌باشد . در صورت کم شدن موجودی مبلغ شما طی ۴۸ ساعت آینده برای شما واریز میشود ."
+    "transaction_msg": "سرویس بانکی شما ( سامان ) در حال حاظر پاسخگو نمی‌باشد . در صورت کم شدن موجودی مبلغ شما طی ۴۸ ساعت آینده برای شما واریز میشود ."
   },
   {
     "id": 12,
@@ -153,7 +153,7 @@
     "transaction_id": "lujluiah4CGU",
     "phone_number": "09100022528",
     "img": "",
-    "transaction_mag": "سرویس بانکی شما ( سامان ) در حال حاظر پاسخگو نمی‌باشد . در صورت کم شدن موجودی مبلغ شما طی ۴۸ ساعت آینده برای شما واریز میشود ."
+    "transaction_msg": "سرویس بانکی شما ( سامان ) در حال حاظر پاسخگو نمی‌باشد . در صورت کم شدن موجودی مبلغ شما طی ۴۸ ساعت آینده برای شما واریز میشود ."
   },
   {
     "id": 13,
@@ -166,7 +166,7 @@
     "transaction_id": "lujhtdctcjkjkGU",
     "phone_number": "09100022528",
     "img": "",
-    "transaction_mag": "سرویس بانکی شما ( سامان ) در حال حاظر پاسخگو نمی‌باشد . در صورت کم شدن موجودی مبلغ شما طی ۴۸ ساعت آینده برای شما واریز میشود ."
+    "transaction_msg": "سرویس بانکی شما ( سامان ) در حال حاظر پاسخگو نمی‌باشد . در صورت کم شدن موجودی مبلغ شما طی ۴۸ ساعت آینده برای شما واریز میشود ."
   },
   {
     "id": 14,
@@ -179,7 +179,7 @@
     "transaction_id": "YdfweeeefCGU",
     "phone_number": "09100145638",
     "img": "/assets/transactions-logo/tapsi.svg",
-    "transaction_mag": ""
+    "transaction_msg": ""
   },
   {
     "id": 15,
@@ -192,7 +192,7 @@
     "transaction_id": "Ydfjgyjgh4CGU",
     "phone_number": "09100022528",
     "img": "/assets/transactions-logo/snap.svg",
-    "transaction_mag": ""
+    "transaction_msg": ""
   },
   {
     "id": 16,
@@ -205,6 +205,6 @@
     "transaction_id": "Ydfjgyjgh4CGU",
     "phone_number": "09100022528",
     "img": "/assets/transactions-logo/snap.svg",
-    "transaction_mag": ""
+    "transaction_msg": ""
   }
 ]

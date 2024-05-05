@@ -14,6 +14,8 @@ import homeFilterReducer from './filterPage/homeFilterSlice';
 import paymanFilterReducer from './filterPage/paymanFilterSlice';
 
 import arrayHomeWithMandateReducer from './arrayHomeWithMandate/arrayHomeWithMandateSlice';
+import bottomSheetReducer from './bottomSheet/bottomSheetSlice';
+import transactionReducer from './transaction/transactionSlice';
 
 const store = configureStore({
   reducer: {
@@ -32,6 +34,8 @@ const store = configureStore({
     paymanFilter: paymanFilterReducer,
 
     arrayHome: arrayHomeWithMandateReducer,
+    bottomSheet: bottomSheetReducer,
+    transaction: transactionReducer,
   },
 });
 

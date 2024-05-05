@@ -2,7 +2,7 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { type RootState } from '../store';
 import { type Transaction } from '../../components/transactions/TransactionsList';
 import transactions from '../../transaction.json';
-import { parse } from 'date-fns';
+import { isAfter, parse } from 'date-fns';
 
 // Interface for the filter state
 interface FilterState {
@@ -15,6 +15,7 @@ interface FilterState {
   totalFilterNumber: number;
   datePeriod: string;
   transactionList: Transaction[];
+  sortKey: string;
 }
 
 // Initial state for the filter
@@ -28,6 +29,7 @@ const initialState: FilterState = {
   totalFilterNumber: 0,
   datePeriod: '',
   transactionList: transactions,
+  sortKey: '0',
 };
 
 export const transactionFilterSlice = createSlice({
@@ -167,6 +169,10 @@ export const transactionFilterSlice = createSlice({
       }
       state.transactionList = filteredList;
     },
+
+    handleSortKey: (state, action: PayloadAction<string>) => {
+      state.sortKey = action.payload;
+    },
   },
 });
 
@@ -181,10 +187,35 @@ export const selectMerchantsFilterLength = (state: RootState) =>
   state.transactionFilter.allFilter.merchants.length;
 export const selectDatePeriod = (state: RootState) =>
   state.transactionFilter.datePeriod;
-export const selectTransactionList = (state: RootState) =>
-  state.transactionFilter.transactionList;
+export const selectTransactionList = (state: RootState) => {
+  if (state.transactionFilter.sortKey === '0') {
+    const sortedList = [...state.transactionFilter.transactionList];
+    sortedList.sort((a, b) => {
+      const dateA = parse(
+        a.transaction_date,
+        'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
+        new Date()
+      );
+      const dateB = parse(
+        b.transaction_date,
+        'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
+        new Date()
+      );
 
-// Export the action creators
+      // Compare dates using isAfter from date-fns
+      return isAfter(dateB, dateA) ? 1 : -1;
+    });
+
+    return sortedList;
+  } else if (state.transactionFilter.sortKey === '1') {
+    const sortedList = [...state.transactionFilter.transactionList];
+    sortedList.sort((a, b) => b.transaction_amount - a.transaction_amount);
+    return sortedList;
+  }
+
+  return state.transactionFilter.transactionList;
+};
+
 export const {
   merchantHandler,
   dateHandler,
@@ -192,6 +223,7 @@ export const {
   priceHandler,
   dateQuickAccessHandler,
   handleListFiltering,
+  handleSortKey,
 } = transactionFilterSlice.actions;
 
 export default transactionFilterSlice.reducer;
