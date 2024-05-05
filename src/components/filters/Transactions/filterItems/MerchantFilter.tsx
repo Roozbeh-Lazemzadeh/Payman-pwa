@@ -1,10 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {
-  Button,
-  Dropdown,
-  type MenuProps,
   Select,
-  Space,
   type SelectProps,
 } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
@@ -166,37 +162,6 @@ const inputRef = useRef<HTMLInputElement>(null);
     );
   }, [options]);
 
-  const items: MenuProps['items'] = [
-    {
-      label: '1st menu item',
-      key: '1',
-      // icon: <UserOutlined />,
-    },
-    {
-      label: '2nd menu item',
-      key: '2',
-      // icon: <UserOutlined />,
-    },
-    {
-      label: '3rd menu item',
-      key: '3',
-      // icon: <UserOutlined />,
-      danger: true,
-    },
-    {
-      label: '4rd menu item',
-      key: '4',
-      // icon: <UserOutlined />,
-      danger: true,
-      disabled: true,
-    },
-  ];
-
-  const menuProps = {
-    items,
-    // onClick: handleMenuClick,
-  };
-
   const handleFixFooterInput = () => {
     console.log('first');
   };
@@ -204,6 +169,7 @@ const inputRef = useRef<HTMLInputElement>(null);
   const handleFixFooterSelect = () => {
     if (inputRef.current) {
       inputRef.current.focus();
+      return true;
     }
     console.log('first1');
   };
@@ -275,13 +241,9 @@ const inputRef = useRef<HTMLInputElement>(null);
           className='input-class'
           ref={inputRef}
           onFocus={handleFixFooterInput}
+          type='number'
         />
         <div className='search-section '>
-          <Dropdown menu={menuProps}>
-            <Button>
-              <Space>Button</Space>
-            </Button>
-          </Dropdown>
           <Select
             placeholder='جستجوی نام کسب‌وکار'
             mode='multiple'
@@ -293,6 +255,7 @@ const inputRef = useRef<HTMLInputElement>(null);
             value={selectedOptions}
             placement='topRight'
             onFocus={handleFixFooterSelect}
+            onDropdownVisibleChange={handleFixFooterSelect}
           />
         </div>
       </div>
