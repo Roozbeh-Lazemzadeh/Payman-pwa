@@ -53,7 +53,7 @@ body {
     height: 100vw;
     visibility: hidden;
   }
-  footer.ant-layout-footer.primary-footer-active {
+  .ant-layout-footer.primary-footer-active {
     display: none;
   }
   .landscape-wrapper {
