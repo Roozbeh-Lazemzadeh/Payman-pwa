@@ -166,7 +166,7 @@ export const MerchantFilter: React.FC = () => {
   const handleFixFooterSelect = () => {
     if (inputRef.current) {
       inputRef.current.focus();
-      inputRef.current.disabled = !inputRef.current.disabled;
+      inputRef.current.disabled = true;
     }
     console.log('first1');
   };
