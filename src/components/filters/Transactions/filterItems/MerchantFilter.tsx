@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Select, type SelectProps } from 'antd';
+import { Input, Select, type SelectProps } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import {
   transactionFilteredToggle,
@@ -223,6 +223,7 @@ export const MerchantFilter: React.FC = () => {
             </span>
           </>
         </div>
+          <Input className='input-class' />
         <div className='search-section '>
           <Select
             placeholder='جستجوی نام کسب‌وکار'

@@ -58,6 +58,7 @@ function HomeWithMandate() {
     if (selectedMonth) {
       const selectedYearMonth = monthsList2[selectedMonth.id];
       dispatch(getMonthBillHandler(selectedYearMonth));
+      console.log(selectedYearMonth);
     } else {
       console.log('Error: Month not found');
     }
