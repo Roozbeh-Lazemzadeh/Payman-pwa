@@ -72,6 +72,12 @@ function App(): JSX.Element {
           },
         }}
       >
+        <div className='landscape-wrapper'>
+          <img className='landscape-img' src='./assets/pics/landscape.png' />
+          <p className='landscape-paragraph'>
+            کاربر گرامی لطفا گوشی را عمودی نگه دارید.
+          </p>
+        </div>
         {isAppLoaded ? (
           <RouterProvider router={router} />
         ) : isAppLoading ? null : (

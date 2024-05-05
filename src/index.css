@@ -1,49 +1,74 @@
 @font-face {
-  font-family: "IranYekan";
-  src: url("/public/assets/fonts/IRANYekanXFaNum-DemiBold.ttf")
-    format("truetype");
+  font-family: 'IranYekan';
+  src: url('/public/assets/fonts/IRANYekanXFaNum-DemiBold.ttf')
+    format('truetype');
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "IranYekan";
-  src: url("/public/assets/fonts/IRANYekanXFaNum-ExtraBold.ttf")
-    format("truetype");
+  font-family: 'IranYekan';
+  src: url('/public/assets/fonts/IRANYekanXFaNum-ExtraBold.ttf')
+    format('truetype');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "IranYekan";
-  src: url("/public/assets/fonts/IRANYekanXFaNum-Medium.ttf") format("truetype");
+  font-family: 'IranYekan';
+  src: url('/public/assets/fonts/IRANYekanXFaNum-Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "IranYekan";
-  src: url("/public/assets/fonts/IRANYekanXFaNum-Regular.ttf")
-    format("truetype");
+  font-family: 'IranYekan';
+  src: url('/public/assets/fonts/IRANYekanXFaNum-Regular.ttf')
+    format('truetype');
   font-weight: 400;
   font-style: normal;
 }
 
 body {
   margin: 0;
-  font-family: "IranYekan", sans-serif;
+  font-family: 'IranYekan', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   user-select: none;
   background: #fff;
 }
 
+.landscape-wrapper {
+  visibility: hidden;
+  display: none;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
 @media screen and (orientation: landscape) {
   body {
     overflow: hidden;
-    transform: rotate(-90deg);
     width: 100vh;
     height: 100vw;
-    margin: calc((100vw - 100vh) / 2) 0;
+    visibility: hidden;
+  }
+  footer.ant-layout-footer.primary-footer-active {
+    display: none;
+  }
+  .landscape-wrapper {
+    visibility: visible;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    transform: rotate(360deg);
+  }
+  .landscape-img {
+    margin-bottom: 40px;
   }
 }
