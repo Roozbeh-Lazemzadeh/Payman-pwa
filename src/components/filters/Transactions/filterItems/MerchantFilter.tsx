@@ -202,15 +202,11 @@ const inputRef = useRef<HTMLInputElement>(null);
   };
 
   const handleFixFooterSelect = () => {
-    console.log('two');
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+    console.log('first1');
   };
-
-   useEffect(() => {
-     if (inputRef.current) {
-       inputRef.current.focus();
-     }
-   }, []);
-
   return (
     <>
       <ToastContainer rtl />
