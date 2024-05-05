@@ -12,6 +12,7 @@ import gregorian_en from 'react-date-object/locales/gregorian_en';
 import {
   dateHandler,
   dateQuickAccessHandler,
+  handleListFiltering,
   selectAllFilter,
   selectDatePeriod,
 } from '../../../../store/filterPage/transactionFilterSlice';
@@ -59,6 +60,7 @@ export const DateFilter: React.FC = () => {
   const handleDateFilter = () => {
     if (dates.length === 0) return null;
     dispatch(dateHandler(dates));
+    dispatch(handleListFiltering({ dates }));
     dispatch(transactionSearchedToggle(''));
     dispatch(transactionFilteredToggle());
   };

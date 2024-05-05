@@ -13,6 +13,7 @@ import { showNotifyToast } from '../../../shared/Toast/CustomToast';
 import { ReactComponent as RemoveIcon } from '../../../../icons/delete.svg';
 import { ReactComponent as InfoIcon } from '../../../../icons/yellowInfo.svg';
 import {
+  handleListFiltering,
   merchantHandler,
   selectAllFilter,
 } from '../../../../store/filterPage/transactionFilterSlice';
@@ -67,6 +68,7 @@ export const MerchantFilter: React.FC = () => {
     dispatch(merchantHandler(combinedSelectedItems));
     dispatch(transactionSearchedToggle(''));
     dispatch(transactionFilteredToggle());
+    dispatch(handleListFiltering({ merchants: combinedSelectedItems }));
   };
 
   const handleRemoveFilter = () => {
