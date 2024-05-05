@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Button,
   Dropdown,
@@ -6,7 +6,6 @@ import {
   Select,
   Space,
   type SelectProps,
-  Input,
 } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import {
@@ -37,7 +36,7 @@ export const MerchantFilter: React.FC = () => {
   const [selectedQuickItems, setSelectedQuickItems] = useState<string[]>([]);
   const [options, setOptions] = useState<SelectProps['options']>([]);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
-
+const inputRef = useRef<HTMLInputElement>(null);
   const selectedQuickAccess = (title: string) => {
     const currentOptionsLength = selectedOptions.length;
     const totalSelectedItems = selectedQuickItems.length + currentOptionsLength; // Check if the total length (selectedQuickItems + selectedOptions) is less than 3
@@ -198,6 +197,20 @@ export const MerchantFilter: React.FC = () => {
     // onClick: handleMenuClick,
   };
 
+  const handleFixFooterInput = () => {
+    console.log('first');
+  };
+
+  const handleFixFooterSelect = () => {
+    console.log('two');
+  };
+
+   useEffect(() => {
+     if (inputRef.current) {
+       inputRef.current.focus();
+     }
+   }, []);
+
   return (
     <>
       <ToastContainer rtl />
@@ -262,7 +275,11 @@ export const MerchantFilter: React.FC = () => {
             </span>
           </>
         </div>
-          <Input className='input-class' />
+        <input
+          className='input-class'
+          ref={inputRef}
+          onFocus={handleFixFooterInput}
+        />
         <div className='search-section '>
           <Dropdown menu={menuProps}>
             <Button>
@@ -279,6 +296,7 @@ export const MerchantFilter: React.FC = () => {
             maxTagTextLength={7}
             value={selectedOptions}
             placement='topRight'
+            onFocus={handleFixFooterSelect}
           />
         </div>
       </div>
