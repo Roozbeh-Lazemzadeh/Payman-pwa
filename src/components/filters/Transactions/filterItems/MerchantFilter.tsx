@@ -30,6 +30,7 @@ export const MerchantFilter: React.FC = () => {
   const [options, setOptions] = useState<SelectProps['options']>([]);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
+  const selectRef = useRef<any>(null);
   const selectedQuickAccess = (title: string) => {
     const currentOptionsLength = selectedOptions.length;
     const totalSelectedItems = selectedQuickItems.length + currentOptionsLength; // Check if the total length (selectedQuickItems + selectedOptions) is less than 3
@@ -159,22 +160,24 @@ export const MerchantFilter: React.FC = () => {
     );
   }, [options]);
 
-  const handleFixFooterInput = () => {
-    console.log('first');
-  };
+ const handleFixFooterInput = () => {
+   console.log('first');
+   if (selectRef.current) {
+     selectRef.current.focus();
+   }
+ };
 
-  const handleFixFooterSelect = () => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  //   function myStopFunction() {
-  //     if (inputRef.current) {
-  //       inputRef.current.disabled = true;
-  //     }
-  //   }
-  //   setTimeout(myStopFunction, 500);
-  //   console.log('first1');
-  };
+ const handleFixFooterSelect = () => {
+   console.log('true');
+   if (inputRef.current && selectRef.current) {
+     inputRef.current.focus();
+     inputRef.current.disabled = true;
+     setTimeout(() => {
+       inputRef.current?.removeAttribute('disabled'); // Enable the input after a delay
+     }, 500);
+     selectRef.current.focus();
+   }
+ };
   return (
     <>
       <ToastContainer rtl />
@@ -251,14 +254,14 @@ export const MerchantFilter: React.FC = () => {
             value={selectedOptions}
             placement='topRight'
             onFocus={handleFixFooterSelect}
-            onDropdownVisibleChange={handleFixFooterSelect}
+            ref={selectRef}
           />
-        <input
-          className='input-class'
-          ref={inputRef}
-          onFocus={handleFixFooterInput}
-          type='number'
-        />
+          <input
+            className='input-class'
+            ref={inputRef}
+            onFocus={handleFixFooterInput}
+            type='number'
+          />
         </div>
       </div>
     </>
