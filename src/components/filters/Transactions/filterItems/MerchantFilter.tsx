@@ -181,16 +181,17 @@ export const MerchantFilter: React.FC = () => {
  const handleFixFooterSelect = () => {
    if (inputRef.current) {
      console.log('true');
-     inputRef.current.disabled = true;
      inputRef.current.focus();
+     inputRef.current.disabled = true;
+     selectRef.current.focus();
     //  if (document.activeElement !== inputRef.current) {
     //  }
-     setTimeout(() => {
-       inputRef.current?.removeAttribute('disabled');
-     }, 500);
-     if (document.activeElement !== selectRef.current) {
-       selectRef.current.focus();
-     }
+    //  setTimeout(() => {
+    //    inputRef.current?.removeAttribute('disabled');
+    //  }, 500);
+    //  if (document.activeElement !== selectRef.current) {
+    //    selectRef.current.focus();
+    //  }
    }
  };
   return (
