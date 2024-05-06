@@ -32,7 +32,6 @@ export const MerchantFilter: React.FC = () => {
   const selectRef = useRef<any>(null);
   const inputRef = useRef<any>(null);
   const [isOpen, setIsOpen] = useState(false);
-  // const selectRef = useRef<BaseSelectRef>(null);
 
   const selectedQuickAccess = (title: string) => {
     const currentOptionsLength = selectedOptions.length;
@@ -165,6 +164,9 @@ export const MerchantFilter: React.FC = () => {
 
   const handleSelectFocus = () => {
     inputRef.current.focus();
+    setTimeout(() => {
+      selectRef.current.focus();
+    }, 500);
 
     setIsOpen(true);
   };
