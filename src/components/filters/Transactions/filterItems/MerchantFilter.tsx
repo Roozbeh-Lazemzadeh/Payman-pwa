@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Input, type InputRef, Select, type SelectProps } from 'antd';
+import { Select, type SelectProps, Input } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import {
   transactionFilteredToggle,
@@ -29,7 +29,9 @@ export const MerchantFilter: React.FC = () => {
   const [selectedQuickItems, setSelectedQuickItems] = useState<string[]>([]);
   const [options, setOptions] = useState<SelectProps['options']>([]);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
-  const hiddenInputRef = useRef<InputRef>(null);
+  const selectRef = useRef<any>(null);
+  const [isOpen, setIsOpen] = useState(false);
+  // const selectRef = useRef<BaseSelectRef>(null);
 
   const selectedQuickAccess = (title: string) => {
     const currentOptionsLength = selectedOptions.length;
@@ -159,10 +161,11 @@ export const MerchantFilter: React.FC = () => {
       )
     );
   }, [options]);
+
   const handleSelectFocus = () => {
-    if (hiddenInputRef.current) {
-      hiddenInputRef.current.select();
-      console.log('first');
+    if (selectRef.current) {
+      selectRef.current.focus();
+      setIsOpen(true);
     }
   };
 
@@ -231,7 +234,7 @@ export const MerchantFilter: React.FC = () => {
           </>
         </div>
         <div className='search-section '>
-          <Input ref={hiddenInputRef} style={{ visibility: 'hidden' }} />
+          <Input onFocus={handleSelectFocus} />
           <Select
             placeholder='جستجوی نام کسب‌وکار'
             mode='multiple'
@@ -242,7 +245,10 @@ export const MerchantFilter: React.FC = () => {
             maxTagTextLength={7}
             value={selectedOptions}
             placement='topRight'
-            onFocus={handleSelectFocus}
+            // onFocus={handleSelectFocus}
+            // getPopupContainer={(node) => node.parentNode as HTMLElement}
+            ref={selectRef}
+            open={isOpen}
           />
         </div>
       </div>
