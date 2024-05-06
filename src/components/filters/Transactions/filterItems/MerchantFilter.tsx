@@ -161,7 +161,7 @@ export const MerchantFilter: React.FC = () => {
   }, [options]);
   const handleSelectFocus = () => {
     if (hiddenInputRef.current) {
-      hiddenInputRef.current.focus();
+      hiddenInputRef.current.select();
       console.log('first');
     }
   };
@@ -231,7 +231,7 @@ export const MerchantFilter: React.FC = () => {
           </>
         </div>
         <div className='search-section '>
-          <Input ref={hiddenInputRef} style={{ display: 'none' }} />
+          <Input ref={hiddenInputRef} style={{ visibility: 'hidden' }} />
           <Select
             placeholder='جستجوی نام کسب‌وکار'
             mode='multiple'
