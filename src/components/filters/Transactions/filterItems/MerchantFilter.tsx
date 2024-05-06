@@ -160,39 +160,41 @@ export const MerchantFilter: React.FC = () => {
     );
   }, [options]);
 
- const handleFixFooterInput = () => {
-   console.log('first');
-   if (selectRef.current) {
-     selectRef.current.focus();
-   }
- };
+  const handleFixFooterInput = () => {
+    console.log('first');
+    if (selectRef.current) {
+      selectRef.current.focus();
+    }
+  };
 
-//  const handleFixFooterSelect = () => {
-//    console.log('true');
-//    if (inputRef.current && selectRef.current) {
-//      inputRef.current.focus();
-//      inputRef.current.disabled = true;
-//      setTimeout(() => {
-//        inputRef.current?.removeAttribute('disabled');
-//      }, 500);
-//      selectRef.current.focus();
-//    }
-//  };
- const handleFixFooterSelect = () => {
-   if (inputRef.current) {
-     console.log('true');
-     inputRef.current.focus();
-     //  if (document.activeElement !== inputRef.current) {
-       //  }
-       setTimeout(() => {
-        if (inputRef.current) inputRef.current.disabled = true;
-       selectRef.current.focus();
-     }, 500);
-    //  if (document.activeElement !== selectRef.current) {
-    //    selectRef.current.focus();
-    //  }
-   }
- };
+  //  const handleFixFooterSelect = () => {
+  //    console.log('true');
+  //    if (inputRef.current && selectRef.current) {
+  //      inputRef.current.focus();
+  //      inputRef.current.disabled = true;
+  //      setTimeout(() => {
+  //        inputRef.current?.removeAttribute('disabled');
+  //      }, 500);
+  //      selectRef.current.focus();
+  //    }
+  //  };
+  const handleFixFooterSelect = () => {
+    if (inputRef.current) {
+      console.log('true');
+      inputRef.current.focus();
+      //  if (document.activeElement !== inputRef.current) {
+      //  }
+      setTimeout(() => {
+        if (inputRef.current) {
+          inputRef.current.disabled = true;
+          selectRef.current.focus();
+        }
+      }, 500);
+      //  if (document.activeElement !== selectRef.current) {
+      //    selectRef.current.focus();
+      //  }
+    }
+  };
   return (
     <>
       <ToastContainer rtl />
