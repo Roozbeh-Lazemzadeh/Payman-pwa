@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Input, type InputRef, Select, type SelectProps } from 'antd';
+import { Select, type SelectProps } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import {
   transactionFilteredToggle,
@@ -29,7 +29,8 @@ export const MerchantFilter: React.FC = () => {
   const [selectedQuickItems, setSelectedQuickItems] = useState<string[]>([]);
   const [options, setOptions] = useState<SelectProps['options']>([]);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
-  const hiddenInputRef = useRef<InputRef>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const selectRef = useRef<any>(null);
 
   const selectedQuickAccess = (title: string) => {
     const currentOptionsLength = selectedOptions.length;
@@ -255,7 +256,6 @@ export const MerchantFilter: React.FC = () => {
           </>
         </div>
         <div className='search-section '>
-          <Input ref={hiddenInputRef} style={{ visibility: 'hidden' }} />
           <Select
             placeholder='جستجوی نام کسب‌وکار'
             mode='multiple'
