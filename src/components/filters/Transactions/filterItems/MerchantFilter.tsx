@@ -239,12 +239,6 @@ export const MerchantFilter: React.FC = () => {
             </span>
           </>
         </div>
-        <input
-          className='input-class'
-          ref={inputRef}
-          onFocus={handleFixFooterInput}
-          type='number'
-        />
         <div className='search-section '>
           <Select
             placeholder='جستجوی نام کسب‌وکار'
@@ -259,6 +253,12 @@ export const MerchantFilter: React.FC = () => {
             onFocus={handleFixFooterSelect}
             onDropdownVisibleChange={handleFixFooterSelect}
           />
+        <input
+          className='input-class'
+          ref={inputRef}
+          onFocus={handleFixFooterInput}
+          type='number'
+        />
         </div>
       </div>
     </>
