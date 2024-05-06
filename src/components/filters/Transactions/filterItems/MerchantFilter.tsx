@@ -167,15 +167,30 @@ export const MerchantFilter: React.FC = () => {
    }
  };
 
+//  const handleFixFooterSelect = () => {
+//    console.log('true');
+//    if (inputRef.current && selectRef.current) {
+//      inputRef.current.focus();
+//      inputRef.current.disabled = true;
+//      setTimeout(() => {
+//        inputRef.current?.removeAttribute('disabled');
+//      }, 500);
+//      selectRef.current.focus();
+//    }
+//  };
  const handleFixFooterSelect = () => {
-   console.log('true');
-   if (inputRef.current && selectRef.current) {
-     inputRef.current.focus();
+   if (inputRef.current) {
+     console.log('true');
      inputRef.current.disabled = true;
+     inputRef.current.focus();
+    //  if (document.activeElement !== inputRef.current) {
+    //  }
      setTimeout(() => {
-       inputRef.current?.removeAttribute('disabled'); // Enable the input after a delay
+       inputRef.current?.removeAttribute('disabled');
      }, 500);
-     selectRef.current.focus();
+     if (document.activeElement !== selectRef.current) {
+       selectRef.current.focus();
+     }
    }
  };
   return (
