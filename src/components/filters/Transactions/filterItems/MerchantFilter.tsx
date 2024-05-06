@@ -233,7 +233,7 @@ export const MerchantFilter: React.FC = () => {
           </>
         </div>
         <div className='search-section '>
-          <Input onFocus={handleSelectFocus} />
+          <Input onClick={handleSelectFocus} />
           <Select
             placeholder='جستجوی نام کسب‌وکار'
             mode='multiple'
