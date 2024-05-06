@@ -182,13 +182,12 @@ export const MerchantFilter: React.FC = () => {
    if (inputRef.current) {
      console.log('true');
      inputRef.current.focus();
-     inputRef.current.disabled = true;
-     selectRef.current.focus();
-    //  if (document.activeElement !== inputRef.current) {
-    //  }
-    //  setTimeout(() => {
-    //    inputRef.current?.removeAttribute('disabled');
-    //  }, 500);
+     //  if (document.activeElement !== inputRef.current) {
+       //  }
+       setTimeout(() => {
+        if (inputRef.current) inputRef.current.disabled = true;
+       selectRef.current.focus();
+     }, 500);
     //  if (document.activeElement !== selectRef.current) {
     //    selectRef.current.focus();
     //  }
