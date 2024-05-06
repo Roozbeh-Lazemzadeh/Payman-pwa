@@ -30,6 +30,7 @@ export const MerchantFilter: React.FC = () => {
   const [options, setOptions] = useState<SelectProps['options']>([]);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const selectRef = useRef<any>(null);
+  const inputRef = useRef<any>(null);
   const [isOpen, setIsOpen] = useState(false);
   // const selectRef = useRef<BaseSelectRef>(null);
 
@@ -163,10 +164,11 @@ export const MerchantFilter: React.FC = () => {
   }, [options]);
 
   const handleSelectFocus = () => {
-    if (selectRef.current) {
+    inputRef.current.focus();
+    setTimeout(() => {
       selectRef.current.focus();
       setIsOpen(true);
-    }
+    }, 0);
   };
   return (
     <>
@@ -233,7 +235,7 @@ export const MerchantFilter: React.FC = () => {
           </>
         </div>
         <div className='search-section '>
-          <Input onClick={handleSelectFocus} />
+          <Input onClick={handleSelectFocus} ref={inputRef} />
           <Select
             placeholder='جستجوی نام کسب‌وکار'
             mode='multiple'
