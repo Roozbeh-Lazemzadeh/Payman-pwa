@@ -1,12 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import {
-  Button,
-  Dropdown,
-  type MenuProps,
-  Select,
-  Space,
-  type SelectProps,
-} from 'antd';
+import React, { useEffect, useRef, useState } from 'react';
+import { Input, type InputRef, Select, type SelectProps } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import {
   transactionFilteredToggle,
@@ -36,6 +29,7 @@ export const MerchantFilter: React.FC = () => {
   const [selectedQuickItems, setSelectedQuickItems] = useState<string[]>([]);
   const [options, setOptions] = useState<SelectProps['options']>([]);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const hiddenInputRef = useRef<InputRef>(null);
 
   const selectedQuickAccess = (title: string) => {
     const currentOptionsLength = selectedOptions.length;
@@ -165,36 +159,11 @@ export const MerchantFilter: React.FC = () => {
       )
     );
   }, [options]);
-
-  const items: MenuProps['items'] = [
-    {
-      label: '1st menu item',
-      key: '1',
-      // icon: <UserOutlined />,
-    },
-    {
-      label: '2nd menu item',
-      key: '2',
-      // icon: <UserOutlined />,
-    },
-    {
-      label: '3rd menu item',
-      key: '3',
-      // icon: <UserOutlined />,
-      danger: true,
-    },
-    {
-      label: '4rd menu item',
-      key: '4',
-      // icon: <UserOutlined />,
-      danger: true,
-      disabled: true,
-    },
-  ];
-
-  const menuProps = {
-    items,
-    // onClick: handleMenuClick,
+  const handleSelectFocus = () => {
+    if (hiddenInputRef.current) {
+      hiddenInputRef.current.focus();
+      console.log('first');
+    }
   };
 
   return (
@@ -262,11 +231,7 @@ export const MerchantFilter: React.FC = () => {
           </>
         </div>
         <div className='search-section '>
-          <Dropdown menu={menuProps}>
-            <Button>
-              <Space>Button</Space>
-            </Button>
-          </Dropdown>
+          <Input ref={hiddenInputRef} style={{ display: 'none' }} />
           <Select
             placeholder='جستجوی نام کسب‌وکار'
             mode='multiple'
@@ -277,6 +242,7 @@ export const MerchantFilter: React.FC = () => {
             maxTagTextLength={7}
             value={selectedOptions}
             placement='topRight'
+            onFocus={handleSelectFocus}
           />
         </div>
       </div>
