@@ -160,12 +160,12 @@ export const MerchantFilter: React.FC = () => {
     );
   }, [options]);
 
-  const handleFixFooterInput = () => {
-    console.log('first');
-    if (selectRef.current) {
-      selectRef.current.focus();
-    }
-  };
+  // const handleFixFooterInput = () => {
+  //   console.log('first');
+  //   if (selectRef.current) {
+  //     selectRef.current.focus();
+  //   }
+  // };
 
   //  const handleFixFooterSelect = () => {
   //    console.log('true');
@@ -182,14 +182,9 @@ export const MerchantFilter: React.FC = () => {
     if (inputRef.current) {
       console.log('true');
       inputRef.current.focus();
+      selectRef.current.focus();
       //  if (document.activeElement !== inputRef.current) {
       //  }
-      setTimeout(() => {
-        if (inputRef.current) {
-          inputRef.current.disabled = true;
-          selectRef.current.focus();
-        }
-      }, 500);
       //  if (document.activeElement !== selectRef.current) {
       //    selectRef.current.focus();
       //  }
@@ -276,7 +271,7 @@ export const MerchantFilter: React.FC = () => {
           <input
             className='input-class'
             ref={inputRef}
-            onFocus={handleFixFooterInput}
+            // onFocus={handleFixFooterInput}
             type='number'
           />
         </div>
