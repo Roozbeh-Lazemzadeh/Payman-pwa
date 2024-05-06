@@ -168,7 +168,7 @@ export const MerchantFilter: React.FC = () => {
     setTimeout(() => {
       selectRef.current.focus();
       setIsOpen(true);
-    }, 0);
+    }, 100);
   };
   return (
     <>
