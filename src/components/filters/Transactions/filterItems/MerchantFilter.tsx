@@ -168,7 +168,6 @@ export const MerchantFilter: React.FC = () => {
       setIsOpen(true);
     }
   };
-
   return (
     <>
       <ToastContainer rtl />
