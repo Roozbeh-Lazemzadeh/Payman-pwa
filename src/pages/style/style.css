@@ -364,7 +364,7 @@
 .rmdp-mobile .rmdp-rtl .rmdp-action-button {
   background-color: rgba(239, 242, 255, 1);
   border-radius: 5px;
-  width: 50%;
+  width: 70%;
   height: 35px;
 }
 .rmdp-mobile .rmdp-action-buttons {
@@ -415,7 +415,8 @@
   color: #fff;
 }
 .rmdp-mobile .rmdp-action-button:first-child {
-  width: 65px;
+  width: 100px;
+  margin-inline-start: 33px;
 }
 .rmdp-action-buttons > button {
   font-family: 'IranYekan';
