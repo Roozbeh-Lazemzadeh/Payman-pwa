@@ -27,7 +27,8 @@ import '../../style.css';
 
 export const MerchantFilter: React.FC = () => {
   const dispatch = useAppDispatch();
-  const isOpen = useAppSelector(selectSearchingMerchantOpen);
+  // const isOpen = useAppSelector(selectSearchingMerchantOpen);
+  const [isOpen, setIsOpen] = useState(false);
   const allFilter = useAppSelector(selectAllFilter);
   const filteredFooter = useAppSelector(selectTransactionFilter);
   const searchItem = useAppSelector(selectTransactionSearchItem);
@@ -168,12 +169,19 @@ export const MerchantFilter: React.FC = () => {
     );
   }, [options]);
 
+  // const handleSelectFocus = () => {
+  //   inputRef.current.focus();
+  //   // dispatch(handleSearchingMerchantOpen());
+  //   setTimeout(() => {
+  //     selectRef.current.focus();
+  //   }, 500);
+  // };
   const handleSelectFocus = () => {
     inputRef.current.focus();
-    // dispatch(handleSearchingMerchantOpen());
     setTimeout(() => {
       selectRef.current.focus();
-    }, 500);
+    }, 0);
+    setIsOpen(true);
   };
   return (
     <>
@@ -257,7 +265,7 @@ export const MerchantFilter: React.FC = () => {
             value={selectedOptions}
             placement='topRight'
             ref={selectRef}
-            // open={isOpen}
+            open={isOpen}
           />
         </div>
       </div>
