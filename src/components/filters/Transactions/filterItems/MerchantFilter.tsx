@@ -246,7 +246,7 @@ export const MerchantFilter: React.FC = () => {
             // className={`${isOpen ? 'hidden' : 'dummy-input'}`}
           />
           <Select
-            className='custom-select'
+            // className='custom-select'
             placeholder='جستجوی نام کسب‌وکار'
             mode='multiple'
             style={{ width: '100%' }}
