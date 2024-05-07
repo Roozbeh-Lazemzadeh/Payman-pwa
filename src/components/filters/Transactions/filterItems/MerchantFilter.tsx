@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useRef, useState } from 'react';
 import { Select, type SelectProps, Input } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
@@ -7,8 +6,7 @@ import {
   transactionSearchedToggle,
   selectTransactionFilter,
   selectTransactionSearchItem,
-  selectSearchingMerchantOpen,
-  handleSearchingMerchantOpen,
+  // handleSearchingMerchantOpen,
   handleSearchingMerchantClose,
 } from '../../../../store/filterMenu/transactionFilterMenuSlice';
 import { ReactComponent as TickSquareIcon } from '../../../../icons/tickSquare.svg';
@@ -251,10 +249,10 @@ export const MerchantFilter: React.FC = () => {
           <Input
             onClick={handleSelectFocus}
             ref={inputRef}
-            // className={`${isOpen ? 'hidden' : 'dummy-input'}`}
+            className={`${isOpen ? 'hidden' : 'dummy-input'}`}
           />
           <Select
-            // className='custom-select'
+            className='custom-select'
             placeholder='جستجوی نام کسب‌وکار'
             mode='multiple'
             style={{ width: '100%' }}
