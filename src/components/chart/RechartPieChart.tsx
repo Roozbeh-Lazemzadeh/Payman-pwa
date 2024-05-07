@@ -1,23 +1,20 @@
+// RechartPieChart.tsx
+
 import React from 'react';
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Cell, ResponsiveContainer, Sector } from 'recharts';
 import './style.css';
 import { useAppSelector } from '../hooks/reduxHooks';
 import { selectSelectedMerchant } from '../../store/chart/chartSlice';
+interface RechartPieChartProps {
+  data: Array<{ name: string; value: number }>;
+}
 
-export const data = [
-  { name: 'اسنپ', value: 400 },
-  { name: 'تپسی', value: 300 },
-  { name: 'فیلیمو', value: 550 },
-  { name: 'همه', value: 0 },
-];
-export const RechartPieChart: React.FC = () => {
+const RechartPieChart: React.FC<RechartPieChartProps> = ({
+  data
+}) => {
   const activeIndex = useAppSelector(selectSelectedMerchant);
-
-  const COLORS = ['#00E261', '#FF683B', '#FFAA1B', '#bbb'];
-
   const renderActiveShape = (props: any) => {
     const { cx, cy, innerRadius, startAngle, endAngle, fill, percent } = props;
-
     return (
       <g>
         <text
@@ -28,7 +25,9 @@ export const RechartPieChart: React.FC = () => {
           textAnchor='middle'
           fill={fill}
         >
-          {`%${activeIndex !== 3 ? (percent * 100).toFixed(0) : '100'}`}
+          {`%${
+            activeIndex !== data.length ? (percent * 100).toFixed(0) : '100'
+          }`}
         </text>
         <Sector
           cx={cx}
@@ -44,6 +43,33 @@ export const RechartPieChart: React.FC = () => {
       </g>
     );
   };
+  const generateChartData = () => {
+    if (!data || data.length === 0) {
+      return [];
+    }
+
+    console.log(data);
+
+    return data.map((entry, index) => ({
+      ...entry,
+      color: COLORS[index % COLORS.length],
+    }));
+  };
+
+  const COLORS = ['#00E261', '#FF683B', '#FFAA1B', '#bbb'];
+  // const COLORS = ['#00E261', '#FF683B', '#FFAA1B', '#bbb'];
+
+  // const generateRandomColors = (length: number) => {
+  //   const colors = [];
+  //   for (let i = 0; i < length; i++) {
+  //     const randomColor =
+  //       '#' + Math.floor(Math.random() * 16777215).toString(16);
+  //     colors.push(randomColor);
+  //   }
+  //   return COLORS;
+  // };
+
+  const chartData = generateChartData();
 
   return (
     <ResponsiveContainer>
@@ -51,7 +77,7 @@ export const RechartPieChart: React.FC = () => {
         <Pie
           activeIndex={activeIndex}
           activeShape={renderActiveShape}
-          data={data}
+          data={chartData}
           cx='50%'
           cy='50%'
           innerRadius={65}
@@ -75,3 +101,5 @@ export const RechartPieChart: React.FC = () => {
     </ResponsiveContainer>
   );
 };
+
+export default RechartPieChart;

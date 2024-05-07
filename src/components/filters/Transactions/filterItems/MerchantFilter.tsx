@@ -161,12 +161,13 @@ export const MerchantFilter: React.FC = () => {
     );
   }, [options]);
 
-  // const handleFixFooterInput = () => {
-  //   console.log('first');
-  //   if (selectRef.current) {
-  //     selectRef.current.focus();
-  //   }
-  // };
+  const handleFixFooterInput = () => {
+    console.log('first');
+    if (selectRef.current) {
+      console.log(selectRef.current);
+      // selectRef.current.target();
+    }
+  };
 
   //  const handleFixFooterSelect = () => {
   //    console.log('true');
@@ -179,18 +180,12 @@ export const MerchantFilter: React.FC = () => {
   //      selectRef.current.focus();
   //    }
   //  };
-  const handleFixFooterSelect = () => {
-    if (inputRef.current) {
-      console.log('true');
-      inputRef.current.focus();
-      selectRef.current.focus();
-      //  if (document.activeElement !== inputRef.current) {
-      //  }
-      //  if (document.activeElement !== selectRef.current) {
-      //    selectRef.current.focus();
-      //  }
-    }
-  };
+  // const handleFixFooterSelect = () => {
+  //   if (inputRef.current) {
+  //     inputRef.current.focus();
+  //     selectRef.current.focus();
+  //   }
+  // };
   return (
     <>
       <ToastContainer rtl />
@@ -266,13 +261,13 @@ export const MerchantFilter: React.FC = () => {
             maxTagTextLength={7}
             value={selectedOptions}
             placement='topRight'
-            onFocus={handleFixFooterSelect}
+            // onFocus={handleFixFooterSelect}
             ref={selectRef}
           />
           <input
             className='input-class'
             ref={inputRef}
-            // onFocus={handleFixFooterInput}
+            onFocus={handleFixFooterInput}
             type='number'
           />
         </div>

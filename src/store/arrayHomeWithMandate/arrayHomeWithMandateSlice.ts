@@ -5,11 +5,13 @@ import { type GroupedTransaction, type TransactionItem } from './types';
 
 // Define the initial state
 interface ArrayHomeWithMandateState {
+  transactions: any;
   groupsTransactions: GroupedTransaction[];
 }
 
 const initialState: ArrayHomeWithMandateState = {
   groupsTransactions: [],
+  transactions: undefined
 };
 
 // Create the slice
