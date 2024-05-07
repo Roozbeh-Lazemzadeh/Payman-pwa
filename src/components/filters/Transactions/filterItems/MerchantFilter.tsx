@@ -94,6 +94,7 @@ export const MerchantFilter: React.FC = () => {
       currentQuickItems.length + newSelectedOptions.length;
 
     if (totalSelectedItems > 3) {
+      setIsOpen(false);
       showNotifyToast(
         'شما مجاز به انتخاب سه کسب و کار می باشید.',
         <InfoIcon />
