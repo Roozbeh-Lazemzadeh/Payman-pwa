@@ -243,7 +243,7 @@ export const MerchantFilter: React.FC = () => {
           <Input
             onClick={handleSelectFocus}
             ref={inputRef}
-            className={`${isOpen ? 'hidden' : 'dummy-input'}`}
+            // className={`${isOpen ? 'hidden' : 'dummy-input'}`}
           />
           <Select
             className='custom-select'
