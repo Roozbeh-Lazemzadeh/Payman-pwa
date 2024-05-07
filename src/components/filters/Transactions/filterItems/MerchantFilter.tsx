@@ -6,7 +6,7 @@ import {
   transactionSearchedToggle,
   selectTransactionFilter,
   selectTransactionSearchItem,
-  // handleSearchingMerchantOpen,
+  handleSearchingMerchantOpen,
   handleSearchingMerchantClose,
 } from '../../../../store/filterMenu/transactionFilterMenuSlice';
 import { ReactComponent as TickSquareIcon } from '../../../../icons/tickSquare.svg';
@@ -25,7 +25,6 @@ import '../../style.css';
 
 export const MerchantFilter: React.FC = () => {
   const dispatch = useAppDispatch();
-  // const isOpen = useAppSelector(selectSearchingMerchantOpen);
   const [isOpen, setIsOpen] = useState(false);
   const allFilter = useAppSelector(selectAllFilter);
   const filteredFooter = useAppSelector(selectTransactionFilter);
@@ -167,13 +166,6 @@ export const MerchantFilter: React.FC = () => {
     );
   }, [options]);
 
-  // const handleSelectFocus = () => {
-  //   inputRef.current.focus();
-  //   // dispatch(handleSearchingMerchantOpen());
-  //   setTimeout(() => {
-  //     selectRef.current.focus();
-  //   }, 500);
-  // };
   const handleSelectFocus = () => {
     inputRef.current.focus();
     setTimeout(() => {
@@ -181,6 +173,10 @@ export const MerchantFilter: React.FC = () => {
     }, 0);
     setIsOpen(true);
   };
+  useEffect(() => {
+    dispatch(handleSearchingMerchantOpen());
+  }, [isOpen]);
+
   return (
     <>
       <ToastContainer rtl />
