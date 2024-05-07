@@ -173,7 +173,7 @@ export const MerchantFilter: React.FC = () => {
     setTimeout(() => {
       selectRef.current.focus();
       dispatch(handleSearchingMerchantOpen());
-    }, 200);
+    }, 500);
   };
   return (
     <>
