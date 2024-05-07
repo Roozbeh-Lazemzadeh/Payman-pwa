@@ -170,9 +170,9 @@ export const MerchantFilter: React.FC = () => {
 
   const handleSelectFocus = () => {
     inputRef.current.focus();
+    // dispatch(handleSearchingMerchantOpen());
     setTimeout(() => {
       selectRef.current.focus();
-      dispatch(handleSearchingMerchantOpen());
     }, 500);
   };
   return (
@@ -257,7 +257,7 @@ export const MerchantFilter: React.FC = () => {
             value={selectedOptions}
             placement='topRight'
             ref={selectRef}
-            open={isOpen}
+            // open={isOpen}
           />
         </div>
       </div>
