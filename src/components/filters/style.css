@@ -229,21 +229,36 @@
 }
 
 .search-section {
-    display: flex;
-    width: 81%;
-    height: 43%;
-    padding: 15px 10px 13px;
-    gap: 10px;
-    direction: rtl;
-    position: absolute;
-    top: 75px;
-    overflow: hidden;
+  display: flex;
+  width: 100%;
+  height: 50%;
+  padding: 15px 10px 13px;
+  gap: 10px;
+  direction: rtl;
+  position: relative;
+  overflow: hidden;
 }
 
 .search-section.search-bar {
   display: unset;
   padding: 10px 10px 10px;
 }
+.search-section .hidden {
+  display: none;
+  visibility: hidden;
+}
+.ant-input.dummy-input {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 11px;
+  z-index: 5;
+  padding: 10px;
+  background-color: transparent;
+  border: none;
+}
+
 .search-datePicker .rmdp-container .rmdp-input {
   padding: 0px 10px 0px 60px;
 }
@@ -348,7 +363,7 @@
 }
 
 input.ant-input.css-dev-only-do-not-override-1jc77hn.ant-input-outlined.input-class {
-    position: relative;
+  position: relative;
 }
 /* media gueries */
 

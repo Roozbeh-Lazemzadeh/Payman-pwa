@@ -6,6 +6,7 @@ const initialState = {
   isSearchedShown: false,
   closingSearchFilter: false,
   searchItem: '',
+  isSearchingMerchantOpen: false,
 };
 
 export const transactionFilterMenuSlice = createSlice({
@@ -25,22 +26,32 @@ export const transactionFilterMenuSlice = createSlice({
     transactionCloseSearchFalse: (state) => {
       state.closingSearchFilter = false;
     },
+    handleSearchingMerchantOpen: (state) => {
+      state.isSearchingMerchantOpen = true;
+    },
+    handleSearchingMerchantClose: (state) => {
+      state.isSearchingMerchantOpen = false;
+    },
   },
 });
 
 export const selectTransactionFilter = (state: RootState) =>
-  state.transactionFilterMenu?.isFilteredShown;
+  state.transactionFilterMenu.isFilteredShown;
 export const selectTransactionSearchedFilter = (state: RootState) =>
-  state.transactionFilterMenu?.isSearchedShown;
+  state.transactionFilterMenu.isSearchedShown;
 export const selectTransactionCloseSearchedFilter = (state: RootState) =>
-  state.transactionFilterMenu?.closingSearchFilter;
+  state.transactionFilterMenu.closingSearchFilter;
 export const selectTransactionSearchItem = (state: RootState) =>
-  state.transactionFilterMenu?.searchItem;
+  state.transactionFilterMenu.searchItem;
+export const selectSearchingMerchantOpen = (state: RootState) =>
+  state.transactionFilterMenu.isSearchingMerchantOpen;
 
 export const {
   transactionFilteredToggle,
   transactionSearchedToggle,
   transactionCloseSearchToggle,
   transactionCloseSearchFalse,
+  handleSearchingMerchantOpen,
+  handleSearchingMerchantClose,
 } = transactionFilterMenuSlice.actions;
 export default transactionFilterMenuSlice.reducer;

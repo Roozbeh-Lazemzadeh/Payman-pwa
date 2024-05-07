@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useRef, useState } from 'react';
 import { Select, type SelectProps, Input } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
@@ -6,6 +7,9 @@ import {
   transactionSearchedToggle,
   selectTransactionFilter,
   selectTransactionSearchItem,
+  selectSearchingMerchantOpen,
+  handleSearchingMerchantOpen,
+  handleSearchingMerchantClose,
 } from '../../../../store/filterMenu/transactionFilterMenuSlice';
 import { ReactComponent as TickSquareIcon } from '../../../../icons/tickSquare.svg';
 import { ToastContainer } from 'react-toastify';
@@ -23,6 +27,7 @@ import '../../style.css';
 
 export const MerchantFilter: React.FC = () => {
   const dispatch = useAppDispatch();
+  const isOpen = useAppSelector(selectSearchingMerchantOpen);
   const allFilter = useAppSelector(selectAllFilter);
   const filteredFooter = useAppSelector(selectTransactionFilter);
   const searchItem = useAppSelector(selectTransactionSearchItem);
@@ -31,7 +36,6 @@ export const MerchantFilter: React.FC = () => {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const selectRef = useRef<any>(null);
   const inputRef = useRef<any>(null);
-  const [isOpen, setIsOpen] = useState(false);
 
   const selectedQuickAccess = (title: string) => {
     const currentOptionsLength = selectedOptions.length;
@@ -72,6 +76,7 @@ export const MerchantFilter: React.FC = () => {
     dispatch(transactionSearchedToggle(''));
     dispatch(transactionFilteredToggle());
     dispatch(handleListFiltering({ merchants: combinedSelectedItems }));
+    dispatch(handleSearchingMerchantClose());
   };
 
   const handleRemoveFilter = () => {
@@ -83,6 +88,7 @@ export const MerchantFilter: React.FC = () => {
     dispatch(transactionSearchedToggle(''));
     dispatch(transactionFilteredToggle());
     dispatch(handleListFiltering({ merchants: [] }));
+    dispatch(handleSearchingMerchantClose());
   };
 
   const handleSelectedOptions = (newSelectedOptions: string[]) => {
@@ -168,7 +174,7 @@ export const MerchantFilter: React.FC = () => {
       selectRef.current.focus();
     }, 0);
 
-    setIsOpen(true);
+    dispatch(handleSearchingMerchantOpen());
   };
   return (
     <>
@@ -235,8 +241,13 @@ export const MerchantFilter: React.FC = () => {
           </>
         </div>
         <div className='search-section '>
-          <Input onClick={handleSelectFocus} ref={inputRef} />
+          <Input
+            onClick={handleSelectFocus}
+            ref={inputRef}
+            className={`${isOpen ? 'hidden' : 'dummy-input'}`}
+          />
           <Select
+            className='custom-select'
             placeholder='جستجوی نام کسب‌وکار'
             mode='multiple'
             style={{ width: '100%' }}
@@ -246,8 +257,6 @@ export const MerchantFilter: React.FC = () => {
             maxTagTextLength={7}
             value={selectedOptions}
             placement='topRight'
-            // onFocus={handleSelectFocus}
-            // getPopupContainer={(node) => node.parentNode as HTMLElement}
             ref={selectRef}
             open={isOpen}
           />

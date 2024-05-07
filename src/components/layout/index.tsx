@@ -10,6 +10,7 @@ import {
   transactionCloseSearchToggle,
   selectTransactionSearchedFilter,
   selectTransactionFilter,
+  handleSearchingMerchantClose,
 } from '../../store/filterMenu/transactionFilterMenuSlice';
 import PrimaryFooter from './footer/PrimaryFooter';
 import { SearchedItems } from '../filters/Transactions/filterItems';
@@ -78,6 +79,7 @@ const PWALayout: React.FC = () => {
         dispatch(transactionCloseSearchToggle());
         dispatch(transactionSearchedToggle(''));
         dispatch(transactionFilteredToggle());
+        dispatch(handleSearchingMerchantClose());
       }
     }
   };
