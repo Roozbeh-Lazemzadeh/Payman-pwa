@@ -12,9 +12,10 @@
 .Toastify__toast-container.Toastify__toast-container--top-right {
   position: fixed;
   top: 10px;
-  right: 0;
+  right: 10px;
   border-radius: 5px;
 }
+
 .Toastify__toast-body {
   direction: rtl;
   font-size: 12px;

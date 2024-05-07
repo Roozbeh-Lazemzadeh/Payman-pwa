@@ -29,13 +29,13 @@ export const transactionFilterMenuSlice = createSlice({
 });
 
 export const selectTransactionFilter = (state: RootState) =>
-  state.transactionFilterMenu?.isFilteredShown;
+  state.transactionFilterMenu.isFilteredShown;
 export const selectTransactionSearchedFilter = (state: RootState) =>
-  state.transactionFilterMenu?.isSearchedShown;
+  state.transactionFilterMenu.isSearchedShown;
 export const selectTransactionCloseSearchedFilter = (state: RootState) =>
-  state.transactionFilterMenu?.closingSearchFilter;
+  state.transactionFilterMenu.closingSearchFilter;
 export const selectTransactionSearchItem = (state: RootState) =>
-  state.transactionFilterMenu?.searchItem;
+  state.transactionFilterMenu.searchItem;
 
 export const {
   transactionFilteredToggle,

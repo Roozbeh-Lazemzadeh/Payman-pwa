@@ -71,4 +71,7 @@ body {
   .landscape-img {
     margin-bottom: 40px;
   }
+  .ant-layout {
+    position: unset !important;
+  }
 }

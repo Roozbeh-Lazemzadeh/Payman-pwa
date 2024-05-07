@@ -158,7 +158,7 @@ export const PriceFilter: React.FC = () => {
               }
               onClick={() => selectedQuickAccess(100000)}
             >
-              ۱۰۰هزار تومانءءء
+              تا ۱۰۰هزار تومانءءء
             </span>
             <span
               className={
@@ -168,7 +168,7 @@ export const PriceFilter: React.FC = () => {
               }
               onClick={() => selectedQuickAccess(200000)}
             >
-              2۰۰هزار تومانءءء
+              تا ۲۰۰هزار تومانءءء
             </span>
             <span
               className={
@@ -178,7 +178,7 @@ export const PriceFilter: React.FC = () => {
               }
               onClick={() => selectedQuickAccess(300000)}
             >
-              3۰۰هزار تومانءءء
+              تا ۳۰۰هزار تومانءءء
             </span>
           </>
         </div>

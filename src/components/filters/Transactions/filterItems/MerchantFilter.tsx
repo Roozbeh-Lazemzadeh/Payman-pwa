@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Select, type SelectProps } from 'antd';
+import { Select, type SelectProps, Input } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import {
   transactionFilteredToggle,
@@ -23,14 +23,15 @@ import '../../style.css';
 
 export const MerchantFilter: React.FC = () => {
   const dispatch = useAppDispatch();
+  const [isOpen, setIsOpen] = useState(false);
   const allFilter = useAppSelector(selectAllFilter);
   const filteredFooter = useAppSelector(selectTransactionFilter);
   const searchItem = useAppSelector(selectTransactionSearchItem);
   const [selectedQuickItems, setSelectedQuickItems] = useState<string[]>([]);
   const [options, setOptions] = useState<SelectProps['options']>([]);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
-  const inputRef = useRef<HTMLInputElement>(null);
   const selectRef = useRef<any>(null);
+  const inputRef = useRef<any>(null);
 
   const selectedQuickAccess = (title: string) => {
     const currentOptionsLength = selectedOptions.length;
@@ -93,6 +94,8 @@ export const MerchantFilter: React.FC = () => {
       currentQuickItems.length + newSelectedOptions.length;
 
     if (totalSelectedItems > 3) {
+      selectRef.current.blur();
+      setIsOpen(false);
       showNotifyToast(
         'شما مجاز به انتخاب سه کسب و کار می باشید.',
         <InfoIcon />
@@ -161,31 +164,14 @@ export const MerchantFilter: React.FC = () => {
     );
   }, [options]);
 
-  const handleFixFooterInput = () => {
-    console.log('first');
-    if (selectRef.current) {
-      console.log(selectRef.current);
-      // selectRef.current.target();
-    }
+  const handleSelectFocus = () => {
+    inputRef.current.focus();
+    setTimeout(() => {
+      selectRef.current.focus();
+    }, 0);
+    setIsOpen(true);
   };
 
-  //  const handleFixFooterSelect = () => {
-  //    console.log('true');
-  //    if (inputRef.current && selectRef.current) {
-  //      inputRef.current.focus();
-  //      inputRef.current.disabled = true;
-  //      setTimeout(() => {
-  //        inputRef.current?.removeAttribute('disabled');
-  //      }, 500);
-  //      selectRef.current.focus();
-  //    }
-  //  };
-  // const handleFixFooterSelect = () => {
-  //   if (inputRef.current) {
-  //     inputRef.current.focus();
-  //     selectRef.current.focus();
-  //   }
-  // };
   return (
     <>
       <ToastContainer rtl />
@@ -251,7 +237,13 @@ export const MerchantFilter: React.FC = () => {
           </>
         </div>
         <div className='search-section '>
+          <Input
+            onClick={handleSelectFocus}
+            ref={inputRef}
+            className={`${isOpen ? 'hidden' : 'dummy-input'}`}
+          />
           <Select
+            className='custom-select'
             placeholder='جستجوی نام کسب‌وکار'
             mode='multiple'
             style={{ width: '100%' }}
@@ -261,14 +253,8 @@ export const MerchantFilter: React.FC = () => {
             maxTagTextLength={7}
             value={selectedOptions}
             placement='topRight'
-            // onFocus={handleFixFooterSelect}
             ref={selectRef}
-          />
-          <input
-            className='input-class'
-            ref={inputRef}
-            onFocus={handleFixFooterInput}
-            type='number'
+            open={isOpen}
           />
         </div>
       </div>
