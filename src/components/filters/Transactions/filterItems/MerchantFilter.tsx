@@ -174,7 +174,7 @@ export const MerchantFilter: React.FC = () => {
 
   return (
     <>
-      <ToastContainer rtl className={`${isOpen ? 'half-display' : ''}`} />
+      <ToastContainer rtl />
       <div className='implement-remove-wrapper'>
         <div
           className={`remove-button ${
