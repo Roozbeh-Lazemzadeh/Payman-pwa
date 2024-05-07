@@ -11,7 +11,7 @@
 }
 .Toastify__toast-container.Toastify__toast-container--top-right {
   position: fixed;
-  top: 10px;
+  top: 5vh;
   right: 0;
   border-radius: 5px;
 }

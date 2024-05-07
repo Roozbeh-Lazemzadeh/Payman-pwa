@@ -6,8 +6,6 @@ import {
   transactionSearchedToggle,
   selectTransactionFilter,
   selectTransactionSearchItem,
-  // handleSearchingMerchantOpen,
-  // handleSearchingMerchantClose,
 } from '../../../../store/filterMenu/transactionFilterMenuSlice';
 import { ReactComponent as TickSquareIcon } from '../../../../icons/tickSquare.svg';
 import { ToastContainer } from 'react-toastify';
@@ -74,7 +72,6 @@ export const MerchantFilter: React.FC = () => {
     dispatch(transactionSearchedToggle(''));
     dispatch(transactionFilteredToggle());
     dispatch(handleListFiltering({ merchants: combinedSelectedItems }));
-    // dispatch(handleSearchingMerchantClose());
   };
 
   const handleRemoveFilter = () => {
@@ -86,7 +83,6 @@ export const MerchantFilter: React.FC = () => {
     dispatch(transactionSearchedToggle(''));
     dispatch(transactionFilteredToggle());
     dispatch(handleListFiltering({ merchants: [] }));
-    // dispatch(handleSearchingMerchantClose());
   };
 
   const handleSelectedOptions = (newSelectedOptions: string[]) => {
@@ -173,9 +169,6 @@ export const MerchantFilter: React.FC = () => {
     }, 0);
     setIsOpen(true);
   };
-  // useEffect(() => {
-  //   dispatch(handleSearchingMerchantOpen());
-  // }, [isOpen]);
 
   return (
     <>
