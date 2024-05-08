@@ -2,8 +2,12 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { Layout } from 'antd';
 import CustomHeader from './header/CustomHeader';
 import { Sidebar } from './sidebar/Sidebar';
-import FilteredUI from '../filters/Transactions/filterMenu/FilterMenu';
+import PrimaryFooter from './footer/PrimaryFooter';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+
+// transaction filter
+import TransactionFilteredUI from '../filters/Transactions/filterMenu/FilterMenu';
+import TransactionSearchedItems from '../filters/Transactions/filterItems';
 import {
   transactionFilteredToggle,
   transactionSearchedToggle,
@@ -11,8 +15,18 @@ import {
   selectTransactionSearchedFilter,
   selectTransactionFilter,
 } from '../../store/filterMenu/transactionFilterMenuSlice';
-import PrimaryFooter from './footer/PrimaryFooter';
-import { SearchedItems } from '../filters/Transactions/filterItems';
+
+// home filter
+import HomeFilteredUI from '../filters/Home/filterMenu/FilterMenu';
+import HomeSearchedItems from '../filters/Home/filterItems';
+import {
+  homeFilteredToggle,
+  homeSearchedToggle,
+  homeCloseSearchToggle,
+  selectHomeSearchedFilter,
+  selectHomeFilter,
+} from '../../store/filterMenu/homeFilterMenuSlice';
+
 interface HeaderStyle {
   background: boolean;
   title: string;
@@ -20,11 +34,21 @@ interface HeaderStyle {
 
 // Define the main layout for the Progressive Web App (PWA)
 const PWALayout: React.FC = () => {
+  const dispatch = useAppDispatch();
   const { Content } = Layout;
   const location = useLocation();
-  const dispatch = useAppDispatch();
-  const isFilteredFooterShown = useAppSelector(selectTransactionFilter);
-  const isSearchedFooterShown = useAppSelector(selectTransactionSearchedFilter);
+  const currentPath = location.pathname;
+
+  // transaction filter
+  const isTransactionFilteredShown = useAppSelector(selectTransactionFilter);
+  const isTransactionSearchedShown = useAppSelector(
+    selectTransactionSearchedFilter
+  );
+
+  // home filter
+  const isHomeFilteredShown = useAppSelector(selectHomeFilter);
+  const isHomeSearchedShown = useAppSelector(selectHomeSearchedFilter);
+
   // const isUserRegistered = true; // todo replace with corresponding API
 
   // Define different headers (blue or white) based on the route
@@ -66,19 +90,43 @@ const PWALayout: React.FC = () => {
       '.ant-select-item.ant-select-item-option'
     );
     if (selectDropdown) return;
-    if (!filterIcon) {
-      if (
-        !filteredFooterWrapper &&
-        isFilteredFooterShown &&
-        !isSearchedFooterShown
-      ) {
-        dispatch(transactionFilteredToggle());
-      }
-      if (!searchFooterWrapper && isSearchedFooterShown) {
-        dispatch(transactionCloseSearchToggle());
-        dispatch(transactionSearchedToggle(''));
-        dispatch(transactionFilteredToggle());
-      }
+
+    switch (currentPath) {
+      case '/transactions':
+        if (!filterIcon) {
+          if (
+            !filteredFooterWrapper &&
+            isTransactionFilteredShown &&
+            !isTransactionSearchedShown
+          ) {
+            dispatch(transactionFilteredToggle());
+          }
+          if (!searchFooterWrapper && isTransactionSearchedShown) {
+            dispatch(transactionCloseSearchToggle());
+            dispatch(transactionSearchedToggle(''));
+            dispatch(transactionFilteredToggle());
+          }
+        }
+        break;
+      case '/home/with-mandate':
+        if (!filterIcon) {
+          if (
+            !filteredFooterWrapper &&
+            isHomeFilteredShown &&
+            !isHomeSearchedShown
+          ) {
+            dispatch(homeFilteredToggle());
+          }
+          if (!searchFooterWrapper && isHomeSearchedShown) {
+            dispatch(homeCloseSearchToggle());
+            dispatch(homeSearchedToggle(''));
+            dispatch(homeFilteredToggle());
+          }
+        }
+        break;
+
+      default:
+        break;
     }
   };
 
@@ -95,8 +143,14 @@ const PWALayout: React.FC = () => {
         </Content>
       </div>
       <PrimaryFooter />
-      <FilteredUI />
-      <SearchedItems />
+
+      {/* transaction filter  */}
+      <TransactionFilteredUI />
+      <TransactionSearchedItems />
+
+      {/* home filter  */}
+      <HomeFilteredUI />
+      <HomeSearchedItems />
     </Layout>
   );
 };

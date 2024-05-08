@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-invalid-void-type */
 import { useEffect, useState } from 'react';
 import { Layout, Tabs } from 'antd';
 import { ReactComponent as DefaultPaymanIcon } from '../../../icons/defaultPayman.svg';
@@ -8,10 +7,14 @@ import { ReactComponent as ActivePaperIcon } from '../../../icons/activePaper.sv
 import { ReactComponent as ActivePaymanIcon } from '../../../icons/activePayman.svg';
 import { ReactComponent as ActiveHomeIcon } from '../../../icons/activeHome.svg';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useAppSelector } from '../../hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
+// transaction filter
 import { selectTransactionFilter } from '../../../store/filterMenu/transactionFilterMenuSlice';
 import { removeAllFiltersHandler } from '../../../store/filterPage/transactionFilterSlice';
-import { useDispatch } from 'react-redux';
+// home filter
+import { selectHomeFilter } from '../../../store/filterMenu/homeFilterMenuSlice';
+
+// style
 import '../style.css';
 
 const { Footer } = Layout;
@@ -24,11 +27,16 @@ interface TabData {
 }
 
 const PrimaryFooter: React.FC = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const isPrimaryFooterShown = !useAppSelector(selectTransactionFilter);
   const [activeTab, setActiveTab] = useState('2');
-  const dispatch = useDispatch();
+  const isPrimaryTransactionFooterShown = !useAppSelector(
+    selectTransactionFilter
+  );
+  const isPrimaryHomeFooterShown = !useAppSelector(selectHomeFilter);
+  console.log(isPrimaryHomeFooterShown);
+  console.log(isPrimaryTransactionFooterShown);
 
   useEffect(() => {
     // Get the path from the current location
@@ -92,10 +100,12 @@ const PrimaryFooter: React.FC = () => {
     navigate(path);
     return null;
   };
+  const handlePrimaryFooter = () =>
+    isPrimaryHomeFooterShown && isPrimaryTransactionFooterShown;
   return (
     <Footer
       className={`${
-        isPrimaryFooterShown ? 'primary-footer-active' : 'primary-footer'
+        handlePrimaryFooter() ? 'primary-footer-active' : 'primary-footer'
       }`}
     >
       <Tabs

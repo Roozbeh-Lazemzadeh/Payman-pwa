@@ -179,9 +179,9 @@ export const transactionFilterSlice = createSlice({
 // Selectors for accessing the state
 export const selectAllFilter = (state: RootState) =>
   state.transactionFilter.allFilter;
-export const selectShowFilterIcon = (state: RootState) =>
+export const selectShowTransactionFilterIcon = (state: RootState) =>
   state.transactionFilter.isFiltered;
-export const selectFilterNumber = (state: RootState) =>
+export const selectTransactionFilterNumber = (state: RootState) =>
   state.transactionFilter.totalFilterNumber;
 export const selectMerchantsFilterLength = (state: RootState) =>
   state.transactionFilter.allFilter.merchants.length;

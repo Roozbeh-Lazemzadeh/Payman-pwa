@@ -1,5 +1,8 @@
-import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { type RootState } from '../store';
+import { type Transaction } from '../../components/transactions/TransactionsList';
+import transactions from '../../transaction.json';
+import { isAfter, parse } from 'date-fns';
 
 interface FilterState {
   allFilter: {
@@ -8,10 +11,13 @@ interface FilterState {
     price: number[];
   };
   isFiltered: boolean;
-  filterNumber: number;
+  totalFilterNumber: number;
   datePeriod: string;
+  transactionList: Transaction[];
+  sortKey: string;
 }
 
+// Initial state for the filter
 const initialState: FilterState = {
   allFilter: {
     merchants: [],
@@ -19,58 +25,194 @@ const initialState: FilterState = {
     price: [],
   },
   isFiltered: false,
-  filterNumber: 0,
+  totalFilterNumber: 0,
   datePeriod: '',
+  transactionList: transactions,
+  sortKey: '0',
 };
 
 export const homeFilterSlice = createSlice({
   name: 'homeFilter',
   initialState,
   reducers: {
+    // Handler for merchant filters
     merchantHandler: (state, action: PayloadAction<string[]>) => {
       const newMerchants = action.payload;
+      // Limit the number of merchants to 3
+      const limitedMerchants = newMerchants.slice(0, 3);
 
-      // Assign the new array of merchants directly to the state
-      state.allFilter.merchants = newMerchants;
+      // Assign the new array of merchants to the state
+      state.allFilter.merchants = limitedMerchants;
 
-      if (state.allFilter.merchants.length === 0) {
-        state.isFiltered = false;
-      } else {
-        state.isFiltered = true;
-        state.filterNumber = state.allFilter.merchants.length;
-      }
+      // Update isFiltered and totalFilterNumber based on the filter state
+      const hasFilters =
+        state.allFilter.merchants.length > 0 ||
+        state.allFilter.date.length > 0 ||
+        state.allFilter.price.length > 0;
+      state.isFiltered = hasFilters;
+      state.totalFilterNumber =
+        state.allFilter.merchants.length +
+        (state.allFilter.date.length > 0 ? 1 : 0) +
+        (state.allFilter.price.length > 0 ? 1 : 0);
     },
+
+    // Handler for date filters
     dateHandler: (state, action: PayloadAction<string[]>) => {
-      const stringDates = action.payload;
-      state.allFilter.date = stringDates;
+      const newDates = action.payload;
+
+      // Update isFiltered and totalFilterNumber based on the filter state
+      const hasFilters =
+        state.allFilter.merchants.length > 0 ||
+        newDates.length > 0 ||
+        state.allFilter.price.length > 0;
+      state.isFiltered = hasFilters;
+      state.totalFilterNumber =
+        state.allFilter.merchants.length +
+        (newDates.length > 0 ? 1 : 0) +
+        (state.allFilter.price.length > 0 ? 1 : 0);
+
+      // Assign the new array of dates to the state
+      state.allFilter.date = newDates;
     },
+
+    // Handler for setting the date period
     dateQuickAccessHandler: (state, action: PayloadAction<string>) => {
       state.datePeriod = action.payload;
     },
+
+    // Handler for price filters
     priceHandler: (state, action: PayloadAction<number[]>) => {
-      const prices = action.payload;
-      state.allFilter.price = prices;
+      const newPrices = action.payload;
+
+      // Update isFiltered and totalFilterNumber based on the filter state
+      const hasFilters =
+        state.allFilter.merchants.length > 0 ||
+        state.allFilter.date.length > 0 ||
+        newPrices.length > 0;
+      state.isFiltered = hasFilters;
+      state.totalFilterNumber =
+        state.allFilter.merchants.length +
+        (state.allFilter.date.length > 0 ? 1 : 0) +
+        (newPrices.length > 0 ? 1 : 0);
+
+      // Assign the new array of prices to the state
+      state.allFilter.price = newPrices;
     },
+
+    // Handler for removing all filters
     removeAllFiltersHandler: (state) => {
       state.allFilter.merchants = [];
       state.allFilter.date = [];
       state.allFilter.price = [];
       state.isFiltered = false;
-      state.filterNumber = 0;
+      state.totalFilterNumber = 0;
+      state.datePeriod = '';
+      state.transactionList = transactions;
+    },
+
+    handleListFiltering: (
+      state,
+      action: PayloadAction<{
+        merchants?: string[];
+        prices?: number[];
+        dates?: string[];
+      }>
+    ) => {
+      const { merchants, prices, dates } = action.payload;
+      const { allFilter } = state;
+      let filteredList = transactions;
+      const merchantsToFilter = merchants ?? allFilter.merchants;
+      const pricesToFilter = prices ?? allFilter.price;
+      const datesToFilter = dates ?? allFilter.date;
+
+      // filtering based on merchants
+      if (merchantsToFilter.length > 0) {
+        filteredList = filteredList.filter((transaction) =>
+          merchantsToFilter.includes(transaction.creditor)
+        );
+      }
+
+      // filtering based on prices
+      if (pricesToFilter.length > 0 && pricesToFilter.length === 2) {
+        const [minPrice, maxPrice] = pricesToFilter;
+
+        filteredList = filteredList.filter((transaction) => {
+          const transactionAmount = transaction.transaction_amount;
+          return transactionAmount >= minPrice && transactionAmount <= maxPrice;
+        });
+
+        filteredList.sort(
+          (a, b) => b.transaction_amount - a.transaction_amount
+        );
+      }
+
+      // filtering based on dates
+      if (datesToFilter.length > 0 && datesToFilter.length === 2) {
+        const parsedDates: Date[] = datesToFilter.map((date) =>
+          parse(date, 'yy-MMM-dd hh:mm:ss a', new Date())
+        );
+
+        // Filter transactions between the specified dates
+        filteredList = filteredList.filter((transaction) => {
+          const transactionDate = parse(
+            transaction.transaction_date,
+            'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
+            new Date()
+          );
+
+          return (
+            transactionDate >= parsedDates[0] &&
+            transactionDate <= parsedDates[1]
+          );
+        });
+      }
+      state.transactionList = filteredList;
+    },
+
+    handleSortKey: (state, action: PayloadAction<string>) => {
+      state.sortKey = action.payload;
     },
   },
 });
 
-export const selectAllFilter = (state: RootState) =>
-  state.homeFilter?.allFilter;
-export const selectShowFilterIcon = (state: RootState) =>
-  state.homeFilter?.isFiltered;
-export const selectFilterNumber = (state: RootState) =>
-  state.homeFilter?.filterNumber;
+// Selectors for accessing the state
+export const selectAllFilter = (state: RootState) => state.homeFilter.allFilter;
+export const selectHomeShowFilterIcon = (state: RootState) =>
+  state.homeFilter.isFiltered;
+export const selectHomeFilterNumber = (state: RootState) =>
+  state.homeFilter.totalFilterNumber;
 export const selectMerchantsFilterLength = (state: RootState) =>
-  state.homeFilter?.allFilter.merchants.length;
+  state.homeFilter.allFilter.merchants.length;
 export const selectDatePeriod = (state: RootState) =>
-  state.homeFilter?.datePeriod;
+  state.homeFilter.datePeriod;
+export const selectTransactionList = (state: RootState) => {
+  if (state.homeFilter.sortKey === '0') {
+    const sortedList = [...state.homeFilter.transactionList];
+    sortedList.sort((a, b) => {
+      const dateA = parse(
+        a.transaction_date,
+        'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
+        new Date()
+      );
+      const dateB = parse(
+        b.transaction_date,
+        'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
+        new Date()
+      );
+
+      // Compare dates using isAfter from date-fns
+      return isAfter(dateB, dateA) ? 1 : -1;
+    });
+
+    return sortedList;
+  } else if (state.homeFilter.sortKey === '1') {
+    const sortedList = [...state.homeFilter.transactionList];
+    sortedList.sort((a, b) => b.transaction_amount - a.transaction_amount);
+    return sortedList;
+  }
+
+  return state.homeFilter.transactionList;
+};
 
 export const {
   merchantHandler,
@@ -78,5 +220,8 @@ export const {
   removeAllFiltersHandler,
   priceHandler,
   dateQuickAccessHandler,
+  handleListFiltering,
+  handleSortKey,
 } = homeFilterSlice.actions;
+
 export default homeFilterSlice.reducer;

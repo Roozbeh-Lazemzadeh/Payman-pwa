@@ -1,6 +1,8 @@
 import React from 'react';
 import { ReactComponent as FilterIcon } from '../../icons/bilbil.svg';
 import { ReactComponent as FilteredCircleIcon } from '../../icons/filteringCirc.svg';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+// transaction filter import
 import {
   selectTransactionFilter,
   selectTransactionSearchedFilter,
@@ -9,11 +11,24 @@ import {
   transactionFilteredToggle,
   transactionSearchedToggle,
 } from '../../store/filterMenu/transactionFilterMenuSlice';
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import {
-  selectFilterNumber,
-  selectShowFilterIcon,
+  selectTransactionFilterNumber,
+  selectShowTransactionFilterIcon,
 } from '../../store/filterPage/transactionFilterSlice';
+// home filter import
+import {
+  selectHomeFilter,
+  selectHomeSearchedFilter,
+  homeCloseSearchToggle,
+  homeCloseSearchFalse,
+  homeFilteredToggle,
+  homeSearchedToggle,
+} from '../../store/filterMenu/homeFilterMenuSlice';
+import {
+  selectHomeFilterNumber,
+  selectHomeShowFilterIcon,
+} from '../../store/filterPage/homeFilterSlice';
+// style
 import { useLocation } from 'react-router-dom';
 import './style.css';
 
@@ -23,14 +38,23 @@ export const Filter: React.FC = () => {
   const currentPath = location.pathname;
 
   // transaction filter
-  const filteredIcon = useAppSelector(selectShowFilterIcon);
-  const totalFilterNumber = useAppSelector(selectFilterNumber);
+  const transactionFilteredIcon = useAppSelector(
+    selectShowTransactionFilterIcon
+  );
+  const transactionTotalFilterNumber = useAppSelector(
+    selectTransactionFilterNumber
+  );
   const isTransactionFilterShown = useAppSelector(selectTransactionFilter);
   const isTransactionSearchedFilterShown = useAppSelector(
     selectTransactionSearchedFilter
   );
 
   // home filter
+  const homeFilteredIcon = useAppSelector(selectHomeShowFilterIcon);
+  const homeTotalFilterNumber = useAppSelector(selectHomeFilterNumber);
+  const isHomeFilterShown = useAppSelector(selectHomeFilter);
+  const isHomeSearchedFilterShown = useAppSelector(selectHomeSearchedFilter);
+
   // payman filter
 
   const handlePrimaryFilterShow = () => {
@@ -48,6 +72,17 @@ export const Filter: React.FC = () => {
         }
         break;
       case '/home/with-mandate':
+        console.log('true');
+        if (!isHomeFilterShown && !isHomeSearchedFilterShown) {
+          dispatch(homeFilteredToggle());
+          dispatch(homeCloseSearchFalse());
+        } else if (isHomeSearchedFilterShown) {
+          dispatch(homeCloseSearchToggle());
+          dispatch(homeFilteredToggle());
+          dispatch(homeSearchedToggle(''));
+        } else if (isHomeFilterShown) {
+          dispatch(homeFilteredToggle());
+        }
         break;
       case '/paymans/me':
         break;
@@ -59,7 +94,7 @@ export const Filter: React.FC = () => {
 
   return (
     <span className='filter-icon'>
-      {filteredIcon ? (
+      {transactionFilteredIcon || homeFilteredIcon ? (
         <div className='filtered-wrapper'>
           <div className='filtered'>
             <FilterIcon onClick={handlePrimaryFilterShow} />
@@ -69,10 +104,12 @@ export const Filter: React.FC = () => {
           </div>
           <span
             className={`filter-number ${
-              totalFilterNumber === 1 ? 'number-one' : ''
+              transactionTotalFilterNumber === 1 || homeTotalFilterNumber === 1
+                ? 'number-one'
+                : ''
             }`}
           >
-            {totalFilterNumber}
+            {transactionTotalFilterNumber || homeTotalFilterNumber}
           </span>
         </div>
       ) : (
