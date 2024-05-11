@@ -5,13 +5,8 @@ import chartReducer from './chart/chartSlice';
 import merchantReducer from './merchant/merchantSlice';
 import monthlyBillSlice from './monthlyBill/monthlyBillSlice';
 
-import transactionFilterMenuReducer from './filterMenu/transactionFilterMenuSlice';
-import homeFilterMenuReducer from './filterMenu/homeFilterMenuSlice';
-import paymanFilterMenuReducer from './filterMenu/paymanFilterMenuSlice';
-
-import transactionFilterReducer from './filterPage/transactionFilterSlice';
-import homeFilterReducer from './filterPage/homeFilterSlice';
-import paymanFilterReducer from './filterPage/paymanFilterSlice';
+import filterMenuReducer from './filterMenu/filterMenuSlice';
+import filterReducer from './filterPage/filterSlice';
 
 import arrayHomeWithMandateReducer from './arrayHomeWithMandate/arrayHomeWithMandateSlice';
 import bottomSheetReducer from './bottomSheet/bottomSheetSlice';
@@ -25,13 +20,8 @@ const store = configureStore({
     merchant: merchantReducer,
     monthly: monthlyBillSlice,
 
-    transactionFilterMenu: transactionFilterMenuReducer,
-    homeFilterMenu: homeFilterMenuReducer,
-    paymanFilterMenu: paymanFilterMenuReducer,
-
-    transactionFilter: transactionFilterReducer,
-    homeFilter: homeFilterReducer,
-    paymanFilter: paymanFilterReducer,
+    filterMenu: filterMenuReducer,
+    filter: filterReducer,
 
     arrayHome: arrayHomeWithMandateReducer,
     bottomSheet: bottomSheetReducer,

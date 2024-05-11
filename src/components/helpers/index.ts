@@ -1,14 +1,14 @@
 import { toggleSidebar } from '../../store/sidebar/sidebarSlice';
 import {
-  transactionFilteredToggle,
-  transactionSearchedToggle,
-} from '../../store/filterMenu/transactionFilterMenuSlice';
+  filteredToggle,
+  searchedToggle,
+} from '../../store/filterMenu/filterMenuSlice';
 import { type NavigateFunction } from 'react-router-dom';
 import { type Dispatch } from '@reduxjs/toolkit';
 import {
   dateQuickAccessHandler,
   removeAllFiltersHandler,
-} from '../../store/filterPage/transactionFilterSlice';
+} from '../../store/filterPage/filterSlice';
 
 interface ItemProps {
   label: string;
@@ -52,12 +52,12 @@ export function getItem({
     if (key.length === 3) {
       if (key === '101') {
         dispatch(removeAllFiltersHandler());
-        dispatch(transactionSearchedToggle(''));
-        dispatch(transactionFilteredToggle());
+        dispatch(searchedToggle(''));
+        dispatch(filteredToggle());
         dispatch(dateQuickAccessHandler(''));
       }
 
-      dispatch(transactionSearchedToggle(key));
+      dispatch(searchedToggle(key));
     }
 
     if (key === '4' || key === '2' || key === '3') {

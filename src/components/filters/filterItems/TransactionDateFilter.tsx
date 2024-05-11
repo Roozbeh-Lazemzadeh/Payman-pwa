@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { ReactComponent as TickSquareIcon } from '../../../../icons/tickSquare.svg';
-import { ReactComponent as CalendarIcon } from '../../../../icons/calendar.svg';
-import { ReactComponent as RemoveIcon } from '../../../../icons/delete.svg';
+import { ReactComponent as TickSquareIcon } from '../../../icons/tickSquare.svg';
+import { ReactComponent as CalendarIcon } from '../../../icons/calendar.svg';
+import { ReactComponent as RemoveIcon } from '../../../icons/delete.svg';
 import DatePicker, { DateObject } from 'react-multi-date-picker';
-import { weekDays } from '../../../types/calendar';
+import { weekDays } from '../../types/calendar';
 import gregorian from 'react-date-object/calendars/gregorian';
 import { startOfDay, subDays, subWeeks, subMonths, parse } from 'date-fns';
 import persian from 'react-date-object/calendars/persian';
@@ -15,21 +15,21 @@ import {
   handleListFiltering,
   selectAllFilter,
   selectDatePeriod,
-} from '../../../../store/filterPage/transactionFilterSlice';
-import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
+} from '../../../store/filterPage/filterSlice';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import {
-  transactionFilteredToggle,
-  transactionSearchedToggle,
-  selectTransactionSearchItem,
-} from '../../../../store/filterMenu/transactionFilterMenuSlice';
+  filteredToggle,
+  searchedToggle,
+  selectSearchItem,
+} from '../../../store/filterMenu/filterMenuSlice';
 
-import '../../../Paymans/otherPaymans/style.css';
-import '../../style.css';
+import '../../Paymans/otherPaymans/style.css';
+import '../style.css';
 
-export const DateFilter: React.FC = () => {
+export const TransactionDateFilter: React.FC = () => {
   const dispatch = useAppDispatch();
   const allFilter = useAppSelector(selectAllFilter);
-  const searchItem = useAppSelector(selectTransactionSearchItem);
+  const searchItem = useAppSelector(selectSearchItem);
   const datePeriod = useAppSelector(selectDatePeriod);
   const [dates, setDates] = useState<string[]>([]);
   const [values, setValues] = useState<Date[]>([
@@ -61,8 +61,8 @@ export const DateFilter: React.FC = () => {
     if (dates.length === 0) return null;
     dispatch(dateHandler(dates));
     dispatch(handleListFiltering({ dates }));
-    dispatch(transactionSearchedToggle(''));
-    dispatch(transactionFilteredToggle());
+    dispatch(searchedToggle(''));
+    dispatch(filteredToggle());
   };
 
   useEffect(() => {
@@ -144,8 +144,8 @@ export const DateFilter: React.FC = () => {
     setDates([]);
     setValues([]);
     dispatch(dateHandler([]));
-    dispatch(transactionSearchedToggle(''));
-    dispatch(transactionFilteredToggle());
+    dispatch(searchedToggle(''));
+    dispatch(filteredToggle());
     dispatch(dateQuickAccessHandler(''));
     dispatch(handleListFiltering({ dates: [] }));
   };

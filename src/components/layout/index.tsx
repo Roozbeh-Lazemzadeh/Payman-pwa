@@ -5,27 +5,16 @@ import { Sidebar } from './sidebar/Sidebar';
 import PrimaryFooter from './footer/PrimaryFooter';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 
-// transaction filter
-import TransactionFilteredUI from '../filters/Transactions/filterMenu/FilterMenu';
-import TransactionSearchedItems from '../filters/Transactions/filterItems';
+// filter
+import FilteredUI from '../filters/filterMenu/FilterMenu';
+import SearchedItems from '../filters/filterItems';
 import {
-  transactionFilteredToggle,
-  transactionSearchedToggle,
-  transactionCloseSearchToggle,
-  selectTransactionSearchedFilter,
-  selectTransactionFilter,
-} from '../../store/filterMenu/transactionFilterMenuSlice';
-
-// home filter
-import HomeFilteredUI from '../filters/Home/filterMenu/FilterMenu';
-import HomeSearchedItems from '../filters/Home/filterItems';
-import {
-  homeFilteredToggle,
-  homeSearchedToggle,
-  homeCloseSearchToggle,
-  selectHomeSearchedFilter,
-  selectHomeFilter,
-} from '../../store/filterMenu/homeFilterMenuSlice';
+  filteredToggle,
+  searchedToggle,
+  closeSearchToggle,
+  selectSearchedFilter,
+  selectFilter,
+} from '../../store/filterMenu/filterMenuSlice';
 
 interface HeaderStyle {
   background: boolean;
@@ -37,17 +26,10 @@ const PWALayout: React.FC = () => {
   const dispatch = useAppDispatch();
   const { Content } = Layout;
   const location = useLocation();
-  const currentPath = location.pathname;
 
-  // transaction filter
-  const isTransactionFilteredShown = useAppSelector(selectTransactionFilter);
-  const isTransactionSearchedShown = useAppSelector(
-    selectTransactionSearchedFilter
-  );
-
-  // home filter
-  const isHomeFilteredShown = useAppSelector(selectHomeFilter);
-  const isHomeSearchedShown = useAppSelector(selectHomeSearchedFilter);
+  // filter
+  const isFilteredShown = useAppSelector(selectFilter);
+  const isSearchedShown = useAppSelector(selectSearchedFilter);
 
   // const isUserRegistered = true; // todo replace with corresponding API
 
@@ -91,42 +73,15 @@ const PWALayout: React.FC = () => {
     );
     if (selectDropdown) return;
 
-    switch (currentPath) {
-      case '/transactions':
-        if (!filterIcon) {
-          if (
-            !filteredFooterWrapper &&
-            isTransactionFilteredShown &&
-            !isTransactionSearchedShown
-          ) {
-            dispatch(transactionFilteredToggle());
-          }
-          if (!searchFooterWrapper && isTransactionSearchedShown) {
-            dispatch(transactionCloseSearchToggle());
-            dispatch(transactionSearchedToggle(''));
-            dispatch(transactionFilteredToggle());
-          }
-        }
-        break;
-      case '/home/with-mandate':
-        if (!filterIcon) {
-          if (
-            !filteredFooterWrapper &&
-            isHomeFilteredShown &&
-            !isHomeSearchedShown
-          ) {
-            dispatch(homeFilteredToggle());
-          }
-          if (!searchFooterWrapper && isHomeSearchedShown) {
-            dispatch(homeCloseSearchToggle());
-            dispatch(homeSearchedToggle(''));
-            dispatch(homeFilteredToggle());
-          }
-        }
-        break;
-
-      default:
-        break;
+    if (!filterIcon) {
+      if (!filteredFooterWrapper && isFilteredShown && !isSearchedShown) {
+        dispatch(filteredToggle());
+      }
+      if (!searchFooterWrapper && isSearchedShown) {
+        dispatch(closeSearchToggle());
+        dispatch(searchedToggle(''));
+        dispatch(filteredToggle());
+      }
     }
   };
 
@@ -144,13 +99,9 @@ const PWALayout: React.FC = () => {
       </div>
       <PrimaryFooter />
 
-      {/* transaction filter  */}
-      <TransactionFilteredUI />
-      <TransactionSearchedItems />
-
-      {/* home filter  */}
-      <HomeFilteredUI />
-      <HomeSearchedItems />
+      {/* filter  */}
+      <FilteredUI />
+      <SearchedItems />
     </Layout>
   );
 };

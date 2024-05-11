@@ -4,6 +4,7 @@ import { type Transaction } from '../../components/transactions/TransactionsList
 import transactions from '../../transaction.json';
 import { isAfter, parse } from 'date-fns';
 
+// Interface for the filter state
 interface FilterState {
   allFilter: {
     merchants: string[];
@@ -31,8 +32,8 @@ const initialState: FilterState = {
   sortKey: '0',
 };
 
-export const homeFilterSlice = createSlice({
-  name: 'homeFilter',
+export const filterSlice = createSlice({
+  name: 'filter',
   initialState,
   reducers: {
     // Handler for merchant filters
@@ -176,18 +177,17 @@ export const homeFilterSlice = createSlice({
 });
 
 // Selectors for accessing the state
-export const selectAllFilter = (state: RootState) => state.homeFilter.allFilter;
-export const selectHomeShowFilterIcon = (state: RootState) =>
-  state.homeFilter.isFiltered;
-export const selectHomeFilterNumber = (state: RootState) =>
-  state.homeFilter.totalFilterNumber;
+export const selectAllFilter = (state: RootState) => state.filter.allFilter;
+export const selectShowFilterIcon = (state: RootState) =>
+  state.filter.isFiltered;
+export const selectFilterNumber = (state: RootState) =>
+  state.filter.totalFilterNumber;
 export const selectMerchantsFilterLength = (state: RootState) =>
-  state.homeFilter.allFilter.merchants.length;
-export const selectDatePeriod = (state: RootState) =>
-  state.homeFilter.datePeriod;
+  state.filter.allFilter.merchants.length;
+export const selectDatePeriod = (state: RootState) => state.filter.datePeriod;
 export const selectTransactionList = (state: RootState) => {
-  if (state.homeFilter.sortKey === '0') {
-    const sortedList = [...state.homeFilter.transactionList];
+  if (state.filter.sortKey === '0') {
+    const sortedList = [...state.filter.transactionList];
     sortedList.sort((a, b) => {
       const dateA = parse(
         a.transaction_date,
@@ -205,13 +205,13 @@ export const selectTransactionList = (state: RootState) => {
     });
 
     return sortedList;
-  } else if (state.homeFilter.sortKey === '1') {
-    const sortedList = [...state.homeFilter.transactionList];
+  } else if (state.filter.sortKey === '1') {
+    const sortedList = [...state.filter.transactionList];
     sortedList.sort((a, b) => b.transaction_amount - a.transaction_amount);
     return sortedList;
   }
 
-  return state.homeFilter.transactionList;
+  return state.filter.transactionList;
 };
 
 export const {
@@ -222,6 +222,6 @@ export const {
   dateQuickAccessHandler,
   handleListFiltering,
   handleSortKey,
-} = homeFilterSlice.actions;
+} = filterSlice.actions;
 
-export default homeFilterSlice.reducer;
+export default filterSlice.reducer;

@@ -1,12 +1,12 @@
 import React from 'react';
-import TransactionFilterTag from '../shared/Tags/TransactionFilterTag';
+import FilterTag from '../shared/Tags/FilterTag';
 import { useAppSelector } from '../hooks/reduxHooks';
-import { selectShowTransactionFilterIcon } from '../../store/filterPage/transactionFilterSlice';
+import { selectShowFilterIcon } from '../../store/filterPage/filterSlice';
 
 import './style.css';
 
 export const TransactionFilterLabels: React.FC = () => {
-  const isFiltered = useAppSelector(selectShowTransactionFilterIcon);
+  const isFiltered = useAppSelector(selectShowFilterIcon);
 
   if (!isFiltered) {
     return null;
@@ -14,7 +14,7 @@ export const TransactionFilterLabels: React.FC = () => {
     return (
       <div className='transaction-filter-list-wrapper'>
         <div className='transaction-filter-item'>
-          <TransactionFilterTag />
+          <FilterTag />
         </div>
       </div>
     );

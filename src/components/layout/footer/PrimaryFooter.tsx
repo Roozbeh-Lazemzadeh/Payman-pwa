@@ -8,11 +8,9 @@ import { ReactComponent as ActivePaymanIcon } from '../../../icons/activePayman.
 import { ReactComponent as ActiveHomeIcon } from '../../../icons/activeHome.svg';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
-// transaction filter
-import { selectTransactionFilter } from '../../../store/filterMenu/transactionFilterMenuSlice';
-import { removeAllFiltersHandler } from '../../../store/filterPage/transactionFilterSlice';
-// home filter
-import { selectHomeFilter } from '../../../store/filterMenu/homeFilterMenuSlice';
+// filter
+import { selectFilter } from '../../../store/filterMenu/filterMenuSlice';
+import { removeAllFiltersHandler } from '../../../store/filterPage/filterSlice';
 
 // style
 import '../style.css';
@@ -31,12 +29,7 @@ const PrimaryFooter: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [activeTab, setActiveTab] = useState('2');
-  const isPrimaryTransactionFooterShown = !useAppSelector(
-    selectTransactionFilter
-  );
-  const isPrimaryHomeFooterShown = !useAppSelector(selectHomeFilter);
-  console.log(isPrimaryHomeFooterShown);
-  console.log(isPrimaryTransactionFooterShown);
+  const isPrimaryFooterShown = !useAppSelector(selectFilter);
 
   useEffect(() => {
     // Get the path from the current location
@@ -100,12 +93,11 @@ const PrimaryFooter: React.FC = () => {
     navigate(path);
     return null;
   };
-  const handlePrimaryFooter = () =>
-    isPrimaryHomeFooterShown && isPrimaryTransactionFooterShown;
+
   return (
     <Footer
       className={`${
-        handlePrimaryFooter() ? 'primary-footer-active' : 'primary-footer'
+        isPrimaryFooterShown ? 'primary-footer-active' : 'primary-footer'
       }`}
     >
       <Tabs

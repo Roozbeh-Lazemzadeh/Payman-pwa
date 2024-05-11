@@ -7,13 +7,13 @@ import {
   merchantHandler,
   priceHandler,
   selectAllFilter,
-} from '../../../store/filterPage/transactionFilterSlice';
+} from '../../../store/filterPage/filterSlice';
 import { ReactComponent as CrossIcon } from '../../../icons/cross.svg';
 import { filterConvertDate } from '../../helpers/transDate';
 
 import './style.css';
 
-const TransactionFilterTag: React.FC = () => {
+const FilterTag: React.FC = () => {
   const dispatch = useAppDispatch();
   const { merchants, price, date } = useAppSelector(selectAllFilter);
 
@@ -110,4 +110,4 @@ const getPriceLabel = (price: number): string => {
   }
 };
 
-export default TransactionFilterTag;
+export default FilterTag;

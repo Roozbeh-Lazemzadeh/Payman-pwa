@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { Input } from 'antd';
-import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import {
-  homeFilteredToggle,
-  homeSearchedToggle,
-  selectHomeSearchItem,
-} from '../../../../store/filterMenu/homeFilterMenuSlice';
-import { ReactComponent as TickSquareIcon } from '../../../../icons/tickSquare.svg';
-import { ReactComponent as BuyIcon } from '../../../../icons/buy2.svg';
-import { ReactComponent as RemoveIcon } from '../../../../icons/delete.svg';
+  filteredToggle,
+  searchedToggle,
+  selectSearchItem,
+} from '../../../store/filterMenu/filterMenuSlice';
+import { ReactComponent as TickSquareIcon } from '../../../icons/tickSquare.svg';
+import { ReactComponent as BuyIcon } from '../../../icons/buy2.svg';
+import { ReactComponent as RemoveIcon } from '../../../icons/delete.svg';
 import {
   handleListFiltering,
   priceHandler,
   selectAllFilter,
-} from '../../../../store/filterPage/homeFilterSlice';
+} from '../../../store/filterPage/filterSlice';
 
-import '../../style.css';
-import '../../../Paymans/otherPaymans/style.css';
+import '../style.css';
+import '../../Paymans/otherPaymans/style.css';
 
 export const PriceFilter: React.FC = () => {
   const dispatch = useAppDispatch();
   const allFilter = useAppSelector(selectAllFilter);
-  const searchItem = useAppSelector(selectHomeSearchItem);
+  const searchItem = useAppSelector(selectSearchItem);
   const [selectedQuickItems, setSelectedQuickItems] = useState<number[]>([]);
   const [prices, setPrices] = useState<number[]>([]);
   const [priceFrom, setPriceFrom] = useState<number>();
@@ -31,8 +31,8 @@ export const PriceFilter: React.FC = () => {
     if (prices.length === 0) return null;
     setSelectedQuickItems([]);
     dispatch(priceHandler([]));
-    dispatch(homeSearchedToggle(''));
-    dispatch(homeFilteredToggle());
+    dispatch(searchedToggle(''));
+    dispatch(filteredToggle());
     dispatch(handleListFiltering({ prices: [] }));
   };
 
@@ -74,8 +74,8 @@ export const PriceFilter: React.FC = () => {
       dispatch(priceHandler(prices));
       dispatch(handleListFiltering({ prices }));
     }
-    dispatch(homeSearchedToggle(''));
-    dispatch(homeFilteredToggle());
+    dispatch(searchedToggle(''));
+    dispatch(filteredToggle());
   };
 
   useEffect(() => {

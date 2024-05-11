@@ -1,18 +1,17 @@
 import { Layout, Menu, Badge } from 'antd';
-import { ReactComponent as ActivityIcon } from '../../../../icons/activity.svg';
-import { ReactComponent as WorkIcon } from '../../../../icons/work.svg';
-import { ReactComponent as CalendarIcon } from '../../../../icons/calendar.svg';
-import { ReactComponent as RemoveIcon } from '../../../../icons/delete.svg';
-import { getItem } from '../../../helpers';
-import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
+import { ReactComponent as ActivityIcon } from '../../../icons/activity.svg';
+import { ReactComponent as WorkIcon } from '../../../icons/work.svg';
+import { ReactComponent as CalendarIcon } from '../../../icons/calendar.svg';
+import { ReactComponent as RemoveIcon } from '../../../icons/delete.svg';
+import { getItem } from '../../helpers';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import {
-  selectHomeFilter,
-  selectHomeSearchedFilter,
-} from '../../../../store/filterMenu/homeFilterMenuSlice';
-import { selectAllFilter } from '../../../../store/filterPage/homeFilterSlice';
+  selectFilter,
+  selectSearchedFilter,
+} from '../../../store/filterMenu/filterMenuSlice';
+import { selectAllFilter } from '../../../store/filterPage/filterSlice';
 import { useNavigate } from 'react-router-dom';
-
-import '../../style.css';
+import '../style.css';
 import './style.css';
 
 const { Footer } = Layout;
@@ -20,8 +19,8 @@ const { Footer } = Layout;
 const FilterMenu: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const isFilteredMenuShown = useAppSelector(selectHomeFilter);
-  const isSearchedMenuShown = useAppSelector(selectHomeSearchedFilter);
+  const isFilteredFooterShown = useAppSelector(selectFilter);
+  const isSearchedFooterShown = useAppSelector(selectSearchedFilter);
   const allFilter = useAppSelector(selectAllFilter);
 
   const removeFilterItem =
@@ -71,10 +70,10 @@ const FilterMenu: React.FC = () => {
   return (
     <>
       {/* Overlay */}
-      {isFilteredMenuShown && <div className='filter-overlay' />}
+      {isFilteredFooterShown && <div className='filter-overlay' />}
       <Footer
-        className={`filtered-footer${isFilteredMenuShown ? ' active' : ''} ${
-          isSearchedMenuShown ? 'invisible' : ''
+        className={`filtered-footer${isFilteredFooterShown ? ' active' : ''} ${
+          isSearchedFooterShown ? 'invisible' : ''
         }`}
       >
         <Menu

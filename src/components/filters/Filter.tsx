@@ -2,99 +2,48 @@ import React from 'react';
 import { ReactComponent as FilterIcon } from '../../icons/bilbil.svg';
 import { ReactComponent as FilteredCircleIcon } from '../../icons/filteringCirc.svg';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
-// transaction filter import
+// filter imports
 import {
-  selectTransactionFilter,
-  selectTransactionSearchedFilter,
-  transactionCloseSearchToggle,
-  transactionCloseSearchFalse,
-  transactionFilteredToggle,
-  transactionSearchedToggle,
-} from '../../store/filterMenu/transactionFilterMenuSlice';
+  selectFilter,
+  selectSearchedFilter,
+  closeSearchToggle,
+  closeSearchFalse,
+  filteredToggle,
+  searchedToggle,
+} from '../../store/filterMenu/filterMenuSlice';
 import {
-  selectTransactionFilterNumber,
-  selectShowTransactionFilterIcon,
-} from '../../store/filterPage/transactionFilterSlice';
-// home filter import
-import {
-  selectHomeFilter,
-  selectHomeSearchedFilter,
-  homeCloseSearchToggle,
-  homeCloseSearchFalse,
-  homeFilteredToggle,
-  homeSearchedToggle,
-} from '../../store/filterMenu/homeFilterMenuSlice';
-import {
-  selectHomeFilterNumber,
-  selectHomeShowFilterIcon,
-} from '../../store/filterPage/homeFilterSlice';
+  selectFilterNumber,
+  selectShowFilterIcon,
+} from '../../store/filterPage/filterSlice';
+
 // style
-import { useLocation } from 'react-router-dom';
 import './style.css';
 
 export const Filter: React.FC = () => {
   const dispatch = useAppDispatch();
-  const location = useLocation();
-  const currentPath = location.pathname;
 
-  // transaction filter
-  const transactionFilteredIcon = useAppSelector(
-    selectShowTransactionFilterIcon
-  );
-  const transactionTotalFilterNumber = useAppSelector(
-    selectTransactionFilterNumber
-  );
-  const isTransactionFilterShown = useAppSelector(selectTransactionFilter);
-  const isTransactionSearchedFilterShown = useAppSelector(
-    selectTransactionSearchedFilter
-  );
-
-  // home filter
-  const homeFilteredIcon = useAppSelector(selectHomeShowFilterIcon);
-  const homeTotalFilterNumber = useAppSelector(selectHomeFilterNumber);
-  const isHomeFilterShown = useAppSelector(selectHomeFilter);
-  const isHomeSearchedFilterShown = useAppSelector(selectHomeSearchedFilter);
-
-  // payman filter
+  // filter
+  const filteredIcon = useAppSelector(selectShowFilterIcon);
+  const totalFilterNumber = useAppSelector(selectFilterNumber);
+  const isFilterShown = useAppSelector(selectFilter);
+  const isSearchedFilterShown = useAppSelector(selectSearchedFilter);
 
   const handlePrimaryFilterShow = () => {
-    switch (currentPath) {
-      case '/transactions':
-        if (!isTransactionFilterShown && !isTransactionSearchedFilterShown) {
-          dispatch(transactionFilteredToggle());
-          dispatch(transactionCloseSearchFalse());
-        } else if (isTransactionSearchedFilterShown) {
-          dispatch(transactionCloseSearchToggle());
-          dispatch(transactionFilteredToggle());
-          dispatch(transactionSearchedToggle(''));
-        } else if (isTransactionFilterShown) {
-          dispatch(transactionFilteredToggle());
-        }
-        break;
-      case '/home/with-mandate':
-        console.log('true');
-        if (!isHomeFilterShown && !isHomeSearchedFilterShown) {
-          dispatch(homeFilteredToggle());
-          dispatch(homeCloseSearchFalse());
-        } else if (isHomeSearchedFilterShown) {
-          dispatch(homeCloseSearchToggle());
-          dispatch(homeFilteredToggle());
-          dispatch(homeSearchedToggle(''));
-        } else if (isHomeFilterShown) {
-          dispatch(homeFilteredToggle());
-        }
-        break;
-      case '/paymans/me':
-        break;
-
-      default:
-        break;
+    if (!isFilterShown && !isSearchedFilterShown) {
+      dispatch(filteredToggle());
+      dispatch(closeSearchFalse());
+    } else if (isSearchedFilterShown) {
+      dispatch(closeSearchToggle());
+      dispatch(filteredToggle());
+      dispatch(searchedToggle(''));
+    } else if (isFilterShown) {
+      dispatch(filteredToggle());
     }
   };
 
   return (
     <span className='filter-icon'>
-      {transactionFilteredIcon || homeFilteredIcon ? (
+      {filteredIcon ? (
         <div className='filtered-wrapper'>
           <div className='filtered'>
             <FilterIcon onClick={handlePrimaryFilterShow} />
@@ -104,12 +53,10 @@ export const Filter: React.FC = () => {
           </div>
           <span
             className={`filter-number ${
-              transactionTotalFilterNumber === 1 || homeTotalFilterNumber === 1
-                ? 'number-one'
-                : ''
+              totalFilterNumber === 1 ? 'number-one' : ''
             }`}
           >
-            {transactionTotalFilterNumber || homeTotalFilterNumber}
+            {totalFilterNumber}
           </span>
         </div>
       ) : (
