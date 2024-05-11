@@ -1,59 +1,43 @@
 import React from 'react';
 import { ReactComponent as FilterIcon } from '../../icons/bilbil.svg';
 import { ReactComponent as FilteredCircleIcon } from '../../icons/filteringCirc.svg';
-import {
-  selectTransactionFilter,
-  selectTransactionSearchedFilter,
-  transactionCloseSearchToggle,
-  transactionCloseSearchFalse,
-  transactionFilteredToggle,
-  transactionSearchedToggle,
-} from '../../store/filterMenu/transactionFilterMenuSlice';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+// filter imports
+import {
+  selectFilter,
+  selectSearchedFilter,
+  closeSearchToggle,
+  closeSearchFalse,
+  filteredToggle,
+  searchedToggle,
+} from '../../store/filterMenu/filterMenuSlice';
 import {
   selectFilterNumber,
   selectShowFilterIcon,
-} from '../../store/filterPage/transactionFilterSlice';
-import { useLocation } from 'react-router-dom';
+} from '../../store/filterPage/filterSlice';
+
+// style
 import './style.css';
 
 export const Filter: React.FC = () => {
   const dispatch = useAppDispatch();
-  const location = useLocation();
-  const currentPath = location.pathname;
 
-  // transaction filter
+  // filter
   const filteredIcon = useAppSelector(selectShowFilterIcon);
   const totalFilterNumber = useAppSelector(selectFilterNumber);
-  const isTransactionFilterShown = useAppSelector(selectTransactionFilter);
-  const isTransactionSearchedFilterShown = useAppSelector(
-    selectTransactionSearchedFilter
-  );
-
-  // home filter
-  // payman filter
+  const isFilterShown = useAppSelector(selectFilter);
+  const isSearchedFilterShown = useAppSelector(selectSearchedFilter);
 
   const handlePrimaryFilterShow = () => {
-    switch (currentPath) {
-      case '/transactions':
-        if (!isTransactionFilterShown && !isTransactionSearchedFilterShown) {
-          dispatch(transactionFilteredToggle());
-          dispatch(transactionCloseSearchFalse());
-        } else if (isTransactionSearchedFilterShown) {
-          dispatch(transactionCloseSearchToggle());
-          dispatch(transactionFilteredToggle());
-          dispatch(transactionSearchedToggle(''));
-        } else if (isTransactionFilterShown) {
-          dispatch(transactionFilteredToggle());
-        }
-        break;
-      case '/home/with-mandate':
-        break;
-      case '/paymans/me':
-        break;
-
-      default:
-        break;
+    if (!isFilterShown && !isSearchedFilterShown) {
+      dispatch(filteredToggle());
+      dispatch(closeSearchFalse());
+    } else if (isSearchedFilterShown) {
+      dispatch(closeSearchToggle());
+      dispatch(filteredToggle());
+      dispatch(searchedToggle(''));
+    } else if (isFilterShown) {
+      dispatch(filteredToggle());
     }
   };
 

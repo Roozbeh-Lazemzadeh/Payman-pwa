@@ -1,17 +1,17 @@
 import { Layout, Menu, Badge } from 'antd';
-import { ReactComponent as ActivityIcon } from '../../../../icons/activity.svg';
-import { ReactComponent as WorkIcon } from '../../../../icons/work.svg';
-import { ReactComponent as CalendarIcon } from '../../../../icons/calendar.svg';
-import { ReactComponent as RemoveIcon } from '../../../../icons/delete.svg';
-import { getItem } from '../../../helpers';
-import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
+import { ReactComponent as ActivityIcon } from '../../../icons/activity.svg';
+import { ReactComponent as WorkIcon } from '../../../icons/work.svg';
+import { ReactComponent as CalendarIcon } from '../../../icons/calendar.svg';
+import { ReactComponent as RemoveIcon } from '../../../icons/delete.svg';
+import { getItem } from '../../helpers';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import {
-  selectTransactionFilter,
-  selectTransactionSearchedFilter,
-} from '../../../../store/filterMenu/transactionFilterMenuSlice';
-import { selectAllFilter } from '../../../../store/filterPage/transactionFilterSlice';
+  selectFilter,
+  selectSearchedFilter,
+} from '../../../store/filterMenu/filterMenuSlice';
+import { selectAllFilter } from '../../../store/filterPage/filterSlice';
 import { useNavigate } from 'react-router-dom';
-import '../../style.css';
+import '../style.css';
 import './style.css';
 
 const { Footer } = Layout;
@@ -19,8 +19,8 @@ const { Footer } = Layout;
 const FilterMenu: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const isFilteredFooterShown = useAppSelector(selectTransactionFilter);
-  const isSearchedFooterShown = useAppSelector(selectTransactionSearchedFilter);
+  const isFilteredFooterShown = useAppSelector(selectFilter);
+  const isSearchedFooterShown = useAppSelector(selectSearchedFilter);
   const allFilter = useAppSelector(selectAllFilter);
 
   const removeFilterItem =

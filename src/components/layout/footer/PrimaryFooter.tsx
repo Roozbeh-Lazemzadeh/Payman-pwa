@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-invalid-void-type */
 import { useEffect, useState } from 'react';
 import { Layout, Tabs } from 'antd';
 import { ReactComponent as DefaultPaymanIcon } from '../../../icons/defaultPayman.svg';
@@ -8,10 +7,12 @@ import { ReactComponent as ActivePaperIcon } from '../../../icons/activePaper.sv
 import { ReactComponent as ActivePaymanIcon } from '../../../icons/activePayman.svg';
 import { ReactComponent as ActiveHomeIcon } from '../../../icons/activeHome.svg';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useAppSelector } from '../../hooks/reduxHooks';
-import { selectTransactionFilter } from '../../../store/filterMenu/transactionFilterMenuSlice';
-import { removeAllFiltersHandler } from '../../../store/filterPage/transactionFilterSlice';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
+// filter
+import { selectFilter } from '../../../store/filterMenu/filterMenuSlice';
+import { removeAllFiltersHandler } from '../../../store/filterPage/filterSlice';
+
+// style
 import '../style.css';
 
 const { Footer } = Layout;
@@ -24,11 +25,11 @@ interface TabData {
 }
 
 const PrimaryFooter: React.FC = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const isPrimaryFooterShown = !useAppSelector(selectTransactionFilter);
   const [activeTab, setActiveTab] = useState('2');
-  const dispatch = useDispatch();
+  const isPrimaryFooterShown = !useAppSelector(selectFilter);
 
   useEffect(() => {
     // Get the path from the current location
@@ -92,6 +93,7 @@ const PrimaryFooter: React.FC = () => {
     navigate(path);
     return null;
   };
+
   return (
     <Footer
       className={`${

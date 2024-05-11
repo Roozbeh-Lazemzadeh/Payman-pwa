@@ -32,8 +32,8 @@ const initialState: FilterState = {
   sortKey: '0',
 };
 
-export const transactionFilterSlice = createSlice({
-  name: 'transactionFilter',
+export const filterSlice = createSlice({
+  name: 'filter',
   initialState,
   reducers: {
     // Handler for merchant filters
@@ -177,19 +177,17 @@ export const transactionFilterSlice = createSlice({
 });
 
 // Selectors for accessing the state
-export const selectAllFilter = (state: RootState) =>
-  state.transactionFilter.allFilter;
+export const selectAllFilter = (state: RootState) => state.filter.allFilter;
 export const selectShowFilterIcon = (state: RootState) =>
-  state.transactionFilter.isFiltered;
+  state.filter.isFiltered;
 export const selectFilterNumber = (state: RootState) =>
-  state.transactionFilter.totalFilterNumber;
+  state.filter.totalFilterNumber;
 export const selectMerchantsFilterLength = (state: RootState) =>
-  state.transactionFilter.allFilter.merchants.length;
-export const selectDatePeriod = (state: RootState) =>
-  state.transactionFilter.datePeriod;
+  state.filter.allFilter.merchants.length;
+export const selectDatePeriod = (state: RootState) => state.filter.datePeriod;
 export const selectTransactionList = (state: RootState) => {
-  if (state.transactionFilter.sortKey === '0') {
-    const sortedList = [...state.transactionFilter.transactionList];
+  if (state.filter.sortKey === '0') {
+    const sortedList = [...state.filter.transactionList];
     sortedList.sort((a, b) => {
       const dateA = parse(
         a.transaction_date,
@@ -207,13 +205,13 @@ export const selectTransactionList = (state: RootState) => {
     });
 
     return sortedList;
-  } else if (state.transactionFilter.sortKey === '1') {
-    const sortedList = [...state.transactionFilter.transactionList];
+  } else if (state.filter.sortKey === '1') {
+    const sortedList = [...state.filter.transactionList];
     sortedList.sort((a, b) => b.transaction_amount - a.transaction_amount);
     return sortedList;
   }
 
-  return state.transactionFilter.transactionList;
+  return state.filter.transactionList;
 };
 
 export const {
@@ -224,6 +222,6 @@ export const {
   dateQuickAccessHandler,
   handleListFiltering,
   handleSortKey,
-} = transactionFilterSlice.actions;
+} = filterSlice.actions;
 
-export default transactionFilterSlice.reducer;
+export default filterSlice.reducer;

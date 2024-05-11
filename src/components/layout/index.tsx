@@ -2,17 +2,20 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { Layout } from 'antd';
 import CustomHeader from './header/CustomHeader';
 import { Sidebar } from './sidebar/Sidebar';
-import FilteredUI from '../filters/Transactions/filterMenu/FilterMenu';
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
-import {
-  transactionFilteredToggle,
-  transactionSearchedToggle,
-  transactionCloseSearchToggle,
-  selectTransactionSearchedFilter,
-  selectTransactionFilter,
-} from '../../store/filterMenu/transactionFilterMenuSlice';
 import PrimaryFooter from './footer/PrimaryFooter';
-import { SearchedItems } from '../filters/Transactions/filterItems';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+
+// filter
+import FilteredUI from '../filters/filterMenu/FilterMenu';
+import SearchedItems from '../filters/filterItems';
+import {
+  filteredToggle,
+  searchedToggle,
+  closeSearchToggle,
+  selectSearchedFilter,
+  selectFilter,
+} from '../../store/filterMenu/filterMenuSlice';
+
 interface HeaderStyle {
   background: boolean;
   title: string;
@@ -20,11 +23,14 @@ interface HeaderStyle {
 
 // Define the main layout for the Progressive Web App (PWA)
 const PWALayout: React.FC = () => {
+  const dispatch = useAppDispatch();
   const { Content } = Layout;
   const location = useLocation();
-  const dispatch = useAppDispatch();
-  const isFilteredFooterShown = useAppSelector(selectTransactionFilter);
-  const isSearchedFooterShown = useAppSelector(selectTransactionSearchedFilter);
+
+  // filter
+  const isFilteredShown = useAppSelector(selectFilter);
+  const isSearchedShown = useAppSelector(selectSearchedFilter);
+
   // const isUserRegistered = true; // todo replace with corresponding API
 
   // Define different headers (blue or white) based on the route
@@ -66,18 +72,15 @@ const PWALayout: React.FC = () => {
       '.ant-select-item.ant-select-item-option'
     );
     if (selectDropdown) return;
+
     if (!filterIcon) {
-      if (
-        !filteredFooterWrapper &&
-        isFilteredFooterShown &&
-        !isSearchedFooterShown
-      ) {
-        dispatch(transactionFilteredToggle());
+      if (!filteredFooterWrapper && isFilteredShown && !isSearchedShown) {
+        dispatch(filteredToggle());
       }
-      if (!searchFooterWrapper && isSearchedFooterShown) {
-        dispatch(transactionCloseSearchToggle());
-        dispatch(transactionSearchedToggle(''));
-        dispatch(transactionFilteredToggle());
+      if (!searchFooterWrapper && isSearchedShown) {
+        dispatch(closeSearchToggle());
+        dispatch(searchedToggle(''));
+        dispatch(filteredToggle());
       }
     }
   };
@@ -95,6 +98,8 @@ const PWALayout: React.FC = () => {
         </Content>
       </div>
       <PrimaryFooter />
+
+      {/* filter  */}
       <FilteredUI />
       <SearchedItems />
     </Layout>

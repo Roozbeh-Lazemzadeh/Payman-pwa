@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import {
   selectAllFilter,
   selectTransactionList,
-} from '../../store/filterPage/transactionFilterSlice';
+} from '../../store/filterPage/filterSlice';
 import {
   handleSelectedTransaction,
   selectSelectedTransaction,

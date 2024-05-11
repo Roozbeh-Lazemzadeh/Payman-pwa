@@ -2,7 +2,7 @@ import React from 'react';
 import { Dropdown, Space } from 'antd';
 import { ReactComponent as ArrowDownIcon } from '../../icons/arrowDown2.svg';
 import { useAppDispatch } from '../hooks/reduxHooks';
-import { handleSortKey } from '../../store/filterPage/transactionFilterSlice';
+import { handleSortKey } from '../../store/filterPage/filterSlice';
 import './style.css';
 
 interface MenuItems {
