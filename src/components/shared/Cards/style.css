@@ -118,6 +118,11 @@
   direction: rtl;
   margin: 1rem 0;
 }
+.transaction-titles-wrapper {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+}
 .card-home-content {
   display: flex;
   flex-direction: column;

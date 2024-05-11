@@ -3,16 +3,18 @@
 import React from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Sector } from 'recharts';
 import './style.css';
-import { useAppSelector } from '../hooks/reduxHooks';
-import { selectSelectedMerchant } from '../../store/chart/chartSlice';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import {
+  selectMerchant,
+  selectSelectedMerchant,
+} from '../../store/chart/chartSlice';
 interface RechartPieChartProps {
   data: Array<{ name: string; value: number }>;
 }
 
-const RechartPieChart: React.FC<RechartPieChartProps> = ({
-  data
-}) => {
+const RechartPieChart: React.FC<RechartPieChartProps> = ({ data }) => {
   const activeIndex = useAppSelector(selectSelectedMerchant);
+  const dispatch = useAppDispatch();
   const renderActiveShape = (props: any) => {
     const { cx, cy, innerRadius, startAngle, endAngle, fill, percent } = props;
     return (
@@ -71,6 +73,11 @@ const RechartPieChart: React.FC<RechartPieChartProps> = ({
 
   const chartData = generateChartData();
 
+  const handleClick = (entry: any, index: number) => {
+    console.log(entry, index);
+    dispatch(selectMerchant(index));
+  };
+
   return (
     <ResponsiveContainer>
       <PieChart>
@@ -90,11 +97,14 @@ const RechartPieChart: React.FC<RechartPieChartProps> = ({
           style={{ outline: 'none' }}
         >
           {data.map((entry, index) => (
-            <Cell
-              key={`cell-${index}`}
-              fill={COLORS[index % COLORS.length]}
-              style={{ outline: 'none' }}
-            />
+            <>
+              <Cell
+                key={`cell-${index}`}
+                fill={COLORS[index % COLORS.length]}
+                style={{ outline: 'none' }}
+                onClick={() => handleClick(entry, index)}
+              />
+            </>
           ))}
         </Pie>
       </PieChart>

@@ -64,7 +64,6 @@ export const TransactionCard: React.FC<TransactionCardProps> = ({
             />
           )}
         </div>
-
         <span className='card-merchant-name'>{merchant}</span>
       </div>
       <div className='card-content'>

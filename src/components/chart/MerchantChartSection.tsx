@@ -7,6 +7,9 @@ import {
   selectSelectedMerchant,
 } from '../../store/chart/chartSlice';
 import transactionData from '../../transaction.json';
+import jalaliMoment from 'jalali-moment';
+// import { format, parse } from 'date-fns';
+import { transDate } from '../helpers/transDate';
 
 export const MerchantChartSection: React.FC = () => {
   const [title, setTitle] = useState('اسنپ');
@@ -22,46 +25,54 @@ export const MerchantChartSection: React.FC = () => {
 
     switch (spanName) {
       case 'all':
-        // Handle 'همه' (all) case
         dispatch(selectMerchant(3));
         setTitle('این ماه');
         setSum(
-          transactionData[0].transaction_amount + transactionData[1].transaction_amount + transactionData[2].transaction_amount
+          transactionData[0].transaction_amount +
+            transactionData[1].transaction_amount +
+            transactionData[2].transaction_amount
         );
         break;
       case 'fil':
-        // Handle 'فیلیمو' (fil) case
         setTitle('فیلیمو');
         setSum(transactionData[2].transaction_amount);
         dispatch(selectMerchant(2));
         break;
       case 'taps':
-        // Handle 'تپسی' (taps) case
         setTitle('تپسی');
         setSum(transactionData[1].transaction_amount);
         dispatch(selectMerchant(1));
         break;
       case 'snap':
-        // Handle 'اسنپ' (snap) case
         setTitle('اسنپ');
         setSum(transactionData[0].transaction_amount);
         dispatch(selectMerchant(0));
         break;
       default:
-        // Handle other cases if needed
         break;
     }
   };
 
-  // Ensure transactionData is correctly imported
-  // console.log(transactionData);
+   const filteredData = transactionData.filter((transaction) => {
+     const transDateFormatted = transDate(transaction.transaction_date);
+     const gregorianDate = jalaliMoment(
+       transDateFormatted,
+       'jYYYY/jMM/jDD - HH:mm:ss'
+     ).toDate();
+     console.log('gregorianDate', gregorianDate);
+     console.log('monthBillValue', monthBillValue.monthlyBill);
+     console.log('transactionDate', gregorianDate.getMonth() + 1);
+     return (
+       gregorianDate.getMonth() + 1 === parseInt(monthBillValue.monthlyBill)
+     );
+   });
 
-  const transformedData = transactionData.map((transaction) => ({
-    name: transaction.creditor, // Use a unique identifier as the name
-    value: transaction.transaction_amount,
-  }));
+   console.log('filteredData', filteredData);
 
-  console.log(monthBillValue.monthlyBill);
+   const transformedData = filteredData.map((transaction) => ({
+     name: transaction.creditor,
+     value: transaction.transaction_amount,
+   }));
 
   return (
     <>
@@ -69,7 +80,7 @@ export const MerchantChartSection: React.FC = () => {
         <div className='pay-info-wrapper'>
           <div className='pay-title-price-wrapper'>
             <span className='pay-title'>{`کل پرداخت های شما در  ${title}`}</span>
-            <span className='pay-price'> {`${sum} تومان`}</span>
+            <span className='pay-price'>{`${sum} تومان`}</span>
           </div>
           <div className='merchants-wrapper'>
             <span
@@ -106,10 +117,7 @@ export const MerchantChartSection: React.FC = () => {
             </span>
           </div>
         </div>
-        <RechartPieChart
-          data={transformedData}
-          // activeIndex={transformedData.length}
-        />
+        <RechartPieChart data={transformedData} />
       </div>
     </>
   );

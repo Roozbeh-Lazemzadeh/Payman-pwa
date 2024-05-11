@@ -24,20 +24,33 @@ export const TransactionHomeCard: React.FC<TransactionHomeCardProps> = ({
   return (
     <div className='transaction-home-card'>
       <div className='card-merchant-wrapper'>
-        <img
-          className='card-icon'
-          src={img.length ? img : '/assets/pics/icon-default.png'}
-        />
+        <div className='card-icon-wrapper'>
+          {img.length ? (
+            <div className='card-icon-style'>
+              <img className='card-icon' src={img} />
+              <span
+                className='card-icon-filter'
+                style={{
+                  backgroundImage: `url(${img})`,
+                }}
+              ></span>
+            </div>
+          ) : (
+            <img
+              className='card-icon-default'
+              src='/assets/pics/Icon-default.svg'
+            />
+          )}
+        </div>
         <span className='card-merchant-name'>{merchant}</span>
       </div>
-      <div className='card-home-content'>
-        <div className='transaction-titles'>
+      <div className='card-content'>
+        <div className='transaction-titles-wrapper'>
           <div>
             <span className='transaction-title'>مبلغ تراکنش ها: </span>
             <span className='card-price'>{price}</span>
             <span className='card-price'> تومانءءء</span>
           </div>
-        </div>
         <div>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <span className='transaction-title'>تاریخ تراکنش:‌</span>
@@ -45,9 +58,8 @@ export const TransactionHomeCard: React.FC<TransactionHomeCardProps> = ({
           </div>
         </div>
       </div>
-      <div className='card-home-arrow-left'>
-        <ArrowLeft2Icon />
       </div>
+        <ArrowLeft2Icon />
     </div>
   );
 };
