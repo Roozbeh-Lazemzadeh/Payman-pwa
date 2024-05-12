@@ -1,39 +1,40 @@
-// HomeWithMandate.tsx
-
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { MerchantChartSection } from '../components/chart/MerchantChartSection';
 import FilterTools from '../components/template/FilterTools';
 import { TransactionHomeCard } from '../components/shared/Cards/TransactionHomeCards';
-// import { DetailedDrawer } from '../components/shared/Drawer/DetailedDrawer';
-import transactionData from '../transaction.json';
-// import useDrawerTransaction from '../components/hooks/useDrawerTransaction';
 import jalaliMoment from 'jalali-moment';
 import { format, parse } from 'date-fns';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMonthBillHandler } from '../store/monthlyBill/monthlyBillSlice';
 import { setArrayHomeWithMandate } from '../store/arrayHomeWithMandate/arrayHomeWithMandateSlice';
 import { type RootState } from '../store/store';
-import { type TransactionItem } from '../store/arrayHomeWithMandate/types';
+import { type Transaction } from '../store/arrayHomeWithMandate/types';
 import { transDate } from '../components/helpers/transDate';
+import { TransactionFilterLabels } from '../components/transactions/TransactionFilterLabels';
+import { filterLabelStyle } from '../components/helpers/filterLabelsStyle';
+import { useAppSelector } from '../components/hooks/reduxHooks';
+import {
+  selectAllFilter,
+  selectTransactionList,
+} from '../store/filterPage/filterSlice';
 
 function HomeWithMandate() {
+  const dispatch = useDispatch();
+  const allFilter = useAppSelector(selectAllFilter);
+  const Transactions = useAppSelector(selectTransactionList);
   const [selectedItemIndex, setSelectedItemIndex] = useState<number | null>(0);
-  // const {
-  //   isOpen,
-  //   detailedDrawerData,
-  //   handleDrawerTransaction,
-  //   handleCloseDrawer,
-  //   selectedTransactionId,
-  // } = useDrawerTransaction(transactionData);
-
   const groupedTransactions = useSelector(
     (state: RootState) => state.arrayHome.groupsTransactions
   );
-
-  const dispatch = useDispatch();
+  const memoizedDate = useMemo(() => allFilter.date, [allFilter.date]);
+  const memoizedMerchants = useMemo(
+    () => allFilter.merchants,
+    [allFilter.merchants]
+  );
+  const memoizedPrice = useMemo(() => allFilter.price, [allFilter.price]);
 
   const monthsList: Array<{ id: number; year: string; month: string }> = [];
-  const monthsList2: any[] = [];
+  const monthsList2: string[] = [];
 
   for (let i = 0; i < 6; i++) {
     const currentDate = jalaliMoment();
@@ -58,15 +59,14 @@ function HomeWithMandate() {
     if (selectedMonth) {
       const selectedYearMonth = monthsList2[selectedMonth.id];
       dispatch(getMonthBillHandler(selectedYearMonth));
-      console.log(selectedYearMonth);
     } else {
       console.log('Error: Month not found');
     }
   };
 
   useEffect(() => {
-    dispatch(setArrayHomeWithMandate(transactionData));
-  }, [dispatch]);
+    Transactions && dispatch(setArrayHomeWithMandate(Transactions));
+  }, [memoizedDate, memoizedMerchants, memoizedPrice]);
 
   return (
     <div className='home-wrapper'>
@@ -92,13 +92,14 @@ function HomeWithMandate() {
         data={detailedDrawerData}
       /> */}
       <FilterTools title='تراکنش‌های پرداخت مستقیم' />
+      <TransactionFilterLabels />
       <div className='TransactionHomeCard-wrapper'>
-        <div className='TransactionHomeCard'>
+        <div className={`TransactionHomeCard ${filterLabelStyle(allFilter)}`}>
           <div className='TransactionHomeCard-wrapper-cards'>
             {groupedTransactions?.map(
               (group: {
                 key: React.Key | null | undefined;
-                value: TransactionItem[];
+                value: Transaction[];
               }) => {
                 return (
                   <div key={group.key} className='TransactionHomeCard-wrapper'>
@@ -121,7 +122,7 @@ function HomeWithMandate() {
                             .format('dddd ، jD jMMMM')}`}
                     </p>
                     <div className='TransactionHomeCard-wrapper-cards'>
-                      {group.value.map((transaction: TransactionItem) => (
+                      {group.value.map((transaction: Transaction) => (
                         <div
                           key={transaction.id}
                           // onClick={() =>

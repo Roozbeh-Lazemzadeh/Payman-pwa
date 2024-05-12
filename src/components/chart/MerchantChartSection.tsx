@@ -53,26 +53,21 @@ export const MerchantChartSection: React.FC = () => {
     }
   };
 
-   const filteredData = transactionData.filter((transaction) => {
-     const transDateFormatted = transDate(transaction.transaction_date);
-     const gregorianDate = jalaliMoment(
-       transDateFormatted,
-       'jYYYY/jMM/jDD - HH:mm:ss'
-     ).toDate();
-     console.log('gregorianDate', gregorianDate);
-     console.log('monthBillValue', monthBillValue.monthlyBill);
-     console.log('transactionDate', gregorianDate.getMonth() + 1);
-     return (
-       gregorianDate.getMonth() + 1 === parseInt(monthBillValue.monthlyBill)
-     );
-   });
+  const filteredData = transactionData.filter((transaction) => {
+    const transDateFormatted = transDate(transaction.transaction_date);
+    const gregorianDate = jalaliMoment(
+      transDateFormatted,
+      'jYYYY/jMM/jDD - HH:mm:ss'
+    ).toDate();
+    return (
+      gregorianDate.getMonth() + 1 === parseInt(monthBillValue.monthlyBill)
+    );
+  });
 
-   console.log('filteredData', filteredData);
-
-   const transformedData = filteredData.map((transaction) => ({
-     name: transaction.creditor,
-     value: transaction.transaction_amount,
-   }));
+  const transformedData = filteredData.map((transaction) => ({
+    name: transaction.creditor,
+    value: transaction.transaction_amount,
+  }));
 
   return (
     <>
