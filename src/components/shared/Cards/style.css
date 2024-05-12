@@ -23,7 +23,6 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  /* margin-left: 50%; */
   margin-right: 12%;
 }
 
@@ -120,7 +119,7 @@
 }
 .transaction-titles-wrapper {
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   flex-direction: column;
 }
 .card-home-content {

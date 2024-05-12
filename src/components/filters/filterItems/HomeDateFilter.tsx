@@ -197,7 +197,7 @@ export const HomeDateFilter: React.FC = () => {
               className={selectedQuickItems === 'ماه گذشته' ? 'selected' : ''}
               onClick={() => selectedQuickAccess('ماه گذشته')}
             >
-              ۷ روز گذشته
+              هفته گذشته
             </span>
           </>
         </div>
