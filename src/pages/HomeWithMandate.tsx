@@ -15,12 +15,14 @@ import { filterLabelStyle } from '../components/helpers/filterLabelsStyle';
 import { useAppSelector } from '../components/hooks/reduxHooks';
 import {
   selectAllFilter,
+  selectSortKey,
   selectTransactionList,
 } from '../store/filterPage/filterSlice';
 
 function HomeWithMandate() {
   const dispatch = useDispatch();
   const allFilter = useAppSelector(selectAllFilter);
+  const sortKey = useAppSelector(selectSortKey);
   const Transactions = useAppSelector(selectTransactionList);
   const [selectedItemIndex, setSelectedItemIndex] = useState<number | null>(0);
   const groupedTransactions = useSelector(
@@ -65,8 +67,12 @@ function HomeWithMandate() {
   };
 
   useEffect(() => {
-    Transactions && dispatch(setArrayHomeWithMandate(Transactions));
-  }, [memoizedDate, memoizedMerchants, memoizedPrice]);
+    if (Transactions) {
+      dispatch(
+        setArrayHomeWithMandate({ transactions: Transactions, sortKey })
+      );
+    }
+  }, [memoizedDate, memoizedMerchants, memoizedPrice, sortKey]);
 
   return (
     <div className='home-wrapper'>

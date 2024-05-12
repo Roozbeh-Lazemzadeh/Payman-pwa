@@ -185,6 +185,7 @@ export const selectFilterNumber = (state: RootState) =>
 export const selectMerchantsFilterLength = (state: RootState) =>
   state.filter.allFilter.merchants.length;
 export const selectDatePeriod = (state: RootState) => state.filter.datePeriod;
+export const selectSortKey = (state: RootState) => state.filter.sortKey;
 export const selectTransactionList = (state: RootState) => {
   if (state.filter.sortKey === '0') {
     const sortedList = [...state.filter.transactionList];

@@ -12,14 +12,21 @@ const initialState: ArrayHomeWithMandateState = {
   groupsTransactions: [],
   transactions: [],
 };
+interface SetArrayHomeWithMandatePayload {
+  transactions: Transaction[];
+  sortKey: string;
+}
 
 // Create the slice
 const arrayHomeWithMandateSlice = createSlice({
   name: 'arrayHomeWithMandate',
   initialState,
   reducers: {
-    setArrayHomeWithMandate: (state, action: PayloadAction<Transaction[]>) => {
-      const transactions = action.payload;
+    setArrayHomeWithMandate: (
+      state,
+      action: PayloadAction<SetArrayHomeWithMandatePayload>
+    ) => {
+      const { transactions, sortKey } = action.payload;
 
       const groupedTransactions: Record<string, Transaction[]> = {};
 
@@ -53,13 +60,31 @@ const arrayHomeWithMandateSlice = createSlice({
         value,
       }));
 
-      groupedArray.sort((a, b) => {
-        const dateA = new Date(a.key);
-        const dateB = new Date(b.key);
-        return dateB.getTime() - dateA.getTime();
-      });
+      if (sortKey === '0') {
+        console.log(groupedArray);
+        groupedArray.sort((a, b) => {
+          const dateA = new Date(a.key);
+          const dateB = new Date(b.key);
+          return dateB.getTime() - dateA.getTime();
+        });
+      } else if (sortKey === '1') {
+        groupedArray.sort((a, b) => {
+          const sumA = a.value.reduce(
+            (acc, transaction) => acc + transaction.transaction_amount,
+            0
+          );
+          const sumB = b.value.reduce(
+            (acc, transaction) => acc + transaction.transaction_amount,
+            0
+          );
+          return sumB - sumA;
+        });
+      }
 
-      state.groupsTransactions = groupedArray;
+      return {
+        ...state,
+        groupsTransactions: groupedArray,
+      };
     },
   },
 });
