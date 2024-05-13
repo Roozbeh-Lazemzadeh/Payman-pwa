@@ -1,46 +1,56 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-import { createSlice } from '@reduxjs/toolkit';
+import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { parse } from 'date-fns';
-import { type GroupedTransaction, type TransactionItem } from './types';
+import { type GroupedTransaction, type Transaction } from './types';
 
 // Define the initial state
 interface ArrayHomeWithMandateState {
-  transactions: any;
+  transactions: Transaction[];
   groupsTransactions: GroupedTransaction[];
 }
 
 const initialState: ArrayHomeWithMandateState = {
   groupsTransactions: [],
-  transactions: undefined
+  transactions: [],
 };
+interface SetArrayHomeWithMandatePayload {
+  transactions: Transaction[];
+  sortKey: string;
+}
 
 // Create the slice
 const arrayHomeWithMandateSlice = createSlice({
   name: 'arrayHomeWithMandate',
   initialState,
   reducers: {
-    setArrayHomeWithMandate: (state, action) => {
-      const transactions: TransactionItem[] = action.payload;
+    setArrayHomeWithMandate: (
+      state,
+      action: PayloadAction<SetArrayHomeWithMandatePayload>
+    ) => {
+      const { transactions, sortKey } = action.payload;
 
-      const groupedTransactions: Record<string, TransactionItem[]> = {};
+      const groupedTransactions: Record<string, Transaction[]> = {};
 
       transactions.forEach((transaction) => {
-        const parsedDate = parse(
-          transaction.transaction_date,
-          'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
-          new Date()
-        );
-        const date = parsedDate;
-        const day = date.getDate();
-        const month = date.getMonth() + 1;
-        const year = date.getFullYear();
-        const key = `${year}-${month}-${day}`;
+        const transactionDate = transaction.transaction_date;
 
-        if (!groupedTransactions[key]) {
-          groupedTransactions[key] = [];
+        // Check if transaction_date is a string
+        if (typeof transactionDate === 'string') {
+          const parsedDate = parse(
+            transaction.transaction_date,
+            'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
+            new Date()
+          );
+          const date = parsedDate;
+          const day = date.getDate();
+          const month = date.getMonth() + 1;
+          const year = date.getFullYear();
+          const key = `${year}-${month}-${day}`;
+          if (!groupedTransactions[key]) {
+            groupedTransactions[key] = [];
+          }
+
+          groupedTransactions[key].push(transaction);
         }
-
-        groupedTransactions[key].push(transaction);
       });
 
       const groupedArray: GroupedTransaction[] = Object.entries(
@@ -50,13 +60,31 @@ const arrayHomeWithMandateSlice = createSlice({
         value,
       }));
 
-      groupedArray.sort((a, b) => {
-        const dateA = new Date(a.key);
-        const dateB = new Date(b.key);
-        return dateB.getTime() - dateA.getTime();
-      });
+      if (sortKey === '0') {
+        console.log(groupedArray);
+        groupedArray.sort((a, b) => {
+          const dateA = new Date(a.key);
+          const dateB = new Date(b.key);
+          return dateB.getTime() - dateA.getTime();
+        });
+      } else if (sortKey === '1') {
+        groupedArray.sort((a, b) => {
+          const sumA = a.value.reduce(
+            (acc, transaction) => acc + transaction.transaction_amount,
+            0
+          );
+          const sumB = b.value.reduce(
+            (acc, transaction) => acc + transaction.transaction_amount,
+            0
+          );
+          return sumB - sumA;
+        });
+      }
 
-      state.groupsTransactions = groupedArray;
+      return {
+        ...state,
+        groupsTransactions: groupedArray,
+      };
     },
   },
 });

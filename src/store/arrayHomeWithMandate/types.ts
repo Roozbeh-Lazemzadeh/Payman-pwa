@@ -1,5 +1,5 @@
 // Define the TransactionItem type
-export interface TransactionItem {
+export interface Transaction {
   id: number;
   creditor: string;
   currency: string;
@@ -14,8 +14,7 @@ export interface TransactionItem {
 }
 
 // Define the GroupedTransaction type
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export interface GroupedTransaction {
   key: string;
-  value: TransactionItem[];
+  value: Transaction[];
 }

@@ -5,7 +5,7 @@ import { ReactComponent as RemoveIcon } from '../../../icons/delete.svg';
 import DatePicker, { DateObject } from 'react-multi-date-picker';
 import { weekDays } from '../../types/calendar';
 import gregorian from 'react-date-object/calendars/gregorian';
-import { startOfDay, subDays, subWeeks, subMonths, parse } from 'date-fns';
+import { startOfDay, subDays, subWeeks, parse } from 'date-fns';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
 import gregorian_en from 'react-date-object/locales/gregorian_en';
@@ -83,8 +83,8 @@ export const HomeDateFilter: React.FC = () => {
     let formattedDates: string[] = [];
     const today = startOfDay(new Date());
     const yesterday = subDays(today, 1);
+    const threeDaysAgo = subDays(today, 3);
     const oneWeekAgo = subWeeks(today, 1);
-    const oneMonthAgo = subMonths(today, 1);
     // Filter out the previously selected item from the selectedQuickItems array
     setSelectedQuickItems(title);
 
@@ -103,6 +103,21 @@ export const HomeDateFilter: React.FC = () => {
         dispatch(dateQuickAccessHandler('روز گذشته'));
         break;
 
+      case '۳ روز گذشته':
+        formattedDates = [
+          new DateObject(threeDaysAgo)
+            .convert(gregorian, gregorian_en)
+            .format('YY-MMM-DD hh:mm:ss a'),
+          new DateObject(today)
+            .convert(gregorian, gregorian_en)
+            .format('YY-MMM-DD hh:mm:ss a'),
+        ];
+        setDates(formattedDates);
+        setValues([threeDaysAgo, today]);
+        dispatch(dateQuickAccessHandler('۳ روز گذشته'));
+
+        break;
+
       case 'هفته گذشته':
         formattedDates = [
           new DateObject(oneWeekAgo)
@@ -115,21 +130,6 @@ export const HomeDateFilter: React.FC = () => {
         setDates(formattedDates);
         setValues([oneWeekAgo, today]);
         dispatch(dateQuickAccessHandler('هفته گذشته'));
-
-        break;
-
-      case 'ماه گذشته':
-        formattedDates = [
-          new DateObject(oneMonthAgo)
-            .convert(gregorian, gregorian_en)
-            .format('YY-MMM-DD hh:mm:ss a'),
-          new DateObject(today)
-            .convert(gregorian, gregorian_en)
-            .format('YY-MMM-DD hh:mm:ss a'),
-        ];
-        setDates(formattedDates);
-        setValues([oneMonthAgo, today]);
-        dispatch(dateQuickAccessHandler('ماه گذشته'));
 
         break;
 
@@ -188,16 +188,16 @@ export const HomeDateFilter: React.FC = () => {
               روز گذشته
             </span>
             <span
-              className={selectedQuickItems === 'هفته گذشته' ? 'selected' : ''}
-              onClick={() => selectedQuickAccess('هفته گذشته')}
+              className={selectedQuickItems === '۳ روز گذشته' ? 'selected' : ''}
+              onClick={() => selectedQuickAccess('۳ روز گذشته')}
             >
               ۳ روز گذشته
             </span>
             <span
-              className={selectedQuickItems === 'ماه گذشته' ? 'selected' : ''}
-              onClick={() => selectedQuickAccess('ماه گذشته')}
+              className={selectedQuickItems === 'هفته گذشته' ? 'selected' : ''}
+              onClick={() => selectedQuickAccess('هفته گذشته')}
             >
-              ۷ روز گذشته
+              هفته گذشته
             </span>
           </>
         </div>

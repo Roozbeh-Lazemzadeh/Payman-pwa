@@ -50,8 +50,6 @@ const RechartPieChart: React.FC<RechartPieChartProps> = ({ data }) => {
       return [];
     }
 
-    console.log(data);
-
     return data.map((entry, index) => ({
       ...entry,
       color: COLORS[index % COLORS.length],
@@ -74,7 +72,6 @@ const RechartPieChart: React.FC<RechartPieChartProps> = ({ data }) => {
   const chartData = generateChartData();
 
   const handleClick = (entry: any, index: number) => {
-    console.log(entry, index);
     dispatch(selectMerchant(index));
   };
 

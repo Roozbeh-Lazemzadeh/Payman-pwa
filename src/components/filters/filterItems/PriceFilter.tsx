@@ -14,9 +14,11 @@ import {
   priceHandler,
   selectAllFilter,
 } from '../../../store/filterPage/filterSlice';
-
-import '../style.css';
+// helper
+import { formatNumberWithCommas } from '../../helpers/seperatorInNumbers';
+// style
 import '../../Paymans/otherPaymans/style.css';
+import '../style.css';
 
 export const PriceFilter: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -24,8 +26,8 @@ export const PriceFilter: React.FC = () => {
   const searchItem = useAppSelector(selectSearchItem);
   const [selectedQuickItems, setSelectedQuickItems] = useState<number[]>([]);
   const [prices, setPrices] = useState<number[]>([]);
-  const [priceFrom, setPriceFrom] = useState<number>();
-  const [priceTo, setPriceTo] = useState<number>();
+  const [priceFrom, setPriceFrom] = useState<string>();
+  const [priceTo, setPriceTo] = useState<string>();
 
   const handleRemoveFilter = () => {
     if (prices.length === 0) return null;
@@ -41,20 +43,20 @@ export const PriceFilter: React.FC = () => {
 
     switch (value) {
       case 100000:
-        setPriceFrom(0); // Update priceFrom to 0
-        setPriceTo(100000); // Update priceTo to 100000
+        setPriceFrom('0'); // Update priceFrom to 0
+        setPriceTo('100,000'); // Update priceTo to 100000
         setPrices([0, 100000]);
         break;
 
       case 200000:
-        setPriceFrom(0); // Update priceFrom to 0
-        setPriceTo(200000); // Update priceTo to 200000
+        setPriceFrom('0'); // Update priceFrom to 0
+        setPriceTo('200,000'); // Update priceTo to 200000
         setPrices([0, 200000]);
         break;
 
       case 300000:
-        setPriceFrom(0); // Update priceFrom to 0
-        setPriceTo(300000); // Update priceTo to 300000
+        setPriceFrom('0'); // Update priceFrom to 0
+        setPriceTo('300,000'); // Update priceTo to 300000
         setPrices([0, 300000]);
         break;
 
@@ -87,23 +89,28 @@ export const PriceFilter: React.FC = () => {
 
   const handlePriceFrom = (e: any) => {
     const { value } = e.target;
-    const parsedValue = Number(value);
+    const parsedValue = Number(value.replace(/,/g, ''));
+    const isNumeric = !isNaN(parsedValue);
+
     if (parsedValue !== 0) {
       // Remove the selected class when priceFrom changes from 0 to any other number
       setSelectedQuickItems([]);
     } else {
       setSelectedQuickItems([0, prices[1]]);
     }
-    if (!isNaN(parsedValue)) {
+    if (isNumeric) {
       // Update the state only if the input value is a valid number
-      setPriceFrom(parsedValue);
-      setPrices([parsedValue, prices[1]]);
+      setPriceFrom(formatNumberWithCommas(Number(parsedValue)));
+      setPrices([Number(parsedValue), prices[1]]);
+    } else {
+      setPriceFrom('');
     }
   };
 
   const handlePriceTo = (e: any) => {
     const { value } = e.target;
-    const parsedValue = Number(value);
+    const parsedValue = Number(value.replace(/,/g, ''));
+    const isNumeric = !isNaN(parsedValue);
 
     if (
       parsedValue !== 100000 &&
@@ -116,10 +123,12 @@ export const PriceFilter: React.FC = () => {
       setSelectedQuickItems([prices[0], parsedValue]);
     }
 
-    if (!isNaN(parsedValue)) {
+    if (isNumeric) {
       // Update the state only if the input value is a valid number
-      setPriceTo(parsedValue);
+      setPriceTo(formatNumberWithCommas(parsedValue));
       setPrices([prices[0], parsedValue]);
+    } else {
+      setPriceTo('');
     }
   };
 
@@ -185,20 +194,20 @@ export const PriceFilter: React.FC = () => {
         <div className='search-section '>
           <>
             <Input
-              type='number'
+              type='text'
               className='search-input'
               addonBefore={<BuyIcon />}
               placeholder='از مبلغ'
               onChange={(e) => handlePriceFrom(e)}
-              value={priceFrom ?? prices[0]}
+              value={priceFrom ?? (formatNumberWithCommas(prices[0]) || '')}
             />
             <Input
-              type='number'
+              type='text'
               className='search-input'
               addonBefore={<BuyIcon />}
               placeholder='تا مبلغ'
               onChange={(e) => handlePriceTo(e)}
-              value={priceTo ?? prices[1]}
+              value={priceTo ?? (formatNumberWithCommas(prices[1]) || '')}
             />
           </>
         </div>
