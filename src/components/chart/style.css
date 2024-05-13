@@ -66,6 +66,7 @@ svg.recharts-surface {
   align-items: center;
   gap: 15px;
   z-index: 2;
+  flex-wrap: wrap;
 }
 .instance {
   font-size: 10px;

@@ -3,7 +3,7 @@ import sidebarReducer from './sidebar/sidebarSlice';
 import notificationReducer from './notification/notificationSlice';
 import chartReducer from './chart/chartSlice';
 import merchantReducer from './merchant/merchantSlice';
-import monthlyBillSlice from './monthlyBill/monthlyBillSlice';
+import monthlyBillReducer from './monthlyBill/monthlyBillSlice'; // Corrected import
 
 import filterMenuReducer from './filterMenu/filterMenuSlice';
 import filterReducer from './filterPage/filterSlice';
@@ -18,7 +18,7 @@ const store = configureStore({
     notification: notificationReducer,
     chart: chartReducer,
     merchant: merchantReducer,
-    monthly: monthlyBillSlice,
+    monthly: monthlyBillReducer, // Use the correct reducer here
 
     filterMenu: filterMenuReducer,
     filter: filterReducer,

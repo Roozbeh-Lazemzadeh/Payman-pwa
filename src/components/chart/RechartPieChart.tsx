@@ -97,14 +97,12 @@ const RechartPieChart: React.FC<RechartPieChartProps> = ({ data }) => {
           style={{ outline: 'none' }}
         >
           {data.map((entry, index) => (
-            <>
-              <Cell
-                key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
-                style={{ outline: 'none' }}
-                onClick={() => handleClick(entry, index)}
-              />
-            </>
+            <Cell
+              key={`cell-${index}`} // Assigning unique key
+              fill={COLORS[index % COLORS.length]}
+              style={{ outline: 'none' }}
+              onClick={() => handleClick(entry, index)}
+            />
           ))}
         </Pie>
       </PieChart>

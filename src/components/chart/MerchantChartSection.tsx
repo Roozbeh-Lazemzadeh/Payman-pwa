@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import React, { useState } from 'react';
 import RechartPieChart from './RechartPieChart';
 import './style.css';
@@ -8,8 +9,8 @@ import {
 } from '../../store/chart/chartSlice';
 import transactionData from '../../transaction.json';
 import jalaliMoment from 'jalali-moment';
-// import { format, parse } from 'date-fns';
-import { transDate } from '../helpers/transDate';
+import { format, parse } from 'date-fns';
+// import { getMonthBillHandler } from '../../store/monthlyBill/monthlyBillSlice'; // Import the action creator
 
 export const MerchantChartSection: React.FC = () => {
   const [title, setTitle] = useState('اسنپ');
@@ -18,19 +19,90 @@ export const MerchantChartSection: React.FC = () => {
   const selectedMerchant = useAppSelector(selectSelectedMerchant);
   const monthBillValue = useAppSelector((state) => state.monthly);
 
+  // useEffect(() => {
+  //   dispatch(getMonthBillHandler(undefined));
+  // }, []);
+
+  const formattedMonthBillValue = monthBillValue?.monthlyBill
+    ? `${monthBillValue.monthlyBill.substring(
+        0,
+        2
+      )}/${monthBillValue.monthlyBill.substring(3)}`
+    : '';
+  //  const sortedTransactionData = [...transactionData].sort((a, b) => {
+  //    return b.transaction_amount - a.transaction_amount;
+  //  });
+
+  //  const topThreeTransactions = sortedTransactionData.slice(0, 3);
+  //  const restOfTransactions = sortedTransactionData.slice(3);
+
+  const filteredData = transactionData.filter((transaction) => {
+    const jalaliDate = jalaliMoment(
+      format(
+        parse(
+          transaction.transaction_date,
+          'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
+          new Date()
+        ),
+        'yyyy-MM-dd HH:mm:ss'
+      )
+    ).format('jYYYY/jM');
+
+    return (
+      parseInt(jalaliDate.split('/')[1]) ===
+      parseInt(formattedMonthBillValue.split('/')[2])
+    );
+  });
+
+  const filteredDataData = [...filteredData].sort((a, b) => {
+    return b.transaction_amount - a.transaction_amount;
+  });
+
+  //  const topThreeTransactions = filteredDataData.slice(0, 3);
+  //  const restOfTransactions = filteredDataData.slice(3);
+  //  console.log(restOfTransactions);
+
+  console.log('filteredData', filteredDataData);
+
+  const creditorTransactionMap = new Map<string, number>();
+
+  filteredData.forEach((transaction) => {
+    const { creditor, transaction_amount } = transaction;
+    if (creditorTransactionMap.has(creditor)) {
+      const currentTotal = creditorTransactionMap.get(creditor)!;
+      creditorTransactionMap.set(creditor, currentTotal + transaction_amount);
+    } else {
+      creditorTransactionMap.set(creditor, transaction_amount);
+    }
+  });
+
+  console.log(creditorTransactionMap);
+
+  const topThreeTransactions = Array.from(creditorTransactionMap).slice(0, 3);
+  const restOfAmounts = Array.from(creditorTransactionMap)
+    .slice(3)
+    .reduce((total, [, amount]) => total + amount, 0);
+
+  console.log(topThreeTransactions);
+  const transformedData = [
+    ...topThreeTransactions.map(([name, value]) => ({ name, value })),
+    { name: 'Others', value: restOfAmounts },
+  ];
+
   const handleSelectedMerchant = (
     e: React.MouseEvent<HTMLSpanElement, MouseEvent>
   ) => {
-    const spanName = e.currentTarget.className.split(' ')[1]; // Get the second class name
+    const spanName = e.currentTarget.className.split(' ')[1];
 
     switch (spanName) {
       case 'all':
         dispatch(selectMerchant(3));
         setTitle('این ماه');
         setSum(
-          transactionData[0].transaction_amount +
-            transactionData[1].transaction_amount +
-            transactionData[2].transaction_amount
+          transactionData.reduce(
+            (total, transaction) => total + transaction.transaction_amount,
+            0
+          )
         );
         break;
       case 'fil':
@@ -45,34 +117,13 @@ export const MerchantChartSection: React.FC = () => {
         break;
       case 'snap':
         setTitle('اسنپ');
-        setSum(transactionData[0].transaction_amount);
+        setSum(transformedData[0].value);
         dispatch(selectMerchant(0));
         break;
       default:
         break;
     }
   };
-
-   const filteredData = transactionData.filter((transaction) => {
-     const transDateFormatted = transDate(transaction.transaction_date);
-     const gregorianDate = jalaliMoment(
-       transDateFormatted,
-       'jYYYY/jMM/jDD - HH:mm:ss'
-     ).toDate();
-     console.log('gregorianDate', gregorianDate);
-     console.log('monthBillValue', monthBillValue.monthlyBill);
-     console.log('transactionDate', gregorianDate.getMonth() + 1);
-     return (
-       gregorianDate.getMonth() + 1 === parseInt(monthBillValue.monthlyBill)
-     );
-   });
-
-   console.log('filteredData', filteredData);
-
-   const transformedData = filteredData.map((transaction) => ({
-     name: transaction.creditor,
-     value: transaction.transaction_amount,
-   }));
 
   return (
     <>
@@ -114,6 +165,14 @@ export const MerchantChartSection: React.FC = () => {
               onClick={handleSelectedMerchant}
             >
               اسنپ
+            </span>
+            <span
+              className={`instance snap ${
+                selectedMerchant === 0 ? 'active' : ''
+              }`}
+              onClick={handleSelectedMerchant}
+            >
+              سایر
             </span>
           </div>
         </div>

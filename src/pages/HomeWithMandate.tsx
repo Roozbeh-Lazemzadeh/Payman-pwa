@@ -68,6 +68,12 @@ function HomeWithMandate() {
     dispatch(setArrayHomeWithMandate(transactionData));
   }, [dispatch]);
 
+  useEffect(() => {
+    handleItemClick(selectedItemIndex);
+  }, []);
+
+  console.log(monthsList);
+
   return (
     <div className='home-wrapper'>
       <div className='home-datepickers'>
