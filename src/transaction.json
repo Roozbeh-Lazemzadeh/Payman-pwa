@@ -10,7 +10,8 @@
     "transaction_id": "YdfgsdfRgh4CGU",
     "phone_number": "09100022528",
     "img": "/assets/transactions-logo/tapsi.svg",
-    "transaction_msg": ""
+    "transaction_msg": "",
+    "color": "#f58d42"
   },
   {
     "id": 2,
@@ -23,7 +24,8 @@
     "transaction_id": "Ydfjgyjgh4CGU",
     "phone_number": "09100022528",
     "img": "/assets/transactions-logo/snap.svg",
-    "transaction_msg": ""
+    "transaction_msg": "",
+    "color": "#54f542"
   },
   {
     "id": 3,
@@ -36,7 +38,8 @@
     "transaction_id": "YdfunRwwwerfg",
     "phone_number": "09100022528",
     "img": "/assets/transactions-logo/cafe-bazar.png",
-    "transaction_msg": ""
+    "transaction_msg": "",
+    "color": "#1ae004"
   },
   {
     "id": 4,
@@ -49,7 +52,8 @@
     "transaction_id": "YdfunRssdsdf",
     "phone_number": "09100022528",
     "img": "/assets/transactions-logo/filimo.png",
-    "transaction_msg": ""
+    "transaction_msg": "",
+    "color": "#04b1e0"
   },
   {
     "id": 5,
@@ -62,7 +66,8 @@
     "transaction_id": "sdfsdfsdRgh4CGU",
     "phone_number": "09100022528",
     "img": "/assets/transactions-logo/FILMNET.svg",
-    "transaction_msg": ""
+    "transaction_msg": "",
+    "color": "#00a4f0"
   },
   {
     "id": 6,
@@ -75,7 +80,8 @@
     "transaction_id": "Ydeeers4CGU",
     "phone_number": "09100022528",
     "img": "/assets/transactions-logo/HIWEB.svg",
-    "transaction_msg": ""
+    "transaction_msg": "",
+    "color": "#f00004"
   },
   {
     "id": 7,
@@ -88,7 +94,8 @@
     "transaction_id": "YdfkhckljoCGU",
     "phone_number": "09100022528",
     "img": "/assets/transactions-logo/ITOLL.svg",
-    "transaction_msg": ""
+    "transaction_msg": "",
+    "color": "#00a4f0"
   },
   {
     "id": 8,
@@ -101,7 +108,8 @@
     "transaction_id": "YkufkyukkCGU",
     "phone_number": "09100022528",
     "img": "/assets/transactions-logo/MTN-Logo.png",
-    "transaction_msg": ""
+    "transaction_msg": "",
+    "color": "#f0c400"
   },
   {
     "id": 9,
@@ -114,7 +122,8 @@
     "transaction_id": "Ydfunpoihkbvgkj",
     "phone_number": "09100022528",
     "img": "/assets/transactions-logo/myket.png",
-    "transaction_msg": "سرویس بانکی شما ( سامان ) در حال حاظر پاسخگو نمی‌باشد . در صورت کم شدن موجودی مبلغ شما طی ۴۸ ساعت آینده برای شما واریز میشود ."
+    "transaction_msg": "سرویس بانکی شما ( سامان ) در حال حاظر پاسخگو نمی‌باشد . در صورت کم شدن موجودی مبلغ شما طی ۴۸ ساعت آینده برای شما واریز میشود .",
+    "color": "#00a4f0"
   },
   {
     "id": 10,
@@ -127,7 +136,8 @@
     "transaction_id": "lulbuiulgh4CGU",
     "phone_number": "09100022528",
     "img": "/assets/transactions-logo/shatel.png",
-    "transaction_msg": "سرویس بانکی شما ( سامان ) در حال حاظر پاسخگو نمی‌باشد . در صورت کم شدن موجودی مبلغ شما طی ۴۸ ساعت آینده برای شما واریز میشود ."
+    "transaction_msg": "سرویس بانکی شما ( سامان ) در حال حاظر پاسخگو نمی‌باشد . در صورت کم شدن موجودی مبلغ شما طی ۴۸ ساعت آینده برای شما واریز میشود .",
+    "color": "#00a4f0"
   },
   {
     "id": 11,
@@ -140,7 +150,8 @@
     "transaction_id": "fhgdghdfh4CGU",
     "phone_number": "09100022528",
     "img": "/assets/transactions-logo/SIBCH.svg",
-    "transaction_msg": "سرویس بانکی شما ( سامان ) در حال حاظر پاسخگو نمی‌باشد . در صورت کم شدن موجودی مبلغ شما طی ۴۸ ساعت آینده برای شما واریز میشود ."
+    "transaction_msg": "سرویس بانکی شما ( سامان ) در حال حاظر پاسخگو نمی‌باشد . در صورت کم شدن موجودی مبلغ شما طی ۴۸ ساعت آینده برای شما واریز میشود .",
+    "color": "#0070f0"
   },
   {
     "id": 12,
@@ -153,7 +164,8 @@
     "transaction_id": "lujluiah4CGU",
     "phone_number": "09100022528",
     "img": "",
-    "transaction_msg": "سرویس بانکی شما ( سامان ) در حال حاظر پاسخگو نمی‌باشد . در صورت کم شدن موجودی مبلغ شما طی ۴۸ ساعت آینده برای شما واریز میشود ."
+    "transaction_msg": "سرویس بانکی شما ( سامان ) در حال حاظر پاسخگو نمی‌باشد . در صورت کم شدن موجودی مبلغ شما طی ۴۸ ساعت آینده برای شما واریز میشود .",
+    "color": "#0070f0"
   },
   {
     "id": 13,
@@ -166,7 +178,8 @@
     "transaction_id": "lujhtdctcjkjkGU",
     "phone_number": "09100022528",
     "img": "",
-    "transaction_msg": "سرویس بانکی شما ( سامان ) در حال حاظر پاسخگو نمی‌باشد . در صورت کم شدن موجودی مبلغ شما طی ۴۸ ساعت آینده برای شما واریز میشود ."
+    "transaction_msg": "سرویس بانکی شما ( سامان ) در حال حاظر پاسخگو نمی‌باشد . در صورت کم شدن موجودی مبلغ شما طی ۴۸ ساعت آینده برای شما واریز میشود .",
+    "color": "#0070f0"
   },
   {
     "id": 14,
@@ -179,7 +192,8 @@
     "transaction_id": "YdfweeeefCGU",
     "phone_number": "09100145638",
     "img": "/assets/transactions-logo/tapsi.svg",
-    "transaction_msg": ""
+    "transaction_msg": "",
+    "color": "#f58d42"
   },
   {
     "id": 15,
@@ -192,7 +206,8 @@
     "transaction_id": "Ydfjgyjgh4CGU",
     "phone_number": "09100022528",
     "img": "/assets/transactions-logo/snap.svg",
-    "transaction_msg": ""
+    "transaction_msg": "",
+    "color": "#54f542"
   },
   {
     "id": 16,
@@ -205,7 +220,8 @@
     "transaction_id": "Ydfjgyjgh4CGU",
     "phone_number": "09100022528",
     "img": "/assets/transactions-logo/snap.svg",
-    "transaction_msg": ""
+    "transaction_msg": "",
+    "color": "#54f542"
   },
   {
     "id": 17,
@@ -218,7 +234,8 @@
     "transaction_id": "YdfsfsffRgh4CGU",
     "phone_number": "091243252528",
     "img": "/assets/transactions-logo/tapsi.svg",
-    "transaction_msg": ""
+    "transaction_msg": "",
+    "color": "#00a4f0"
   },
   {
     "id": 18,
@@ -231,7 +248,8 @@
     "transaction_id": "YdfsfsffRgh4CGU",
     "phone_number": "091243252528",
     "img": "/assets/transactions-logo/tapsi.svg",
-    "transaction_msg": ""
+    "transaction_msg": "",
+    "color": "#00a4f0"
   },
   {
     "id": 19,
@@ -244,7 +262,8 @@
     "transaction_id": "YdfsfsffRgh4CGU",
     "phone_number": "091243252528",
     "img": "/assets/transactions-logo/tapsi.svg",
-    "transaction_msg": ""
+    "transaction_msg": "",
+    "color": "#f00004"
   },
   {
     "id": 20,
@@ -257,6 +276,7 @@
     "transaction_id": "YdfsfsffRgh4CGU",
     "phone_number": "091243252528",
     "img": "/assets/transactions-logo/tapsi.svg",
-    "transaction_msg": ""
+    "transaction_msg": "",
+    "color": "#1ae004"
   }
 ]

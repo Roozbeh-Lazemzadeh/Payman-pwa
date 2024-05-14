@@ -1,27 +1,18 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import React, { useState } from 'react';
 import RechartPieChart from './RechartPieChart';
 import './style.css';
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
-import {
-  selectMerchant,
-  selectSelectedMerchant,
-} from '../../store/chart/chartSlice';
+import { useAppSelector } from '../hooks/reduxHooks';
+import { selectSelectedMerchant } from '../../store/chart/chartSlice';
 import transactionData from '../../transaction.json';
 import jalaliMoment from 'jalali-moment';
 import { format, parse } from 'date-fns';
-// import { getMonthBillHandler } from '../../store/monthlyBill/monthlyBillSlice'; // Import the action creator
 
 export const MerchantChartSection: React.FC = () => {
   const [title, setTitle] = useState('اسنپ');
   const [sum, setSum] = useState<number>(transactionData[0].transaction_amount);
-  const dispatch = useAppDispatch();
+  const [, setTransformedData] = useState<any[]>([]);
   const selectedMerchant = useAppSelector(selectSelectedMerchant);
   const monthBillValue = useAppSelector((state) => state.monthly);
-
-  // useEffect(() => {
-  //   dispatch(getMonthBillHandler(undefined));
-  // }, []);
 
   const formattedMonthBillValue = monthBillValue?.monthlyBill
     ? `${monthBillValue.monthlyBill.substring(
@@ -29,12 +20,6 @@ export const MerchantChartSection: React.FC = () => {
         2
       )}/${monthBillValue.monthlyBill.substring(3)}`
     : '';
-  //  const sortedTransactionData = [...transactionData].sort((a, b) => {
-  //    return b.transaction_amount - a.transaction_amount;
-  //  });
-
-  //  const topThreeTransactions = sortedTransactionData.slice(0, 3);
-  //  const restOfTransactions = sortedTransactionData.slice(3);
 
   const filteredData = transactionData.filter((transaction) => {
     const jalaliDate = jalaliMoment(
@@ -54,75 +39,73 @@ export const MerchantChartSection: React.FC = () => {
     );
   });
 
-  const filteredDataData = [...filteredData].sort((a, b) => {
-    return b.transaction_amount - a.transaction_amount;
-  });
+  // const filteredDataData = [...filteredData].sort((a, b) => {
+  //   return b.transaction_amount - a.transaction_amount;
+  // });
 
-  //  const topThreeTransactions = filteredDataData.slice(0, 3);
-  //  const restOfTransactions = filteredDataData.slice(3);
-  //  console.log(restOfTransactions);
+  console.log('filteredData', filteredData);
 
-  console.log('filteredData', filteredDataData);
-
-  const creditorTransactionMap = new Map<string, number>();
+  const creditorTransactionMap = new Map<
+    string,
+    { amount: number; color: string }
+  >();
 
   filteredData.forEach((transaction) => {
-    const { creditor, transaction_amount } = transaction;
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const { creditor, transaction_amount, color } = transaction;
     if (creditorTransactionMap.has(creditor)) {
-      const currentTotal = creditorTransactionMap.get(creditor)!;
-      creditorTransactionMap.set(creditor, currentTotal + transaction_amount);
+      const currentTotal = creditorTransactionMap.get(creditor)!.amount;
+      creditorTransactionMap.set(creditor, {
+        amount: currentTotal + transaction_amount,
+        color,
+      });
     } else {
-      creditorTransactionMap.set(creditor, transaction_amount);
+      creditorTransactionMap.set(creditor, {
+        amount: transaction_amount,
+        color,
+      });
     }
   });
-
-  console.log(creditorTransactionMap);
 
   const topThreeTransactions = Array.from(creditorTransactionMap).slice(0, 3);
   const restOfAmounts = Array.from(creditorTransactionMap)
     .slice(3)
-    .reduce((total, [, amount]) => total + amount, 0);
+    .reduce((total, [, { amount }]) => total + amount, 0);
 
-  console.log(topThreeTransactions);
-  const transformedData = [
-    ...topThreeTransactions.map(([name, value]) => ({ name, value })),
-    { name: 'Others', value: restOfAmounts },
+  const newTransformedData = [
+    ...topThreeTransactions.map(([name, { amount, color }]) => ({
+      name,
+      value: amount,
+      color,
+    })),
+    { name: 'Others', value: restOfAmounts, color: 'default_color' },
   ];
+
+  console.log('transformedData', newTransformedData);
 
   const handleSelectedMerchant = (
     e: React.MouseEvent<HTMLSpanElement, MouseEvent>
   ) => {
     const spanName = e.currentTarget.className.split(' ')[1];
+    const selectedTransaction = transactionData.find(
+      (transaction) => transaction.creditor === spanName
+    );
 
-    switch (spanName) {
-      case 'all':
-        dispatch(selectMerchant(3));
-        setTitle('این ماه');
-        setSum(
-          transactionData.reduce(
-            (total, transaction) => total + transaction.transaction_amount,
-            0
-          )
-        );
-        break;
-      case 'fil':
-        setTitle('فیلیمو');
-        setSum(transactionData[2].transaction_amount);
-        dispatch(selectMerchant(2));
-        break;
-      case 'taps':
-        setTitle('تپسی');
-        setSum(transactionData[1].transaction_amount);
-        dispatch(selectMerchant(1));
-        break;
-      case 'snap':
-        setTitle('اسنپ');
-        setSum(transformedData[0].value);
-        dispatch(selectMerchant(0));
-        break;
-      default:
-        break;
+    if (selectedTransaction) {
+      setTitle(selectedTransaction.creditor);
+      setSum(selectedTransaction.transaction_amount);
+
+      // Update transformedData state
+      const spanColor = selectedTransaction.color;
+      setTransformedData((prevData) => [
+        ...prevData,
+        { name: selectedTransaction.creditor, color: spanColor },
+      ]);
     }
+  };
+
+  const handleSelectedAllMerchant = () => {
+    console.log('first');
   };
 
   return (
@@ -138,34 +121,42 @@ export const MerchantChartSection: React.FC = () => {
               className={`instance all ${
                 selectedMerchant === 3 ? 'active' : ''
               }`}
-              onClick={handleSelectedMerchant}
+              onClick={handleSelectedAllMerchant}
             >
               همه
             </span>
-            <span
-              className={`instance fil ${
-                selectedMerchant === 2 ? 'active' : ''
-              }`}
-              onClick={handleSelectedMerchant}
-            >
-              فیلیمو
-            </span>
-            <span
-              className={`instance taps ${
-                selectedMerchant === 1 ? 'active' : ''
-              }`}
-              onClick={handleSelectedMerchant}
-            >
-              تپسی
-            </span>
-            <span
-              className={`instance snap ${
-                selectedMerchant === 0 ? 'active' : ''
-              }`}
-              onClick={handleSelectedMerchant}
-            >
-              اسنپ
-            </span>
+            {newTransformedData.map((item) => {
+              // Convert hexadecimal color to RGB
+              const hexToRgb = (hex: any) =>
+                hex
+                  .replace(
+                    /^#?([a-f\d])([a-f\d])([a-f\d])$/i,
+                    (m: any, r: string, g: string, b: string) =>
+                      '#' + r + r + g + g + b + b
+                  )
+                  .substring(1)
+                  .match(/.{2}/g)
+                  .map((x: string) => parseInt(x, 16));
+
+              const rgbColor = hexToRgb(item.color);
+
+              // Set RGBA color with desired alpha value
+              const rgbaColor = `rgba(${rgbColor[0]}, ${rgbColor[1]}, ${rgbColor[2]}, 0.75)`;
+
+              return (
+                <span
+                  key={item.name}
+                  style={{ backgroundColor: rgbaColor }}
+                  className={`instance ${item.name.toLowerCase()} ${
+                    selectedMerchant === 2 ? 'active' : ''
+                  }`}
+                  onClick={handleSelectedMerchant}
+                >
+                  {item.name}
+                </span>
+              );
+            })}
+
             <span
               className={`instance snap ${
                 selectedMerchant === 0 ? 'active' : ''
@@ -176,7 +167,7 @@ export const MerchantChartSection: React.FC = () => {
             </span>
           </div>
         </div>
-        <RechartPieChart data={transformedData} />
+        <RechartPieChart data={newTransformedData} />
       </div>
     </>
   );
