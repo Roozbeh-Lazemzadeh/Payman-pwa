@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { type RootState } from '../store';
 
 interface monthlyBillState {
   monthlyBill: string;
@@ -9,7 +10,7 @@ const initialState: monthlyBillState = {
 };
 
 const monthlyBillSlice = createSlice({
-  name: 'monthlyBill',
+  name: 'monthly',
   initialState,
   reducers: {
     getMonthBillHandler: (state, action) => {
@@ -17,6 +18,8 @@ const monthlyBillSlice = createSlice({
     },
   },
 });
+export const selectMonthlyBill = (state: RootState) =>
+  state.monthly.monthlyBill;
 
 export const { getMonthBillHandler } = monthlyBillSlice.actions;
 

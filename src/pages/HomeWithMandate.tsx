@@ -5,7 +5,10 @@ import { TransactionHomeCard } from '../components/shared/Cards/TransactionHomeC
 import jalaliMoment from 'jalali-moment';
 import { format, parse } from 'date-fns';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMonthBillHandler } from '../store/monthlyBill/monthlyBillSlice';
+import {
+  getMonthBillHandler,
+  selectMonthlyBill,
+} from '../store/monthlyBill/monthlyBillSlice';
 import { setArrayHomeWithMandate } from '../store/arrayHomeWithMandate/arrayHomeWithMandateSlice';
 import { type RootState } from '../store/store';
 import { type Transaction } from '../store/arrayHomeWithMandate/types';
@@ -18,12 +21,25 @@ import {
   selectSortKey,
   selectTransactionList,
 } from '../store/filterPage/filterSlice';
+import { DetailedDrawer } from '../components/shared/Drawer/DetailedDrawer';
+import {
+  handleSelectedTransaction,
+  selectSelectedTransaction,
+} from '../store/transaction/transactionSlice';
+import {
+  openBottomSheet,
+  selectBottomSheetIsOpen,
+} from '../store/bottomSheet/bottomSheetSlice';
+import { getTransactionDetails } from '../components/helpers/getBottomSheetData';
 
 function HomeWithMandate() {
   const dispatch = useDispatch();
   const allFilter = useAppSelector(selectAllFilter);
   const sortKey = useAppSelector(selectSortKey);
+  const monthBillValue = useAppSelector(selectMonthlyBill);
   const Transactions = useAppSelector(selectTransactionList);
+  const isOpen = useAppSelector(selectBottomSheetIsOpen);
+  const selectedTransaction = useAppSelector(selectSelectedTransaction);
   const [selectedItemIndex, setSelectedItemIndex] = useState<number | null>(0);
   const groupedTransactions = useSelector(
     (state: RootState) => state.arrayHome.groupsTransactions
@@ -61,28 +77,38 @@ function HomeWithMandate() {
     if (selectedMonth) {
       const selectedYearMonth = monthsList2[selectedMonth.id];
       dispatch(getMonthBillHandler(selectedYearMonth));
-    } else {
-      console.log('Error: Month not found');
     }
   };
 
   useEffect(() => {
     if (Transactions) {
       dispatch(
-        setArrayHomeWithMandate({ transactions: Transactions, sortKey })
+        setArrayHomeWithMandate({
+          transactions: Transactions,
+          sortKey,
+          monthBillValue,
+        })
       );
     }
-  }, [memoizedDate, memoizedMerchants, memoizedPrice, sortKey]);
+  }, [memoizedDate, memoizedMerchants, memoizedPrice, sortKey, monthBillValue]);
 
   useEffect(() => {
     handleItemClick(selectedItemIndex);
   }, []);
 
-  console.log(monthsList);
+  const handleDrawerTransaction = (transaction: Transaction) => {
+    dispatch(handleSelectedTransaction(transaction));
+    dispatch(openBottomSheet());
+  };
 
   return (
     <div className='home-wrapper'>
       <div className='home-datepickers'>
+        <DetailedDrawer
+          title={'جزئیات بیشتر'}
+          isOpen={isOpen}
+          data={getTransactionDetails(selectedTransaction)}
+        ></DetailedDrawer>
         {monthsList.reverse().map((item) => (
           <div
             className={`home-datepicker ${
@@ -97,12 +123,6 @@ function HomeWithMandate() {
         ))}
       </div>
       <MerchantChartSection />
-      {/* <DetailedDrawer
-        isOpen={isOpen && selectedTransactionId !== null}
-        setIsOpen={handleCloseDrawer}
-        title={'جزئیات بیشتر'}
-        data={detailedDrawerData}
-      /> */}
       <FilterTools title='تراکنش‌های پرداخت مستقیم' />
       <TransactionFilterLabels />
       <div className='TransactionHomeCard-wrapper'>
@@ -137,9 +157,7 @@ function HomeWithMandate() {
                       {group.value.map((transaction: Transaction) => (
                         <div
                           key={transaction.id}
-                          // onClick={() =>
-                          //   handleDrawerTransaction(transaction.id)
-                          // }
+                          onClick={() => handleDrawerTransaction(transaction)}
                         >
                           <TransactionHomeCard
                             merchant={transaction.creditor}

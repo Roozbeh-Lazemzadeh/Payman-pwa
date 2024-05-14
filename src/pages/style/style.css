@@ -187,18 +187,18 @@
 
 .TransactionHomeCard {
   overflow: scroll !important;
-  height: calc(100vh - 470px);
+  height: calc(100vh - 510px);
   direction: ltr;
 }
 
 .TransactionHomeCard.active-one {
-  height: calc(100vh - 505px);
+  height: calc(100vh - 545px);
 }
 .TransactionHomeCard.active-two {
-  height: calc(100vh - 520px);
+  height: calc(100vh - 575px);
 }
 .TransactionHomeCard.active-three {
-  height: calc(100vh - 550px);
+  height: calc(100vh - 610px);
 }
 
 .TransactionHomeCard-p {
