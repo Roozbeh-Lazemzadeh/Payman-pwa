@@ -1,6 +1,7 @@
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { parse } from 'date-fns';
 import { type GroupedTransaction, type Transaction } from './types';
+import { jalaliDateConvert } from '../../components/helpers/transDate';
 
 // Define the initial state
 interface ArrayHomeWithMandateState {
@@ -15,6 +16,7 @@ const initialState: ArrayHomeWithMandateState = {
 interface SetArrayHomeWithMandatePayload {
   transactions: Transaction[];
   sortKey: string;
+  monthBillValue: string;
 }
 
 // Create the slice
@@ -26,7 +28,7 @@ const arrayHomeWithMandateSlice = createSlice({
       state,
       action: PayloadAction<SetArrayHomeWithMandatePayload>
     ) => {
-      const { transactions, sortKey } = action.payload;
+      const { transactions, sortKey, monthBillValue } = action.payload;
 
       const groupedTransactions: Record<string, Transaction[]> = {};
 
@@ -36,7 +38,7 @@ const arrayHomeWithMandateSlice = createSlice({
         // Check if transaction_date is a string
         if (typeof transactionDate === 'string') {
           const parsedDate = parse(
-            transaction.transaction_date,
+            transactionDate,
             'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
             new Date()
           );
@@ -45,11 +47,16 @@ const arrayHomeWithMandateSlice = createSlice({
           const month = date.getMonth() + 1;
           const year = date.getFullYear();
           const key = `${year}-${month}-${day}`;
-          if (!groupedTransactions[key]) {
-            groupedTransactions[key] = [];
-          }
 
-          groupedTransactions[key].push(transaction);
+          // to compare to monthlyBillValue to render only clicked month transactions
+          const toJalaliDate = jalaliDateConvert(transactionDate);
+          // Skip this transaction if the transaction_date doesn't match the monthlyBillValue
+          if (toJalaliDate === monthBillValue) {
+            if (!groupedTransactions[key]) {
+              groupedTransactions[key] = [];
+            }
+            groupedTransactions[key].push(transaction);
+          }
         }
       });
 
@@ -61,7 +68,6 @@ const arrayHomeWithMandateSlice = createSlice({
       }));
 
       if (sortKey === '0') {
-        console.log(groupedArray);
         groupedArray.sort((a, b) => {
           const dateA = new Date(a.key);
           const dateB = new Date(b.key);

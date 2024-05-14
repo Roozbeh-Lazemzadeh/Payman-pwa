@@ -8,8 +8,10 @@ import {
   selectSelectedMerchant,
 } from '../../store/chart/chartSlice';
 import transactionData from '../../transaction.json';
-import jalaliMoment from 'jalali-moment';
-import { format, parse } from 'date-fns';
+// import jalaliMoment from 'jalali-moment';
+// import { format, parse } from 'date-fns';
+import { selectMonthlyBill } from '../../store/monthlyBill/monthlyBillSlice';
+import { jalaliDate } from '../helpers/transDate';
 // import { getMonthBillHandler } from '../../store/monthlyBill/monthlyBillSlice'; // Import the action creator
 
 export const MerchantChartSection: React.FC = () => {
@@ -17,17 +19,14 @@ export const MerchantChartSection: React.FC = () => {
   const [sum, setSum] = useState<number>(transactionData[0].transaction_amount);
   const dispatch = useAppDispatch();
   const selectedMerchant = useAppSelector(selectSelectedMerchant);
-  const monthBillValue = useAppSelector((state) => state.monthly);
+  const monthBillValue = useAppSelector(selectMonthlyBill);
 
   // useEffect(() => {
   //   dispatch(getMonthBillHandler(undefined));
   // }, []);
 
-  const formattedMonthBillValue = monthBillValue?.monthlyBill
-    ? `${monthBillValue.monthlyBill.substring(
-        0,
-        2
-      )}/${monthBillValue.monthlyBill.substring(3)}`
+  const formattedMonthBillValue = monthBillValue
+    ? `${monthBillValue.substring(0, 2)}/${monthBillValue.substring(3)}`
     : '';
   //  const sortedTransactionData = [...transactionData].sort((a, b) => {
   //    return b.transaction_amount - a.transaction_amount;
@@ -37,19 +36,19 @@ export const MerchantChartSection: React.FC = () => {
   //  const restOfTransactions = sortedTransactionData.slice(3);
 
   const filteredData = transactionData.filter((transaction) => {
-    const jalaliDate = jalaliMoment(
-      format(
-        parse(
-          transaction.transaction_date,
-          'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
-          new Date()
-        ),
-        'yyyy-MM-dd HH:mm:ss'
-      )
-    ).format('jYYYY/jM');
-
+    // const jalaliDate = jalaliMoment(
+    //   format(
+    //     parse(
+    //       transaction.transaction_date,
+    //       'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
+    //       new Date()
+    //     ),
+    //     'yyyy-MM-dd HH:mm:ss'
+    //   )
+    // ).format('jYYYY/jM');
+    // console.log(jalaliDate);
     return (
-      parseInt(jalaliDate.split('/')[1]) ===
+      parseInt(jalaliDate(transaction.transaction_date).split('/')[1]) ===
       parseInt(formattedMonthBillValue.split('/')[2])
     );
   });

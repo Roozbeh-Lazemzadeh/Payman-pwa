@@ -5,7 +5,10 @@ import { TransactionHomeCard } from '../components/shared/Cards/TransactionHomeC
 import jalaliMoment from 'jalali-moment';
 import { format, parse } from 'date-fns';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMonthBillHandler } from '../store/monthlyBill/monthlyBillSlice';
+import {
+  getMonthBillHandler,
+  selectMonthlyBill,
+} from '../store/monthlyBill/monthlyBillSlice';
 import { setArrayHomeWithMandate } from '../store/arrayHomeWithMandate/arrayHomeWithMandateSlice';
 import { type RootState } from '../store/store';
 import { type Transaction } from '../store/arrayHomeWithMandate/types';
@@ -23,6 +26,7 @@ function HomeWithMandate() {
   const dispatch = useDispatch();
   const allFilter = useAppSelector(selectAllFilter);
   const sortKey = useAppSelector(selectSortKey);
+  const monthBillValue = useAppSelector(selectMonthlyBill);
   const Transactions = useAppSelector(selectTransactionList);
   const [selectedItemIndex, setSelectedItemIndex] = useState<number | null>(0);
   const groupedTransactions = useSelector(
@@ -61,24 +65,24 @@ function HomeWithMandate() {
     if (selectedMonth) {
       const selectedYearMonth = monthsList2[selectedMonth.id];
       dispatch(getMonthBillHandler(selectedYearMonth));
-    } else {
-      console.log('Error: Month not found');
     }
   };
 
   useEffect(() => {
     if (Transactions) {
       dispatch(
-        setArrayHomeWithMandate({ transactions: Transactions, sortKey })
+        setArrayHomeWithMandate({
+          transactions: Transactions,
+          sortKey,
+          monthBillValue,
+        })
       );
     }
-  }, [memoizedDate, memoizedMerchants, memoizedPrice, sortKey]);
+  }, [memoizedDate, memoizedMerchants, memoizedPrice, sortKey, monthBillValue]);
 
   useEffect(() => {
     handleItemClick(selectedItemIndex);
   }, []);
-
-  console.log(monthsList);
 
   return (
     <div className='home-wrapper'>
