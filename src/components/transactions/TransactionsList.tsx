@@ -21,6 +21,7 @@ import {
 import { filterLabelStyle } from '../helpers/filterLabelsStyle';
 
 import './style.css';
+import { getTransactionDetails } from '../helpers/getBottomSheetData';
 
 export interface Transaction {
   id: number;
@@ -48,23 +49,13 @@ export const TransactionsList: React.FC = () => {
     dispatch(openBottomSheet());
   };
 
-  const data = selectedTransaction
-    ? [
-        { firstWord: 'بانک', secondWord: selectedTransaction.source_bank },
-        {
-          firstWord: 'شماره موبایل',
-          secondWord: selectedTransaction.phone_number,
-        },
-        {
-          firstWord: 'شناسه پیمان',
-          secondWord: selectedTransaction.transaction_id,
-        },
-      ]
-    : [];
-
   return (
     <div className={`trans-list ${filterLabelStyle(allFilter)}`}>
-      <DetailedDrawer title={'جزئیات بیشتر'} isOpen={isOpen} data={data}>
+      <DetailedDrawer
+        title={'جزئیات بیشتر'}
+        isOpen={isOpen}
+        data={getTransactionDetails(selectedTransaction)}
+      >
         <div className='info-login detail'>
           <div>دلیل نامشخص بودن تراکنش </div>‌
           <div>{selectedTransaction?.transaction_msg}</div>
