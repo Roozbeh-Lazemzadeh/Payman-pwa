@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import RechartPieChart from './RechartPieChart';
 import './style.css';
 import { useAppSelector } from '../hooks/reduxHooks';
-import { selectSelectedMerchant } from '../../store/chart/chartSlice';
+// import { selectSelectedMerchant } from '../../store/chart/chartSlice';
 import transactionData from '../../transaction.json';
 // import jalaliMoment from 'jalali-moment';
 // import { format, parse } from 'date-fns';
@@ -12,9 +12,12 @@ import { jalaliDate } from '../helpers/transDate';
 
 export const MerchantChartSection: React.FC = () => {
   const [title, setTitle] = useState('اسنپ');
-  const [sum, setSum] = useState<number>(transactionData[0].transaction_amount);
+  const [value, setValue] = useState<number>(
+    transactionData[0].transaction_amount
+  );
   const [, setTransformedData] = useState<any[]>([]);
-  const selectedMerchant = useAppSelector(selectSelectedMerchant);
+  // const [selectedItemColor, setSelectedItemColor] = useState<string>('');
+  // const selectedMerchant = useAppSelector(selectSelectedMerchant);
   const monthBillValue = useAppSelector(selectMonthlyBill);
 
   // useEffect(() => {
@@ -85,51 +88,82 @@ export const MerchantChartSection: React.FC = () => {
     { name: 'Others', value: restOfAmounts, color: 'default_color' },
   ];
 
-  console.log('transformedData', newTransformedData);
+  console.log('newTransformedData', newTransformedData);
 
   const handleSelectedMerchant = (
     e: React.MouseEvent<HTMLSpanElement, MouseEvent>
   ) => {
-    const spanName = e.currentTarget.className.split(' ')[1];
-    const selectedTransaction = transactionData.find(
-      (transaction) => transaction.creditor === spanName
+    const selectedTransaction = newTransformedData.find(
+      (transaction) => transaction.name === e.currentTarget.textContent
     );
 
     if (selectedTransaction) {
-      setTitle(selectedTransaction.creditor);
-      setSum(selectedTransaction.transaction_amount);
+      if (selectedTransaction.name !== 'Others') {
+        setTitle(selectedTransaction.name);
+      } else {
+        setTitle('سایر');
+      }
+      setValue(selectedTransaction.value);
 
-      // Update transformedData state
       const spanColor = selectedTransaction.color;
       setTransformedData((prevData) => [
         ...prevData,
-        { name: selectedTransaction.creditor, color: spanColor },
+        { name: selectedTransaction.name, color: spanColor },
       ]);
+    } else {
+      const othersValue =
+        newTransformedData.find((transaction) => transaction.name === 'Others')
+          ?.value ?? 0;
+
+      setValue(othersValue);
     }
+    // selectRef.current.
   };
+
+  useEffect(() => {
+    // Set the initial value on component mount
+    const totalSum = newTransformedData.reduce(
+      (sum, item) => sum + item.value,
+      0
+    );
+    setValue(totalSum);
+    setTitle('همه');
+    // Execute handleSelectedAllMerchant on initial load
+    handleSelectedAllMerchant();
+  }, []);
+
+  useEffect(() => {
+    // Set the initial value on component mount
+    const totalSum = newTransformedData.reduce(
+      (sum, item) => sum + item.value,
+      0
+    );
+    setValue(totalSum);
+    setTitle('همه');
+    // Execute handleSelectedAllMerchant on initial load
+    handleSelectedAllMerchant();
+  }, [monthBillValue]);
 
   const handleSelectedAllMerchant = () => {
-    console.log('first');
+    const totalSum = newTransformedData.reduce(
+      (sum, item) => sum + item.value,
+      0
+    );
+    setValue(totalSum);
   };
-
   return (
     <>
       <div className='chart-row-wrapper'>
         <div className='pay-info-wrapper'>
           <div className='pay-title-price-wrapper'>
             <span className='pay-title'>{`کل پرداخت های شما در  ${title}`}</span>
-            <span className='pay-price'>{`${sum} تومان`}</span>
+            <span className='pay-price'>{`${value} تومان`}</span>
           </div>
           <div className='merchants-wrapper'>
-            <span
-              className={`instance all ${
-                selectedMerchant === 3 ? 'active' : ''
-              }`}
-              onClick={handleSelectedAllMerchant}
-            >
+            <span className='instance all' onClick={handleSelectedAllMerchant}>
               همه
             </span>
-            {newTransformedData.map((item) => {
+            {newTransformedData.map((item, index) => {
               // Convert hexadecimal color to RGB
               const hexToRgb = (hex: any) =>
                 hex
@@ -143,32 +177,24 @@ export const MerchantChartSection: React.FC = () => {
                   .map((x: string) => parseInt(x, 16));
 
               const rgbColor = hexToRgb(item.color);
-
-              // Set RGBA color with desired alpha value
               const rgbaColor = `rgba(${rgbColor[0]}, ${rgbColor[1]}, ${rgbColor[2]}, 0.75)`;
 
               return (
                 <span
                   key={item.name}
-                  style={{ backgroundColor: rgbaColor }}
-                  className={`instance ${item.name.toLowerCase()} ${
-                    selectedMerchant === 2 ? 'active' : ''
-                  }`}
+                  style={{
+                    backgroundColor: rgbaColor,
+                    // border: `${
+                    //   index === selectedItemIndex ? 'solid 1px ' + item.color : ''
+                    // }`,
+                  }}
+                  className='instance'
                   onClick={handleSelectedMerchant}
                 >
                   {item.name}
                 </span>
               );
             })}
-
-            <span
-              className={`instance snap ${
-                selectedMerchant === 0 ? 'active' : ''
-              }`}
-              onClick={handleSelectedMerchant}
-            >
-              سایر
-            </span>
           </div>
         </div>
         <RechartPieChart data={newTransformedData} />
