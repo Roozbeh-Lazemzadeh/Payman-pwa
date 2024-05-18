@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { ReactComponent as TickSquareIcon } from '../../../icons/tickSquare.svg';
 import { ReactComponent as CalendarIcon } from '../../../icons/calendar.svg';
 import { ReactComponent as RemoveIcon } from '../../../icons/delete.svg';
+import { Segmented } from 'antd';
 import DatePicker, { DateObject } from 'react-multi-date-picker';
 import { weekDays } from '../../types/calendar';
 import gregorian from 'react-date-object/calendars/gregorian';
@@ -36,6 +38,7 @@ export const PaymanDateFilter: React.FC = () => {
     // new DateObject({ calendar: gregorian }),
     // new DateObject({ calendar: gregorian }).add(2, 'day'),
   ]);
+  const [selectedDateTab, setSelectedDateTab] = useState('start');
 
   const [selectedQuickItems, setSelectedQuickItems] = useState<string>('');
 
@@ -156,6 +159,19 @@ export const PaymanDateFilter: React.FC = () => {
     setSelectedQuickItems(datePeriod);
   }, [searchItem]);
 
+  const handleSelectedTab = (value: string) => {
+    switch (value) {
+      case 'شروع':
+        setSelectedDateTab('start');
+        break;
+      case 'پایان':
+        setSelectedDateTab('end');
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <>
       <div className='implement-remove-wrapper'>
@@ -178,36 +194,27 @@ export const PaymanDateFilter: React.FC = () => {
       </div>
 
       <div className='searched-footer-content'>
-        <div className='quick-access-section'>
+        <div className='quick-access-section payman'>
           {/* date  */}
-          <>
-            <span
-              className={selectedQuickItems === 'روز گذشته' ? 'selected' : ''}
-              onClick={() => selectedQuickAccess('روز گذشته')}
-            >
-              روز گذشته
-            </span>
-            <span
-              className={selectedQuickItems === 'هفته گذشته' ? 'selected' : ''}
-              onClick={() => selectedQuickAccess('هفته گذشته')}
-            >
-              هفته گذشته
-            </span>
-            <span
-              className={selectedQuickItems === 'ماه گذشته' ? 'selected' : ''}
-              onClick={() => selectedQuickAccess('ماه گذشته')}
-            >
-              ماه گذشته
-            </span>
-          </>
+          <span className='title'>مبنای فیلتر تاریخ بر اساس</span>
+          <Segmented
+            className='custom-date-segment'
+            style={{ direction: 'ltr', height: 30, transition: 'none' }}
+            options={['پایان', 'شروع']}
+            block
+            defaultValue={'شروع'}
+            onChange={handleSelectedTab}
+          />
         </div>
         <div className='search-section search-bar'>
           <div className='search-datePicker'>
             <DatePicker
-              placeholder='از تاریخ                              تا تاریخ'
-              style={{
-                direction: 'rtl',
-              }}
+              placeholder={
+                selectedDateTab === 'start'
+                  ? 'شروع پیمان از تاریخ    شروع پیمان تا تاریخ'
+                  : 'پایان پیمان از تاریخ     پایان پیمان تا تاریخ'
+              }
+              style={{ direction: 'rtl', fontSize: 12 }}
               value={values}
               onChange={handleDateChange}
               dateSeparator='                  '

@@ -10,7 +10,7 @@ import {
   selectSearchedFilter,
 } from '../../../store/filterMenu/filterMenuSlice';
 import { selectAllFilter } from '../../../store/filterPage/filterSlice';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import '../style.css';
 import './style.css';
 
@@ -19,6 +19,8 @@ const { Footer } = Layout;
 const FilterMenu: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+  const pathName = location.pathname;
   const isFilteredFooterShown = useAppSelector(selectFilter);
   const isSearchedFooterShown = useAppSelector(selectSearchedFilter);
   const allFilter = useAppSelector(selectAllFilter);
@@ -43,7 +45,7 @@ const FilterMenu: React.FC = () => {
     removeFilterItem!,
     getItem({
       key: '102',
-      label: 'مبلغ',
+      label: `${pathName === '/paymans/me' ? 'سقف مبلغ روزانه' : 'مبلغ'}`,
       icon: <ActivityIcon />,
       badge: allFilter.price.length === 2 ? 1 : 0,
       dispatch,
