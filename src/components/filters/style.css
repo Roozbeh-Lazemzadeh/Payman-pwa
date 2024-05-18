@@ -425,10 +425,28 @@ input.ant-input.css-dev-only-do-not-override-1jc77hn.ant-input-outlined.input-cl
 
 /* media gueries */
 
-/* 14 iphone */
+/* 12 iphone */
 
+@media screen and (min-width: 390px) {
+  .search-datePicker .divider.payman {
+    right: 40%;
+  }
+}
+/* XR iphone */
+@media screen and (min-width: 410px) {
+  .search-datePicker .divider.payman {
+    right: 38%;
+  }
+}
+/* 14 iphone */
+@media screen and (min-width: 420px) {
+  .search-datePicker .divider.payman {
+    right: 37%;
+  }
+}
+/* 14 iphone */
 @media screen and (min-width: 400px) {
   .search-datePicker .divider {
-    right: 29%;
+    right: 39%;
   }
 }

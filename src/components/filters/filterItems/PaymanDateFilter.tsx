@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { ReactComponent as TickSquareIcon } from '../../../icons/tickSquare.svg';
 import { ReactComponent as CalendarIcon } from '../../../icons/calendar.svg';
 import { ReactComponent as RemoveIcon } from '../../../icons/delete.svg';
@@ -7,22 +7,21 @@ import { Segmented } from 'antd';
 import DatePicker, { DateObject } from 'react-multi-date-picker';
 import { weekDays } from '../../types/calendar';
 import gregorian from 'react-date-object/calendars/gregorian';
-import { startOfDay, subDays, subWeeks, subMonths, parse } from 'date-fns';
+import { parse } from 'date-fns';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
 import gregorian_en from 'react-date-object/locales/gregorian_en';
 import {
   dateHandler,
   dateQuickAccessHandler,
+  endingDateHandler,
   handleListFiltering,
   selectAllFilter,
-  selectDatePeriod,
 } from '../../../store/filterPage/filterSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import {
   filteredToggle,
   searchedToggle,
-  selectSearchItem,
 } from '../../../store/filterMenu/filterMenuSlice';
 
 import '../../Paymans/otherPaymans/style.css';
@@ -31,133 +30,122 @@ import '../style.css';
 export const PaymanDateFilter: React.FC = () => {
   const dispatch = useAppDispatch();
   const allFilter = useAppSelector(selectAllFilter);
-  const searchItem = useAppSelector(selectSearchItem);
-  const datePeriod = useAppSelector(selectDatePeriod);
-  const [dates, setDates] = useState<string[]>([]);
-  const [values, setValues] = useState<Date[]>([
-    // new DateObject({ calendar: gregorian }),
-    // new DateObject({ calendar: gregorian }).add(2, 'day'),
-  ]);
+  const [startingDates, setStartingDates] = useState<string[]>([]);
+  const [endingDates, setEndingDates] = useState<string[]>([]);
   const [selectedDateTab, setSelectedDateTab] = useState('start');
+  const [dateValues, setDateValues] = useState<{
+    startingDateValues: Date[];
+    endingDateValues: Date[];
+  }>({
+    startingDateValues: [],
+    endingDateValues: [],
+  });
+  // const memoizedStartingDate = useMemo(() => allFilter.date, [allFilter.date]);
+  // const memoizedEndingDate = useMemo(
+  //   () => allFilter.endingDate,
+  //   [allFilter.endingDate]
+  // );
+  console.log(allFilter);
+  console.log('startingDates', startingDates);
 
-  const [selectedQuickItems, setSelectedQuickItems] = useState<string>('');
-
-  const handleDateChange = (dates: DateObject[]) => {
+  const handleDateChange = (dates: DateObject | DateObject[] | null) => {
     if (dates) {
-      const formattedDates: string[] = dates.map((date) =>
-        new DateObject(date)
-          .convert(gregorian, gregorian_en)
-          .format('YY-MMM-DD hh:mm:ss a')
-      );
+      const formattedDates: string[] = Array.isArray(dates)
+        ? dates.map((date: DateObject) =>
+            new DateObject(date)
+              .convert(gregorian, gregorian_en)
+              .format('YY-MMM-DD hh:mm:ss a')
+          )
+        : [
+            new DateObject(dates)
+              .convert(gregorian, gregorian_en)
+              .format('YY-MMM-DD hh:mm:ss a'),
+          ];
+
       if (formattedDates.length === 1) {
         const currentDate = new DateObject(new Date())
           .convert(gregorian, gregorian_en)
           .format('YY-MMM-DD hh:mm:ss a');
         formattedDates.push(currentDate);
-        setDates(formattedDates);
-      } else if (formattedDates.length === 2) {
-        setDates(formattedDates);
+      }
+
+      if (selectedDateTab === 'start') {
+        setStartingDates(formattedDates);
+        setDateValues((prevValues) => ({
+          ...prevValues,
+          startingDateValues: Array.isArray(dates)
+            ? dates.map((date) => new DateObject(date).toDate())
+            : [new DateObject(dates).toDate()],
+        }));
+      } else {
+        setEndingDates(formattedDates);
+        setDateValues((prevValues) => ({
+          ...prevValues,
+          endingDateValues: Array.isArray(dates)
+            ? dates.map((date) => new DateObject(date).toDate())
+            : [new DateObject(dates).toDate()],
+        }));
       }
     }
   };
+
   const handleDateFilter = () => {
-    if (dates.length === 0) return null;
-    dispatch(dateHandler(dates));
-    dispatch(handleListFiltering({ dates }));
+    // if (startingDates.length === 0 && endingDates.length === 0) return null;
+    dispatch(dateHandler(startingDates));
+    dispatch(endingDateHandler(endingDates));
+
+    // dispatch(handleListFiltering({ startingDates }));
     dispatch(searchedToggle(''));
     dispatch(filteredToggle());
   };
 
   useEffect(() => {
-    const parsedDates: Date[] = allFilter?.date.map((date) =>
+    console.log('allFilter.date:', allFilter.date);
+    console.log('allFilter.endingDate:', allFilter.endingDate);
+    // starting date
+    const startingParsedDates: Date[] = allFilter?.date.map((date) =>
       parse(date, 'yy-MMM-dd hh:mm:ss a', new Date())
     );
-    setValues(parsedDates);
-    // dispatching if user implement the same date filter
-    const formattedDates: string[] = parsedDates.map((date) =>
+    console.log(startingParsedDates);
+    const startingFormattedDates: string[] = startingParsedDates.map((date) =>
       new DateObject(date)
         .convert(gregorian, gregorian_en)
         .format('YY-MMM-DD hh:mm:ss a')
     );
-    setDates(formattedDates);
-  }, [allFilter.date]);
+    console.log(startingFormattedDates);
 
-  const selectedQuickAccess = (title: string) => {
-    let formattedDates: string[] = [];
-    const today = startOfDay(new Date());
-    const yesterday = subDays(today, 1);
-    const oneWeekAgo = subWeeks(today, 1);
-    const oneMonthAgo = subMonths(today, 1);
-    // Filter out the previously selected item from the selectedQuickItems array
-    setSelectedQuickItems(title);
+    setStartingDates(startingFormattedDates);
+    setDateValues({
+      startingDateValues: startingParsedDates,
+      endingDateValues: dateValues.endingDateValues,
+    });
 
-    switch (title) {
-      case 'روز گذشته':
-        formattedDates = [
-          new DateObject(yesterday)
-            .convert(gregorian, gregorian_en)
-            .format('YY-MMM-DD hh:mm:ss a'),
-          new DateObject(today)
-            .convert(gregorian, gregorian_en)
-            .format('YY-MMM-DD hh:mm:ss a'),
-        ];
-        setDates(formattedDates);
-        setValues([yesterday, today]);
-        dispatch(dateQuickAccessHandler('روز گذشته'));
-        break;
-
-      case 'هفته گذشته':
-        formattedDates = [
-          new DateObject(oneWeekAgo)
-            .convert(gregorian, gregorian_en)
-            .format('YY-MMM-DD hh:mm:ss a'),
-          new DateObject(today)
-            .convert(gregorian, gregorian_en)
-            .format('YY-MMM-DD hh:mm:ss a'),
-        ];
-        setDates(formattedDates);
-        setValues([oneWeekAgo, today]);
-        dispatch(dateQuickAccessHandler('هفته گذشته'));
-
-        break;
-
-      case 'ماه گذشته':
-        formattedDates = [
-          new DateObject(oneMonthAgo)
-            .convert(gregorian, gregorian_en)
-            .format('YY-MMM-DD hh:mm:ss a'),
-          new DateObject(today)
-            .convert(gregorian, gregorian_en)
-            .format('YY-MMM-DD hh:mm:ss a'),
-        ];
-        setDates(formattedDates);
-        setValues([oneMonthAgo, today]);
-        dispatch(dateQuickAccessHandler('ماه گذشته'));
-
-        break;
-
-      default:
-        break;
-    }
-  };
+    // ending date
+    const endingParsedDates: Date[] = allFilter?.endingDate.map((date) =>
+      parse(date, 'yy-MMM-dd hh:mm:ss a', new Date())
+    );
+    const endingFormattedDates: string[] = endingParsedDates.map((date) =>
+      new DateObject(date)
+        .convert(gregorian, gregorian_en)
+        .format('YY-MMM-DD hh:mm:ss a')
+    );
+    setEndingDates(endingFormattedDates);
+    setDateValues({
+      startingDateValues: dateValues.startingDateValues,
+      endingDateValues: endingParsedDates,
+    });
+  }, []);
 
   const handleRemoveFilter = () => {
-    if (dates.length === 0) return null;
-    setSelectedQuickItems('');
-    setDates([]);
-    setValues([]);
+    if (startingDates.length === 0) return null;
+    setStartingDates([]);
+    // setStartingDateValues([]);
     dispatch(dateHandler([]));
     dispatch(searchedToggle(''));
     dispatch(filteredToggle());
     dispatch(dateQuickAccessHandler(''));
     dispatch(handleListFiltering({ dates: [] }));
   };
-
-  useEffect(() => {
-    // Check the search item and initialize the selectedQuickItems state
-
-    setSelectedQuickItems(datePeriod);
-  }, [searchItem]);
 
   const handleSelectedTab = (value: string) => {
     switch (value) {
@@ -171,12 +159,14 @@ export const PaymanDateFilter: React.FC = () => {
         break;
     }
   };
-
+  console.log(selectedDateTab);
   return (
     <>
       <div className='implement-remove-wrapper'>
         <div
-          className={`remove-button ${dates.length === 0 ? 'disabled' : ''}`}
+          className={`remove-button ${
+            startingDates.length === 0 ? 'disabled' : ''
+          }`}
           onClick={handleRemoveFilter}
         >
           <RemoveIcon />
@@ -184,7 +174,7 @@ export const PaymanDateFilter: React.FC = () => {
         </div>
         <div
           className={`implement-button half ${
-            dates.length === 0 ? 'disabled' : ''
+            startingDates.length === 0 ? 'disabled' : ''
           }`}
           onClick={handleDateFilter}
         >
@@ -211,12 +201,16 @@ export const PaymanDateFilter: React.FC = () => {
             <DatePicker
               placeholder={
                 selectedDateTab === 'start'
-                  ? 'شروع پیمان از تاریخ    شروع پیمان تا تاریخ'
-                  : 'پایان پیمان از تاریخ     پایان پیمان تا تاریخ'
+                  ? 'شروع پیمان از تاریخ   شروع پیمان تا تاریخ'
+                  : 'پایان پیمان از تاریخ    پایان پیمان تا تاریخ'
               }
               style={{ direction: 'rtl', fontSize: 12 }}
-              value={values}
-              onChange={handleDateChange}
+              value={
+                selectedDateTab === 'start'
+                  ? dateValues.startingDateValues
+                  : dateValues.endingDateValues
+              }
+              onChange={(dates) => handleDateChange(dates)}
               dateSeparator='                  '
               locale={persian_fa}
               calendar={persian}
@@ -233,7 +227,7 @@ export const PaymanDateFilter: React.FC = () => {
             <div className='icon'>
               <CalendarIcon />
             </div>
-            <div className='divider'></div>
+            <div className='divider payman'></div>
           </div>
         </div>
       </div>

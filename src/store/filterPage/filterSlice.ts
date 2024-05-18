@@ -9,6 +9,7 @@ interface FilterState {
   allFilter: {
     merchants: string[];
     date: string[];
+    endingDate: string[];
     price: number[];
   };
   isFiltered: boolean;
@@ -23,6 +24,7 @@ const initialState: FilterState = {
   allFilter: {
     merchants: [],
     date: [],
+    endingDate: [],
     price: [],
   },
   isFiltered: false,
@@ -74,6 +76,13 @@ export const filterSlice = createSlice({
 
       // Assign the new array of dates to the state
       state.allFilter.date = newDates;
+    },
+
+    endingDateHandler: (state, action: PayloadAction<string[]>) => {
+      const newDates = action.payload;
+
+      // Assign the new array of dates to the state
+      state.allFilter.endingDate = newDates;
     },
 
     // Handler for setting the date period
@@ -223,6 +232,7 @@ export const {
   dateQuickAccessHandler,
   handleListFiltering,
   handleSortKey,
+  endingDateHandler,
 } = filterSlice.actions;
 
 export default filterSlice.reducer;
