@@ -4,6 +4,7 @@ import { ReactComponent as ArrowDownIcon } from '../../icons/arrowDown2.svg';
 import { useAppDispatch } from '../hooks/reduxHooks';
 import { handleSortKey } from '../../store/filterPage/filterSlice';
 import './style.css';
+import { useLocation } from 'react-router-dom';
 
 interface MenuItems {
   label: string;
@@ -13,18 +14,22 @@ interface MenuItems {
 
 export const Sort: React.FC = () => {
   const dispatch = useAppDispatch();
+  const location = useLocation();
+  const pathName = location.pathname;
 
   const handleClick = (key: string) => {
     dispatch(handleSortKey(key));
   };
   const items: MenuItems[] = [
     {
-      label: 'آخرین تراکنش',
+      label: `${
+        pathName === '/paymans/me' ? 'پیمان های فعال' : 'آخرین تراکنش'
+      }`,
       key: '0',
       onClick: () => handleClick('0'),
     },
     {
-      label: 'بیشترین مبلغ',
+      label: `${pathName === '/paymans/me' ? 'منقضی شده' : 'بیشترین مبلغ'}`,
       key: '1',
       onClick: () => handleClick('1'),
     },

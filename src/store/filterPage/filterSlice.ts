@@ -9,6 +9,7 @@ interface FilterState {
   allFilter: {
     merchants: string[];
     date: string[];
+    endingDate: string[];
     price: number[];
   };
   isFiltered: boolean;
@@ -23,6 +24,7 @@ const initialState: FilterState = {
   allFilter: {
     merchants: [],
     date: [],
+    endingDate: [],
     price: [],
   },
   isFiltered: false,
@@ -64,16 +66,35 @@ export const filterSlice = createSlice({
       // Update isFiltered and totalFilterNumber based on the filter state
       const hasFilters =
         state.allFilter.merchants.length > 0 ||
+        state.allFilter.endingDate.length > 0 ||
         newDates.length > 0 ||
         state.allFilter.price.length > 0;
       state.isFiltered = hasFilters;
       state.totalFilterNumber =
         state.allFilter.merchants.length +
-        (newDates.length > 0 ? 1 : 0) +
+        (newDates.length > 0 || state.allFilter.endingDate.length > 0 ? 1 : 0) +
         (state.allFilter.price.length > 0 ? 1 : 0);
 
       // Assign the new array of dates to the state
       state.allFilter.date = newDates;
+    },
+
+    endingDateHandler: (state, action: PayloadAction<string[]>) => {
+      const newDates = action.payload;
+      // Update isFiltered and totalFilterNumber based on the filter state
+      const hasFilters =
+        state.allFilter.merchants.length > 0 ||
+        state.allFilter.date.length > 0 ||
+        newDates.length > 0 ||
+        state.allFilter.price.length > 0;
+      state.isFiltered = hasFilters;
+      state.totalFilterNumber =
+        state.allFilter.merchants.length +
+        (newDates.length > 0 || state.allFilter.date.length > 0 ? 1 : 0) +
+        (state.allFilter.price.length > 0 ? 1 : 0);
+
+      // Assign the new array of dates to the state
+      state.allFilter.endingDate = newDates;
     },
 
     // Handler for setting the date period
@@ -104,6 +125,7 @@ export const filterSlice = createSlice({
     removeAllFiltersHandler: (state) => {
       state.allFilter.merchants = [];
       state.allFilter.date = [];
+      state.allFilter.endingDate = [];
       state.allFilter.price = [];
       state.isFiltered = false;
       state.totalFilterNumber = 0;
@@ -223,6 +245,7 @@ export const {
   dateQuickAccessHandler,
   handleListFiltering,
   handleSortKey,
+  endingDateHandler,
 } = filterSlice.actions;
 
 export default filterSlice.reducer;
