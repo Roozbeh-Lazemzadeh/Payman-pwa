@@ -80,6 +80,7 @@ export const filterSlice = createSlice({
 
     endingDateHandler: (state, action: PayloadAction<string[]>) => {
       const newDates = action.payload;
+      console.log(newDates);
 
       // Assign the new array of dates to the state
       state.allFilter.endingDate = newDates;
@@ -113,6 +114,7 @@ export const filterSlice = createSlice({
     removeAllFiltersHandler: (state) => {
       state.allFilter.merchants = [];
       state.allFilter.date = [];
+      state.allFilter.endingDate = [];
       state.allFilter.price = [];
       state.isFiltered = false;
       state.totalFilterNumber = 0;

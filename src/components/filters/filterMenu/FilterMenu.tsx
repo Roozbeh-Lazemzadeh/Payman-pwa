@@ -26,9 +26,10 @@ const FilterMenu: React.FC = () => {
   const allFilter = useAppSelector(selectAllFilter);
 
   const removeFilterItem =
-    allFilter?.merchants?.length !== 0 ||
-    allFilter?.date?.length !== 0 ||
-    allFilter?.price?.length !== 0
+    allFilter.merchants.length !== 0 ||
+    allFilter.date.length !== 0 ||
+    allFilter.endingDate.length !== 0 ||
+    allFilter.price.length !== 0
       ? getItem({
           key: '101',
           label: 'حذف فیلترها',

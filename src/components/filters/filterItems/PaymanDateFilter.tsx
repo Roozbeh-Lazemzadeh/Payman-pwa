@@ -116,20 +116,18 @@ export const PaymanDateFilter: React.FC = () => {
   }, [allFilter.endingDate]);
 
   const handleDateFilter = () => {
-    // if (startingDates.length === 0 && endingDates.length === 0) return null;
+    if (startingDates.length === 0 && endingDates.length === 0) return null;
     dispatch(dateHandler(startingDates));
     dispatch(endingDateHandler(endingDates));
-
     // dispatch(handleListFiltering({ startingDates }));
     dispatch(searchedToggle(''));
     dispatch(filteredToggle());
   };
 
   const handleRemoveFilter = () => {
-    if (startingDates.length === 0) return null;
-    setStartingDates([]);
-    // setStartingDateValues([]);
+    if (startingDates.length === 0 && endingDates.length === 0) return null;
     dispatch(dateHandler([]));
+    dispatch(endingDateHandler([]));
     dispatch(searchedToggle(''));
     dispatch(filteredToggle());
     dispatch(dateQuickAccessHandler(''));
@@ -154,7 +152,9 @@ export const PaymanDateFilter: React.FC = () => {
       <div className='implement-remove-wrapper'>
         <div
           className={`remove-button ${
-            startingDates.length === 0 ? 'disabled' : ''
+            startingDates.length === 0 && endingDates.length === 0
+              ? 'disabled'
+              : ''
           }`}
           onClick={handleRemoveFilter}
         >
@@ -163,7 +163,9 @@ export const PaymanDateFilter: React.FC = () => {
         </div>
         <div
           className={`implement-button half ${
-            startingDates.length === 0 ? 'disabled' : ''
+            startingDates.length === 0 && endingDates.length === 0
+              ? 'disabled'
+              : ''
           }`}
           onClick={handleDateFilter}
         >
