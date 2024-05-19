@@ -8,5 +8,6 @@
     "پیمان"
   ],
   "prettier.jsxSingleQuote": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "svg.preview.background": "custom"
 }

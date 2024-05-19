@@ -19,18 +19,19 @@ const Onboarding: FC<OnboardingProps> = () => {
   const [tickShow, settickShow] = useState<boolean>(false);
 
   return (
-    <div className="onboardingStyle">
-      <div className="headerOnboarding">
-        <div className="headerOnboarding-box"></div>
+    <div className='onboardingStyle'>
+      <div className='onboardingStyle-wrapper'></div>
+      <div className='headerOnboarding'>
+        <div className='headerOnboarding-box'></div>
         <img
-          className="headerOnboarding-img"
-          src="/assets/onboarding-img/logo-payman-onboarding.svg"
+          className='headerOnboarding-img'
+          src='/assets/onboarding-img/logo-payman-onboarding.svg'
         />
         <OnboardingRedirectBtn tickShow={tickShow} />
       </div>
-      <div className="onboardingSlider">
+      <div className='onboardingSlider'>
         <Swiper
-          className="mySwiper"
+          className='mySwiper'
           spaceBetween={30}
           effect={'fade'}
           pagination={{
