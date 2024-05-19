@@ -1,7 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { type RootState } from '../store';
 import { type Transaction } from '../../components/transactions/TransactionsList';
-import transactions from '../../transaction.json';
+import transactions from '../../data/transaction.json';
 import { isAfter, parse } from 'date-fns';
 
 // Interface for the filter state

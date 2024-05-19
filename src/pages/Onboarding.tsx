@@ -9,7 +9,7 @@ import 'swiper/swiper-bundle.css';
 import OnboardingRedirectBtn from '../components/onboarding/OnboardingRedirectBtn';
 import OnboardingItem from '../components/onboarding/OnboardingItem';
 import OnboardingSliderButtons from '../components/onboarding/OnboardingSliderButtons';
-import mock from '../data.json';
+import mock from '../data/data.json';
 
 export interface OnboardingProps {
   tickShow?: boolean;

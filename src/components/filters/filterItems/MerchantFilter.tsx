@@ -18,7 +18,7 @@ import {
   selectAllFilter,
 } from '../../../store/filterPage/filterSlice';
 import '../../Paymans/otherPaymans/style.css';
-import jsonData from '../../../transaction.json';
+import jsonData from '../../../data/transaction.json';
 import '../style.css';
 
 export const MerchantFilter: React.FC = () => {

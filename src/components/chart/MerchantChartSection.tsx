@@ -3,7 +3,7 @@ import RechartPieChart from './RechartPieChart';
 import './style.css';
 import { useAppSelector } from '../hooks/reduxHooks';
 // import { selectSelectedMerchant } from '../../store/chart/chartSlice';
-import transactionData from '../../transaction.json';
+import transactionData from '../../data/transaction.json';
 // import jalaliMoment from 'jalali-moment';
 // import { format, parse } from 'date-fns';
 import { selectMonthlyBill } from '../../store/monthlyBill/monthlyBillSlice';
