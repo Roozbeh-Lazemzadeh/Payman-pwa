@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ReactComponent as TickSquareIcon } from '../../../icons/tickSquare.svg';
 import { ReactComponent as CalendarIcon } from '../../../icons/calendar.svg';
 import { ReactComponent as RemoveIcon } from '../../../icons/delete.svg';
@@ -40,13 +39,6 @@ export const PaymanDateFilter: React.FC = () => {
     startingDateValues: [],
     endingDateValues: [],
   });
-  // const memoizedStartingDate = useMemo(() => allFilter.date, [allFilter.date]);
-  // const memoizedEndingDate = useMemo(
-  //   () => allFilter.endingDate,
-  //   [allFilter.endingDate]
-  // );
-  console.log(allFilter);
-  console.log('startingDates', startingDates);
 
   const handleDateChange = (dates: DateObject | DateObject[] | null) => {
     if (dates) {
@@ -89,6 +81,40 @@ export const PaymanDateFilter: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    // starting date
+    const startingParsedDates: Date[] = allFilter.date.map((date) =>
+      parse(date, 'yy-MMM-dd hh:mm:ss a', new Date())
+    );
+    const startingFormattedDates: string[] = startingParsedDates.map((date) =>
+      new DateObject(date)
+        .convert(gregorian, gregorian_en)
+        .format('YY-MMM-DD hh:mm:ss a')
+    );
+    setStartingDates(startingFormattedDates);
+    setDateValues((prevValues) => ({
+      ...prevValues,
+      startingDateValues: startingParsedDates,
+    }));
+  }, [allFilter.date]);
+
+  useEffect(() => {
+    // ending date
+    const endingParsedDates: Date[] = allFilter.endingDate.map((date) =>
+      parse(date, 'yy-MMM-dd hh:mm:ss a', new Date())
+    );
+    const endingFormattedDates: string[] = endingParsedDates.map((date) =>
+      new DateObject(date)
+        .convert(gregorian, gregorian_en)
+        .format('YY-MMM-DD hh:mm:ss a')
+    );
+    setEndingDates(endingFormattedDates);
+    setDateValues((prevValues) => ({
+      ...prevValues,
+      endingDateValues: endingParsedDates,
+    }));
+  }, [allFilter.endingDate]);
+
   const handleDateFilter = () => {
     // if (startingDates.length === 0 && endingDates.length === 0) return null;
     dispatch(dateHandler(startingDates));
@@ -98,43 +124,6 @@ export const PaymanDateFilter: React.FC = () => {
     dispatch(searchedToggle(''));
     dispatch(filteredToggle());
   };
-
-  useEffect(() => {
-    console.log('allFilter.date:', allFilter.date);
-    console.log('allFilter.endingDate:', allFilter.endingDate);
-    // starting date
-    const startingParsedDates: Date[] = allFilter?.date.map((date) =>
-      parse(date, 'yy-MMM-dd hh:mm:ss a', new Date())
-    );
-    console.log(startingParsedDates);
-    const startingFormattedDates: string[] = startingParsedDates.map((date) =>
-      new DateObject(date)
-        .convert(gregorian, gregorian_en)
-        .format('YY-MMM-DD hh:mm:ss a')
-    );
-    console.log(startingFormattedDates);
-
-    setStartingDates(startingFormattedDates);
-    setDateValues({
-      startingDateValues: startingParsedDates,
-      endingDateValues: dateValues.endingDateValues,
-    });
-
-    // ending date
-    const endingParsedDates: Date[] = allFilter?.endingDate.map((date) =>
-      parse(date, 'yy-MMM-dd hh:mm:ss a', new Date())
-    );
-    const endingFormattedDates: string[] = endingParsedDates.map((date) =>
-      new DateObject(date)
-        .convert(gregorian, gregorian_en)
-        .format('YY-MMM-DD hh:mm:ss a')
-    );
-    setEndingDates(endingFormattedDates);
-    setDateValues({
-      startingDateValues: dateValues.startingDateValues,
-      endingDateValues: endingParsedDates,
-    });
-  }, []);
 
   const handleRemoveFilter = () => {
     if (startingDates.length === 0) return null;
@@ -159,7 +148,7 @@ export const PaymanDateFilter: React.FC = () => {
         break;
     }
   };
-  console.log(selectedDateTab);
+
   return (
     <>
       <div className='implement-remove-wrapper'>
