@@ -56,7 +56,10 @@ const FilterMenu: React.FC = () => {
       key: '103',
       label: 'تاریخ',
       icon: <CalendarIcon />,
-      badge: allFilter.date.length === 2 ? 1 : 0,
+      badge:
+        allFilter.date.length === 2 || allFilter.endingDate.length === 2
+          ? 1
+          : 0,
       dispatch,
       navigate,
     }),

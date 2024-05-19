@@ -66,12 +66,13 @@ export const filterSlice = createSlice({
       // Update isFiltered and totalFilterNumber based on the filter state
       const hasFilters =
         state.allFilter.merchants.length > 0 ||
+        state.allFilter.endingDate.length > 0 ||
         newDates.length > 0 ||
         state.allFilter.price.length > 0;
       state.isFiltered = hasFilters;
       state.totalFilterNumber =
         state.allFilter.merchants.length +
-        (newDates.length > 0 ? 1 : 0) +
+        (newDates.length > 0 || state.allFilter.endingDate.length > 0 ? 1 : 0) +
         (state.allFilter.price.length > 0 ? 1 : 0);
 
       // Assign the new array of dates to the state
@@ -80,7 +81,17 @@ export const filterSlice = createSlice({
 
     endingDateHandler: (state, action: PayloadAction<string[]>) => {
       const newDates = action.payload;
-      console.log(newDates);
+      // Update isFiltered and totalFilterNumber based on the filter state
+      const hasFilters =
+        state.allFilter.merchants.length > 0 ||
+        state.allFilter.date.length > 0 ||
+        newDates.length > 0 ||
+        state.allFilter.price.length > 0;
+      state.isFiltered = hasFilters;
+      state.totalFilterNumber =
+        state.allFilter.merchants.length +
+        (newDates.length > 0 || state.allFilter.date.length > 0 ? 1 : 0) +
+        (state.allFilter.price.length > 0 ? 1 : 0);
 
       // Assign the new array of dates to the state
       state.allFilter.endingDate = newDates;
