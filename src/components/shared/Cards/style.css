@@ -284,6 +284,11 @@
 .merchant-name-logo {
   display: flex;
   align-items: center;
+  height: 32px;
+}
+.merchant-name-logo img {
+  height: 32px;
+  width: 32px;
 }
 
 .merchant-dateils-wrapper {
@@ -360,6 +365,10 @@
   writing-mode: vertical-rl;
   color: #fff;
   display: block;
+}
+.bank-logo img {
+  width: 73px;
+  height: 73px;
 }
 
 @media (min-width: 400px) {

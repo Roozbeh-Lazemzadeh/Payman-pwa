@@ -13,16 +13,18 @@ import { showNotifyToast } from '../../shared/Toast/CustomToast';
 import { ReactComponent as RemoveIcon } from '../../../icons/delete.svg';
 import { ReactComponent as InfoIcon } from '../../../icons/yellowInfo.svg';
 import {
-  handleListFiltering,
+  transactionsFiltering,
   merchantHandler,
   selectAllFilter,
 } from '../../../store/filterPage/filterSlice';
 import '../../Paymans/otherPaymans/style.css';
 import jsonData from '../../../data/transaction.json';
 import '../style.css';
+import { useLocation } from 'react-router-dom';
 
 export const MerchantFilter: React.FC = () => {
   const dispatch = useAppDispatch();
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const allFilter = useAppSelector(selectAllFilter);
   const filteredFooter = useAppSelector(selectFilter);
@@ -71,7 +73,9 @@ export const MerchantFilter: React.FC = () => {
     dispatch(merchantHandler(combinedSelectedItems));
     dispatch(searchedToggle(''));
     dispatch(filteredToggle());
-    dispatch(handleListFiltering({ merchants: combinedSelectedItems }));
+    location.pathname === '/paymans/me'
+      ? dispatch(transactionsFiltering({ merchants: combinedSelectedItems }))
+      : dispatch(transactionsFiltering({ merchants: combinedSelectedItems }));
   };
 
   const handleRemoveFilter = () => {
@@ -82,7 +86,7 @@ export const MerchantFilter: React.FC = () => {
     dispatch(merchantHandler([]));
     dispatch(searchedToggle(''));
     dispatch(filteredToggle());
-    dispatch(handleListFiltering({ merchants: [] }));
+    dispatch(transactionsFiltering({ merchants: [] }));
   };
 
   const handleSelectedOptions = (newSelectedOptions: string[]) => {

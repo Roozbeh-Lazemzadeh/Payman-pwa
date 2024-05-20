@@ -14,7 +14,7 @@ import {
   dateHandler,
   dateQuickAccessHandler,
   endingDateHandler,
-  handleListFiltering,
+  transactionsFiltering,
   selectAllFilter,
 } from '../../../store/filterPage/filterSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
@@ -119,9 +119,10 @@ export const PaymanDateFilter: React.FC = () => {
     if (startingDates.length === 0 && endingDates.length === 0) return null;
     dispatch(dateHandler(startingDates));
     dispatch(endingDateHandler(endingDates));
-    // dispatch(handleListFiltering({ startingDates }));
     dispatch(searchedToggle(''));
     dispatch(filteredToggle());
+
+    // dispatch(handleListFiltering({ startingDates }))
   };
 
   const handleRemoveFilter = () => {
@@ -131,7 +132,7 @@ export const PaymanDateFilter: React.FC = () => {
     dispatch(searchedToggle(''));
     dispatch(filteredToggle());
     dispatch(dateQuickAccessHandler(''));
-    dispatch(handleListFiltering({ dates: [] }));
+    dispatch(transactionsFiltering({ dates: [] }));
   };
 
   const handleSelectedTab = (value: string) => {

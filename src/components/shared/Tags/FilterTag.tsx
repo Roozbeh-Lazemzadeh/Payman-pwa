@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import {
   dateHandler,
   dateQuickAccessHandler,
-  handleListFiltering,
+  transactionsFiltering,
   merchantHandler,
   priceHandler,
   selectAllFilter,
@@ -33,16 +33,16 @@ const FilterTag: React.FC = () => {
     switch (label) {
       case 'merchant':
         dispatch(merchantHandler([]));
-        dispatch(handleListFiltering({ merchants: [] }));
+        dispatch(transactionsFiltering({ merchants: [] }));
         break;
       case 'date':
         dispatch(dateHandler([]));
-        dispatch(handleListFiltering({ dates: [] }));
+        dispatch(transactionsFiltering({ dates: [] }));
         dispatch(dateQuickAccessHandler(''));
         break;
       case 'price':
         dispatch(priceHandler([]));
-        dispatch(handleListFiltering({ prices: [] }));
+        dispatch(transactionsFiltering({ prices: [] }));
         break;
 
       default:

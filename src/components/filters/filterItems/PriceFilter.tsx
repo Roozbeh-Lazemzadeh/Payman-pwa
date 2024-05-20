@@ -10,7 +10,7 @@ import { ReactComponent as TickSquareIcon } from '../../../icons/tickSquare.svg'
 import { ReactComponent as BuyIcon } from '../../../icons/buy2.svg';
 import { ReactComponent as RemoveIcon } from '../../../icons/delete.svg';
 import {
-  handleListFiltering,
+  transactionsFiltering,
   priceHandler,
   selectAllFilter,
 } from '../../../store/filterPage/filterSlice';
@@ -19,9 +19,11 @@ import { formatNumberWithCommas } from '../../helpers/seperatorInNumbers';
 // style
 import '../../Paymans/otherPaymans/style.css';
 import '../style.css';
+import { useLocation } from 'react-router-dom';
 
 export const PriceFilter: React.FC = () => {
   const dispatch = useAppDispatch();
+  const location = useLocation();
   const allFilter = useAppSelector(selectAllFilter);
   const searchItem = useAppSelector(selectSearchItem);
   const [selectedQuickItems, setSelectedQuickItems] = useState<number[]>([]);
@@ -35,7 +37,7 @@ export const PriceFilter: React.FC = () => {
     dispatch(priceHandler([]));
     dispatch(searchedToggle(''));
     dispatch(filteredToggle());
-    dispatch(handleListFiltering({ prices: [] }));
+    dispatch(transactionsFiltering({ prices: [] }));
   };
 
   const selectedQuickAccess = (value: number) => {
@@ -68,13 +70,19 @@ export const PriceFilter: React.FC = () => {
     if (prices.length === 0) return null;
     if (!prices[0] && prices[1]) {
       dispatch(priceHandler([0, prices[1]]));
-      dispatch(handleListFiltering({ prices: [0, prices[1]] }));
+      location.pathname === '/paymans/me'
+        ? dispatch(transactionsFiltering({ prices: [0, prices[1]] }))
+        : dispatch(transactionsFiltering({ prices: [0, prices[1]] }));
     } else if (prices[0] && !prices[1]) {
       dispatch(priceHandler([prices[0], 100000000]));
-      dispatch(handleListFiltering({ prices: [prices[0], 100000000] }));
+      location.pathname === '/paymans/me'
+        ? dispatch(transactionsFiltering({ prices: [prices[0], 100000000] }))
+        : dispatch(transactionsFiltering({ prices: [prices[0], 100000000] }));
     } else {
       dispatch(priceHandler(prices));
-      dispatch(handleListFiltering({ prices }));
+      location.pathname === '/paymans/me'
+        ? dispatch(transactionsFiltering({ prices }))
+        : dispatch(transactionsFiltering({ prices }));
     }
     dispatch(searchedToggle(''));
     dispatch(filteredToggle());

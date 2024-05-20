@@ -1,8 +1,10 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import { isAfter, parse } from 'date-fns';
+import { type Payman } from '../../components/Paymans/myPaymans/MyPaymans';
 import { type RootState } from '../store';
 import { type Transaction } from '../../components/transactions/TransactionsList';
 import transactions from '../../data/transaction.json';
-import { isAfter, parse } from 'date-fns';
+import paymans from '../../data/payman.json';
 
 // Interface for the filter state
 interface FilterState {
@@ -16,6 +18,7 @@ interface FilterState {
   totalFilterNumber: number;
   datePeriod: string;
   transactionList: Transaction[];
+  paymanList: Payman[];
   sortKey: string;
 }
 
@@ -31,6 +34,7 @@ const initialState: FilterState = {
   totalFilterNumber: 0,
   datePeriod: '',
   transactionList: transactions,
+  paymanList: paymans,
   sortKey: '0',
 };
 
@@ -132,8 +136,8 @@ export const filterSlice = createSlice({
       state.datePeriod = '';
       state.transactionList = transactions;
     },
-
-    handleListFiltering: (
+    // Handler for transactions filtering
+    transactionsFiltering: (
       state,
       action: PayloadAction<{
         merchants?: string[];
@@ -191,7 +195,66 @@ export const filterSlice = createSlice({
       }
       state.transactionList = filteredList;
     },
+    // Handler for paymans filtering
+    paymansFiltering: (
+      state,
+      action: PayloadAction<{
+        merchants?: string[];
+        prices?: number[];
+        dates?: string[];
+        endingDate?: string[];
+      }>
+    ) => {
+      const { merchants, prices, dates, endingDate } = action.payload;
+      const { allFilter } = state;
+      let filteredList = paymans;
+      const merchantsToFilter = merchants ?? allFilter.merchants;
+      const pricesToFilter = prices ?? allFilter.price;
+      const datesToFilter = dates ?? allFilter.date;
+      const endingDatesToFilter = endingDate ?? allFilter.endingDate;
+      console.log(endingDatesToFilter);
 
+      // filtering based on merchants
+      if (merchantsToFilter.length > 0) {
+        filteredList = filteredList.filter((transaction) =>
+          merchantsToFilter.includes(transaction.creditor)
+        );
+      }
+
+      // filtering based on prices
+      if (pricesToFilter.length > 0 && pricesToFilter.length === 2) {
+        const [minPrice, maxPrice] = pricesToFilter;
+
+        filteredList = filteredList.filter((transaction) => {
+          const transactionAmount = transaction.daily_amount;
+          return transactionAmount >= minPrice && transactionAmount <= maxPrice;
+        });
+
+        filteredList.sort((a, b) => b.daily_amount - a.daily_amount);
+      }
+
+      // filtering based on dates
+      if (datesToFilter.length > 0 && datesToFilter.length === 2) {
+        const parsedDates: Date[] = datesToFilter.map((date) =>
+          parse(date, 'yy-MMM-dd hh:mm:ss a', new Date())
+        );
+
+        // Filter transactions between the specified dates
+        filteredList = filteredList.filter((transaction) => {
+          const transactionDate = parse(
+            transaction.start_date,
+            'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
+            new Date()
+          );
+
+          return (
+            transactionDate >= parsedDates[0] &&
+            transactionDate <= parsedDates[1]
+          );
+        });
+      }
+      state.paymanList = filteredList;
+    },
     handleSortKey: (state, action: PayloadAction<string>) => {
       state.sortKey = action.payload;
     },
@@ -236,6 +299,34 @@ export const selectTransactionList = (state: RootState) => {
 
   return state.filter.transactionList;
 };
+export const selectPaymanList = (state: RootState) => {
+  // if (state.filter.sortKey === '0') {
+  //   const sortedList = [...state.filter.transactionList];
+  //   sortedList.sort((a, b) => {
+  //     const dateA = parse(
+  //       a.transaction_date,
+  //       'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
+  //       new Date()
+  //     );
+  //     const dateB = parse(
+  //       b.transaction_date,
+  //       'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
+  //       new Date()
+  //     );
+
+  //     // Compare dates using isAfter from date-fns
+  //     return isAfter(dateB, dateA) ? 1 : -1;
+  //   });
+
+  //   return sortedList;
+  // } else if (state.filter.sortKey === '1') {
+  //   const sortedList = [...state.filter.transactionList];
+  //   sortedList.sort((a, b) => b.transaction_amount - a.transaction_amount);
+  //   return sortedList;
+  // }
+
+  return state.filter.paymanList;
+};
 
 export const {
   merchantHandler,
@@ -243,7 +334,7 @@ export const {
   removeAllFiltersHandler,
   priceHandler,
   dateQuickAccessHandler,
-  handleListFiltering,
+  transactionsFiltering,
   handleSortKey,
   endingDateHandler,
 } = filterSlice.actions;
