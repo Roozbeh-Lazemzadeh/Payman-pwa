@@ -3,7 +3,7 @@ import { ReactComponent as DangerIcon } from '../../../icons/dangerTraingle.svg'
 import { type Payman } from '../../Paymans/myPaymans/MyPaymans';
 import { getFormattedRemainingDays } from '../../helpers/expirationDate';
 
-import './style.css';
+import './style/style.css';
 
 export const ExpiredPaymansCard: React.FC<{ payman: Payman }> = ({
   payman,
@@ -16,12 +16,21 @@ export const ExpiredPaymansCard: React.FC<{ payman: Payman }> = ({
       onClick={() => setIsOpen(!isOpen)}
     >
       <div className='merchant-logo-wrapper'>
-        <div className='merchant-name-logo'>
-          <img src={payman.merchant_img} />
+        <div className='merchant-name-logo expired'>
+          <div className='card-icon-wrapper payman'>
+            <div className='card-icon-style payman'>
+              <img className='card-icon' src={payman.merchant_img} />
+              <span
+                className='card-icon-filter'
+                style={{
+                  backgroundImage: `url(${payman.merchant_img})`,
+                }}
+              ></span>
+            </div>
+          </div>
           <span className='merchant-name expired'>{payman.creditor}</span>
         </div>
-        <div className='bank-logo'>
-          {/* <img src='/assets/pics/pasargadBank.png' /> */}
+        <div className='bank-logo expired'>
           <img src={payman.bank_img} />
         </div>
       </div>

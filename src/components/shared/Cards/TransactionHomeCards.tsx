@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { ReactComponent as ArrowLeft2Icon } from '../../../icons/arrowLeft2.svg';
-import './style.css';
+
+import './style/style.css';
 
 interface TransactionHomeCardProps {
   merchant: string;
@@ -51,15 +52,15 @@ export const TransactionHomeCard: React.FC<TransactionHomeCardProps> = ({
             <span className='card-price'>{price}</span>
             <span className='card-price'> تومانءءء</span>
           </div>
-        <div>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <span className='transaction-title'>تاریخ تراکنش:‌</span>
-            <span className='card-date'>{transDate}</span>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <span className='transaction-title'>تاریخ تراکنش:‌</span>
+              <span className='card-date'>{transDate}</span>
+            </div>
           </div>
         </div>
       </div>
-      </div>
-        <ArrowLeft2Icon />
+      <ArrowLeft2Icon />
     </div>
   );
 };

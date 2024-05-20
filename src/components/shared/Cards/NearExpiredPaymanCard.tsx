@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
-import { ReactComponent as TapsiIcon } from './icon.svg';
-import { ReactComponent as SamanBankIcon } from '../../../icons/samanBank.svg';
 import { type Payman } from '../../Paymans/myPaymans/MyPaymans';
-// import { DetailedDrawer } from '../Drawer/DetailedDrawer';
-// import { Button } from 'antd';
-import './style.css';
 import { getFormattedRemainingDays } from '../../helpers/expirationDate';
+
+import './style/style.css';
 
 export const NearExpiredPaymanCard: React.FC<{ payman: Payman }> = ({
   payman,
@@ -19,7 +16,18 @@ export const NearExpiredPaymanCard: React.FC<{ payman: Payman }> = ({
     >
       <div className='merchant-row'>
         <div className='merchant-name-logo'>
-          <TapsiIcon />
+          <div className='card-icon-wrapper payman'>
+            <div className='card-icon-style payman'>
+              <img className='card-icon' src={payman.merchant_img} />
+              <span
+                className='card-icon-filter'
+                style={{
+                  backgroundImage: `url(${payman.merchant_img})`,
+                }}
+              ></span>
+            </div>
+          </div>
+
           <span className='merchant-name'>{payman.creditor}</span>
         </div>
         <div className='remain-dates-wrapper'>
@@ -31,7 +39,7 @@ export const NearExpiredPaymanCard: React.FC<{ payman: Payman }> = ({
       </div>
       <div className='bank-row-wrapper'>
         <div className='bank-logo'>
-          <SamanBankIcon />
+          <img src={payman.bank_img} />
         </div>
         <div className='ceiling-qnt-wrapper'>
           <div className='price-ceiling'>

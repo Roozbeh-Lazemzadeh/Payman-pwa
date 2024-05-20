@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { ReactComponent as SnapIcon } from '../../../icons/snapIcon.svg';
 import { type Payman } from '../../Paymans/myPaymans/MyPaymans';
-
-import './style.css';
 import { getFormattedRemainingDays } from '../../helpers/expirationDate';
+
+import './style/style.css';
 
 export const OtherPaymansCard: React.FC<{ payman: Payman }> = ({ payman }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -15,7 +14,18 @@ export const OtherPaymansCard: React.FC<{ payman: Payman }> = ({ payman }) => {
     >
       <div className='merchant-row'>
         <div className='merchant-name-logo'>
-          <SnapIcon />
+          <div className='card-icon-wrapper payman'>
+            <div className='card-icon-style payman'>
+              <img className='card-icon' src={payman.merchant_img} />
+              <span
+                className='card-icon-filter'
+                style={{
+                  backgroundImage: `url(${payman.merchant_img})`,
+                }}
+              ></span>
+            </div>
+          </div>
+
           <span className='merchant-name'>{payman.creditor}</span>
         </div>
         <div className='remain-dates-wrapper'>
@@ -27,8 +37,7 @@ export const OtherPaymansCard: React.FC<{ payman: Payman }> = ({ payman }) => {
       </div>
       <div className='bank-row-wrapper'>
         <div className='bank-logo'>
-          {/* <PasargadBankIcon /> */}
-          <img src='/assets/pics/pasargadBank.png' />
+          <img src={payman.bank_img} />
         </div>
         <div className='ceiling-qnt-wrapper'>
           <div className='price-ceiling'>

@@ -243,7 +243,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 1.5rem;
+  gap: 2.5rem;
 }
 .bank-row-wrapper.expired {
   width: 19rem;
@@ -285,10 +285,14 @@
   display: flex;
   align-items: center;
   height: 32px;
+  width: 90px;
 }
 .merchant-name-logo img {
   height: 32px;
   width: 32px;
+}
+.merchant-name-logo img {
+  opacity: 0.3;
 }
 
 .merchant-dateils-wrapper {
@@ -297,6 +301,15 @@
   color: rgba(255, 255, 255, 0.5);
   display: flex;
   gap: 1.5rem;
+}
+
+.bank-logo img {
+  width: 73px;
+  height: 73px;
+  opacity: 0.1;
+}
+.bank-logo.expired img {
+  opacity: 0.3;
 }
 
 .merchant-dateil-right {
@@ -331,10 +344,20 @@
   border-radius: 10px;
   z-index: 2;
 }
+.card-icon-wrapper.payman {
+  width: 32px;
+  height: 32px;
+  margin-inline-end: unset;
+}
 
 .card-icon-style {
   width: 36px;
   height: auto;
+}
+
+.card-icon-style.payman {
+  width: 32px;
+  height: 32px;
 }
 
 .card-icon-default {
@@ -365,10 +388,6 @@
   writing-mode: vertical-rl;
   color: #fff;
   display: block;
-}
-.bank-logo img {
-  width: 73px;
-  height: 73px;
 }
 
 @media (min-width: 400px) {

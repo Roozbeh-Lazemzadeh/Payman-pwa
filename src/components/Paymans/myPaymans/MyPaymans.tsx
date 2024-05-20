@@ -49,6 +49,8 @@ export const MyPaymans: React.FC = () => {
             .map((payman) => (
               <OtherPaymansCard key={payman.id} payman={payman} />
             ))}
+          <Divider />
+          <span className='other-payman-title'>پیمان‌های منقضی شده</span>
           {paymanList
             .filter((payman) => isExpired(payman.end_date))
             .map((payman) => (
