@@ -135,6 +135,7 @@ export const filterSlice = createSlice({
       state.totalFilterNumber = 0;
       state.datePeriod = '';
       state.transactionList = transactions;
+      state.paymanList = paymans;
     },
     // Handler for transactions filtering
     transactionsFiltering: (
@@ -212,12 +213,11 @@ export const filterSlice = createSlice({
       const pricesToFilter = prices ?? allFilter.price;
       const datesToFilter = dates ?? allFilter.date;
       const endingDatesToFilter = endingDate ?? allFilter.endingDate;
-      console.log(endingDatesToFilter);
 
       // filtering based on merchants
       if (merchantsToFilter.length > 0) {
-        filteredList = filteredList.filter((transaction) =>
-          merchantsToFilter.includes(transaction.creditor)
+        filteredList = filteredList.filter((payman) =>
+          merchantsToFilter.includes(payman.creditor)
         );
       }
 
@@ -234,22 +234,24 @@ export const filterSlice = createSlice({
       }
 
       // filtering based on dates
-      if (datesToFilter.length > 0 && datesToFilter.length === 2) {
-        const parsedDates: Date[] = datesToFilter.map((date) =>
-          parse(date, 'yy-MMM-dd hh:mm:ss a', new Date())
+      if (datesToFilter.length > 0 || endingDatesToFilter.length > 0) {
+        const parsedDates: Date[] = datesToFilter.map(
+          (date) => new Date(date.split(' ')[0])
+        );
+
+        const parseEndingDates: Date[] = endingDatesToFilter.map(
+          (date) => new Date(date.split(' ')[0])
         );
 
         // Filter transactions between the specified dates
-        filteredList = filteredList.filter((transaction) => {
-          const transactionDate = parse(
-            transaction.start_date,
-            'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
-            new Date()
-          );
+        filteredList = filteredList.filter((payman) => {
+          const paymanDate = new Date(payman.start_date.split(' ')[0]);
+          const paymanEndingDate = new Date(payman.end_date.split(' ')[0]);
 
           return (
-            transactionDate >= parsedDates[0] &&
-            transactionDate <= parsedDates[1]
+            (paymanDate >= parsedDates[0] && paymanDate <= parsedDates[1]) ||
+            (paymanEndingDate >= parseEndingDates[0] &&
+              paymanEndingDate <= parseEndingDates[1])
           );
         });
       }
@@ -337,6 +339,7 @@ export const {
   transactionsFiltering,
   handleSortKey,
   endingDateHandler,
+  paymansFiltering,
 } = filterSlice.actions;
 
 export default filterSlice.reducer;

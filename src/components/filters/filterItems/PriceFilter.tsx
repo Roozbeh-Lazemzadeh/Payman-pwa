@@ -13,6 +13,7 @@ import {
   transactionsFiltering,
   priceHandler,
   selectAllFilter,
+  paymansFiltering,
 } from '../../../store/filterPage/filterSlice';
 // helper
 import { formatNumberWithCommas } from '../../helpers/seperatorInNumbers';
@@ -37,7 +38,9 @@ export const PriceFilter: React.FC = () => {
     dispatch(priceHandler([]));
     dispatch(searchedToggle(''));
     dispatch(filteredToggle());
-    dispatch(transactionsFiltering({ prices: [] }));
+    location.pathname === '/paymans/me'
+      ? dispatch(paymansFiltering({ prices: [] }))
+      : dispatch(transactionsFiltering({ prices: [] }));
   };
 
   const selectedQuickAccess = (value: number) => {
@@ -71,17 +74,17 @@ export const PriceFilter: React.FC = () => {
     if (!prices[0] && prices[1]) {
       dispatch(priceHandler([0, prices[1]]));
       location.pathname === '/paymans/me'
-        ? dispatch(transactionsFiltering({ prices: [0, prices[1]] }))
+        ? dispatch(paymansFiltering({ prices: [0, prices[1]] }))
         : dispatch(transactionsFiltering({ prices: [0, prices[1]] }));
     } else if (prices[0] && !prices[1]) {
       dispatch(priceHandler([prices[0], 100000000]));
       location.pathname === '/paymans/me'
-        ? dispatch(transactionsFiltering({ prices: [prices[0], 100000000] }))
+        ? dispatch(paymansFiltering({ prices: [prices[0], 100000000] }))
         : dispatch(transactionsFiltering({ prices: [prices[0], 100000000] }));
     } else {
       dispatch(priceHandler(prices));
       location.pathname === '/paymans/me'
-        ? dispatch(transactionsFiltering({ prices }))
+        ? dispatch(paymansFiltering({ prices }))
         : dispatch(transactionsFiltering({ prices }));
     }
     dispatch(searchedToggle(''));

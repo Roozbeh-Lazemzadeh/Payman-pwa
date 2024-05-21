@@ -16,6 +16,7 @@ import {
   transactionsFiltering,
   merchantHandler,
   selectAllFilter,
+  paymansFiltering,
 } from '../../../store/filterPage/filterSlice';
 import '../../Paymans/otherPaymans/style.css';
 import jsonData from '../../../data/transaction.json';
@@ -74,7 +75,7 @@ export const MerchantFilter: React.FC = () => {
     dispatch(searchedToggle(''));
     dispatch(filteredToggle());
     location.pathname === '/paymans/me'
-      ? dispatch(transactionsFiltering({ merchants: combinedSelectedItems }))
+      ? dispatch(paymansFiltering({ merchants: combinedSelectedItems }))
       : dispatch(transactionsFiltering({ merchants: combinedSelectedItems }));
   };
 
@@ -86,7 +87,9 @@ export const MerchantFilter: React.FC = () => {
     dispatch(merchantHandler([]));
     dispatch(searchedToggle(''));
     dispatch(filteredToggle());
-    dispatch(transactionsFiltering({ merchants: [] }));
+    location.pathname === '/paymans/me'
+      ? dispatch(paymansFiltering({ merchants: [] }))
+      : dispatch(transactionsFiltering({ merchants: [] }));
   };
 
   const handleSelectedOptions = (newSelectedOptions: string[]) => {

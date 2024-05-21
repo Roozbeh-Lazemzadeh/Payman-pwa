@@ -5,7 +5,7 @@ const today = new Date();
 export const isNearExpired = (endDate: string): boolean => {
   const parsedExpirationDate = parse(
     endDate,
-    'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
+    'dd-MMM-yy hh.mm.ss.SSSSSSSSS a',
     new Date()
   );
   const diffDays = Math.ceil(
@@ -17,7 +17,7 @@ export const isNearExpired = (endDate: string): boolean => {
 export const isExpired = (endDate: string): boolean => {
   const parsedExpirationDate = parse(
     endDate,
-    'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
+    'dd-MMM-yy hh.mm.ss.SSSSSSSSS a',
     new Date()
   );
   return parsedExpirationDate < today;
@@ -26,7 +26,7 @@ export const isExpired = (endDate: string): boolean => {
 export const getFormattedRemainingDays = (endDate: string): string => {
   const parsedExpirationDate = parse(
     endDate,
-    'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
+    'dd-MMM-yy hh.mm.ss.SSSSSSSSS a',
     new Date()
   );
   const diffDays = Math.ceil(

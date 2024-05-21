@@ -7,6 +7,7 @@ import { ExpiredPaymansCard } from '../../shared/Cards/ExpiredPaymansCard';
 import { useAppSelector } from '../../hooks/reduxHooks';
 import { selectPaymanList } from '../../../store/filterPage/filterSlice';
 import { isExpired, isNearExpired } from '../../helpers/expirationDate';
+import { getPaymanTitle } from '../../helpers/getPaymanTitle';
 
 import './style.css';
 export interface Payman {
@@ -26,36 +27,56 @@ export interface Payman {
 
 export const MyPaymans: React.FC = () => {
   const paymanList = useAppSelector(selectPaymanList);
+  const nearExpiredPaymans = paymanList.filter((payman) =>
+    isNearExpired(payman.end_date)
+  );
+  const otherPaymans = paymanList.filter(
+    (payman) => !isNearExpired(payman.end_date) && !isExpired(payman.end_date)
+  );
+  const expiredPaymans = paymanList.filter((payman) =>
+    isExpired(payman.end_date)
+  );
+  const paymanTitle = getPaymanTitle(
+    nearExpiredPaymans,
+    otherPaymans,
+    expiredPaymans
+  );
 
   return (
     <>
       <div className='payman-filter-title'>
-        <FilterTools title='پیمان‌های رو به اتمام' />
+        <FilterTools title={paymanTitle} />
       </div>
       <div className='scrollable-section-wrapper'>
         <div className='scrollable-section'>
-          {paymanList
-            .filter((payman) => isNearExpired(payman.end_date))
-            .map((payman) => (
-              <NearExpiredPaymanCard key={payman.id} payman={payman} />
-            ))}
-          <Divider />
-          <span className='other-payman-title'>سایر ‌‌پیمان‌ها</span>
-          {paymanList
-            .filter(
-              (payman) =>
-                !isNearExpired(payman.end_date) && !isExpired(payman.end_date)
-            )
-            .map((payman) => (
-              <OtherPaymansCard key={payman.id} payman={payman} />
-            ))}
-          <Divider />
-          <span className='other-payman-title'>پیمان‌های منقضی شده</span>
-          {paymanList
-            .filter((payman) => isExpired(payman.end_date))
-            .map((payman) => (
-              <ExpiredPaymansCard key={payman.id} payman={payman} />
-            ))}
+          {nearExpiredPaymans.map((payman) => (
+            <NearExpiredPaymanCard key={payman.id} payman={payman} />
+          ))}
+          {otherPaymans.length > 0 && nearExpiredPaymans.length > 0 && (
+            <>
+              <Divider />
+              <span className='other-payman-title'>سایر ‌‌پیمان‌ها</span>
+            </>
+          )}
+          {otherPaymans.map((payman) => (
+            <OtherPaymansCard key={payman.id} payman={payman} />
+          ))}
+          {(otherPaymans.length > 0 || nearExpiredPaymans.length > 0) &&
+            expiredPaymans.length > 0 && (
+              <>
+                <Divider />
+                <span className='other-payman-title'>
+                  {`${
+                    expiredPaymans.length === 1
+                      ? 'پیمان‌ منقضی شده'
+                      : 'پیمان‌های منقضی شده'
+                  }`}
+                </span>
+              </>
+            )}
+          {expiredPaymans.map((payman) => (
+            <ExpiredPaymansCard key={payman.id} payman={payman} />
+          ))}
         </div>
       </div>
     </>

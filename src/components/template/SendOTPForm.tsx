@@ -20,7 +20,7 @@ const SendOTPForm: FC<OnboardingProps> = ({ setStep }) => {
   const [otpVal, setOtpVal] = useState<string>();
 
   useEffect(() => {
-    console.log(otp);
+    // console.log(otp);
   }, [otp]);
 
   // const sharedProps = {

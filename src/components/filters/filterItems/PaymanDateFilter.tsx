@@ -16,6 +16,7 @@ import {
   endingDateHandler,
   transactionsFiltering,
   selectAllFilter,
+  paymansFiltering,
 } from '../../../store/filterPage/filterSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import {
@@ -25,9 +26,11 @@ import {
 
 import '../../Paymans/otherPaymans/style.css';
 import '../style.css';
+import { useLocation } from 'react-router-dom';
 
 export const PaymanDateFilter: React.FC = () => {
   const dispatch = useAppDispatch();
+  const location = useLocation();
   const allFilter = useAppSelector(selectAllFilter);
   const [startingDates, setStartingDates] = useState<string[]>([]);
   const [endingDates, setEndingDates] = useState<string[]>([]);
@@ -46,18 +49,18 @@ export const PaymanDateFilter: React.FC = () => {
         ? dates.map((date: DateObject) =>
             new DateObject(date)
               .convert(gregorian, gregorian_en)
-              .format('YY-MMM-DD hh:mm:ss a')
+              .format('DD-MMM-YY hh:mm:ss a')
           )
         : [
             new DateObject(dates)
               .convert(gregorian, gregorian_en)
-              .format('YY-MMM-DD hh:mm:ss a'),
+              .format('DD-MMM-YY hh:mm:ss a'),
           ];
 
       if (formattedDates.length === 1) {
         const currentDate = new DateObject(new Date())
           .convert(gregorian, gregorian_en)
-          .format('YY-MMM-DD hh:mm:ss a');
+          .format('DD-MMM-YY hh:mm:ss a');
         formattedDates.push(currentDate);
       }
 
@@ -84,12 +87,12 @@ export const PaymanDateFilter: React.FC = () => {
   useEffect(() => {
     // starting date
     const startingParsedDates: Date[] = allFilter.date.map((date) =>
-      parse(date, 'yy-MMM-dd hh:mm:ss a', new Date())
+      parse(date, 'dd-MMM-yy hh:mm:ss a', new Date())
     );
     const startingFormattedDates: string[] = startingParsedDates.map((date) =>
       new DateObject(date)
         .convert(gregorian, gregorian_en)
-        .format('YY-MMM-DD hh:mm:ss a')
+        .format('DD-MMM-YY hh:mm:ss a')
     );
     setStartingDates(startingFormattedDates);
     setDateValues((prevValues) => ({
@@ -101,12 +104,12 @@ export const PaymanDateFilter: React.FC = () => {
   useEffect(() => {
     // ending date
     const endingParsedDates: Date[] = allFilter.endingDate.map((date) =>
-      parse(date, 'yy-MMM-dd hh:mm:ss a', new Date())
+      parse(date, 'dd-MMM-yy hh:mm:ss a', new Date())
     );
     const endingFormattedDates: string[] = endingParsedDates.map((date) =>
       new DateObject(date)
         .convert(gregorian, gregorian_en)
-        .format('YY-MMM-DD hh:mm:ss a')
+        .format('DD-MMM-YY hh:mm:ss a')
     );
     setEndingDates(endingFormattedDates);
     setDateValues((prevValues) => ({
@@ -121,8 +124,9 @@ export const PaymanDateFilter: React.FC = () => {
     dispatch(endingDateHandler(endingDates));
     dispatch(searchedToggle(''));
     dispatch(filteredToggle());
-
-    // dispatch(handleListFiltering({ startingDates }))
+    dispatch(
+      paymansFiltering({ dates: startingDates, endingDate: endingDates })
+    );
   };
 
   const handleRemoveFilter = () => {
@@ -132,7 +136,9 @@ export const PaymanDateFilter: React.FC = () => {
     dispatch(searchedToggle(''));
     dispatch(filteredToggle());
     dispatch(dateQuickAccessHandler(''));
-    dispatch(transactionsFiltering({ dates: [] }));
+    location.pathname === '/paymans/me'
+      ? dispatch(paymansFiltering({ dates: [] }))
+      : dispatch(transactionsFiltering({ dates: [] }));
   };
 
   const handleSelectedTab = (value: string) => {

@@ -50,8 +50,6 @@ export const MerchantChartSection: React.FC = () => {
   //   return b.transaction_amount - a.transaction_amount;
   // });
 
-  console.log('filteredData', filteredData);
-
   const creditorTransactionMap = new Map<
     string,
     { amount: number; color: string }
@@ -87,8 +85,6 @@ export const MerchantChartSection: React.FC = () => {
     })),
     { name: 'Others', value: restOfAmounts, color: 'default_color' },
   ];
-
-  console.log('newTransformedData', newTransformedData);
 
   const handleSelectedMerchant = (
     e: React.MouseEvent<HTMLSpanElement, MouseEvent>
