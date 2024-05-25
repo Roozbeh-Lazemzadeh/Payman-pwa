@@ -44,12 +44,12 @@ export const TransactionDateFilter: React.FC = () => {
       const formattedDates: string[] = dates.map((date) =>
         new DateObject(date)
           .convert(gregorian, gregorian_en)
-          .format('YY-MMM-DD hh:mm:ss a')
+          .format('DD-MMM-YY hh:mm:ss a')
       );
       if (formattedDates.length === 1) {
         const currentDate = new DateObject(new Date())
           .convert(gregorian, gregorian_en)
-          .format('YY-MMM-DD hh:mm:ss a');
+          .format('DD-MMM-YY hh:mm:ss a');
         formattedDates.push(currentDate);
         setDates(formattedDates);
       } else if (formattedDates.length === 2) {
@@ -67,14 +67,14 @@ export const TransactionDateFilter: React.FC = () => {
 
   useEffect(() => {
     const parsedDates: Date[] = allFilter?.date.map((date) =>
-      parse(date, 'yy-MMM-dd hh:mm:ss a', new Date())
+      parse(date, 'dd-MMM-yy hh:mm:ss a', new Date())
     );
     setValues(parsedDates);
     // dispatching if user implement the same date filter
     const formattedDates: string[] = parsedDates.map((date) =>
       new DateObject(date)
         .convert(gregorian, gregorian_en)
-        .format('YY-MMM-DD hh:mm:ss a')
+        .format('DD-MMM-YY hh:mm:ss a')
     );
     setDates(formattedDates);
   }, [allFilter.date]);
@@ -93,10 +93,10 @@ export const TransactionDateFilter: React.FC = () => {
         formattedDates = [
           new DateObject(yesterday)
             .convert(gregorian, gregorian_en)
-            .format('YY-MMM-DD hh:mm:ss a'),
+            .format('DD-MMM-YY hh:mm:ss a'),
           new DateObject(today)
             .convert(gregorian, gregorian_en)
-            .format('YY-MMM-DD hh:mm:ss a'),
+            .format('DD-MMM-YY hh:mm:ss a'),
         ];
         setDates(formattedDates);
         setValues([yesterday, today]);
@@ -107,10 +107,10 @@ export const TransactionDateFilter: React.FC = () => {
         formattedDates = [
           new DateObject(oneWeekAgo)
             .convert(gregorian, gregorian_en)
-            .format('YY-MMM-DD hh:mm:ss a'),
+            .format('DD-MMM-YY hh:mm:ss a'),
           new DateObject(today)
             .convert(gregorian, gregorian_en)
-            .format('YY-MMM-DD hh:mm:ss a'),
+            .format('DD-MMM-YY hh:mm:ss a'),
         ];
         setDates(formattedDates);
         setValues([oneWeekAgo, today]);
@@ -122,10 +122,10 @@ export const TransactionDateFilter: React.FC = () => {
         formattedDates = [
           new DateObject(oneMonthAgo)
             .convert(gregorian, gregorian_en)
-            .format('YY-MMM-DD hh:mm:ss a'),
+            .format('DD-MMM-YY hh:mm:ss a'),
           new DateObject(today)
             .convert(gregorian, gregorian_en)
-            .format('YY-MMM-DD hh:mm:ss a'),
+            .format('DD-MMM-YY hh:mm:ss a'),
         ];
         setDates(formattedDates);
         setValues([oneMonthAgo, today]);

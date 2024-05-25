@@ -177,14 +177,14 @@ export const filterSlice = createSlice({
       // filtering based on dates
       if (datesToFilter.length > 0 && datesToFilter.length === 2) {
         const parsedDates: Date[] = datesToFilter.map((date) =>
-          parse(date, 'yy-MMM-dd hh:mm:ss a', new Date())
+          parse(date, 'dd-MMM-yy hh:mm:ss a', new Date())
         );
 
         // Filter transactions between the specified dates
         filteredList = filteredList.filter((transaction) => {
           const transactionDate = parse(
             transaction.transaction_date,
-            'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
+            'dd-MMM-yy hh.mm.ss.SSSSSSSSS a',
             new Date()
           );
 
@@ -225,9 +225,9 @@ export const filterSlice = createSlice({
       if (pricesToFilter.length > 0 && pricesToFilter.length === 2) {
         const [minPrice, maxPrice] = pricesToFilter;
 
-        filteredList = filteredList.filter((transaction) => {
-          const transactionAmount = transaction.daily_amount;
-          return transactionAmount >= minPrice && transactionAmount <= maxPrice;
+        filteredList = filteredList.filter((payman) => {
+          const paymanAmount = payman.daily_amount;
+          return paymanAmount >= minPrice && paymanAmount <= maxPrice;
         });
 
         filteredList.sort((a, b) => b.daily_amount - a.daily_amount);
@@ -279,12 +279,12 @@ export const selectTransactionList = (state: RootState) => {
     sortedList.sort((a, b) => {
       const dateA = parse(
         a.transaction_date,
-        'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
+        'dd-MMM-yy hh.mm.ss.SSSSSSSSS a',
         new Date()
       );
       const dateB = parse(
         b.transaction_date,
-        'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
+        'dd-MMM-yy hh.mm.ss.SSSSSSSSS a',
         new Date()
       );
 

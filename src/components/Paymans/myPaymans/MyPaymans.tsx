@@ -10,6 +10,10 @@ import { isExpired, isNearExpired } from '../../helpers/expirationDate';
 import { getPaymanTitle } from '../../helpers/getPaymanTitle';
 
 import './style.css';
+import { DetailedDrawer } from '../../shared/Drawer/DetailedDrawer';
+import { selectBottomSheetIsOpen } from '../../../store/bottomSheet/bottomSheetSlice';
+import { selectSelectedPayman } from '../../../store/payman/paymanSlice';
+import { getPaymanDetails } from '../../helpers/getBottomSheetData';
 export interface Payman {
   id: number;
   creditor: string;
@@ -26,7 +30,10 @@ export interface Payman {
 }
 
 export const MyPaymans: React.FC = () => {
+  const isOpen = useAppSelector(selectBottomSheetIsOpen);
+  const selectedPayman = useAppSelector(selectSelectedPayman);
   const paymanList = useAppSelector(selectPaymanList);
+
   const nearExpiredPaymans = paymanList.filter((payman) =>
     isNearExpired(payman.end_date)
   );
@@ -48,6 +55,11 @@ export const MyPaymans: React.FC = () => {
         <FilterTools title={paymanTitle} />
       </div>
       <div className='scrollable-section-wrapper'>
+        <DetailedDrawer
+          isOpen={isOpen}
+          title={'جزییات پیمان'}
+          data={getPaymanDetails(selectedPayman)}
+        ></DetailedDrawer>
         <div className='scrollable-section'>
           {nearExpiredPaymans.map((payman) => (
             <NearExpiredPaymanCard key={payman.id} payman={payman} />

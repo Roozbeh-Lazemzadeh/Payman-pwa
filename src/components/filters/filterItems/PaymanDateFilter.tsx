@@ -3,10 +3,10 @@ import { ReactComponent as TickSquareIcon } from '../../../icons/tickSquare.svg'
 import { ReactComponent as CalendarIcon } from '../../../icons/calendar.svg';
 import { ReactComponent as RemoveIcon } from '../../../icons/delete.svg';
 import { Segmented } from 'antd';
+import { parse } from 'date-fns';
 import DatePicker, { DateObject } from 'react-multi-date-picker';
 import { weekDays } from '../../types/calendar';
 import gregorian from 'react-date-object/calendars/gregorian';
-import { parse } from 'date-fns';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
 import gregorian_en from 'react-date-object/locales/gregorian_en';
@@ -23,10 +23,10 @@ import {
   filteredToggle,
   searchedToggle,
 } from '../../../store/filterMenu/filterMenuSlice';
+import { useLocation } from 'react-router-dom';
 
 import '../../Paymans/otherPaymans/style.css';
 import '../style.css';
-import { useLocation } from 'react-router-dom';
 
 export const PaymanDateFilter: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -57,11 +57,29 @@ export const PaymanDateFilter: React.FC = () => {
               .format('DD-MMM-YY hh:mm:ss a'),
           ];
 
+      // Check if only one date is selected and if it's in the future
       if (formattedDates.length === 1) {
-        const currentDate = new DateObject(new Date())
-          .convert(gregorian, gregorian_en)
-          .format('DD-MMM-YY hh:mm:ss a');
-        formattedDates.push(currentDate);
+        const parsedDate = parse(
+          formattedDates[0],
+          'dd-MMM-yy hh:mm:ss a',
+          new Date()
+        );
+        const currentDate = new Date(); // current date as Date object
+
+        const isFutureDate = parsedDate > currentDate; // Compare the actual Date objects
+        if (isFutureDate) {
+          formattedDates.unshift(
+            new DateObject(currentDate)
+              .convert(gregorian, gregorian_en)
+              .format('DD-MMM-YY hh:mm:ss a')
+          );
+        } else {
+          formattedDates.push(
+            new DateObject(currentDate)
+              .convert(gregorian, gregorian_en)
+              .format('DD-MMM-YY hh:mm:ss a')
+          );
+        }
       }
 
       if (selectedDateTab === 'start') {

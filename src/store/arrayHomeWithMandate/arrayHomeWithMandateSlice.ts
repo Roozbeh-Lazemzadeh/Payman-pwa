@@ -39,7 +39,7 @@ const arrayHomeWithMandateSlice = createSlice({
         if (typeof transactionDate === 'string') {
           const parsedDate = parse(
             transactionDate,
-            'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
+            'dd-MMM-yy hh.mm.ss.SSSSSSSSS a',
             new Date()
           );
           const date = parsedDate;

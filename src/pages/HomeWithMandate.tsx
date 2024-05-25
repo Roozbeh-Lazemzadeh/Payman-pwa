@@ -137,14 +137,14 @@ function HomeWithMandate() {
                   <div key={group.key} className='TransactionHomeCard-wrapper'>
                     <p className='TransactionHomeCard-p'>
                       {group.value[0].transaction_date.startsWith(
-                        format(new Date(), 'yy-MMM-dd').toUpperCase()
+                        format(new Date(), 'dd-MMM-yy').toUpperCase()
                       )
                         ? getCurrentJalaliDate()
                         : `${jalaliMoment(
                             format(
                               parse(
                                 group.value[0].transaction_date,
-                                'yy-MMM-dd hh.mm.ss.SSSSSSSSSS a',
+                                'dd-MMM-yy hh.mm.ss.SSSSSSSSSS a',
                                 new Date()
                               ),
                               'yyyy-MM-dd HH:mm:ss'

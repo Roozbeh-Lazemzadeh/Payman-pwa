@@ -1,9 +1,13 @@
 import { Segmented } from 'antd';
 import React from 'react';
-import './style.css';
 import { useNavigate, useLocation } from 'react-router-dom';
+// import { useAppDispatch } from '../../hooks/reduxHooks';
+// import { removeAllFiltersHandler } from '../../../store/filterPage/filterSlice';
+
+import './style.css';
 
 export const PaymanSegmented: React.FC = () => {
+  // const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const { pathname } = location;
@@ -28,6 +32,7 @@ export const PaymanSegmented: React.FC = () => {
   const handleSelectedTab = (value: string) => {
     switch (value) {
       case 'سایر ‌هم‌پیمان‌ها':
+        // dispatch(removeAllFiltersHandler());
         navigate('others');
         break;
       case 'پیمان‌های من':

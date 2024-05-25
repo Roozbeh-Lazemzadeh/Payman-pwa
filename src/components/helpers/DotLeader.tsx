@@ -3,7 +3,7 @@ import './style.css';
 
 interface DotLeaderProps {
   firstWord: string;
-  secondWord: string;
+  secondWord: string | number;
 }
 
 export const DotLeader: React.FC<DotLeaderProps> = ({

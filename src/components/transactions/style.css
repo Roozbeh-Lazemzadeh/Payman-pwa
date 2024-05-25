@@ -4,7 +4,7 @@
 
 .trans-list {
   overflow-y: auto;
-  max-height: 72vh;
+  max-height: calc(100vh - 260px);
   padding-bottom: 30px;
   direction: ltr;
 }

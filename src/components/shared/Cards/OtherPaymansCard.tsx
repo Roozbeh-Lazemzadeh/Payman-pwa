@@ -1,16 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { type Payman } from '../../Paymans/myPaymans/MyPaymans';
 import { getFormattedRemainingDays } from '../../helpers/expirationDate';
+import { useAppDispatch } from '../../hooks/reduxHooks';
+import { handleSelectedPayman } from '../../../store/payman/paymanSlice';
+import { openBottomSheet } from '../../../store/bottomSheet/bottomSheetSlice';
 
 import './style/style.css';
 
 export const OtherPaymansCard: React.FC<{ payman: Payman }> = ({ payman }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
+  const handleDrawerPayman = (payman: Payman) => {
+    dispatch(handleSelectedPayman(payman));
+    dispatch(openBottomSheet());
+  };
 
   return (
     <div
       className='near-expiration-card-wrapper other'
-      onClick={() => setIsOpen(!isOpen)}
+      onClick={() => handleDrawerPayman(payman)}
     >
       <div className='merchant-row'>
         <div className='merchant-name-logo'>

@@ -4,7 +4,7 @@ import { format, parse } from 'date-fns';
 export const transDate = (inputDate: string) => {
   const parsedDate = parse(
     inputDate,
-    'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
+    'dd-MMM-yy hh.mm.ss.SSSSSSSSS a',
     new Date()
   );
   const formattedDate = format(parsedDate, 'yyyy-MM-dd HH:mm:ss');
@@ -16,7 +16,7 @@ export const transDate = (inputDate: string) => {
 };
 
 export const filterConvertDate = (inputDate: string) => {
-  const parsedDate = parse(inputDate, 'yy-MMM-dd hh:mm:ss aaa', new Date());
+  const parsedDate = parse(inputDate, 'dd-MMM-yy hh:mm:ss aaa', new Date());
   const formattedDate = format(parsedDate, 'yyyy-MM-dd HH:mm:ss');
   const jalaliDate = jalaliMoment(formattedDate).format('jYYYY/jMM/jDD');
   return ` ${jalaliDate}`;
@@ -25,7 +25,7 @@ export const filterConvertDate = (inputDate: string) => {
 export const jalaliDate = (inputDate: string) => {
   const jalaliDate = jalaliMoment(
     format(
-      parse(inputDate, 'yy-MMM-dd hh.mm.ss.SSSSSSSSS a', new Date()),
+      parse(inputDate, 'dd-MMM-yy hh.mm.ss.SSSSSSSSS a', new Date()),
       'yyyy-MM-dd HH:mm:ss'
     )
   ).format('jYYYY/jM');
@@ -35,9 +35,20 @@ export const jalaliDate = (inputDate: string) => {
 export const jalaliDateConvert = (inputDate: string) => {
   const jalaliDate = jalaliMoment(
     format(
-      parse(inputDate, 'yy-MMM-dd hh.mm.ss.SSSSSSSSS a', new Date()),
+      parse(inputDate, 'dd-MMM-yy hh.mm.ss.SSSSSSSSS a', new Date()),
       'yyyy-MM-dd HH:mm:ss'
     )
   ).format('jYYYY/jMM');
+  return jalaliDate;
+};
+
+export const paymanTransDate = (inputDate: string) => {
+  const parsedDate = parse(
+    inputDate,
+    'dd-MMM-yy hh.mm.ss.SSSSSSSSS a',
+    new Date()
+  );
+  const formattedDate = format(parsedDate, 'yyyy-MM-dd HH:mm:ss');
+  const jalaliDate = jalaliMoment(formattedDate).format('jYY / jMM / jDD');
   return jalaliDate;
 };

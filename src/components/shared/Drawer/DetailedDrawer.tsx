@@ -6,7 +6,7 @@ import { selectBottomSheetIsOpen } from '../../../store/bottomSheet/bottomSheetS
 
 interface DetailedDrawerItem {
   firstWord: string;
-  secondWord: string;
+  secondWord: string | number;
 }
 interface DetailedDrawerProps {
   title: string;
