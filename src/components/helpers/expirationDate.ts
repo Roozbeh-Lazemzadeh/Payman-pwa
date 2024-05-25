@@ -11,7 +11,7 @@ export const isNearExpired = (endDate: string): boolean => {
   const diffDays = Math.ceil(
     (parsedExpirationDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
   );
-  return diffDays >= 0 && diffDays <= 10; // 7 days is the assumption
+  return diffDays >= 0 && diffDays <= 7; // 7 days is the assumption
 };
 
 export const isExpired = (endDate: string): boolean => {

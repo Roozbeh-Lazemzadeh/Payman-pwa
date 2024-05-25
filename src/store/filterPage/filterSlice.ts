@@ -302,32 +302,29 @@ export const selectTransactionList = (state: RootState) => {
   return state.filter.transactionList;
 };
 export const selectPaymanList = (state: RootState) => {
-  // if (state.filter.sortKey === '0') {
-  //   const sortedList = [...state.filter.transactionList];
-  //   sortedList.sort((a, b) => {
-  //     const dateA = parse(
-  //       a.transaction_date,
-  //       'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
-  //       new Date()
-  //     );
-  //     const dateB = parse(
-  //       b.transaction_date,
-  //       'yy-MMM-dd hh.mm.ss.SSSSSSSSS a',
-  //       new Date()
-  //     );
+  const sortedList = [...state.filter.paymanList];
+  sortedList.sort((a, b) => {
+    const currentDate = new Date();
+    const dateA = parse(
+      a.end_date,
+      'dd-MMM-yy hh.mm.ss.SSSSSSSSS a',
+      new Date()
+    );
+    const dateB = parse(
+      b.end_date,
+      'dd-MMM-yy hh.mm.ss.SSSSSSSSS a',
+      new Date()
+    );
 
-  //     // Compare dates using isAfter from date-fns
-  //     return isAfter(dateB, dateA) ? 1 : -1;
-  //   });
-
-  //   return sortedList;
-  // } else if (state.filter.sortKey === '1') {
-  //   const sortedList = [...state.filter.transactionList];
-  //   sortedList.sort((a, b) => b.transaction_amount - a.transaction_amount);
-  //   return sortedList;
-  // }
-
-  return state.filter.paymanList;
+    // If both end_dates are before the current date, sort in descending order
+    if (dateA < currentDate && dateB < currentDate) {
+      return dateB.getTime() - dateA.getTime();
+    } else {
+      // If both end_dates are after or equal to the current date, sort in ascending order
+      return dateA.getTime() - dateB.getTime();
+    }
+  });
+  return sortedList;
 };
 
 export const {
