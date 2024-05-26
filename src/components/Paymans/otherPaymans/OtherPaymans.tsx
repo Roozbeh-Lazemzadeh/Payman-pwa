@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { BusinessSection } from './BusinessSection';
-import './style.css';
-import '../../template/style.css';
 import SelectedMerchants from '../../template/SelectedMerchants';
 import OtherMerchants from '../../template/OtherMerchants';
 import {
@@ -13,9 +11,10 @@ import { MerchantBottomSheet } from '../../shared/Drawer/MerchantBottomSheet';
 import MerchantInfo from '../../shared/Merchant/MerchantInfo';
 import { type Merchant } from '../../types/Merchant';
 
-export const OtherPaymans: React.FC = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+import './style.css';
+import '../../template/style.css';
 
+export const OtherPaymans: React.FC = () => {
   const [selectedMerchants, setSelectedMerchants] = useState<Merchant[]>(
     selectedMerchantsArray
   );
@@ -35,18 +34,11 @@ export const OtherPaymans: React.FC = () => {
       <BusinessSection />
       <div className='home-merchants-wrapper'>
         <div className='home-merchants payman'>
-          <SelectedMerchants
-            merchants={selectedMerchants}
-            setIsOpen={setIsOpen}
-          />
-          <OtherMerchants merchants={otherMerchants} setIsOpen={setIsOpen} />
+          <SelectedMerchants merchants={selectedMerchants} />
+          <OtherMerchants merchants={otherMerchants} />
         </div>
       </div>
-      <MerchantBottomSheet
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        title={'جزئیات بیشتر'}
-      >
+      <MerchantBottomSheet>
         <MerchantInfo />
       </MerchantBottomSheet>
     </div>

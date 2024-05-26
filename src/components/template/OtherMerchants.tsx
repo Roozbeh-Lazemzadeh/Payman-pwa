@@ -1,19 +1,18 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import './style.css';
 import { merchantDetails } from '../../store/merchant/merchantSlice';
 import { useAppDispatch } from '../hooks/reduxHooks';
 import { type Merchant } from '../types/Merchant';
+import { openBottomSheet } from '../../store/bottomSheet/bottomSheetSlice';
 
+import './style.css';
 interface OtherMerchantsProps {
   merchants: Merchant[];
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
-function OtherMerchants({ merchants, setIsOpen }: OtherMerchantsProps) {
+function OtherMerchants({ merchants }: OtherMerchantsProps) {
   const dispatch = useAppDispatch();
 
   const handleMerchantDetails = (merchant: Merchant) => {
-    setIsOpen(true);
+    dispatch(openBottomSheet());
     dispatch(merchantDetails(merchant));
   };
   return (

@@ -4,18 +4,18 @@ import './style.css';
 import { useAppDispatch } from '../hooks/reduxHooks';
 import { merchantDetails } from '../../store/merchant/merchantSlice';
 import { type Merchant } from '../types/Merchant';
+import { openBottomSheet } from '../../store/bottomSheet/bottomSheetSlice';
 // import { Button } from "antd";
 
 interface SelectedMerchantsProps {
   merchants: Merchant[];
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function SelectedMerchants({ merchants, setIsOpen }: SelectedMerchantsProps) {
+function SelectedMerchants({ merchants }: SelectedMerchantsProps) {
   const dispatch = useAppDispatch();
 
   const handleMerchantDetails = (merchant: Merchant) => {
-    setIsOpen(true);
+    dispatch(openBottomSheet());
     dispatch(merchantDetails(merchant));
   };
   return (

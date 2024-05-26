@@ -12,10 +12,10 @@ const MerchantInfo: React.FC = () => {
   return (
     <>
       <div className='h_iframe-aparat_embed_frame'>
-        {/* <span style='display: block;padding-top: 57%'></span> */}
         <iframe
           src='https://www.aparat.com/video/video/embed/videohash/k588l9q/vt/frame'
           allowFullScreen
+          style={{ width: '100%', borderRadius: '10px', borderWidth: '1px' }}
         ></iframe>
       </div>
       <div className='merchant-title'>
