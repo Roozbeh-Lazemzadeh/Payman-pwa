@@ -11,15 +11,10 @@ const MerchantInfo: React.FC = () => {
   const merchantImg = useAppSelector(selectMerchantImg);
   return (
     <>
-      <div className='embedded-video'>
+      <div className='h_iframe-aparat_embed_frame'>
+        {/* <span style='display: block;padding-top: 57%'></span> */}
         <iframe
-          width='100%'
-          height='110'
-          src='https://www.youtube.com/embed/PGlGdID_Mm8?si=43SuHls706k1C6Rt'
-          title='YouTube video player'
-          frameBorder='0'
-          allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-          referrerPolicy='strict-origin-when-cross-origin'
+          src='https://www.aparat.com/video/video/embed/videohash/k588l9q/vt/frame'
           allowFullScreen
         ></iframe>
       </div>

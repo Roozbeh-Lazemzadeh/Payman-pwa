@@ -29,6 +29,7 @@ export const CustomDrawer: React.FC<CustomDrawerProps> = ({
         tweenConfig={{ ease: 'circInOut', duration: 0.45 }}
         isOpen={isOpen}
         onClose={handleCloseBottomSheet}
+        className="sheet-wrapper"
       >
         <Sheet.Container>
           <Sheet.Header>
