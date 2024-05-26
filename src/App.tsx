@@ -73,7 +73,7 @@ function App(): JSX.Element {
         }}
       >
         <div className='landscape-wrapper'>
-          <img className='landscape-img' src='./assets/pics/landscape.svg' />
+          <img className='landscape-img' src='/assets/pics/landscape.svg' />
           <p className='landscape-paragraph'>
             کاربر گرامی لطفا گوشی را عمودی نگه دارید.
           </p>
