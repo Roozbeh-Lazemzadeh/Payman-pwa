@@ -74,4 +74,22 @@ body {
   .ant-layout {
     position: unset !important;
   }
+  .searched-footer.active {
+    display: none !important;
+  }
+  .sheet-wrapper {
+    display: none;
+  }
+  .rmdp-calendar-container-mobile {
+    display: none;
+  }
+  .home-datepickers {
+    display: none !important;
+  }
+  .ant-dropdown {
+    display: none;
+  }
+  .filtered-footer.active {
+    display: none;
+  }
 }
