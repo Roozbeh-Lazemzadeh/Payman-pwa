@@ -57,8 +57,10 @@ export const TransactionsList: React.FC = () => {
         data={getTransactionDetails(selectedTransaction)}
       >
         <div className='info-login detail'>
-          <div>دلیل نامشخص بودن تراکنش </div>‌
-          <div>{selectedTransaction?.transaction_msg}</div>
+          <div> دلیل نامشخص بودن تراکنش : </div>‌
+          <div style={{ marginTop: -10 }}>
+            {selectedTransaction?.transaction_msg}
+          </div>
         </div>
       </DetailedDrawer>
       {Transactions.map((transaction) => (

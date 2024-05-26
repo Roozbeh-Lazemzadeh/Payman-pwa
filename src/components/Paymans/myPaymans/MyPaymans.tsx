@@ -6,6 +6,7 @@ import { OtherPaymansCard } from '../../shared/Cards/OtherPaymansCard';
 import { ExpiredPaymansCard } from '../../shared/Cards/ExpiredPaymansCard';
 import { useAppSelector } from '../../hooks/reduxHooks';
 import {
+  selectAllFilter,
   selectPaymanList,
   selectSortKey,
 } from '../../../store/filterPage/filterSlice';
@@ -15,6 +16,8 @@ import { DetailedDrawer } from '../../shared/Drawer/DetailedDrawer';
 import { selectBottomSheetIsOpen } from '../../../store/bottomSheet/bottomSheetSlice';
 import { selectSelectedPayman } from '../../../store/payman/paymanSlice';
 import { getPaymanDetails } from '../../helpers/getBottomSheetData';
+import { TransactionFilterLabels } from '../../transactions/TransactionFilterLabels';
+import { filterLabelStyle } from '../../helpers/filterLabelsStyle';
 
 import './style.css';
 export interface Payman {
@@ -37,6 +40,7 @@ export const MyPaymans: React.FC = () => {
   const selectedPayman = useAppSelector(selectSelectedPayman);
   const paymanList = useAppSelector(selectPaymanList);
   const sortKey = useAppSelector(selectSortKey);
+  const allFilter = useAppSelector(selectAllFilter);
 
   const nearExpiredPaymans = paymanList.filter((payman) =>
     isNearExpired(payman.end_date)
@@ -121,6 +125,7 @@ export const MyPaymans: React.FC = () => {
     <>
       <div className='payman-filter-title'>
         <FilterTools title={paymanTitle} />
+        <TransactionFilterLabels />
       </div>
       <div className='scrollable-section-wrapper'>
         <DetailedDrawer
@@ -128,7 +133,7 @@ export const MyPaymans: React.FC = () => {
           title={'جزییات پیمان'}
           data={getPaymanDetails(selectedPayman)}
         ></DetailedDrawer>
-        <div className='scrollable-section'>
+        <div className={`scrollable-section ${filterLabelStyle(allFilter)}`}>
           {nearExpiredPaymans.map((payman) => (
             <NearExpiredPaymanCard key={payman.id} payman={payman} />
           ))}

@@ -7,15 +7,21 @@ import {
   merchantHandler,
   priceHandler,
   selectAllFilter,
+  paymansFiltering,
+  endingDateHandler,
 } from '../../../store/filterPage/filterSlice';
 import { ReactComponent as CrossIcon } from '../../../icons/cross.svg';
 import { filterConvertDate } from '../../helpers/transDate';
+import { useLocation } from 'react-router-dom';
 
 import './style.css';
 
 const FilterTag: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { merchants, price, date } = useAppSelector(selectAllFilter);
+  const location = useLocation();
+  const pathName = location.pathname;
+  const { merchants, price, date, endingDate } =
+    useAppSelector(selectAllFilter);
 
   const priceRange =
     price.length > 0
@@ -24,29 +30,64 @@ const FilterTag: React.FC = () => {
 
   const dateRange =
     date.length > 0
-      ? `از ${filterConvertDate(date[0])} - تا ${filterConvertDate(
+      ? `از ${filterConvertDate(date[0])} تا ${filterConvertDate(
           date[date.length - 1]
         )}`
       : '';
 
-  const onClick = (label: string) => {
-    switch (label) {
-      case 'merchant':
-        dispatch(merchantHandler([]));
-        dispatch(transactionsFiltering({ merchants: [] }));
-        break;
-      case 'date':
-        dispatch(dateHandler([]));
-        dispatch(transactionsFiltering({ dates: [] }));
-        dispatch(dateQuickAccessHandler(''));
-        break;
-      case 'price':
-        dispatch(priceHandler([]));
-        dispatch(transactionsFiltering({ prices: [] }));
-        break;
+  const endingDateRange =
+    endingDate.length > 0
+      ? `از ${filterConvertDate(endingDate[0])} تا ${filterConvertDate(
+          endingDate[endingDate.length - 1]
+        )}`
+      : '';
 
-      default:
-        break;
+  const onClick = (label: string) => {
+    if (pathName === '/paymans/me') {
+      switch (label) {
+        case 'merchant':
+          dispatch(merchantHandler([]));
+          dispatch(paymansFiltering({ merchants: [] }));
+          break;
+        case 'date':
+          dispatch(dateHandler([]));
+          dispatch(paymansFiltering({ dates: [] }));
+          break;
+        case 'endingDate':
+          dispatch(endingDateHandler([]));
+          dispatch(paymansFiltering({ endingDate: [] }));
+          break;
+        case 'price':
+          dispatch(priceHandler([]));
+          dispatch(paymansFiltering({ prices: [] }));
+          break;
+
+        default:
+          break;
+      }
+    } else {
+      switch (label) {
+        case 'merchant':
+          dispatch(merchantHandler([]));
+          dispatch(transactionsFiltering({ merchants: [] }));
+          break;
+        case 'date':
+          dispatch(dateHandler([]));
+          dispatch(transactionsFiltering({ dates: [] }));
+          dispatch(dateQuickAccessHandler(''));
+          break;
+        case 'price':
+          dispatch(priceHandler([]));
+          dispatch(transactionsFiltering({ prices: [] }));
+          break;
+        case 'endingDate':
+          dispatch(priceHandler([]));
+          dispatch(transactionsFiltering({ prices: [] }));
+          break;
+
+        default:
+          break;
+      }
     }
   };
 
@@ -72,7 +113,21 @@ const FilterTag: React.FC = () => {
           onClick={() => onClick('date')}
         >
           <>
-            <span>{`فیلتر شده بر اساس تاریخ : ${dateRange}`}</span>
+            <span>{`فیلتر شده بر اساس تاریخ ${
+              pathName === '/paymans/me' ? 'شروع پیمان' : ''
+            } : ${dateRange}`}</span>
+          </>
+        </Tag>
+      )}
+      {endingDate.length > 0 && (
+        <Tag
+          icon={<CrossIcon style={{ marginLeft: 5 }} />}
+          onClick={() => onClick('endingDate')}
+        >
+          <>
+            <span>{`فیلتر شده بر اساس تاریخ ${
+              pathName === '/paymans/me' ? 'پایان پیمان' : ''
+            } : ${endingDateRange}`}</span>
           </>
         </Tag>
       )}
@@ -94,7 +149,7 @@ const FilterTag: React.FC = () => {
 const getPriceRangeLabel = (minPrice: number, maxPrice: number): string => {
   const minPriceLabel = getPriceLabel(minPrice);
   const maxPriceLabel = getPriceLabel(maxPrice);
-  return `از ${minPriceLabel} - تا ${maxPriceLabel}`;
+  return `از ${minPriceLabel} تا ${maxPriceLabel}`;
 };
 
 // Helper function to get the price label with the correct unit

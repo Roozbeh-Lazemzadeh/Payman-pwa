@@ -225,10 +225,6 @@
   margin-bottom: 1.3rem;
 }
 
-.contact-details .info-login {
-  max-width: 375px;
-}
-
 .contact-btn {
   font-size: 14px;
   font-weight: 600;
@@ -257,20 +253,27 @@
   margin-top: 4rem;
   background-color: rgba(239, 242, 255, 1);
   width: 100%;
-  max-width: 325px;
-  font-size: 13px;
-  font-weight: 600;
-  padding: 1rem 1.5rem;
+  max-width: calc(100% - 55px);
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 500;
+  padding: 16px 25px;
   border: 1.2px dashed rgba(0, 114, 255, 1);
   border-radius: 10px;
 }
+.info-login.payman {
+  max-width: unset;
+  margin-top: 36px;
+  line-height: 15.6px;
+}
+.info-login.contact {
+  max-width: unset;
+  line-height: 15.6px;
+}
 .info-login.detail {
-  width: 88%;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 16px;
-  padding: 0.5rem 0.5rem;
-  margin: 2rem auto;
+  margin: 30px 16px;
+  width: calc(100% - 52px);
+  padding: 10px 10px;
 }
 /* end style contact page */
 

@@ -163,22 +163,6 @@ span.otp-inputs-border {
   text-decoration-color: #0072ff;
 }
 
-.info-login {
-  margin-top: 5rem;
-  background-color: rgba(239, 242, 255, 1);
-  width: 80%;
-  font-size: 12px;
-  font-weight: 500;
-  padding: 1rem 1.4rem;
-  border: 1.2px dashed rgba(0, 114, 255, 1);
-  border-radius: 10px;
-}
-.info-login.payman {
-  margin-top: 2rem;
-  width: 100%;
-  max-width: 373px;
-}
-
 .check-wrapper {
   display: flex;
   flex-direction: column;

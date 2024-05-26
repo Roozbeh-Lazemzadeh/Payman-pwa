@@ -28,7 +28,7 @@
   height: auto;
   z-index: 4;
   padding-top: 0.4rem;
-  padding-bottom: 0.4rem;
+  /* padding-bottom: 0.4rem; */
 }
 .transaction-filter-item {
   margin-top: 0.6rem;

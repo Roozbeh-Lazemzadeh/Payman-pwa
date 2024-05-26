@@ -23,7 +23,7 @@ function ContactPage() {
           </a>
           <span className='contact-title'>pay.payman.info@gmail.com</span>
         </div>
-        <p className='info-login'>
+        <p className='info-login contact'>
           هم‌پیمان‌عزیز
           <br />
           در هر مرحله استفاده از اپلیکیشن، اگر به کمک و راهنمایی نیاز داشتید،

@@ -189,6 +189,7 @@
 .remain-dates-wrapper {
   display: flex;
   gap: 1rem;
+  align-items: center;
 }
 .near-expiration-card-wrapper.expired::before {
   position: absolute;
@@ -252,6 +253,7 @@
 .transaction-ceiling {
   display: flex;
   gap: 1rem;
+  align-items: center;
 }
 .ceiling-value {
   font-size: 12px;
@@ -330,7 +332,7 @@
   justify-content: center;
   height: 100%;
   gap: 6px;
-  margin-right: 10px; /* Default margin */
+  margin-right: 25px; /* Default margin */
 }
 
 .card-icon-wrapper {
@@ -390,6 +392,11 @@
   display: block;
 }
 
+@media (min-width: 390px) {
+  .merchant-expiration-wrapper {
+    margin-right: 30px; /* Margin for min width 400px */
+  }
+}
 @media (min-width: 400px) {
   .merchant-expiration-wrapper {
     margin-right: 20px; /* Margin for min width 400px */
@@ -397,7 +404,7 @@
 }
 @media (min-width: 410px) {
   .merchant-expiration-wrapper {
-    margin-right: 30px; /* Margin for min width 400px */
+    margin-right: 35px; /* Margin for min width 400px */
   }
 }
 @media (min-width: 420px) {

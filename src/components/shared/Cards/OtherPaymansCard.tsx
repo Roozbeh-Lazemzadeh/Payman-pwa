@@ -4,6 +4,7 @@ import { getFormattedRemainingDays } from '../../helpers/expirationDate';
 import { useAppDispatch } from '../../hooks/reduxHooks';
 import { handleSelectedPayman } from '../../../store/payman/paymanSlice';
 import { openBottomSheet } from '../../../store/bottomSheet/bottomSheetSlice';
+import { formatNumberWithCommas } from '../../helpers/seperatorInNumbers';
 
 import './style/style.css';
 
@@ -50,7 +51,7 @@ export const OtherPaymansCard: React.FC<{ payman: Payman }> = ({ payman }) => {
           <div className='price-ceiling'>
             <span className='remain-dates-title'>سقف مبلغ روزانه: </span>
             <span className='ceiling-value'>
-              {payman.daily_amount} تومانءءء
+              {`${formatNumberWithCommas(payman.daily_amount)} `} تومانءءء
             </span>
           </div>
           <div className='transaction-ceiling'>

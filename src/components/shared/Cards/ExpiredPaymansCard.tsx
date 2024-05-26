@@ -5,6 +5,7 @@ import { getFormattedRemainingDays } from '../../helpers/expirationDate';
 import { useAppDispatch } from '../../hooks/reduxHooks';
 import { handleSelectedPayman } from '../../../store/payman/paymanSlice';
 import { openBottomSheet } from '../../../store/bottomSheet/bottomSheetSlice';
+import { formatNumberWithCommas } from '../../helpers/seperatorInNumbers';
 
 import './style/style.css';
 
@@ -52,7 +53,7 @@ export const ExpiredPaymansCard: React.FC<{ payman: Payman }> = ({
             {getFormattedRemainingDays(payman.end_date)}
           </p>
           <p className='merchant-dateil-maxtnx val'>
-            {payman.daily_amount} تومانءءء
+            {`${formatNumberWithCommas(payman.daily_amount)} `} تومانءءء
           </p>
           <p className='merchant-dateil-number val'>
             {payman.daily_numbers} تراکنش در روز
