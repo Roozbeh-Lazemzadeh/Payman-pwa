@@ -12,7 +12,7 @@
 .scrollable-section {
   overflow-y: scroll !important;
   overflow-x: hidden;
-  height: calc(100vh - 320px);
+  height: calc(100vh - 308px);
   padding-bottom: 1rem;
   /* padding-right: 0.5rem;
   padding-left: 0.5rem; */

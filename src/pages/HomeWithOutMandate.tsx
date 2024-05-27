@@ -16,7 +16,6 @@ import { type Merchant } from '../components/types/Merchant';
 import './style/style.css';
 
 const HomeWithOutMandate: React.FC = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
   const navigate = useNavigate();
   const [selectedMerchants, setSelectedMerchants] = useState<Merchant[]>(
     selectedMerchantsArray
@@ -59,18 +58,11 @@ const HomeWithOutMandate: React.FC = () => {
       />
       <div className='home-merchants-wrapper'>
         <div className='home-merchants'>
-          <SelectedMerchants
-            merchants={selectedMerchants}
-            setIsOpen={setIsOpen}
-          />
-          <OtherMerchants merchants={otherMerchants} setIsOpen={setIsOpen} />
+          <SelectedMerchants merchants={selectedMerchants} />
+          <OtherMerchants merchants={otherMerchants} />
         </div>
       </div>
-      <MerchantBottomSheet
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        title={'جزئیات بیشتر'}
-      >
+      <MerchantBottomSheet>
         <MerchantInfo />
       </MerchantBottomSheet>
     </div>

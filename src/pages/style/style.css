@@ -514,6 +514,7 @@
   align-items: center;
   gap: 5px;
   padding-bottom: 20px;
+  margin-top: 16px;
 }
 .merchant-title img {
   width: 20px;
