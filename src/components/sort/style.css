@@ -38,7 +38,7 @@ ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropd
 .dropdown-sort .ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item-selected {
   background-color: #0072ff !important;
   color: #fff;
-  padding: 11px 15px !important;
+  /* padding: 14px 10px !important; */
 }
 
 span.ant-dropdown-menu-title-content {
@@ -51,5 +51,5 @@ span.ant-dropdown-menu-title-content {
 }
 
 .dropdown-sort .ant-dropdown-menu-item {
-  padding: 11px 15px !important;
+  padding: 14px 10px !important;
 }
