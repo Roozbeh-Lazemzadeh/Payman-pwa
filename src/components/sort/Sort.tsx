@@ -23,7 +23,7 @@ export const Sort: React.FC = () => {
   const items: MenuItems[] = [
     {
       label: `${
-        pathName === '/paymans/me' ? 'پیمان های فعال' : 'آخرین تراکنش'
+        pathName === '/paymans/me' ? 'پیمان فعال' : 'آخرین تراکنش'
       }`,
       key: '0',
       onClick: () => handleClick('0'),
@@ -44,6 +44,7 @@ export const Sort: React.FC = () => {
         })),
         defaultSelectedKeys: ['0'],
         selectable: true,
+        className: 'dropdown-sort',
       }}
       trigger={['click']}
     >
