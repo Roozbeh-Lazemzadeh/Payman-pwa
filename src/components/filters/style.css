@@ -347,8 +347,9 @@
   position: absolute;
   height: 34px;
   color: #cdcdd0;
-  right: 42%;
-  top: 5px;
+  right: 50%;
+  top: 50%;
+  transform: translate(calc(-50% + 20px), -50%);
   border-right: 1px solid #cdcdd0;
 }
 .search-datePicker .rmdp-container input::placeholder {
@@ -449,26 +450,26 @@ input.ant-input.css-dev-only-do-not-override-1jc77hn.ant-input-outlined.input-cl
 
 /* 12 iphone */
 
-@media screen and (min-width: 390px) {
+/* @media screen and (min-width: 390px) {
   .search-datePicker .divider.payman {
     right: 40%;
   }
-}
+} */
 /* XR iphone */
-@media screen and (min-width: 410px) {
+/* @media screen and (min-width: 410px) {
   .search-datePicker .divider.payman {
     right: 38%;
   }
-}
+} */
 /* 14 iphone */
-@media screen and (min-width: 420px) {
+/* @media screen and (min-width: 420px) {
   .search-datePicker .divider.payman {
     right: 37%;
   }
-}
+} */
 /* 14 iphone */
-@media screen and (min-width: 400px) {
+/* @media screen and (min-width: 400px) {
   .search-datePicker .divider {
     right: 39%;
   }
-}
+} */
