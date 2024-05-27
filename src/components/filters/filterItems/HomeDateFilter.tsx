@@ -22,8 +22,9 @@ import {
   searchedToggle,
   selectSearchItem,
 } from '../../../store/filterMenu/filterMenuSlice';
-
 import '../../Paymans/otherPaymans/style.css';
+import useResponsiveSpace from '../../hooks/useResponsiveSpace';
+
 import '../style.css';
 
 export const HomeDateFilter: React.FC = () => {
@@ -36,8 +37,8 @@ export const HomeDateFilter: React.FC = () => {
     // new DateObject({ calendar: gregorian }),
     // new DateObject({ calendar: gregorian }).add(2, 'day'),
   ]);
-
   const [selectedQuickItems, setSelectedQuickItems] = useState<string>('');
+  const { spaceCount, dateSpace } = useResponsiveSpace();
 
   const handleDateChange = (dates: DateObject[]) => {
     if (dates) {
@@ -204,13 +205,13 @@ export const HomeDateFilter: React.FC = () => {
         <div className='search-section search-bar'>
           <div className='search-datePicker'>
             <DatePicker
-              placeholder='از تاریخ                              تا تاریخ'
+              placeholder={`از تاریخ${' '.repeat(spaceCount)} تا تاریخ`}
               style={{
                 direction: 'rtl',
               }}
               value={values}
               onChange={handleDateChange}
-              dateSeparator='                  '
+              dateSeparator={' '.repeat(dateSpace)}
               locale={persian_fa}
               calendar={persian}
               className='rmdp-mobile'

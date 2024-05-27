@@ -551,6 +551,11 @@
 /* media gueries */
 
 /* SE phone */
+@media screen and (max-width: 374px) {
+  .search-datePicker.payman .rmdp-input {
+    font-size: 10px !important;
+  }
+}
 
 @media screen and (max-width: 376px), screen and (max-height: 668px) {
   .headerOnboarding-img {

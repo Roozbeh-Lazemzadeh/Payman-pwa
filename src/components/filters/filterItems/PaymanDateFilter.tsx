@@ -27,6 +27,7 @@ import { useLocation } from 'react-router-dom';
 
 import '../../Paymans/otherPaymans/style.css';
 import '../style.css';
+import useResponsiveSpace from '../../hooks/useResponsiveSpace';
 
 export const PaymanDateFilter: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -42,6 +43,7 @@ export const PaymanDateFilter: React.FC = () => {
     startingDateValues: [],
     endingDateValues: [],
   });
+  const { spaceCount, dateSpace } = useResponsiveSpace();
 
   const handleDateChange = (dates: DateObject | DateObject[] | null) => {
     if (dates) {
@@ -213,12 +215,16 @@ export const PaymanDateFilter: React.FC = () => {
           />
         </div>
         <div className='search-section search-bar'>
-          <div className='search-datePicker'>
+          <div className='search-datePicker payman'>
             <DatePicker
               placeholder={
                 selectedDateTab === 'start'
-                  ? 'شروع پیمان از تاریخ   شروع پیمان تا تاریخ'
-                  : 'پایان پیمان از تاریخ    پایان پیمان تا تاریخ'
+                  ? `شروع پیمان از تاریخ${' '.repeat(
+                      spaceCount
+                    )}شروع پیمان تا تاریخ`
+                  : `پایان پیمان از تاریخ${' '.repeat(
+                      spaceCount
+                    )}پایان پیمان تا تاریخ`
               }
               style={{ direction: 'rtl', fontSize: 12 }}
               value={
@@ -227,7 +233,7 @@ export const PaymanDateFilter: React.FC = () => {
                   : dateValues.endingDateValues
               }
               onChange={(dates) => handleDateChange(dates)}
-              dateSeparator='                  '
+              dateSeparator={' '.repeat(dateSpace)}
               locale={persian_fa}
               calendar={persian}
               className='rmdp-mobile'
