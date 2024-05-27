@@ -20,8 +20,9 @@ import {
 } from '../../../store/filterPage/filterSlice';
 import '../../Paymans/otherPaymans/style.css';
 import jsonData from '../../../data/transaction.json';
-import '../style.css';
 import { useLocation } from 'react-router-dom';
+
+import '../style.css';
 
 export const MerchantFilter: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -37,6 +38,13 @@ export const MerchantFilter: React.FC = () => {
   const inputRef = useRef<any>(null);
 
   const selectedQuickAccess = (title: string) => {
+    if (selectedOptions.length === 3) {
+      return showNotifyToast(
+        'شما مجاز به انتخاب سه کسب و کار می باشید.',
+        <InfoIcon />
+      );
+    }
+
     const currentOptionsLength = selectedOptions.length;
     const totalSelectedItems = selectedQuickItems.length + currentOptionsLength; // Check if the total length (selectedQuickItems + selectedOptions) is less than 3
 

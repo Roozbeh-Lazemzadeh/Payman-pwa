@@ -425,6 +425,28 @@ input.ant-input.css-dev-only-do-not-override-1jc77hn.ant-input-outlined.input-cl
 
 /* media gueries */
 
+/* SE iphone */
+
+@media screen and (max-width: 355px) {
+  .quick-access-section > span {
+    min-width: 65px;
+    padding: 10px 15px;
+  }
+  .quick-access-section {
+    width: 90%;
+  }
+  .remove-button,
+  .implement-button.half {
+    width: 104%;
+  }
+}
+@media screen and (min-width: 355px), screen and (max-width: 376px) {
+  .remove-button,
+  .implement-button.half {
+    width: 102%;
+  }
+}
+
 /* 12 iphone */
 
 @media screen and (min-width: 390px) {
