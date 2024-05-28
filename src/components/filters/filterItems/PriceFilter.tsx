@@ -99,11 +99,9 @@ export const PriceFilter: React.FC = () => {
     setPrices(prices);
   }, [searchItem]);
 
-  const handlePriceFrom = (e: any) => {
+  const handlePriceFrom = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    // const parsedValue = Number(value.replace(/,/g, ''));
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    const parsedValue = Number(persianToEnglishNumber(value.replace(/,/g, '')));
+    const parsedValue = Number(value.replace(/,/g, ''));
     const isNumeric = !isNaN(parsedValue);
 
     if (parsedValue !== 0) {
@@ -121,7 +119,7 @@ export const PriceFilter: React.FC = () => {
     }
   };
 
-  const handlePriceTo = (e: any) => {
+  const handlePriceTo = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     const parsedValue = Number(value.replace(/,/g, ''));
     const isNumeric = !isNaN(parsedValue);
@@ -147,6 +145,7 @@ export const PriceFilter: React.FC = () => {
   };
 
   // Persian number to English number converter
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const persianToEnglishNumber = (num: string) => {
     const persianNumbers = '۰۱۲۳۴۵۶۷۸۹';
     const englishNumbers = '0123456789';
@@ -224,7 +223,7 @@ export const PriceFilter: React.FC = () => {
             <Input
               type='text'
               inputMode='numeric'
-              pattern='[0-9\u0660-\u0669]*'
+              pattern='^([\u06F0]|[0])([\u06F9]|[9])(([\u06F0-\u06F9]|[0-9]){2})(([\u06F0-\u06F9]|[0-9]){3})(([\u06F0-\u06F9]|[0-9]){4})'
               className='search-input'
               addonBefore={<BuyIcon />}
               placeholder='از مبلغ'
@@ -234,7 +233,7 @@ export const PriceFilter: React.FC = () => {
             <Input
               type='text'
               inputMode='numeric'
-              pattern='[0-9\u0660-\u0669]*'
+              pattern='^([\u06F0]|[0])([\u06F9]|[9])(([\u06F0-\u06F9]|[0-9]){2})(([\u06F0-\u06F9]|[0-9]){3})(([\u06F0-\u06F9]|[0-9]){4})'
               className='search-input'
               addonBefore={<BuyIcon />}
               placeholder='تا مبلغ'
