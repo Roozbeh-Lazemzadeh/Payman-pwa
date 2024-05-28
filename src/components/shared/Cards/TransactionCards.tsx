@@ -69,7 +69,7 @@ export const TransactionCard: React.FC<TransactionCardProps> = ({
       <div className='card-content'>
         <div className='transaction-titles'>
           <div>
-            <span className='transaction-title'>مبلغ تراکنش ها: </span>
+            <span className='transaction-title'>مبلغ تراکنش : </span>
             <span className='card-price'>{price}</span>
             <span className='card-price'> تومانءءء</span>
           </div>
