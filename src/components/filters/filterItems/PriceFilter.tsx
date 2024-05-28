@@ -18,9 +18,10 @@ import {
 // helper
 import { formatNumberWithCommas } from '../../helpers/seperatorInNumbers';
 // style
+import { useLocation } from 'react-router-dom';
+
 import '../../Paymans/otherPaymans/style.css';
 import '../style.css';
-import { useLocation } from 'react-router-dom';
 
 export const PriceFilter: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -100,7 +101,9 @@ export const PriceFilter: React.FC = () => {
 
   const handlePriceFrom = (e: any) => {
     const { value } = e.target;
-    const parsedValue = Number(value.replace(/,/g, ''));
+    // const parsedValue = Number(value.replace(/,/g, ''));
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    const parsedValue = Number(persianToEnglishNumber(value.replace(/,/g, '')));
     const isNumeric = !isNaN(parsedValue);
 
     if (parsedValue !== 0) {
@@ -141,6 +144,20 @@ export const PriceFilter: React.FC = () => {
     } else {
       setPriceTo('');
     }
+  };
+
+  // Persian number to English number converter
+  const persianToEnglishNumber = (num: string) => {
+    const persianNumbers = '۰۱۲۳۴۵۶۷۸۹';
+    const englishNumbers = '0123456789';
+    return num
+      .split('')
+      .map((char) =>
+        persianNumbers.includes(char)
+          ? englishNumbers[persianNumbers.indexOf(char)]
+          : char
+      )
+      .join('');
   };
 
   return (
