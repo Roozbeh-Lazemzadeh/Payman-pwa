@@ -223,7 +223,7 @@ export const PriceFilter: React.FC = () => {
             <Input
               type='text'
               inputMode='numeric'
-              pattern='^([\u06F0]|[0])([\u06F9]|[9])(([\u06F0-\u06F9]|[0-9]){2})(([\u06F0-\u06F9]|[0-9]){3})(([\u06F0-\u06F9]|[0-9]){4})'
+              pattern='^[\u06F0-\u06F90-9]+$'
               className='search-input'
               addonBefore={<BuyIcon />}
               placeholder='از مبلغ'
@@ -233,7 +233,7 @@ export const PriceFilter: React.FC = () => {
             <Input
               type='text'
               inputMode='numeric'
-              pattern='^([\u06F0]|[0])([\u06F9]|[9])(([\u06F0-\u06F9]|[0-9]){2})(([\u06F0-\u06F9]|[0-9]){3})(([\u06F0-\u06F9]|[0-9]){4})'
+              pattern='^[\u06F0-\u06F90-9]+$'
               className='search-input'
               addonBefore={<BuyIcon />}
               placeholder='تا مبلغ'
