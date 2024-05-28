@@ -101,7 +101,7 @@ export const PriceFilter: React.FC = () => {
 
   const handlePriceFrom = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    const parsedValue = Number(value.replace(/,/g, ''));
+    const parsedValue = Number(persianToEnglishNumber(value.replace(/,/g, '')));
     const isNumeric = !isNaN(parsedValue);
 
     if (parsedValue !== 0) {
@@ -121,7 +121,7 @@ export const PriceFilter: React.FC = () => {
 
   const handlePriceTo = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    const parsedValue = Number(value.replace(/,/g, ''));
+    const parsedValue = Number(persianToEnglishNumber(value.replace(/,/g, '')));
     const isNumeric = !isNaN(parsedValue);
 
     if (
@@ -145,7 +145,6 @@ export const PriceFilter: React.FC = () => {
   };
 
   // Persian number to English number converter
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const persianToEnglishNumber = (num: string) => {
     const persianNumbers = '۰۱۲۳۴۵۶۷۸۹';
     const englishNumbers = '0123456789';
@@ -223,7 +222,6 @@ export const PriceFilter: React.FC = () => {
             <Input
               type='text'
               inputMode='numeric'
-              pattern='^[\u06F0-\u06F90-9]+$'
               className='search-input'
               addonBefore={<BuyIcon />}
               placeholder='از مبلغ'
@@ -233,7 +231,6 @@ export const PriceFilter: React.FC = () => {
             <Input
               type='text'
               inputMode='numeric'
-              pattern='^[\u06F0-\u06F90-9]+$'
               className='search-input'
               addonBefore={<BuyIcon />}
               placeholder='تا مبلغ'
