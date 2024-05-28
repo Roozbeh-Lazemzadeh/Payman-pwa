@@ -315,6 +315,12 @@
 .search-input {
   direction: ltr;
 }
+.search-input .ant-input-group-addon {
+  border-radius: 5px;
+}
+.search-input .ant-input {
+  border-radius: 5px;
+}
 .search-section .home-search_input.payman {
   margin-top: 0;
 }
