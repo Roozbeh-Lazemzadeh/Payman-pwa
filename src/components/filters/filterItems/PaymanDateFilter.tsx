@@ -24,10 +24,10 @@ import {
   searchedToggle,
 } from '../../../store/filterMenu/filterMenuSlice';
 import { useLocation } from 'react-router-dom';
-
-import '../../Paymans/otherPaymans/style.css';
-import '../style.css';
 import useResponsiveSpace from '../../hooks/useResponsiveSpace';
+
+import '../style.css';
+import '../../Paymans/otherPaymans/style.css';
 
 export const PaymanDateFilter: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -43,7 +43,9 @@ export const PaymanDateFilter: React.FC = () => {
     startingDateValues: [],
     endingDateValues: [],
   });
-  const { spaceCount, dateSpace } = useResponsiveSpace();
+  // const { spaceCount, dateSpace } = useResponsiveSpace();
+  const { spaceCount, dateSpace, inputRef } = useResponsiveSpace();
+  console.log(spaceCount, dateSpace, inputRef);
 
   const handleDateChange = (dates: DateObject | DateObject[] | null) => {
     if (dates) {
@@ -217,6 +219,7 @@ export const PaymanDateFilter: React.FC = () => {
         <div className='search-section search-bar'>
           <div className='search-datePicker payman'>
             <DatePicker
+              ref={inputRef}
               placeholder={
                 selectedDateTab === 'start'
                   ? `شروع پیمان از تاریخ${' '.repeat(
