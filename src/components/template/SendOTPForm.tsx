@@ -1,13 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
-import {
-  type FC,
-  type Dispatch,
-  type SetStateAction,
-  useState,
-  useEffect,
-} from 'react';
+import { type FC, type Dispatch, type SetStateAction } from 'react';
 import { Checkbox, Button } from 'antd';
-import OtpInput from 'react-otp-input';
+// import OtpInput from 'react-otp-input';
 import { CustomDrawer } from '../shared/Drawer/Drawer';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import {
@@ -23,12 +17,12 @@ interface OnboardingProps {
 const SendOTPForm: FC<OnboardingProps> = ({ setStep }) => {
   const dispatch = useAppDispatch();
   const isOpen = useAppSelector(selectBottomSheetIsOpen);
-  const [otp, setOtp] = useState<string>();
-  const [otpVal, setOtpVal] = useState<string>();
+  // const [otp, setOtp] = useState<string>();
+  // const [otpVal, setOtpVal] = useState<string>();
 
-  useEffect(() => {
-    // console.log(otp);
-  }, [otp]);
+  // useEffect(() => {
+  //   // console.log(otp);
+  // }, [otp]);
 
   // const sharedProps = {
   //   onChange,
@@ -46,7 +40,7 @@ const SendOTPForm: FC<OnboardingProps> = ({ setStep }) => {
             <div className='otp-form_input'>
               <span className='form-input_title'>شماره موبایل</span>
               <span className='form-input_num'>
-                <OtpInput
+                {/* <OtpInput
                   value={otp}
                   onChange={setOtp}
                   numInputs={9}
@@ -54,14 +48,15 @@ const SendOTPForm: FC<OnboardingProps> = ({ setStep }) => {
                   renderInput={(props) => <input {...props} />}
                   containerStyle='phone-num-inputs'
                   inputStyle='phone-num-input'
-                />
+                /> */}
+                <input type='text' className='phone-num-inputs' />
                 <span>۰۹</span>
               </span>
             </div>
             <div className='otp-form_input'>
               <span className='form-input_title'>کد ملی</span>
               <span className='form-input_num'>
-                <OtpInput
+                {/* <OtpInput
                   value={otpVal}
                   onChange={setOtpVal}
                   numInputs={10}
@@ -69,7 +64,7 @@ const SendOTPForm: FC<OnboardingProps> = ({ setStep }) => {
                   renderInput={(props) => <input {...props} />}
                   containerStyle='phone-num-inputs'
                   inputStyle='phone-num-input'
-                />
+                /> */}
                 {/* <span>۰۹</span> */}
               </span>
             </div>
