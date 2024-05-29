@@ -315,6 +315,13 @@
 .search-input {
   direction: ltr;
 }
+.search-input .ant-input-group-addon {
+  border-radius: 5px;
+  background-color: unset;
+}
+.search-input .ant-input {
+  border-radius: 5px;
+}
 .search-section .home-search_input.payman {
   margin-top: 0;
 }
@@ -448,13 +455,13 @@ input.ant-input.css-dev-only-do-not-override-1jc77hn.ant-input-outlined.input-cl
   }
 }
 
-/* 12 iphone */
+/*  iphone 6/7/8 */
 
-/* @media screen and (min-width: 390px) {
-  .search-datePicker .divider.payman {
-    right: 40%;
+@media screen and (max-width: 376px) {
+  .quick-access-section > span {
+    padding: 10px 4px;
   }
-} */
+}
 /* XR iphone */
 /* @media screen and (min-width: 410px) {
   .search-datePicker .divider.payman {

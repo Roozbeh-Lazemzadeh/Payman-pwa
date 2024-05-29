@@ -15,12 +15,14 @@ import {
   selectAllFilter,
   paymansFiltering,
 } from '../../../store/filterPage/filterSlice';
+import { persianToEnglishNumber } from '../../helpers/persianToEnglishNumbers';
+import { useLocation } from 'react-router-dom';
 // helper
+import { MAX_SAFE_INTEGER } from '../../helpers';
 import { formatNumberWithCommas } from '../../helpers/seperatorInNumbers';
 // style
 import '../../Paymans/otherPaymans/style.css';
 import '../style.css';
-import { useLocation } from 'react-router-dom';
 
 export const PriceFilter: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -98,9 +100,9 @@ export const PriceFilter: React.FC = () => {
     setPrices(prices);
   }, [searchItem]);
 
-  const handlePriceFrom = (e: any) => {
+  const handlePriceFrom = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    const parsedValue = Number(value.replace(/,/g, ''));
+    const parsedValue = Number(persianToEnglishNumber(value.replace(/,/g, '')));
     const isNumeric = !isNaN(parsedValue);
 
     if (parsedValue !== 0) {
@@ -109,7 +111,7 @@ export const PriceFilter: React.FC = () => {
     } else {
       setSelectedQuickItems([0, prices[1]]);
     }
-    if (isNumeric) {
+    if (isNumeric && parsedValue <= MAX_SAFE_INTEGER) {
       // Update the state only if the input value is a valid number
       setPriceFrom(formatNumberWithCommas(Number(parsedValue)));
       setPrices([Number(parsedValue), prices[1]]);
@@ -118,9 +120,9 @@ export const PriceFilter: React.FC = () => {
     }
   };
 
-  const handlePriceTo = (e: any) => {
+  const handlePriceTo = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    const parsedValue = Number(value.replace(/,/g, ''));
+    const parsedValue = Number(persianToEnglishNumber(value.replace(/,/g, '')));
     const isNumeric = !isNaN(parsedValue);
 
     if (
@@ -134,7 +136,7 @@ export const PriceFilter: React.FC = () => {
       setSelectedQuickItems([prices[0], parsedValue]);
     }
 
-    if (isNumeric) {
+    if (isNumeric && parsedValue <= MAX_SAFE_INTEGER) {
       // Update the state only if the input value is a valid number
       setPriceTo(formatNumberWithCommas(parsedValue));
       setPrices([prices[0], parsedValue]);
@@ -206,6 +208,7 @@ export const PriceFilter: React.FC = () => {
           <>
             <Input
               type='text'
+              inputMode='numeric'
               className='search-input'
               addonBefore={<BuyIcon />}
               placeholder='از مبلغ'
@@ -214,6 +217,7 @@ export const PriceFilter: React.FC = () => {
             />
             <Input
               type='text'
+              inputMode='numeric'
               className='search-input'
               addonBefore={<BuyIcon />}
               placeholder='تا مبلغ'
