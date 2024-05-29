@@ -43,8 +43,8 @@ const useResponsiveSpace = () => {
         }
       } else if (window.innerWidth >= 465 && window.innerWidth <= 500) {
         if (pathName !== '/paymans/me') {
-          setSpaceCount(35);
-          setDateSpace(27);
+          setSpaceCount(38);
+          setDateSpace(30);
         } else {
           setSpaceCount(10);
           setDateSpace(22);
