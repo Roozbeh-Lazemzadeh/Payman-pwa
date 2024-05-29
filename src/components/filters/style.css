@@ -317,6 +317,7 @@
 }
 .search-input .ant-input-group-addon {
   border-radius: 5px;
+  background-color: unset;
 }
 .search-input .ant-input {
   border-radius: 5px;

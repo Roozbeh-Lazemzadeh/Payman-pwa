@@ -19,24 +19,24 @@ const useResponsiveSpace = () => {
         }
       } else if (window.innerWidth >= 375 && window.innerWidth < 390) {
         if (pathName !== '/paymans/me') {
-          setSpaceCount(20);
-          setDateSpace(14);
+          setSpaceCount(22);
+          setDateSpace(16);
         } else {
           setSpaceCount(3);
           setDateSpace(17);
         }
       } else if (window.innerWidth >= 390 && window.innerWidth < 415) {
         if (pathName !== '/paymans/me') {
-          setSpaceCount(23);
-          setDateSpace(17);
+          setSpaceCount(25);
+          setDateSpace(19);
         } else {
           setSpaceCount(5);
           setDateSpace(19);
         }
       } else if (window.innerWidth >= 415 && window.innerWidth <= 440) {
         if (pathName !== '/paymans/me') {
-          setSpaceCount(27);
-          setDateSpace(21);
+          setSpaceCount(29);
+          setDateSpace(23);
         } else {
           setSpaceCount(10);
           setDateSpace(22);

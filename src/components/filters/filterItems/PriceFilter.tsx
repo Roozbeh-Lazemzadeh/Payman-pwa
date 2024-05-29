@@ -15,11 +15,12 @@ import {
   selectAllFilter,
   paymansFiltering,
 } from '../../../store/filterPage/filterSlice';
+import { persianToEnglishNumber } from '../../helpers/persianToEnglishNumbers';
+import { useLocation } from 'react-router-dom';
 // helper
+import { MAX_SAFE_INTEGER } from '../../helpers';
 import { formatNumberWithCommas } from '../../helpers/seperatorInNumbers';
 // style
-import { useLocation } from 'react-router-dom';
-
 import '../../Paymans/otherPaymans/style.css';
 import '../style.css';
 
@@ -110,7 +111,7 @@ export const PriceFilter: React.FC = () => {
     } else {
       setSelectedQuickItems([0, prices[1]]);
     }
-    if (isNumeric) {
+    if (isNumeric && parsedValue <= MAX_SAFE_INTEGER) {
       // Update the state only if the input value is a valid number
       setPriceFrom(formatNumberWithCommas(Number(parsedValue)));
       setPrices([Number(parsedValue), prices[1]]);
@@ -135,27 +136,13 @@ export const PriceFilter: React.FC = () => {
       setSelectedQuickItems([prices[0], parsedValue]);
     }
 
-    if (isNumeric) {
+    if (isNumeric && parsedValue <= MAX_SAFE_INTEGER) {
       // Update the state only if the input value is a valid number
       setPriceTo(formatNumberWithCommas(parsedValue));
       setPrices([prices[0], parsedValue]);
     } else {
       setPriceTo('');
     }
-  };
-
-  // Persian number to English number converter
-  const persianToEnglishNumber = (num: string) => {
-    const persianNumbers = '۰۱۲۳۴۵۶۷۸۹';
-    const englishNumbers = '0123456789';
-    return num
-      .split('')
-      .map((char) =>
-        persianNumbers.includes(char)
-          ? englishNumbers[persianNumbers.indexOf(char)]
-          : char
-      )
-      .join('');
   };
 
   return (
