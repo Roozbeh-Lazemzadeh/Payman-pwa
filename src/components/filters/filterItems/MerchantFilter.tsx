@@ -187,6 +187,10 @@ export const MerchantFilter: React.FC = () => {
     setIsOpen(true);
   };
 
+  // Custom filter function to ignore leading spaces
+  const customFilterOption = (input: string, option: any) =>
+    option?.value?.toLowerCase().indexOf(input.trim().toLowerCase()) >= 0;
+
   return (
     <>
       <ToastContainer rtl />
@@ -270,6 +274,7 @@ export const MerchantFilter: React.FC = () => {
             placement='topRight'
             ref={selectRef}
             open={isOpen}
+            filterOption={customFilterOption}
           />
         </div>
       </div>

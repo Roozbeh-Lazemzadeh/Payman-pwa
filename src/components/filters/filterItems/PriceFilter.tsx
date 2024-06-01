@@ -8,7 +8,9 @@ import {
 } from '../../../store/filterMenu/filterMenuSlice';
 import { ReactComponent as TickSquareIcon } from '../../../icons/tickSquare.svg';
 import { ReactComponent as BuyIcon } from '../../../icons/buy2.svg';
+import { ReactComponent as TomanIcon } from '../../../icons/Toman.svg';
 import { ReactComponent as RemoveIcon } from '../../../icons/delete.svg';
+import { ReactComponent as InfoIcon } from '../../../icons/yellowInfo.svg';
 import {
   transactionsFiltering,
   priceHandler,
@@ -17,6 +19,8 @@ import {
 } from '../../../store/filterPage/filterSlice';
 import { persianToEnglishNumber } from '../../helpers/persianToEnglishNumbers';
 import { useLocation } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import { showNotifyToast } from '../../shared/Toast/CustomToast';
 // helper
 import { MAX_SAFE_INTEGER } from '../../helpers';
 import { formatNumberWithCommas } from '../../helpers/seperatorInNumbers';
@@ -73,6 +77,12 @@ export const PriceFilter: React.FC = () => {
   };
   const handlePriceFilter = () => {
     if (prices.length === 0) return null;
+    if (prices[0] > prices[1]) {
+      return showNotifyToast(
+        'بازه قیمت از قیمت پایین به بالا فیلتر شود.',
+        <InfoIcon />
+      );
+    }
     if (!prices[0] && prices[1]) {
       dispatch(priceHandler([0, prices[1]]));
       location.pathname === '/paymans/me'
@@ -147,6 +157,7 @@ export const PriceFilter: React.FC = () => {
 
   return (
     <>
+      <ToastContainer rtl />
       <div className='implement-remove-wrapper'>
         <div
           className={`remove-button ${
@@ -210,7 +221,7 @@ export const PriceFilter: React.FC = () => {
               type='text'
               inputMode='numeric'
               className='search-input'
-              addonBefore={<BuyIcon />}
+              addonBefore={prices[0] ? <TomanIcon /> : <BuyIcon />}
               placeholder='از مبلغ'
               onChange={(e) => handlePriceFrom(e)}
               value={priceFrom ?? (formatNumberWithCommas(prices[0]) || '')}
@@ -219,7 +230,7 @@ export const PriceFilter: React.FC = () => {
               type='text'
               inputMode='numeric'
               className='search-input'
-              addonBefore={<BuyIcon />}
+              addonBefore={prices[1] ? <TomanIcon /> : <BuyIcon />}
               placeholder='تا مبلغ'
               onChange={(e) => handlePriceTo(e)}
               value={priceTo ?? (formatNumberWithCommas(prices[1]) || '')}
