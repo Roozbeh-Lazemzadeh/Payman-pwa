@@ -98,7 +98,7 @@ span.otp-inputs-border {
 
 .otp-inputs-borders {
   /* position: relative; */
-  margin-left: 60px;
+  margin-left: 62px;
 }
 
 span.otp-inputs-border {
@@ -367,7 +367,7 @@ span.otp-inputs-border {
   input.checks-otp-inputs {
     letter-spacing: 87px;
     font-size: 1rem;
-    margin-left: 181px;
+    margin-left: 185px;
     margin-bottom: -1rem;
   }
 
