@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ReactComponent as TickSquareIcon } from '../../../icons/tickSquare.svg';
 import { ReactComponent as CalendarIcon } from '../../../icons/calendar.svg';
 import { ReactComponent as RemoveIcon } from '../../../icons/delete.svg';
@@ -32,6 +32,7 @@ import '../../Paymans/otherPaymans/style.css';
 export const PaymanDateFilter: React.FC = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
+  const datePickerRef = useRef<any>(null);
   const allFilter = useAppSelector(selectAllFilter);
   const [startingDates, setStartingDates] = useState<string[]>([]);
   const [endingDates, setEndingDates] = useState<string[]>([]);
@@ -217,9 +218,9 @@ export const PaymanDateFilter: React.FC = () => {
           />
         </div>
         <div className='search-section search-bar'>
-          <div className='search-datePicker payman'>
+          <div className='search-datePicker payman' ref={inputRef}>
             <DatePicker
-              ref={inputRef}
+              ref={datePickerRef}
               placeholder={
                 selectedDateTab === 'start'
                   ? `شروع پیمان از تاریخ${' '.repeat(
@@ -250,7 +251,9 @@ export const PaymanDateFilter: React.FC = () => {
               }}
             />
             <div className='icon'>
-              <CalendarIcon />
+              <CalendarIcon
+                onClick={() => datePickerRef.current.openCalendar()}
+              />
             </div>
             <div className='divider payman'></div>
           </div>

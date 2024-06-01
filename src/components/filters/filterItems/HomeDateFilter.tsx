@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ReactComponent as TickSquareIcon } from '../../../icons/tickSquare.svg';
 import { ReactComponent as CalendarIcon } from '../../../icons/calendar.svg';
 import { ReactComponent as RemoveIcon } from '../../../icons/delete.svg';
@@ -23,12 +23,13 @@ import {
   selectSearchItem,
 } from '../../../store/filterMenu/filterMenuSlice';
 import useResponsiveSpace from '../../hooks/useResponsiveSpace';
-
+// style
 import '../../Paymans/otherPaymans/style.css';
 import '../style.css';
 
 export const HomeDateFilter: React.FC = () => {
   const dispatch = useAppDispatch();
+  const datePickerRef = useRef<any>(null);
   const allFilter = useAppSelector(selectAllFilter);
   const searchItem = useAppSelector(selectSearchItem);
   const datePeriod = useAppSelector(selectDatePeriod);
@@ -204,9 +205,9 @@ export const HomeDateFilter: React.FC = () => {
           </>
         </div>
         <div className='search-section search-bar'>
-          <div className='search-datePicker'>
+          <div className='search-datePicker' ref={inputRef}>
             <DatePicker
-              ref={inputRef}
+              ref={datePickerRef}
               placeholder={`از تاریخ${' '.repeat(spaceCount)}تا تاریخ`}
               style={{
                 direction: 'rtl',
@@ -227,7 +228,9 @@ export const HomeDateFilter: React.FC = () => {
               }}
             />
             <div className='icon'>
-              <CalendarIcon />
+              <CalendarIcon
+                onClick={() => datePickerRef.current.openCalendar()}
+              />
             </div>
             <div className='divider'></div>
           </div>

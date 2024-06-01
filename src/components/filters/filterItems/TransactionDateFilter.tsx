@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ReactComponent as TickSquareIcon } from '../../../icons/tickSquare.svg';
 import { ReactComponent as CalendarIcon } from '../../../icons/calendar.svg';
 import { ReactComponent as RemoveIcon } from '../../../icons/delete.svg';
@@ -30,6 +30,7 @@ import '../style.css';
 
 export const TransactionDateFilter: React.FC = () => {
   const dispatch = useAppDispatch();
+  const datePickerRef = useRef<any>(null);
   const allFilter = useAppSelector(selectAllFilter);
   const searchItem = useAppSelector(selectSearchItem);
   const datePeriod = useAppSelector(selectDatePeriod);
@@ -193,19 +194,20 @@ export const TransactionDateFilter: React.FC = () => {
               className={selectedQuickItems === 'هفته گذشته' ? 'selected' : ''}
               onClick={() => selectedQuickAccess('هفته گذشته')}
             >
-              هفته گذشته
+              7 روز گذشته
             </span>
             <span
               className={selectedQuickItems === 'ماه گذشته' ? 'selected' : ''}
               onClick={() => selectedQuickAccess('ماه گذشته')}
             >
-              ماه گذشته
+              30 روز گذشته
             </span>
           </>
         </div>
         <div className='search-section search-bar'>
           <div className='search-datePicker'>
             <DatePicker
+              ref={datePickerRef}
               placeholder={`از تاریخ${' '.repeat(spaceCount)} تا تاریخ`}
               style={{
                 direction: 'rtl',
@@ -226,7 +228,9 @@ export const TransactionDateFilter: React.FC = () => {
               }}
             />
             <div className='icon'>
-              <CalendarIcon />
+              <CalendarIcon
+                onClick={() => datePickerRef.current.openCalendar()}
+              />
             </div>
             <div className='divider'></div>
           </div>
