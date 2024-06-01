@@ -37,8 +37,6 @@ export const PriceFilter: React.FC = () => {
   const [prices, setPrices] = useState<number[]>([]);
   const [priceFrom, setPriceFrom] = useState<string>();
   const [priceTo, setPriceTo] = useState<string>();
-  const [priceFromIcon, setPriceFromIcon] = useState<JSX.Element>(<BuyIcon />);
-  const [priceToIcon, setPriceToIcon] = useState<JSX.Element>(<BuyIcon />);
 
   const handleRemoveFilter = () => {
     if (prices.length === 0) return null;
@@ -130,8 +128,6 @@ export const PriceFilter: React.FC = () => {
     } else {
       setPriceFrom('');
     }
-    // Change the icon based on the input value
-    setPriceFromIcon(value ? <TomanIcon /> : <BuyIcon />);
   };
 
   const handlePriceTo = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -157,8 +153,6 @@ export const PriceFilter: React.FC = () => {
     } else {
       setPriceTo('');
     }
-    // Change the icon based on the input value
-    setPriceToIcon(value ? <TomanIcon /> : <BuyIcon />);
   };
 
   return (
@@ -227,7 +221,7 @@ export const PriceFilter: React.FC = () => {
               type='text'
               inputMode='numeric'
               className='search-input'
-              addonBefore={priceFromIcon}
+              addonBefore={prices[0] ? <TomanIcon /> : <BuyIcon />}
               placeholder='از مبلغ'
               onChange={(e) => handlePriceFrom(e)}
               value={priceFrom ?? (formatNumberWithCommas(prices[0]) || '')}
@@ -236,7 +230,7 @@ export const PriceFilter: React.FC = () => {
               type='text'
               inputMode='numeric'
               className='search-input'
-              addonBefore={priceToIcon}
+              addonBefore={prices[1] ? <TomanIcon /> : <BuyIcon />}
               placeholder='تا مبلغ'
               onChange={(e) => handlePriceTo(e)}
               value={priceTo ?? (formatNumberWithCommas(prices[1]) || '')}
