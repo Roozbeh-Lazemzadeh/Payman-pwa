@@ -7,11 +7,16 @@ import { selectMerchant } from '../../store/chart/chartSlice';
 interface RechartPieChartProps {
   data: Array<{ name: string; value: number; color: string }>;
   selectedIndex?: number;
+  onCellClick: (
+    e: React.MouseEvent<HTMLSpanElement, MouseEvent>,
+    index: number
+  ) => void;
 }
 
 const RechartPieChart: React.FC<RechartPieChartProps> = ({
   data,
   selectedIndex,
+  onCellClick,
 }) => {
   const dispatch = useAppDispatch();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -50,6 +55,8 @@ const RechartPieChart: React.FC<RechartPieChartProps> = ({
 
   const handleClick = (entry: any, index: number) => {
     dispatch(selectMerchant(index));
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    onCellClick(entry, index);
   };
 
   return (
@@ -68,6 +75,7 @@ const RechartPieChart: React.FC<RechartPieChartProps> = ({
           paddingAngle={4}
           cornerRadius={5}
           style={{ outline: 'none' }}
+          onClick={handleClick}
         >
           {data.map((entry, index) => (
             <Cell

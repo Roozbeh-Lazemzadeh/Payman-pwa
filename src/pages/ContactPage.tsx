@@ -24,7 +24,7 @@ function ContactPage() {
           <span className='contact-title'>pay.payman.info@gmail.com</span>
         </div>
         <p className='info-login contact'>
-          هم‌پیمان‌عزیز
+          هم‌پیمان‌ عزیز
           <br />
           در هر مرحله استفاده از اپلیکیشن، اگر به کمک و راهنمایی نیاز داشتید،
           همکاران ما در واحد پشتیبانی از ساعت ۹ صبح تا ۱۷ عصر پاسخ‌گوی شما

@@ -130,7 +130,7 @@
 
 @media screen and (max-width: 376px), screen and (max-height: 668px) {
   .ant-btn {
-    height: 29px !important;
+    height: 36px !important;
   }
   /* .ant-collapse.ant-collapse-icon-position-start {
     height: 65%;

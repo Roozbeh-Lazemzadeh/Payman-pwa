@@ -51,8 +51,15 @@
   justify-content: space-around;
   flex-direction: row-reverse;
   width: 13rem;
-  padding-left: 8px;
-  padding-bottom: 5px;
+  padding-left: 9px;
+  padding-bottom: 0px;
+  direction: ltr;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  letter-spacing: 7px;
+  font-family: 'IranYekan', sans-serif;
+  font-weight: 500;
 }
 
 .phone-num-input {
@@ -144,7 +151,7 @@ span.otp-inputs-border {
   background-color: transparent;
   outline: none;
   border: none;
-  width: 100%;
+  /* width: 100%; */
   height: 100%;
   font-family: 'IranYekan';
 }
@@ -194,9 +201,17 @@ span.otp-inputs-border {
   color: black !important;
 }
 
+.ant-btn-default {
+  color: #4096ff;
+  border-color: #4096ff;
+  background: #ffffff;
+  display: flex;
+  gap: 4px;
+}
+
 .logo-login-swap {
-  position: absolute;
-  right: 90px;
+  /* position: absolute;
+  right: 90px; */
 }
 
 .check-otp-input:focus {
@@ -205,11 +220,12 @@ span.otp-inputs-border {
 
 .check-otp__style {
   text-align: center;
+  margin-top: -23px;
 }
 
 .check-title {
   color: rgba(16, 24, 40, 0.2);
-  margin-top: -6rem;
+  margin-top: -62px;
 }
 
 .check-number {
@@ -310,6 +326,10 @@ span.otp-inputs-border {
   text-decoration-color: #0072ff;
 }
 
+:where(.css-dev-only-do-not-override-1jc77hn).ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
+  background: unset !important;
+}
+
 /* media gueries */
 
 /* SE phone */
@@ -320,6 +340,10 @@ span.otp-inputs-border {
     margin-top: 0.8rem;
   }
 
+  .otp-form_input {
+    height: 36px;
+  }
+
   .otp-inputs-border {
     width: 30px;
   }
@@ -327,6 +351,10 @@ span.otp-inputs-border {
   .login-header__logo {
     margin-top: 14px;
     width: 6rem;
+  }
+
+  .ant-btn {
+    height: 36px !important;
   }
 
   .login-header__title {
@@ -360,6 +388,11 @@ span.otp-inputs-border {
     margin-top: 1.2rem;
   }
 
+  .info-login {
+    margin-top: 0.5rem !important;
+    padding: 9px 25px !important;
+  }
+
   .footer-wrapper {
     margin-bottom: 5px;
   }
@@ -379,5 +412,48 @@ span.otp-inputs-border {
 
   .otp-inputs-borders {
     margin-left: 60px;
+  }
+}
+
+@media screen and (min-width: 377px), screen and (min-height: 669px) {
+  .btns-wrapper-check-otp {
+    width: 90%;
+    margin-top: 0rem;
+    padding-top: 3rem;
+  }
+  .form-items-wrapper {
+    margin-top: 0rem;
+  }
+  .check-timer {
+    font-weight: 500;
+    margin-top: 2rem;
+  }
+  .login-header__logo {
+    margin-top: 20px;
+  }
+  .check-otp__style {
+    text-align: center;
+    margin-top: -45px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .otp-form_btn-wrapper {
+    width: 300px;
+  }
+  .otp-inputs-border {
+    width: 36px;
+  }
+  .otp-inputs-border {
+    width: 50px;
+    display: inline-block;
+    border-bottom: 1px solid black;
+    margin-right: 50px;
+  }
+  .checks-otp-inputs {
+    letter-spacing: 87px;
+    font-size: 1rem;
+    margin-left: 216px;
+    margin-bottom: -1rem;
   }
 }
