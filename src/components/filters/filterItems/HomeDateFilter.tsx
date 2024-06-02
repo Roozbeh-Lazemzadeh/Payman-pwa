@@ -23,6 +23,8 @@ import {
   selectSearchItem,
 } from '../../../store/filterMenu/filterMenuSlice';
 import useResponsiveSpace from '../../hooks/useResponsiveSpace';
+import { selectSelectedMonth } from '../../../store/monthlyBill/monthlyBillSlice';
+
 // style
 import '../../Paymans/otherPaymans/style.css';
 import '../style.css';
@@ -34,14 +36,18 @@ export const HomeDateFilter: React.FC = () => {
   const searchItem = useAppSelector(selectSearchItem);
   const datePeriod = useAppSelector(selectDatePeriod);
   const [dates, setDates] = useState<string[]>([]);
-  const [values, setValues] = useState<Date[]>([
-    // new DateObject({ calendar: gregorian }),
-    // new DateObject({ calendar: gregorian }).add(2, 'day'),
-  ]);
   const [selectedQuickItems, setSelectedQuickItems] = useState<string>('');
   const { spaceCount, dateSpace, inputRef } = useResponsiveSpace();
-  console.log(spaceCount, dateSpace, inputRef);
+  const month = useAppSelector(selectSelectedMonth);
 
+  // Use fallback values if month is null
+  const initialFirstDay = month?.firstDayOfMonth ?? new Date();
+  const initialLastDay = month?.lastDayOfMonth ?? new Date();
+
+  const [values, setValues] = useState<Date[]>([
+    initialFirstDay,
+    initialLastDay,
+  ]);
   const handleDateChange = (dates: DateObject[]) => {
     if (dates) {
       const formattedDates: string[] = dates.map((date) =>
@@ -200,7 +206,7 @@ export const HomeDateFilter: React.FC = () => {
               className={selectedQuickItems === 'هفته گذشته' ? 'selected' : ''}
               onClick={() => selectedQuickAccess('هفته گذشته')}
             >
-              هفته گذشته
+              ۷ روز گذشته
             </span>
           </>
         </div>
@@ -226,6 +232,9 @@ export const HomeDateFilter: React.FC = () => {
                 OK: 'تایید',
                 CANCEL: 'انصراف',
               }}
+              minDate={month?.firstDayOfMonth}
+              maxDate={month?.lastDayOfMonth}
+              currentDate={new DateObject(initialFirstDay)} // Set the initial view to the startDate
             />
             <div className='icon'>
               <CalendarIcon

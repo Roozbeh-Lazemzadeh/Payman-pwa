@@ -7,6 +7,7 @@ import { format, parse } from 'date-fns';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   getMonthBillHandler,
+  getSelectedMonth,
   selectMonthlyBill,
 } from '../store/monthlyBill/monthlyBillSlice';
 import { setArrayHomeWithMandate } from '../store/arrayHomeWithMandate/arrayHomeWithMandateSlice';
@@ -32,6 +33,14 @@ import {
 } from '../store/bottomSheet/bottomSheetSlice';
 import { getTransactionDetails } from '../components/helpers/getBottomSheetData';
 
+export interface Month {
+  id: number;
+  year: string;
+  month: string;
+  firstDayOfMonth: Date;
+  lastDayOfMonth: Date;
+}
+
 function HomeWithMandate() {
   const dispatch = useDispatch();
   const allFilter = useAppSelector(selectAllFilter);
@@ -51,7 +60,7 @@ function HomeWithMandate() {
   );
   const memoizedPrice = useMemo(() => allFilter.price, [allFilter.price]);
 
-  const monthsList: Array<{ id: number; year: string; month: string }> = [];
+  const monthsList: Month[] = [];
   const monthsList2: string[] = [];
 
   for (let i = 0; i < 6; i++) {
@@ -61,6 +70,8 @@ function HomeWithMandate() {
       id: i,
       year: pastDate.locale('fa').format('jYY'),
       month: pastDate.locale('fa').format('jMMMM'),
+      firstDayOfMonth: pastDate.locale('fa').startOf('jMonth').toDate(),
+      lastDayOfMonth: pastDate.locale('fa').endOf('jMonth').toDate(),
     });
     monthsList2.push(pastDate.format('jYYYY/jMM'));
   }
@@ -77,6 +88,7 @@ function HomeWithMandate() {
     if (selectedMonth) {
       const selectedYearMonth = monthsList2[selectedMonth.id];
       dispatch(getMonthBillHandler(selectedYearMonth));
+      dispatch(getSelectedMonth(selectedMonth));
     }
   };
 
