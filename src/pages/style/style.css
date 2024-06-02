@@ -548,6 +548,10 @@
   font-weight: 500;
 }
 
+.rules-wrapper {
+  direction: rtl !important;
+}
+
 /* media gueries */
 
 /* SE phone */

@@ -6,6 +6,7 @@ import transactionData from '../../data/transaction.json';
 import { selectMonthlyBill } from '../../store/monthlyBill/monthlyBillSlice';
 import { jalaliDate } from '../helpers/transDate';
 import { selectMerchant } from '../../store/chart/chartSlice';
+// import { from } from 'jalali-moment';
 
 export const MerchantChartSection: React.FC = () => {
   const [title, setTitle] = useState('اسنپ');
@@ -68,30 +69,18 @@ export const MerchantChartSection: React.FC = () => {
     e: React.MouseEvent<HTMLSpanElement, MouseEvent>,
     index: number
   ) => {
-    const selectedTransaction = newTransformedData.find(
-      (transaction) => transaction.name === e.currentTarget.textContent
-    );
+    const selectedTransaction = newTransformedData[index];
 
     if (selectedTransaction) {
-      if (selectedTransaction.name !== 'Others') {
-        setTitle(selectedTransaction.name);
-      } else {
-        setTitle('سایر');
-      }
+      setTitle(selectedTransaction.name);
       setValue(selectedTransaction.value);
       dispatch(selectMerchant(index));
 
       const spanColor = selectedTransaction.color;
-      setTransformedData((prevData) => [
+      setTransformedData((prevData: any) => [
         ...prevData,
         { name: selectedTransaction.name, color: spanColor },
       ]);
-    } else {
-      const othersValue =
-        newTransformedData.find((transaction) => transaction.name === 'سایر')
-          ?.value ?? 0;
-
-      setValue(othersValue);
     }
   };
 
@@ -137,7 +126,8 @@ export const MerchantChartSection: React.FC = () => {
             <span
               className='instance all'
               style={{
-                border: selectedIndex === -1 ? '2px solid blue' : 'none',
+                border:
+                  selectedIndex === -1 ? '2px solid blue' : '2px solid #fff',
               }}
               onClick={handleSelectedAllMerchant}
             >
@@ -167,7 +157,7 @@ export const MerchantChartSection: React.FC = () => {
                     border: `${
                       index === selectedIndex
                         ? `2px solid ${rgbaColorBorder}`
-                        : 'none'
+                        : '2px solid #fff'
                     }`,
                   }}
                   className={`instance ${
@@ -184,6 +174,7 @@ export const MerchantChartSection: React.FC = () => {
         <RechartPieChart
           data={newTransformedData}
           selectedIndex={selectedIndex}
+          onCellClick={handleSelectedMerchant}
         />
       </div>
     </>
