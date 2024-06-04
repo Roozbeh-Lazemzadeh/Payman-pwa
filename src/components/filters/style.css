@@ -361,7 +361,7 @@
 }
 .date_from {
   position: absolute;
-  right: 2px;
+  right: 1px;
   top: 5px;
   background-color: #fff;
   display: inline-block;
@@ -371,13 +371,16 @@
   position: absolute;
   right: 50%;
   top: 50%;
-  transform: translate(calc(-50% + 63px), -50%);
+  transform: translate(calc(-50% + 64px), -50%);
   background-color: #fff;
   display: inline-block;
   padding: 5px 10px;
 }
 .search-datePicker .rmdp-container input::placeholder {
   color: rgba(16, 24, 40, 0.2);
+}
+.search-datePicker .rmdp-container input {
+  color: transparent;
 }
 .custom-input {
   font-family: 'IranYekan';
