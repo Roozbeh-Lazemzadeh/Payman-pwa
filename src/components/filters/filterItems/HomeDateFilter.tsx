@@ -37,12 +37,16 @@ export const HomeDateFilter: React.FC = () => {
   const datePeriod = useAppSelector(selectDatePeriod);
   const [dates, setDates] = useState<string[]>([]);
   const [selectedQuickItems, setSelectedQuickItems] = useState<string>('');
+  const [fromDate, setFromDate] = useState('');
+  const [toDate, setToDate] = useState('');
   const { spaceCount, dateSpace, inputRef } = useResponsiveSpace();
   const month = useAppSelector(selectSelectedMonth);
 
   // Use fallback values if month is null
-  const initialFirstDay = month?.firstDayOfMonth ?? new Date();
-  const initialLastDay = month?.lastDayOfMonth ?? new Date();
+  const initialFirstDay =
+    (month && new Date(Date.parse(month?.firstDayOfMonth))) ?? new Date();
+  const initialLastDay =
+    (month && new Date(Date.parse(month?.lastDayOfMonth))) ?? new Date();
 
   const [values, setValues] = useState<Date[]>([
     initialFirstDay,
@@ -165,6 +169,44 @@ export const HomeDateFilter: React.FC = () => {
     setSelectedQuickItems(datePeriod);
   }, [searchItem]);
 
+  // // Function to get the value of the input field
+  // const getInputValue = () => {
+  //   if (datePickerRef.current) {
+  //     const inputElement = datePickerRef.current.querySelector('.rmdp-input');
+  //     if (inputElement) {
+  //       console.log(inputElement.value);
+  //     }
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   // Example usage of getInputValue function
+  //   getInputValue();
+  //   console.log(dates);
+  // }, [dates]);
+
+  // Function to convert the dates to Persian format
+  const convertToPersianFormat = (dates: string[]) => {
+    if (!dates.length) return '';
+
+    const persianDates = dates.map((dateString) => {
+      const dateObject = new DateObject(
+        parse(dateString, 'dd-MMM-yy hh:mm:ss a', new Date())
+      );
+      return dateObject.convert(persian, persian_fa).format('YYYY/MM/DD');
+    });
+
+    return `${persianDates[0]}~${persianDates[1]}`;
+  };
+
+  useEffect(() => {
+    if (dates.length > 0) {
+      const Dates = convertToPersianFormat(dates);
+      Dates !== '' && setFromDate(Dates.split('~')[0]);
+      Dates !== '' && setToDate(Dates.split('~')[1]);
+    }
+  }, [dates]);
+
   return (
     <>
       <div className='implement-remove-wrapper'>
@@ -236,6 +278,8 @@ export const HomeDateFilter: React.FC = () => {
               maxDate={month?.lastDayOfMonth}
               currentDate={new DateObject(initialFirstDay)} // Set the initial view to the startDate
             />
+            <span className='date_from'>{fromDate}</span>
+            <span className='date_to'>{toDate}</span>
             <div className='icon'>
               <CalendarIcon
                 onClick={() => datePickerRef.current.openCalendar()}

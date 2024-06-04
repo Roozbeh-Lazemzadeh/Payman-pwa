@@ -37,8 +37,9 @@ export interface Month {
   id: number;
   year: string;
   month: string;
-  firstDayOfMonth: Date;
-  lastDayOfMonth: Date;
+  firstDayOfMonth: string;
+  lastDayOfMonth: string;
+  todayDate: string;
 }
 
 function HomeWithMandate() {
@@ -62,6 +63,7 @@ function HomeWithMandate() {
 
   const monthsList: Month[] = [];
   const monthsList2: string[] = [];
+  const today = jalaliMoment().locale('fa').toISOString();
 
   for (let i = 0; i < 6; i++) {
     const currentDate = jalaliMoment();
@@ -70,8 +72,9 @@ function HomeWithMandate() {
       id: i,
       year: pastDate.locale('fa').format('jYY'),
       month: pastDate.locale('fa').format('jMMMM'),
-      firstDayOfMonth: pastDate.locale('fa').startOf('jMonth').toDate(),
-      lastDayOfMonth: pastDate.locale('fa').endOf('jMonth').toDate(),
+      firstDayOfMonth: pastDate.locale('fa').startOf('jMonth').toISOString(),
+      lastDayOfMonth: pastDate.locale('fa').endOf('jMonth').toISOString(),
+      todayDate: today,
     });
     monthsList2.push(pastDate.format('jYYYY/jMM'));
   }

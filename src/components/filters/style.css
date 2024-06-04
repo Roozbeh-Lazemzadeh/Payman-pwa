@@ -359,6 +359,23 @@
   transform: translate(calc(-50% + 20px), -50%);
   border-right: 1px solid #cdcdd0;
 }
+.date_from {
+  position: absolute;
+  right: 2px;
+  top: 5px;
+  background-color: #fff;
+  display: inline-block;
+  padding: 7px 10px;
+}
+.date_to {
+  position: absolute;
+  right: 50%;
+  top: 50%;
+  transform: translate(calc(-50% + 63px), -50%);
+  background-color: #fff;
+  display: inline-block;
+  padding: 5px 10px;
+}
 .search-datePicker .rmdp-container input::placeholder {
   color: rgba(16, 24, 40, 0.2);
 }
