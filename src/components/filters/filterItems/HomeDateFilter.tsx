@@ -278,8 +278,18 @@ export const HomeDateFilter: React.FC = () => {
               maxDate={month?.lastDayOfMonth}
               currentDate={new DateObject(initialFirstDay)} // Set the initial view to the startDate
             />
-            <span className='date_from'>{fromDate}</span>
-            <span className='date_to'>{toDate}</span>
+            <span
+              className='date_from'
+              onClick={() => datePickerRef.current.openCalendar()}
+            >
+              {fromDate}
+            </span>
+            <span
+              className='date_to'
+              onClick={() => datePickerRef.current.openCalendar()}
+            >
+              {toDate}
+            </span>
             <div className='icon'>
               <CalendarIcon
                 onClick={() => datePickerRef.current.openCalendar()}
