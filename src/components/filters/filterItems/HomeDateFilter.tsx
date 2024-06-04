@@ -22,7 +22,7 @@ import {
   searchedToggle,
   selectSearchItem,
 } from '../../../store/filterMenu/filterMenuSlice';
-import useResponsiveSpace from '../../hooks/useResponsiveSpace';
+// import useResponsiveSpace from '../../hooks/useResponsiveSpace';
 import { selectSelectedMonth } from '../../../store/monthlyBill/monthlyBillSlice';
 
 // style
@@ -39,7 +39,7 @@ export const HomeDateFilter: React.FC = () => {
   const [selectedQuickItems, setSelectedQuickItems] = useState<string>('');
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
-  const { spaceCount, dateSpace, inputRef } = useResponsiveSpace();
+  // const { spaceCount, dateSpace, inputRef } = useResponsiveSpace();
   const month = useAppSelector(selectSelectedMonth);
 
   // Use fallback values if month is null
@@ -253,16 +253,16 @@ export const HomeDateFilter: React.FC = () => {
           </>
         </div>
         <div className='search-section search-bar'>
-          <div className='search-datePicker' ref={inputRef}>
+          <div className='search-datePicker'>
             <DatePicker
               ref={datePickerRef}
-              placeholder={`از تاریخ${' '.repeat(spaceCount)}تا تاریخ`}
+              // placeholder={`از تاریخ${' '.repeat(spaceCount)}تا تاریخ`}
               style={{
                 direction: 'rtl',
               }}
               value={values}
               onChange={handleDateChange}
-              dateSeparator={' '.repeat(dateSpace)}
+              // dateSeparator={' '.repeat(dateSpace)}
               locale={persian_fa}
               calendar={persian}
               className='rmdp-mobile'
@@ -282,13 +282,13 @@ export const HomeDateFilter: React.FC = () => {
               className='date_from'
               onClick={() => datePickerRef.current.openCalendar()}
             >
-              {fromDate}
+              {fromDate !== '' ? fromDate : 'از تاریخ'}
             </span>
             <span
               className='date_to'
               onClick={() => datePickerRef.current.openCalendar()}
             >
-              {toDate}
+              {toDate !== '' ? toDate : 'تا تاریخ'}
             </span>
             <div className='icon'>
               <CalendarIcon
