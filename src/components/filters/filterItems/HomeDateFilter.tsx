@@ -22,12 +22,12 @@ import {
   searchedToggle,
   selectSearchItem,
 } from '../../../store/filterMenu/filterMenuSlice';
-// import useResponsiveSpace from '../../hooks/useResponsiveSpace';
 import { selectSelectedMonth } from '../../../store/monthlyBill/monthlyBillSlice';
 
 // style
 import '../../Paymans/otherPaymans/style.css';
 import '../style.css';
+import { convertToPersianFormat } from '../../helpers/transDate';
 
 export const HomeDateFilter: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -39,7 +39,6 @@ export const HomeDateFilter: React.FC = () => {
   const [selectedQuickItems, setSelectedQuickItems] = useState<string>('');
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
-  // const { spaceCount, dateSpace, inputRef } = useResponsiveSpace();
   const month = useAppSelector(selectSelectedMonth);
 
   // Use fallback values if month is null
@@ -165,39 +164,8 @@ export const HomeDateFilter: React.FC = () => {
 
   useEffect(() => {
     // Check the search item and initialize the selectedQuickItems state
-
     setSelectedQuickItems(datePeriod);
   }, [searchItem]);
-
-  // // Function to get the value of the input field
-  // const getInputValue = () => {
-  //   if (datePickerRef.current) {
-  //     const inputElement = datePickerRef.current.querySelector('.rmdp-input');
-  //     if (inputElement) {
-  //       console.log(inputElement.value);
-  //     }
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   // Example usage of getInputValue function
-  //   getInputValue();
-  //   console.log(dates);
-  // }, [dates]);
-
-  // Function to convert the dates to Persian format
-  const convertToPersianFormat = (dates: string[]) => {
-    if (!dates.length) return '';
-
-    const persianDates = dates.map((dateString) => {
-      const dateObject = new DateObject(
-        parse(dateString, 'dd-MMM-yy hh:mm:ss a', new Date())
-      );
-      return dateObject.convert(persian, persian_fa).format('YYYY/MM/DD');
-    });
-
-    return `${persianDates[0]}~${persianDates[1]}`;
-  };
 
   useEffect(() => {
     if (dates.length > 0) {
@@ -256,13 +224,11 @@ export const HomeDateFilter: React.FC = () => {
           <div className='search-datePicker'>
             <DatePicker
               ref={datePickerRef}
-              // placeholder={`از تاریخ${' '.repeat(spaceCount)}تا تاریخ`}
               style={{
                 direction: 'rtl',
               }}
               value={values}
               onChange={handleDateChange}
-              // dateSeparator={' '.repeat(dateSpace)}
               locale={persian_fa}
               calendar={persian}
               className='rmdp-mobile'
@@ -279,13 +245,13 @@ export const HomeDateFilter: React.FC = () => {
               currentDate={new DateObject(initialFirstDay)} // Set the initial view to the startDate
             />
             <span
-              className='date_from'
+              className={`date_from ${fromDate.length !== 0 ? 'filled' : ''}`}
               onClick={() => datePickerRef.current.openCalendar()}
             >
               {fromDate !== '' ? fromDate : 'از تاریخ'}
             </span>
             <span
-              className='date_to'
+              className={`date_to ${toDate.length !== 0 ? 'filled' : ''}`}
               onClick={() => datePickerRef.current.openCalendar()}
             >
               {toDate !== '' ? toDate : 'تا تاریخ'}

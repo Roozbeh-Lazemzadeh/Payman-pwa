@@ -361,29 +361,38 @@
 }
 .date_from {
   position: absolute;
-  right: 1px;
-  top: 6px;
-  background-color: #fff;
+  right: 0%;
+  top: 17%;
   display: inline-block;
   padding: 7px 10px;
-  min-width: 90px;
   color: rgba(16, 24, 40, 0.2);
   font-weight: 600;
   font-size: 12px;
+}
+.date_from.payman {
+  right: -4px;
+}
+.date_from.filled {
+  color: rgba(16, 24, 40, 1);
 }
 .date_to {
   position: absolute;
   right: 50%;
   top: 50%;
-  transform: translate(calc(-50% + 64px), -50%);
-  background-color: #fff;
+  transform: translate(calc(-50% + 75%), -50%);
   display: inline-block;
   padding: 5px 10px;
-  min-width: 90px;
   color: rgba(16, 24, 40, 0.2);
   font-weight: 600;
   font-size: 12px;
 }
+.date_to.payman {
+  transform: translate(calc(-50% + 71%), -50%);
+}
+.date_to.filled {
+  color: rgba(16, 24, 40, 1);
+}
+
 .search-datePicker .rmdp-container input::placeholder {
   color: rgba(16, 24, 40, 0.2);
 }
@@ -490,21 +499,3 @@ input.ant-input.css-dev-only-do-not-override-1jc77hn.ant-input-outlined.input-cl
     padding: 10px 4px;
   }
 }
-/* XR iphone */
-/* @media screen and (min-width: 410px) {
-  .search-datePicker .divider.payman {
-    right: 38%;
-  }
-} */
-/* 14 iphone */
-/* @media screen and (min-width: 420px) {
-  .search-datePicker .divider.payman {
-    right: 37%;
-  }
-} */
-/* 14 iphone */
-/* @media screen and (min-width: 400px) {
-  .search-datePicker .divider {
-    right: 39%;
-  }
-} */

@@ -24,10 +24,11 @@ import {
   searchedToggle,
 } from '../../../store/filterMenu/filterMenuSlice';
 import { useLocation } from 'react-router-dom';
-import useResponsiveSpace from '../../hooks/useResponsiveSpace';
 
+// style
 import '../style.css';
 import '../../Paymans/otherPaymans/style.css';
+import { convertToPersianFormat } from '../../helpers/transDate';
 
 export const PaymanDateFilter: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -36,6 +37,8 @@ export const PaymanDateFilter: React.FC = () => {
   const allFilter = useAppSelector(selectAllFilter);
   const [startingDates, setStartingDates] = useState<string[]>([]);
   const [endingDates, setEndingDates] = useState<string[]>([]);
+  const [viewStartingPayman, setViewStartingPayman] = useState<string[]>([]);
+  const [viewEndingPayman, setViewEndingPayman] = useState<string[]>([]);
   const [selectedDateTab, setSelectedDateTab] = useState('start');
   const [dateValues, setDateValues] = useState<{
     startingDateValues: Date[];
@@ -44,9 +47,6 @@ export const PaymanDateFilter: React.FC = () => {
     startingDateValues: [],
     endingDateValues: [],
   });
-  // const { spaceCount, dateSpace } = useResponsiveSpace();
-  const { spaceCount, dateSpace, inputRef } = useResponsiveSpace();
-  console.log(spaceCount, dateSpace, inputRef);
 
   const handleDateChange = (dates: DateObject | DateObject[] | null) => {
     if (dates) {
@@ -177,6 +177,23 @@ export const PaymanDateFilter: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    if (startingDates.length > 0) {
+      const Dates = convertToPersianFormat(startingDates);
+      const splitDates = Dates.split('~');
+      if (splitDates.length > 0) {
+        setViewStartingPayman([splitDates[0], splitDates[1]]);
+      }
+    }
+    if (endingDates.length > 0) {
+      const Dates = convertToPersianFormat(endingDates);
+      const splitDates = Dates.split('~');
+      if (splitDates.length > 0) {
+        setViewEndingPayman([splitDates[0], splitDates[1]]);
+      }
+    }
+  }, [startingDates, endingDates]);
+
   return (
     <>
       <div className='implement-remove-wrapper'>
@@ -218,18 +235,9 @@ export const PaymanDateFilter: React.FC = () => {
           />
         </div>
         <div className='search-section search-bar'>
-          <div className='search-datePicker payman' ref={inputRef}>
+          <div className='search-datePicker payman'>
             <DatePicker
               ref={datePickerRef}
-              placeholder={
-                selectedDateTab === 'start'
-                  ? `شروع پیمان از تاریخ${' '.repeat(
-                      spaceCount
-                    )}شروع پیمان تا تاریخ`
-                  : `پایان پیمان از تاریخ${' '.repeat(
-                      spaceCount
-                    )}پایان پیمان تا تاریخ`
-              }
               style={{ direction: 'rtl', fontSize: 12 }}
               value={
                 selectedDateTab === 'start'
@@ -237,7 +245,6 @@ export const PaymanDateFilter: React.FC = () => {
                   : dateValues.endingDateValues
               }
               onChange={(dates) => handleDateChange(dates)}
-              dateSeparator={' '.repeat(dateSpace)}
               locale={persian_fa}
               calendar={persian}
               className='rmdp-mobile'
@@ -250,6 +257,54 @@ export const PaymanDateFilter: React.FC = () => {
                 CANCEL: 'انصراف',
               }}
             />
+            {selectedDateTab === 'start' ? (
+              <>
+                <span
+                  className={`date_from ${
+                    viewStartingPayman.length === 0 ? 'payman' : 'filled'
+                  }`}
+                  onClick={() => datePickerRef.current.openCalendar()}
+                >
+                  {viewStartingPayman.length > 0
+                    ? viewStartingPayman[0]
+                    : ' شروع پیمان از تاریخ'}
+                </span>
+                <span
+                  className={`date_to ${
+                    viewStartingPayman.length === 0 ? 'payman' : 'filled'
+                  }`}
+                  onClick={() => datePickerRef.current.openCalendar()}
+                >
+                  {viewStartingPayman.length > 0
+                    ? viewStartingPayman[1]
+                    : ' شروع پیمان تا تاریخ'}
+                </span>
+              </>
+            ) : (
+              <>
+                <span
+                  className={`date_from ${
+                    viewEndingPayman.length === 0 ? 'payman' : 'filled'
+                  }`}
+                  onClick={() => datePickerRef.current.openCalendar()}
+                >
+                  {viewEndingPayman.length > 0
+                    ? viewEndingPayman[0]
+                    : ' پایان پیمان از تاریخ'}
+                </span>
+                <span
+                  className={`date_to ${
+                    viewEndingPayman.length === 0 ? 'payman' : 'filled'
+                  }`}
+                  onClick={() => datePickerRef.current.openCalendar()}
+                >
+                  {viewEndingPayman.length > 0
+                    ? viewEndingPayman[1]
+                    : ' پایان پیمان تا تاریخ'}
+                </span>
+              </>
+            )}
+
             <div className='icon'>
               <CalendarIcon
                 onClick={() => datePickerRef.current.openCalendar()}
