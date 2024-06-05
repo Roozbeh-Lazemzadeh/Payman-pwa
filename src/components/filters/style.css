@@ -253,10 +253,19 @@
   font-size: 10px;
   font-weight: 400;
 }
+.ant-segmented.custom-date-segment .ant-segmented-thumb-motion-appear-active {
+  transition: 0.25s ease-out;
+  border-radius: 5px;
+  line-height: 24px;
+  min-height: 24px;
+}
 .custom-date-segment .ant-segmented-item-selected {
   color: #fff;
   font-size: 10px;
   font-weight: 400;
+}
+.custom-date-segment.ant-segmented {
+  padding: 3px;
 }
 .quick-access-section.payman {
   height: 35%;

@@ -227,7 +227,7 @@ export const PaymanDateFilter: React.FC = () => {
           <span className='title'>مبنای فیلتر تاریخ بر اساس</span>
           <Segmented
             className='custom-date-segment'
-            style={{ direction: 'ltr', height: 30, transition: 'none' }}
+            style={{ direction: 'ltr', height: 30 }}
             options={['پایان', 'شروع']}
             block
             defaultValue={'شروع'}

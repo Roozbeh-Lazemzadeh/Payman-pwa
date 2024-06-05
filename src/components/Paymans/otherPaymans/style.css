@@ -1,6 +1,6 @@
 .business-content {
   position: relative;
-      margin: 1rem 0;
+  margin: 1rem 0;
 }
 
 .business-section-wrapper {
@@ -116,8 +116,9 @@
   box-shadow: unset;
 }
 
-@media screen and (max-width: 376px), screen and (max-height: 668px) {
-  .home-search_input.payman .ant-input-outlined {
-    height: 29px;
+@media screen and (max-width: 376px) {
+  .home-search_input.payman .ant-input-outlined,
+  .home-search_input.payman.others .ant-input-search-button {
+    height: 32px !important;
   }
 }
