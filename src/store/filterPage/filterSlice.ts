@@ -1,4 +1,8 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import {
+  createSelector,
+  createSlice,
+  type PayloadAction,
+} from '@reduxjs/toolkit';
 import { isAfter, parse } from 'date-fns';
 import { type Payman } from '../../components/Paymans/myPaymans/MyPaymans';
 import { type RootState } from '../store';
@@ -55,11 +59,15 @@ export const filterSlice = createSlice({
       const hasFilters =
         state.allFilter.merchants.length > 0 ||
         state.allFilter.date.length > 0 ||
+        state.allFilter.endingDate.length > 0 ||
         state.allFilter.price.length > 0;
       state.isFiltered = hasFilters;
       state.totalFilterNumber =
         state.allFilter.merchants.length +
-        (state.allFilter.date.length > 0 ? 1 : 0) +
+        (state.allFilter.date.length > 0 ||
+        state.allFilter.endingDate.length > 0
+          ? 1
+          : 0) +
         (state.allFilter.price.length > 0 ? 1 : 0);
     },
 
@@ -114,11 +122,15 @@ export const filterSlice = createSlice({
       const hasFilters =
         state.allFilter.merchants.length > 0 ||
         state.allFilter.date.length > 0 ||
+        state.allFilter.endingDate.length > 0 ||
         newPrices.length > 0;
       state.isFiltered = hasFilters;
       state.totalFilterNumber =
         state.allFilter.merchants.length +
-        (state.allFilter.date.length > 0 ? 1 : 0) +
+        (state.allFilter.date.length > 0 ||
+        state.allFilter.endingDate.length > 0
+          ? 1
+          : 0) +
         (newPrices.length > 0 ? 1 : 0);
 
       // Assign the new array of prices to the state
@@ -273,58 +285,76 @@ export const selectMerchantsFilterLength = (state: RootState) =>
   state.filter.allFilter.merchants.length;
 export const selectDatePeriod = (state: RootState) => state.filter.datePeriod;
 export const selectSortKey = (state: RootState) => state.filter.sortKey;
-export const selectTransactionList = (state: RootState) => {
-  if (state.filter.sortKey === '0') {
-    const sortedList = [...state.filter.transactionList];
+
+const selectTransactionList = (state: RootState) =>
+  state.filter.transactionList;
+const selectPaymanList = (state: RootState) => state.filter.paymanList;
+
+// Memoized selector for sorting the transaction list
+const selectTransactionListSorted = createSelector(
+  [selectTransactionList, selectSortKey],
+  (transactionList, sortKey) => {
+    if (sortKey === '0') {
+      const sortedList = [...transactionList];
+      sortedList.sort((a, b) => {
+        const dateA = parse(
+          a.transaction_date,
+          'dd-MMM-yy hh.mm.ss.SSSSSSSSS a',
+          new Date()
+        );
+        const dateB = parse(
+          b.transaction_date,
+          'dd-MMM-yy hh.mm.ss.SSSSSSSSS a',
+          new Date()
+        );
+
+        // Compare dates using isAfter from date-fns
+        return isAfter(dateB, dateA) ? 1 : -1;
+      });
+
+      return sortedList;
+    } else if (sortKey === '1') {
+      const sortedList = [...transactionList];
+      sortedList.sort((a, b) => b.transaction_amount - a.transaction_amount);
+      return sortedList;
+    }
+
+    return transactionList;
+  }
+);
+
+// Memoized selector for sorting the payman list
+const selectPaymanListSorted = createSelector(
+  [selectPaymanList],
+  (paymanList) => {
+    const sortedList = [...paymanList];
     sortedList.sort((a, b) => {
+      const currentDate = new Date();
       const dateA = parse(
-        a.transaction_date,
+        a.end_date,
         'dd-MMM-yy hh.mm.ss.SSSSSSSSS a',
         new Date()
       );
       const dateB = parse(
-        b.transaction_date,
+        b.end_date,
         'dd-MMM-yy hh.mm.ss.SSSSSSSSS a',
         new Date()
       );
 
-      // Compare dates using isAfter from date-fns
-      return isAfter(dateB, dateA) ? 1 : -1;
+      // If both end_dates are before the current date, sort in descending order
+      if (dateA < currentDate && dateB < currentDate) {
+        return dateB.getTime() - dateA.getTime();
+      } else {
+        // If both end_dates are after or equal to the current date, sort in ascending order
+        return dateA.getTime() - dateB.getTime();
+      }
     });
-
-    return sortedList;
-  } else if (state.filter.sortKey === '1') {
-    const sortedList = [...state.filter.transactionList];
-    sortedList.sort((a, b) => b.transaction_amount - a.transaction_amount);
     return sortedList;
   }
-
-  return state.filter.transactionList;
-};
-export const selectPaymanList = (state: RootState) => {
-  const sortedList = [...state.filter.paymanList];
-  sortedList.sort((a, b) => {
-    const currentDate = new Date();
-    const dateA = parse(
-      a.end_date,
-      'dd-MMM-yy hh.mm.ss.SSSSSSSSS a',
-      new Date()
-    );
-    const dateB = parse(
-      b.end_date,
-      'dd-MMM-yy hh.mm.ss.SSSSSSSSS a',
-      new Date()
-    );
-
-    // If both end_dates are before the current date, sort in descending order
-    if (dateA < currentDate && dateB < currentDate) {
-      return dateB.getTime() - dateA.getTime();
-    } else {
-      // If both end_dates are after or equal to the current date, sort in ascending order
-      return dateA.getTime() - dateB.getTime();
-    }
-  });
-  return sortedList;
+);
+export {
+  selectTransactionListSorted as selectTransactionList,
+  selectPaymanListSorted as selectPaymanList,
 };
 
 export const {

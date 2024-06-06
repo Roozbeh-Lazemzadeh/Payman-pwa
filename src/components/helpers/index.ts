@@ -32,6 +32,7 @@ export function getItem({
   className,
 }: ItemProps) {
   const handleClick = () => {
+    dispatch(removeAllFiltersHandler());
     // for closing sidebar
     if (key.length === 1) {
       dispatch(toggleSidebar());
@@ -51,7 +52,6 @@ export function getItem({
     // for filtering price , date, merchants
     if (key.length === 3) {
       if (key === '101') {
-        dispatch(removeAllFiltersHandler());
         dispatch(searchedToggle(''));
         dispatch(filteredToggle());
         dispatch(dateQuickAccessHandler(''));
