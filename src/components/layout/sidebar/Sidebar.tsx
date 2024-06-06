@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Carousel, Drawer, Menu } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import {
@@ -6,67 +6,82 @@ import {
   toggleSidebar,
 } from '../../../store/sidebar/sidebarSlice';
 import { getItem } from '../../helpers';
-import { ReactComponent as DashboardIcon } from '../../../icons/defaultHome.svg';
-import { ReactComponent as ContactIcon } from '../../../icons/defaultContact.svg';
-import { ReactComponent as ProfileIcon } from '../../../icons/defaultProfile.svg';
-import { ReactComponent as InfoIcon } from '../../../icons/defaultInfoIcon.svg';
-import { ReactComponent as BlogIcon } from '../../../icons/defaultBlog.svg';
-import './style.css';
-// import Slider from "../slider/Slider";
-// import { Swiper, SwiperSlide } from "swiper/react";
-// import { Autoplay, EffectCards, Pagination, EffectFlip } from "swiper/modules";
+import { ReactComponent as DefaultDashboardIcon } from '../../../icons/defaultHome.svg';
+import { ReactComponent as DashboardIcon } from '../../../icons/selectedHome.svg';
+import { ReactComponent as DefaultContactIcon } from '../../../icons/defaultContact.svg';
+import { ReactComponent as ContactIcon } from '../../../icons/calling.svg';
+import { ReactComponent as DefaultProfileIcon } from '../../../icons/defaultProfile.svg';
+import { ReactComponent as ProfileIcon } from '../../../icons/Profile.svg';
+import { ReactComponent as DefaultInfoIcon } from '../../../icons/defaultInfoIcon.svg';
+import { ReactComponent as InfoIcon } from '../../../icons/Info.svg';
+import { ReactComponent as DefaultBlogIcon } from '../../../icons/defaultBlog.svg';
+import { ReactComponent as BlogIcon } from '../../../icons/Blog.svg';
+import { useLocation, useNavigate } from 'react-router-dom';
 
+// styles
+import './style.css';
 import 'swiper/css';
 import 'swiper/css/effect-cards';
 import 'swiper/css/effect-flip';
-import { useNavigate } from 'react-router-dom';
-// import { SliderButtons } from "../slider/Slider";
-
-// const homeSliderArray = [
-//   { img: "/assets/banner-home/home1.png", id: 1 },
-//   { img: "/assets/banner-home/home2.png", id: 2 },
-//   { img: "/assets/banner-home/home3.png", id: 3 },
-//   { img: "/assets/banner-home/home4.png", id: 4 },
-// ];
 
 export const Sidebar: React.FC = () => {
+  const [selectedKey, setSelectedKey] = useState('1');
+  const location = useLocation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const isSidebarOpen = useAppSelector(selectSidebar);
+
+  useEffect(() => {
+    const pathname = location.pathname;
+    let key;
+    if (pathname.includes('/home')) {
+      key = '1';
+    } else if (pathname.includes('/contact-us')) {
+      key = '2';
+    } else if (pathname.includes('/profile')) {
+      key = '3';
+    } else if (pathname.includes('/faq')) {
+      key = '4';
+    } else {
+      key = '0'; // Default nothing to show
+    }
+
+    setSelectedKey(key);
+  }, [location]);
 
   const items = [
     getItem({
       label: 'داشبورد',
       key: '1',
-      icon: <DashboardIcon />,
+      icon: selectedKey === '1' ? <DashboardIcon /> : <DefaultDashboardIcon />,
       dispatch,
       navigate,
     }),
     getItem({
       label: 'تماس با پیمان',
       key: '2',
-      icon: <ContactIcon />,
+      icon: selectedKey === '2' ? <ContactIcon /> : <DefaultContactIcon />,
       dispatch,
       navigate,
     }),
     getItem({
       label: 'حساب کاربری',
       key: '3',
-      icon: <ProfileIcon />,
+      icon: selectedKey === '3' ? <ProfileIcon /> : <DefaultProfileIcon />,
       dispatch,
       navigate,
     }),
     getItem({
       label: 'پرسش‌های متداول',
       key: '4',
-      icon: <InfoIcon />,
+      icon: selectedKey === '4' ? <InfoIcon /> : <DefaultInfoIcon />,
       dispatch,
       navigate,
     }),
     getItem({
       label: 'بلاگ پیمان',
       key: '5',
-      icon: <BlogIcon />,
+      icon: selectedKey === '5' ? <BlogIcon /> : <DefaultBlogIcon />,
       dispatch,
       navigate,
     }),
@@ -206,41 +221,14 @@ export const Sidebar: React.FC = () => {
       footer={customFooter()}
     >
       <Menu
-        style={{ background: 'none' }}
-        // onClick={handleNavLink}
+        selectedKeys={[selectedKey]}
+        onClick={(info) => setSelectedKey(info.key)}
         mode='inline'
-        selectedKeys={[location.pathname]}
+        // selectedKeys={[location.pathname]}
         items={items}
         className='custom-sidebar-menu'
       />
-      {/* <div
-        style={{
-          borderBottom: "1px solid rgba(5, 5, 5, 0.06)",
-          width: 260,
-          margin: "20px auto",
-          display: "flex",
-        }}
-      >
-        <Slider ImgArray={homeSliderArray} />
-      </div> */}
-      {/* <Swiper
-        effect={"flip"}
-        slidesOffsetAfter={3}
-        spaceBetween={30}
-        centeredSlides={true}
-        pagination={{
-          clickable: true,
-        }}
-        modules={[Autoplay, Pagination, EffectCards]}
-        className="slider-home"
-      >
-        {homeSliderArray.map((item) => (
-          <SwiperSlide key={item.id}>
-            <img src={item.img} className="banner-home-sidebar" />
-          </SwiperSlide>
-        ))}
-        <SliderButtons />
-      </Swiper> */}
+
       <Carousel autoplay infinite className='custom-sidebar'>
         <img src='/assets/banner-home/home1.png' />
         <img src='/assets/banner-home/home2.png' />

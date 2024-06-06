@@ -169,6 +169,11 @@
   stroke: #fff;
 }
 
+.custom-sidebar-menu .ant-menu-item.ant-menu-item-selected {
+  background-color: #0072ff !important;
+  color: #fff;
+}
+
 .ant-drawer .ant-drawer-mask {
   background: rgba(0, 0, 0, 0.2);
 }
