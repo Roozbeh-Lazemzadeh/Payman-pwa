@@ -51,7 +51,9 @@ const AccountPage: React.FC = () => {
       />
       <Input placeholder='نام و نام خانوادگی' className='profile-input' />
       <Input placeholder='ایمیل' className='profile-input' type='email' />
+
       <Select
+        className='address-select'
         showSearch
         placeholder='محل سکونت'
         optionFilterProp='children'
@@ -94,6 +96,7 @@ const AccountPage: React.FC = () => {
           weekDays={weekDays}
         />
       </div>
+
       <Button
         className='contact-us-with-icon profile'
         type='primary'

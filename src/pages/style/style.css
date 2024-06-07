@@ -490,12 +490,20 @@
   height: 40px;
   margin-top: 2rem;
   background-color: #ff3672;
-  background-color: #ff3672;
+  border: #ff3672;
   color: #fff;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
+  background-color: #fc5b8b;
+  color: #fff;
+}
+
+.address-select .ant-select-selector {
+  border-radius: 10px !important;
 }
 /* end profile page style */
 
@@ -560,8 +568,21 @@
     font-size: 10px !important;
   }
 }
-
 @media screen and (max-width: 376px), screen and (max-height: 668px) {
+  /* login paage  */
+  .profile-input-disabled {
+    margin-bottom: 1rem;
+  }
+  .profile-input {
+    margin-bottom: 1rem;
+  }
+  .datepiker-wrapper {
+    margin-top: 1.7rem;
+  }
+  .contact-us-with-icon.logout {
+    margin-top: 1rem;
+  }
+  /* login paage  */
   .headerOnboarding-img {
     width: 30%;
     width: 30%;
