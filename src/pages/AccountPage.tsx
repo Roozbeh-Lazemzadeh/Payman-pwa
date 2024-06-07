@@ -1,40 +1,42 @@
 import React, { useState } from 'react';
 import { Button, Input, Select } from 'antd';
-import { CaretLeftOutlined, SearchOutlined } from '@ant-design/icons';
 import DatePiker from 'react-multi-date-picker';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
 import { ReactComponent as TickSquarepro } from '../icons/TickSquarepro.svg';
 import { ReactComponent as Logout } from '../icons/Logout.svg';
+import { ReactComponent as SelectLeftIcon } from '../icons/arrowLeft2.svg';
+import { ReactComponent as SelectDownIcon } from '../icons/arrowDown.svg';
 import { weekDays } from '../components/types/calendar';
 import { provinces } from '../components/shared/Constant/provinces';
 
 import 'react-multi-date-picker/styles/layouts/mobile.css';
 import './style/style.css';
 
-const onChange = (value: string) => {
-  console.log(`selected ${value}`);
-};
-
-const onSearch = (value: string): void => {
-  console.log('search:', value);
-};
-
-// Filter `option.label` match the user type `input`
-const filterOption = (
-  input: string,
-  option?: { label: string; value: string }
-) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
-
 const AccountPage: React.FC = () => {
-  const [Icon, setIcon] = useState(true);
+  const [isSelectOpen, setIsSelectOpen] = useState(false);
   const [value, setValue] = useState(new Date());
 
   const changeDateHandler = (): void => {
     const date = new Date();
     setValue(date);
   };
+  const onChange = (value: string) => {
+    console.log(`selected ${value}`);
+    setIsSelectOpen(false);
+  };
+  const onSearch = (value: string): void => {
+    console.log('search:', value);
+  };
 
+  const filterOption = (
+    input: string,
+    option?: { label: string; value: string }
+  ) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
+
+  const handleShowIcon = () => {
+    return isSelectOpen ? <SelectDownIcon /> : <SelectLeftIcon />;
+  };
   return (
     <div className='profile-wrapper'>
       <Input
@@ -57,8 +59,10 @@ const AccountPage: React.FC = () => {
         showSearch
         placeholder='محل سکونت'
         optionFilterProp='children'
-        suffixIcon={Icon ? <CaretLeftOutlined /> : <SearchOutlined />}
-        onFocus={() => setIcon(!Icon)}
+        onDropdownVisibleChange={(open) => setIsSelectOpen(open)}
+        onFocus={() => setIsSelectOpen(true)}
+        onBlur={() => setIsSelectOpen(false)}
+        suffixIcon={handleShowIcon()}
         style={{ width: '100%', height: '44px', borderRadius: '10px' }}
         onChange={onChange}
         onSearch={onSearch}
