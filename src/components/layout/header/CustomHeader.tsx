@@ -32,7 +32,7 @@ const CustomHeader: React.FC<CustomHeaderProps> = ({ background, title }) => {
     <>
       <Header
         style={{
-          paddingTop: 40,
+          paddingTop: 35,
           paddingLeft: 20,
           paddingRight: 20,
           paddingBottom: background ? 170 : 30,

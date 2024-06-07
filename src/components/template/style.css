@@ -288,7 +288,6 @@ span.otp-inputs-border {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 1.2rem;
 }
 
 .filter-tools-component {
@@ -326,7 +325,9 @@ span.otp-inputs-border {
   text-decoration-color: #0072ff;
 }
 
-:where(.css-dev-only-do-not-override-1jc77hn).ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
+:where(.css-dev-only-do-not-override-1jc77hn).ant-btn-default:not(
+    :disabled
+  ):not(.ant-btn-disabled):hover {
   background: unset !important;
 }
 

@@ -122,6 +122,7 @@
   display: flex;
   justify-content: space-between;
   padding-bottom: 1.2rem;
+  padding-top: 20px;
   border-bottom: 1px solid #d3d3d3;
   /* overflow: scroll; */
 }
@@ -187,15 +188,15 @@
 
 .TransactionHomeCard {
   overflow: scroll !important;
-  height: calc(100vh - 510px);
+  height: calc(100vh - 515px);
   direction: ltr;
 }
 
 .TransactionHomeCard.active-one {
-  height: calc(100vh - 545px);
+  height: calc(100vh - 560px);
 }
 .TransactionHomeCard.active-two {
-  height: calc(100vh - 575px);
+  height: calc(100vh - 580px);
 }
 .TransactionHomeCard.active-three {
   height: calc(100vh - 610px);
@@ -288,6 +289,9 @@
 /* end faq style */
 
 /* start profile page style */
+.profile-wrapper {
+  padding-top: 20px;
+}
 
 .profile-wrapper input {
   height: 44px !important;
@@ -484,6 +488,9 @@
 .contact-us-with-icon.profile {
   height: 40px;
   margin-top: 4rem;
+  direction: ltr;
+  font-size: 12px !important;
+  font-weight: 400 !important;
 }
 
 .contact-us-with-icon.logout {
@@ -496,9 +503,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  direction: ltr;
+  font-size: 12px !important;
+  font-weight: 400 !important;
 }
 .ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
-  background-color: #fc5b8b;
+  background-color: #fc5b8b !important;
   color: #fff;
 }
 
@@ -566,6 +576,11 @@
 @media screen and (max-width: 374px) {
   .search-datePicker.payman .rmdp-input {
     font-size: 10px !important;
+  }
+}
+@media screen and (max-width: 376px) {
+  .TransactionHomeCard {
+    height: calc(100vh - 485px);
   }
 }
 @media screen and (max-width: 376px), screen and (max-height: 668px) {
@@ -681,7 +696,7 @@
   }
 
   .home-merchants.payman {
-    height: calc(100vh - 474px);
+    height: calc(100vh - 465px);
   }
 
   .business-content {

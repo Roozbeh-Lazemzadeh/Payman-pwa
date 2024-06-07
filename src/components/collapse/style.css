@@ -57,6 +57,7 @@
   overflow: scroll;
   height: 65%;
   direction: ltr;
+  padding-top: 20px;
 }
 
 .ant-collapse.ant-collapse-icon-position-start > .ant-collapse-item {
@@ -93,7 +94,10 @@
 
 @media screen and (max-width: 376px), screen and (max-height: 668px) {
   .ant-btn-primary.contact-us-with-icon {
-    margin-top: 2.5rem;
+    margin-top: 0.5rem;
+  }
+  .ant-btn-primary.contact-us-with-icon.profile {
+    margin-top: 2rem;
   }
   .ant-collapse.ant-collapse-icon-position-start {
     overflow: scroll;

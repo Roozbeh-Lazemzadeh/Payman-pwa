@@ -32,12 +32,10 @@ export function getItem({
   className,
 }: ItemProps) {
   const handleClick = () => {
-    dispatch(removeAllFiltersHandler());
     // for closing sidebar
     if (key.length === 1) {
       dispatch(toggleSidebar());
     }
-
     // for navigating the page
     if (key === '4') {
       navigate('/faq');
@@ -45,6 +43,7 @@ export function getItem({
       navigate('/contact-us');
     } else if (key === '1') {
       navigate('/home');
+      dispatch(removeAllFiltersHandler());
     } else if (key === '3') {
       navigate('/profile');
     }

@@ -12,26 +12,26 @@
 .scrollable-section {
   overflow-y: scroll !important;
   overflow-x: hidden;
-  height: calc(100vh - 308px);
+  height: calc(100vh - 300px);
   padding-bottom: 1rem;
   /* padding-right: 0.5rem;
   padding-left: 0.5rem; */
   direction: ltr;
 }
 .scrollable-section.active-one {
-  height: calc(100vh - 343px);
+  height: calc(100vh - 325px);
 }
 
 .scrollable-section.active-two {
-  height: calc(100vh - 370px);
+  height: calc(100vh - 355px);
 }
 
 .scrollable-section.active-three {
-  height: calc(100vh - 405px);
+  height: calc(100vh - 385px);
 }
 
 .scrollable-section.active-four {
-  height: calc(100vh - 435px);
+  height: calc(100vh - 425px);
 }
 
 /* .scrollable-section-wrapper {
@@ -39,3 +39,12 @@
   overflow: scroll !important;
   direction: ltr;
 } */
+
+@media screen and (max-width: 376px) {
+  .scrollable-section {
+    height: calc(100vh - 290px);
+  }
+  .scrollable-section.active-four {
+    height: calc(100vh - 415px);
+  }
+}

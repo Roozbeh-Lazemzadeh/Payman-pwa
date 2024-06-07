@@ -44,7 +44,7 @@ export const PaymanSegmented: React.FC = () => {
   return (
     <Segmented
       className='payman-segmented'
-      style={{ direction: 'ltr', height: 40 }}
+      style={{ direction: 'ltr', height: 40, marginBottom: '1.2rem' }}
       options={['سایر ‌هم‌پیمان‌ها', 'پیمان‌های من']}
       block
       defaultValue={showDefaultValue}

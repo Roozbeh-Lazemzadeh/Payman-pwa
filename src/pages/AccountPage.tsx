@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Input, Select } from 'antd';
-import DatePiker from 'react-multi-date-picker';
+import DatePiker, { type DateObject } from 'react-multi-date-picker';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
 import { ReactComponent as TickSquarepro } from '../icons/TickSquarepro.svg';
@@ -15,11 +15,10 @@ import './style/style.css';
 
 const AccountPage: React.FC = () => {
   const [isSelectOpen, setIsSelectOpen] = useState(false);
-  const [value, setValue] = useState(new Date());
+  const [value, setValue] = useState<Date>(new Date());
 
-  const changeDateHandler = (): void => {
-    const date = new Date();
-    setValue(date);
+  const changeDateHandler = (date: DateObject): void => {
+    setValue(date.toDate());
   };
   const onChange = (value: string) => {
     console.log(`selected ${value}`);
@@ -29,10 +28,9 @@ const AccountPage: React.FC = () => {
     console.log('search:', value);
   };
 
-  const filterOption = (
-    input: string,
-    option?: { label: string; value: string }
-  ) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
+  // Custom filter function to ignore leading spaces
+  const filterOption = (input: string, option: any) =>
+    option?.value?.toLowerCase().indexOf(input.trim().toLowerCase()) >= 0;
 
   const handleShowIcon = () => {
     return isSelectOpen ? <SelectDownIcon /> : <SelectLeftIcon />;
