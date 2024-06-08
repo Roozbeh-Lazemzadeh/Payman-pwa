@@ -253,8 +253,8 @@
 .info-login {
   margin-top: 4rem;
   background-color: rgba(239, 242, 255, 1);
-  width: 100%;
-  max-width: calc(100% - 55px);
+  /* width: 100%; */
+  /* max-width: calc(100% - 55px); */
   font-size: 12px;
   line-height: 20px;
   font-weight: 500;
@@ -263,12 +263,12 @@
   border-radius: 10px;
 }
 .info-login.payman {
-  max-width: unset;
+  /* max-width: unset; */
   margin-top: 36px;
   line-height: 15.6px;
 }
 .info-login.contact {
-  max-width: unset;
+  /* max-width: unset; */
   line-height: 15.6px;
 }
 .info-login.detail {
@@ -585,6 +585,9 @@
   .TransactionHomeCard {
     overflow: unset !important;
     height: unset !important;
+  }
+  .info-login.detail {
+    width: calc(100% - 83px);
   }
 }
 @media screen and (max-width: 376px), screen and (max-height: 668px) {
