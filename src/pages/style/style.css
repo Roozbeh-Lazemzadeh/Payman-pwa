@@ -115,7 +115,7 @@
 }
 
 .home-merchants.payman {
-  height: calc(100vh - 533px);
+  height: calc(100vh - 515px);
 }
 
 .home-datepickers {
@@ -696,7 +696,7 @@
   }
 
   .home-merchants.payman {
-    height: calc(100vh - 465px);
+    height: calc(100vh - 445px);
   }
 
   .business-content {
