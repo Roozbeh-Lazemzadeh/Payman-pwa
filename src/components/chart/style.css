@@ -39,6 +39,7 @@ svg.recharts-surface {
   padding: 1.6rem 0 1.6rem 0;
   border-bottom: 1px solid #d3d3d3;
   margin-bottom: 1.2rem;
+  direction: rtl;
 }
 
 .pay-info-wrapper {
@@ -114,6 +115,14 @@ svg.recharts-surface {
 /* SE phone */
 
 @media screen and (max-width: 376px), screen and (max-height: 668px) {
+  .chart-row-wrapper {
+    display: flex;
+    width: 100%;
+    padding: 1.6rem 0 1.6rem 0;
+    border-bottom: 1px solid #d3d3d3;
+    margin-bottom: 1.2rem;
+    direction: rtl;
+  }
   svg.recharts-surface {
     width: 65% !important;
   }
@@ -128,5 +137,15 @@ svg.recharts-surface {
 
   .instance {
     padding: 4px 8px;
+  }
+}
+
+@media screen and (max-width: 376px) {
+  .chart-row-wrapper {
+    position: relative;
+  }
+  .recharts-responsive-container {
+    left: -7%;
+    width: 58% !important;
   }
 }

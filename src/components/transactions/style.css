@@ -22,6 +22,7 @@
 }
 
 .transaction-filter-list-wrapper {
+  direction: rtl;
   position: relative;
   background-color: white;
   width: 100%;

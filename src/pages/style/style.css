@@ -105,7 +105,7 @@
   font-weight: 600;
   font-size: 0.9rem;
   margin-bottom: 4px;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .home-merchants {
@@ -579,8 +579,12 @@
   }
 }
 @media screen and (max-width: 376px) {
+  .info-login.payman {
+    margin-bottom: 2rem;
+  }
   .TransactionHomeCard {
-    height: calc(100vh - 485px);
+    overflow: unset !important;
+    height: unset !important;
   }
 }
 @media screen and (max-width: 376px), screen and (max-height: 668px) {
@@ -697,12 +701,19 @@
   }
 
   .home-merchants.payman {
-    height: calc(100vh - 445px);
+    height: calc(100vh - 480px);
   }
 
   .business-content {
     position: relative;
     margin: 8px 0;
+  }
+  /* homeWithMandate  */
+  .small-display {
+    direction: ltr;
+    overflow: scroll;
+    height: calc(100vh - 275px);
+    /* homeWithMandate  */
   }
 }
 

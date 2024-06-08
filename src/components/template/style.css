@@ -285,6 +285,7 @@ span.otp-inputs-border {
 /* start filter tools style */
 
 .filter-tools-wrapper {
+  direction: rtl;
   display: flex;
   align-items: center;
   justify-content: space-between;

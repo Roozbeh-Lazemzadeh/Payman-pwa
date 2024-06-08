@@ -506,5 +506,10 @@ input.ant-input.css-dev-only-do-not-override-1jc77hn.ant-input-outlined.input-cl
 @media screen and (max-width: 376px) {
   .quick-access-section > span {
     padding: 10px 4px;
+    font-size: 10px;
+  }
+  .date_from.payman,
+  .date_to.payman {
+    font-size: 10px;
   }
 }
