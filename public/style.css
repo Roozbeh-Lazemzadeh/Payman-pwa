@@ -1,0 +1,11 @@
+#root {
+  overflow: hidden !important;
+}
+
+@media screen and (orientation: landscape) {
+  #root {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+}
