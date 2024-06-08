@@ -643,7 +643,8 @@
   }
 
   .info-login {
-    margin-top: 2.5rem;
+    padding: 9px 25px !important;
+    margin-top: 3rem;
     font-size: 11px;
   }
 

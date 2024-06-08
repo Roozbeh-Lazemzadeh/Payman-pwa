@@ -51,7 +51,7 @@ export const Sidebar: React.FC = () => {
 
   const items = [
     getItem({
-      label: 'داشبورد',
+      label: 'خانه',
       key: '1',
       icon: selectedKey === '1' ? <DashboardIcon /> : <DefaultDashboardIcon />,
       dispatch,

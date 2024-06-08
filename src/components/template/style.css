@@ -389,10 +389,9 @@ span.otp-inputs-border {
     margin-top: 1.2rem;
   }
 
-  .info-login {
+  /* .info-login {
     margin-top: 0.5rem !important;
-    padding: 9px 25px !important;
-  }
+  } */
 
   .footer-wrapper {
     margin-bottom: 5px;
