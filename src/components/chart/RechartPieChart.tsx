@@ -19,41 +19,8 @@ const RechartPieChart: React.FC<RechartPieChartProps> = ({
   onCellClick,
 }) => {
   const dispatch = useAppDispatch();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const activeIndex = useAppSelector((state) => state.chart.selectedMerchant);
-  // let renderActiveShape;
   console.log(activeIndex);
-  // if (activeIndex === -1) {
-  //    renderActiveShape = (props: any) => {
-  //     const { cx, cy, innerRadius, startAngle, endAngle, fill } =
-  //       props;
-  //     return (
-  //       <g>
-  //         <text
-  //           className='chart-text'
-  //           x={cx}
-  //           y={cy}
-  //           dy={8}
-  //           textAnchor='middle'
-  //           fill={fill}
-  //         >
-  //           %100
-  //         </text>
-  //         <Sector
-  //           cx={cx}
-  //           cy={cy}
-  //           innerRadius={innerRadius}
-  //           outerRadius={80} // outerRadius set to 80 when selectedIndex is -1
-  //           startAngle={startAngle}
-  //           endAngle={endAngle}
-  //           fill={fill}
-  //           cornerRadius={5}
-  //           style={{ outline: 'none' }}
-  //         />
-  //       </g>
-  //     );
-  //   };
-  // } else {
   const renderActiveShape = (props: any) => {
     const { cx, cy, innerRadius, startAngle, endAngle, fill, percent } = props;
     return (
