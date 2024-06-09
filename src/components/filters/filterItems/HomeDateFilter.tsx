@@ -22,10 +22,12 @@ import {
   searchedToggle,
   selectSearchItem,
 } from '../../../store/filterMenu/filterMenuSlice';
-import useResponsiveSpace from '../../hooks/useResponsiveSpace';
+import { selectSelectedMonth } from '../../../store/monthlyBill/monthlyBillSlice';
+
 // style
 import '../../Paymans/otherPaymans/style.css';
 import '../style.css';
+import { convertToPersianFormat } from '../../helpers/transDate';
 
 export const HomeDateFilter: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -34,14 +36,21 @@ export const HomeDateFilter: React.FC = () => {
   const searchItem = useAppSelector(selectSearchItem);
   const datePeriod = useAppSelector(selectDatePeriod);
   const [dates, setDates] = useState<string[]>([]);
-  const [values, setValues] = useState<Date[]>([
-    // new DateObject({ calendar: gregorian }),
-    // new DateObject({ calendar: gregorian }).add(2, 'day'),
-  ]);
   const [selectedQuickItems, setSelectedQuickItems] = useState<string>('');
-  const { spaceCount, dateSpace, inputRef } = useResponsiveSpace();
-  console.log(spaceCount, dateSpace, inputRef);
+  const [fromDate, setFromDate] = useState('');
+  const [toDate, setToDate] = useState('');
+  const month = useAppSelector(selectSelectedMonth);
 
+  // Use fallback values if month is null
+  const initialFirstDay =
+    (month && new Date(Date.parse(month?.firstDayOfMonth))) ?? new Date();
+  const initialLastDay =
+    (month && new Date(Date.parse(month?.lastDayOfMonth))) ?? new Date();
+
+  const [values, setValues] = useState<Date[]>([
+    initialFirstDay,
+    initialLastDay,
+  ]);
   const handleDateChange = (dates: DateObject[]) => {
     if (dates) {
       const formattedDates: string[] = dates.map((date) =>
@@ -155,9 +164,16 @@ export const HomeDateFilter: React.FC = () => {
 
   useEffect(() => {
     // Check the search item and initialize the selectedQuickItems state
-
     setSelectedQuickItems(datePeriod);
   }, [searchItem]);
+
+  useEffect(() => {
+    if (dates.length > 0) {
+      const Dates = convertToPersianFormat(dates);
+      Dates !== '' && setFromDate(Dates.split('~')[0]);
+      Dates !== '' && setToDate(Dates.split('~')[1]);
+    }
+  }, [dates]);
 
   return (
     <>
@@ -200,21 +216,19 @@ export const HomeDateFilter: React.FC = () => {
               className={selectedQuickItems === 'هفته گذشته' ? 'selected' : ''}
               onClick={() => selectedQuickAccess('هفته گذشته')}
             >
-              هفته گذشته
+              ۷ روز گذشته
             </span>
           </>
         </div>
         <div className='search-section search-bar'>
-          <div className='search-datePicker' ref={inputRef}>
+          <div className='search-datePicker'>
             <DatePicker
               ref={datePickerRef}
-              placeholder={`از تاریخ${' '.repeat(spaceCount)}تا تاریخ`}
               style={{
                 direction: 'rtl',
               }}
               value={values}
               onChange={handleDateChange}
-              dateSeparator={' '.repeat(dateSpace)}
               locale={persian_fa}
               calendar={persian}
               className='rmdp-mobile'
@@ -226,7 +240,22 @@ export const HomeDateFilter: React.FC = () => {
                 OK: 'تایید',
                 CANCEL: 'انصراف',
               }}
+              minDate={month?.firstDayOfMonth}
+              maxDate={month?.lastDayOfMonth}
+              currentDate={new DateObject(initialFirstDay)} // Set the initial view to the startDate
             />
+            <span
+              className={`date_from ${fromDate.length !== 0 ? 'filled' : ''}`}
+              onClick={() => datePickerRef.current.openCalendar()}
+            >
+              {fromDate !== '' ? fromDate : 'از تاریخ'}
+            </span>
+            <span
+              className={`date_to ${toDate.length !== 0 ? 'filled' : ''}`}
+              onClick={() => datePickerRef.current.openCalendar()}
+            >
+              {toDate !== '' ? toDate : 'تا تاریخ'}
+            </span>
             <div className='icon'>
               <CalendarIcon
                 onClick={() => datePickerRef.current.openCalendar()}

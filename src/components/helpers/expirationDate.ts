@@ -8,10 +8,10 @@ export const isNearExpired = (endDate: string): boolean => {
     'dd-MMM-yy hh.mm.ss.SSSSSSSSS a',
     new Date()
   );
-  const diffDays = Math.floor(
+  const diffDays = Math.ceil(
     (parsedExpirationDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
   );
-  return diffDays > 0 && diffDays < 7; // 7 days is the assumption
+  return diffDays > 0 && diffDays <= 7; // 7 days is the assumption
 };
 
 export const isExpired = (endDate: string): boolean => {
@@ -29,13 +29,13 @@ export const getFormattedRemainingDays = (endDate: string): string => {
     'dd-MMM-yy hh.mm.ss.SSSSSSSSS a',
     new Date()
   );
-  const diffDays = Math.floor(
+  const diffDays = Math.ceil(
     (parsedExpirationDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
   );
 
-  if (diffDays < 0) {
+  if (diffDays <= 0) {
     return 'پایان یافته';
-  } else if (diffDays < 7) {
+  } else if (diffDays <= 7 && diffDays > 0) {
     return `${diffDays} روز`;
   } else {
     const monthsRemaining = Math.floor(diffDays / 30);

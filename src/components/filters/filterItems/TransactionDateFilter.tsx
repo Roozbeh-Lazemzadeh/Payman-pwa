@@ -23,10 +23,10 @@ import {
   selectSearchItem,
 } from '../../../store/filterMenu/filterMenuSlice';
 
+// style
 import '../../Paymans/otherPaymans/style.css';
-import useResponsiveSpace from '../../hooks/useResponsiveSpace';
-
 import '../style.css';
+import { convertToPersianFormat } from '../../helpers/transDate';
 
 export const TransactionDateFilter: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -35,12 +35,10 @@ export const TransactionDateFilter: React.FC = () => {
   const searchItem = useAppSelector(selectSearchItem);
   const datePeriod = useAppSelector(selectDatePeriod);
   const [dates, setDates] = useState<string[]>([]);
-  const [values, setValues] = useState<Date[]>([
-    // new DateObject({ calendar: gregorian }),
-    // new DateObject({ calendar: gregorian }).add(2, 'day'),
-  ]);
+  const [fromDate, setFromDate] = useState('');
+  const [toDate, setToDate] = useState('');
+  const [values, setValues] = useState<Date[]>([]);
   const [selectedQuickItems, setSelectedQuickItems] = useState<string>('');
-  const { spaceCount, dateSpace } = useResponsiveSpace();
 
   const handleDateChange = (dates: DateObject[]) => {
     if (dates) {
@@ -155,9 +153,16 @@ export const TransactionDateFilter: React.FC = () => {
 
   useEffect(() => {
     // Check the search item and initialize the selectedQuickItems state
-
     setSelectedQuickItems(datePeriod);
   }, [searchItem]);
+
+  useEffect(() => {
+    if (dates.length > 0) {
+      const Dates = convertToPersianFormat(dates);
+      Dates !== '' && setFromDate(Dates.split('~')[0]);
+      Dates !== '' && setToDate(Dates.split('~')[1]);
+    }
+  }, [dates]);
 
   return (
     <>
@@ -208,13 +213,11 @@ export const TransactionDateFilter: React.FC = () => {
           <div className='search-datePicker'>
             <DatePicker
               ref={datePickerRef}
-              placeholder={`از تاریخ${' '.repeat(spaceCount)} تا تاریخ`}
               style={{
                 direction: 'rtl',
               }}
               value={values}
               onChange={handleDateChange}
-              dateSeparator={' '.repeat(dateSpace)}
               locale={persian_fa}
               calendar={persian}
               className='rmdp-mobile'
@@ -227,6 +230,18 @@ export const TransactionDateFilter: React.FC = () => {
                 CANCEL: 'انصراف',
               }}
             />
+            <span
+              className={`date_from ${fromDate.length !== 0 ? 'filled' : ''}`}
+              onClick={() => datePickerRef.current.openCalendar()}
+            >
+              {fromDate !== '' ? fromDate : 'از تاریخ'}
+            </span>
+            <span
+              className={`date_to ${toDate.length !== 0 ? 'filled' : ''}`}
+              onClick={() => datePickerRef.current.openCalendar()}
+            >
+              {toDate !== '' ? toDate : 'تا تاریخ'}
+            </span>
             <div className='icon'>
               <CalendarIcon
                 onClick={() => datePickerRef.current.openCalendar()}

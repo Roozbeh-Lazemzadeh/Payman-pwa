@@ -36,7 +36,6 @@ export function getItem({
     if (key.length === 1) {
       dispatch(toggleSidebar());
     }
-
     // for navigating the page
     if (key === '4') {
       navigate('/faq');
@@ -44,6 +43,7 @@ export function getItem({
       navigate('/contact-us');
     } else if (key === '1') {
       navigate('/home');
+      dispatch(removeAllFiltersHandler());
     } else if (key === '3') {
       navigate('/profile');
     }
@@ -51,7 +51,6 @@ export function getItem({
     // for filtering price , date, merchants
     if (key.length === 3) {
       if (key === '101') {
-        dispatch(removeAllFiltersHandler());
         dispatch(searchedToggle(''));
         dispatch(filteredToggle());
         dispatch(dateQuickAccessHandler(''));

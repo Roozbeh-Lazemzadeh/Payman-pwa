@@ -253,10 +253,19 @@
   font-size: 10px;
   font-weight: 400;
 }
+.ant-segmented.custom-date-segment .ant-segmented-thumb-motion-appear-active {
+  transition: 0.25s ease-out;
+  border-radius: 5px;
+  line-height: 24px;
+  min-height: 24px;
+}
 .custom-date-segment .ant-segmented-item-selected {
   color: #fff;
   font-size: 10px;
   font-weight: 400;
+}
+.custom-date-segment.ant-segmented {
+  padding: 3px;
 }
 .quick-access-section.payman {
   height: 35%;
@@ -359,8 +368,45 @@
   transform: translate(calc(-50% + 20px), -50%);
   border-right: 1px solid #cdcdd0;
 }
+.date_from {
+  position: absolute;
+  right: 0%;
+  top: 17%;
+  display: inline-block;
+  padding: 7px 10px;
+  color: rgba(16, 24, 40, 0.2);
+  font-weight: 600;
+  font-size: 12px;
+}
+.date_from.payman {
+  right: -4px;
+}
+.date_from.filled {
+  color: rgba(16, 24, 40, 1);
+}
+.date_to {
+  position: absolute;
+  right: 50%;
+  top: 50%;
+  transform: translate(calc(-50% + 75%), -50%);
+  display: inline-block;
+  padding: 5px 10px;
+  color: rgba(16, 24, 40, 0.2);
+  font-weight: 600;
+  font-size: 12px;
+}
+.date_to.payman {
+  transform: translate(calc(-50% + 71%), -50%);
+}
+.date_to.filled {
+  color: rgba(16, 24, 40, 1);
+}
+
 .search-datePicker .rmdp-container input::placeholder {
   color: rgba(16, 24, 40, 0.2);
+}
+.search-datePicker .rmdp-container input {
+  color: transparent;
 }
 .custom-input {
   font-family: 'IranYekan';
@@ -460,23 +506,10 @@ input.ant-input.css-dev-only-do-not-override-1jc77hn.ant-input-outlined.input-cl
 @media screen and (max-width: 376px) {
   .quick-access-section > span {
     padding: 10px 4px;
+    font-size: 10px;
+  }
+  .date_from.payman,
+  .date_to.payman {
+    font-size: 10px;
   }
 }
-/* XR iphone */
-/* @media screen and (min-width: 410px) {
-  .search-datePicker .divider.payman {
-    right: 38%;
-  }
-} */
-/* 14 iphone */
-/* @media screen and (min-width: 420px) {
-  .search-datePicker .divider.payman {
-    right: 37%;
-  }
-} */
-/* 14 iphone */
-/* @media screen and (min-width: 400px) {
-  .search-datePicker .divider {
-    right: 39%;
-  }
-} */

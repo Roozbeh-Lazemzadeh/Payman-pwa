@@ -4,24 +4,25 @@
 
 .trans-list {
   overflow-y: auto;
-  max-height: calc(100vh - 260px);
+  max-height: calc(100vh - 240px);
   padding-bottom: 30px;
   direction: ltr;
 }
 
 .trans-list.active-one {
-  height: calc(100vh - 310px) !important;
+  height: calc(100vh - 265px) !important;
 }
 
 .trans-list.active-two {
-  height: calc(100vh - 340px) !important;
+  height: calc(100vh - 300px) !important;
 }
 
 .trans-list.active-three {
-  height: calc(100vh - 370px) !important;
+  height: calc(100vh - 315px) !important;
 }
 
 .transaction-filter-list-wrapper {
+  direction: rtl;
   position: relative;
   background-color: white;
   width: 100%;
@@ -40,6 +41,6 @@
 
 @media screen and (max-width: 376px), screen and (max-height: 668px) {
   .trans-list {
-    max-height: 62vh;
+    max-height: calc(100vh - 230px);
   }
 }

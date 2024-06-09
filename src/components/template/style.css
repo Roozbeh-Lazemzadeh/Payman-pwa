@@ -285,10 +285,10 @@ span.otp-inputs-border {
 /* start filter tools style */
 
 .filter-tools-wrapper {
+  direction: rtl;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 1.2rem;
 }
 
 .filter-tools-component {
@@ -326,7 +326,9 @@ span.otp-inputs-border {
   text-decoration-color: #0072ff;
 }
 
-:where(.css-dev-only-do-not-override-1jc77hn).ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
+:where(.css-dev-only-do-not-override-1jc77hn).ant-btn-default:not(
+    :disabled
+  ):not(.ant-btn-disabled):hover {
   background: unset !important;
 }
 
@@ -388,10 +390,9 @@ span.otp-inputs-border {
     margin-top: 1.2rem;
   }
 
-  .info-login {
+  /* .info-login {
     margin-top: 0.5rem !important;
-    padding: 9px 25px !important;
-  }
+  } */
 
   .footer-wrapper {
     margin-bottom: 5px;

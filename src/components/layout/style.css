@@ -53,11 +53,12 @@
   width: 100%;
   height: 90%;
   position: absolute;
-  top: 10vh;
+  top: 11vh;
   background-color: rgb(255, 255, 255);
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   padding: 20px;
+  padding-top: 0;
   /* overflow: scroll; */
   /* overflow-x: hidden; */
 }
@@ -136,6 +137,7 @@
 .ant-menu.ant-menu-root.ant-menu-inline.ant-menu-light.custom-sidebar-menu {
   border: none;
   border-bottom: 1px solid rgba(5, 5, 5, 0.06);
+  padding-top: 8px;
 }
 
 .ant-drawer-content.custom-sidebar .ant-drawer-body {
@@ -167,6 +169,11 @@
   svg
   path {
   stroke: #fff;
+}
+
+.custom-sidebar-menu .ant-menu-item.ant-menu-item-selected {
+  background-color: #0072ff !important;
+  color: #fff;
 }
 
 .ant-drawer .ant-drawer-mask {
@@ -227,18 +234,18 @@
 
 @media screen and (max-width: 376px), screen and (max-height: 668px) {
   .content-wrapper {
-    top: 12vh;
+    top: 13vh;
     overflow: hidden;
     height: 80%;
   }
 
   .ant-layout-header {
-    padding: 40px 20px 46px !important;
+    padding: 35px 20px 70px !important;
     overflow: hidden;
   }
 
   .ant-drawer-content.custom-sidebar .ant-drawer-header {
-    padding: 15px 0px 10px 0px;
+    padding: 25px 0px 20px 0px;
   }
 }
 /* media gueries */
