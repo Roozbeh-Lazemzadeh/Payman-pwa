@@ -121,7 +121,7 @@ export const MerchantChartSection: React.FC = () => {
               className='instance all'
               style={{
                 border:
-                  selectedIndex === -1 ? '2px solid blue' : '2px solid #fff',
+                  selectedIndex === 4 ? '2px solid blue' : '2px solid #fff',
               }}
               onClick={handleSelectedAllMerchant}
             >
