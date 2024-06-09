@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Divider } from 'antd';
 import FilterTools from '../../template/FilterTools';
 import { NearExpiredPaymanCard } from '../../shared/Cards/NearExpiredPaymanCard';
@@ -18,6 +18,8 @@ import { selectSelectedPayman } from '../../../store/payman/paymanSlice';
 import { getPaymanDetails } from '../../helpers/getBottomSheetData';
 import { TransactionFilterLabels } from '../../transactions/TransactionFilterLabels';
 import { filterLabelStyle } from '../../helpers/filterLabelsStyle';
+import { ReactComponent as PaymanSkeletonIcon } from '../../../icons/paymanSkeleton.svg';
+import { ReactComponent as EmptyPaymanIcon } from '../../../icons/emptyPayman.svg';
 
 import './style.css';
 export interface Payman {
@@ -41,6 +43,17 @@ export const MyPaymans: React.FC = () => {
   const paymanList = useAppSelector(selectPaymanList);
   const sortKey = useAppSelector(selectSortKey);
   const allFilter = useAppSelector(selectAllFilter);
+  const [isLoading, setIsLoading] = useState(true); // Initial state is loading
+
+  useEffect(() => {
+    // Simulate data fetching with a 1000ms delay
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    // Clean up the timer on component unmount
+    return () => clearTimeout(timer);
+  }, []);
 
   const nearExpiredPaymans = paymanList.filter((payman) =>
     isNearExpired(payman.end_date)
@@ -133,11 +146,34 @@ export const MyPaymans: React.FC = () => {
           title={'جزییات پیمان'}
           data={getPaymanDetails(selectedPayman)}
         ></DetailedDrawer>
-        <div className={`scrollable-section ${filterLabelStyle(allFilter)}`}>
-          {nearExpiredPaymans.map((payman) => (
-            <NearExpiredPaymanCard key={payman.id} payman={payman} />
-          ))}
-          {renderBasedOnSortKey()}
+        <div
+          className={`scrollable-section ${filterLabelStyle(allFilter)} ${
+            paymanList.length === 0 ? 'empty' : ''
+          }`}
+        >
+          {isLoading ? (
+            // Render three instances of the PaymanSkeletonIcon when loading
+            <div className='payman-skeleton-wrapper'>
+              {Array.from({ length: 3 }).map((_, index) => (
+                <div key={index} className='payman-skeleton-card'>
+                  <PaymanSkeletonIcon />
+                </div>
+              ))}
+            </div>
+          ) : paymanList.length === 0 ? (
+            // Render the EmptyPaymanIcon when there are no paymans
+            <div className='empty-payman-wrapper'>
+              <EmptyPaymanIcon />
+              <p>هیچ قرارداد فعالی در پیمان ثبت نشده است.</p>
+            </div>
+          ) : (
+            <>
+              {nearExpiredPaymans.map((payman) => (
+                <NearExpiredPaymanCard key={payman.id} payman={payman} />
+              ))}
+              {renderBasedOnSortKey()}
+            </>
+          )}
         </div>
       </div>
     </>

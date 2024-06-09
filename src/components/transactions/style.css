@@ -8,6 +8,27 @@
   padding-bottom: 30px;
   direction: ltr;
 }
+.trans-list.empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.transaction-skeleton-card {
+  margin-top: 20px;
+  justify-content: center;
+  display: flex;
+}
+.empty-transaction-list {
+  display: flex;
+  flex-direction: column;
+  direction: rtl;
+  align-items: center;
+}
+.empty-transaction-list > p {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(18, 25, 39, 0.5);
+}
 
 .trans-list.active-one {
   height: calc(100vh - 265px) !important;
@@ -42,5 +63,10 @@
 @media screen and (max-width: 376px), screen and (max-height: 668px) {
   .trans-list {
     max-height: calc(100vh - 230px);
+  }
+}
+@media screen and (max-width: 360px) {
+  .transaction-skeleton-card {
+    width: 320px;
   }
 }

@@ -54,8 +54,8 @@ export function getItem({
         dispatch(searchedToggle(''));
         dispatch(filteredToggle());
         dispatch(dateQuickAccessHandler(''));
+        dispatch(removeAllFiltersHandler());
       }
-
       dispatch(searchedToggle(key));
     }
 
