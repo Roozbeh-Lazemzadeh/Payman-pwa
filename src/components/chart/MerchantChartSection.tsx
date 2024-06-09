@@ -6,14 +6,10 @@ import transactionData from '../../data/transaction.json';
 import { selectMonthlyBill } from '../../store/monthlyBill/monthlyBillSlice';
 import { jalaliDate } from '../helpers/transDate';
 import { selectMerchant } from '../../store/chart/chartSlice';
-// import { from } from 'jalali-moment';
 
 export const MerchantChartSection: React.FC = () => {
-  const [title, setTitle] = useState('اسنپ');
-  const [value, setValue] = useState<number>(
-    transactionData[0].transaction_amount
-  );
-  const [, setTransformedData] = useState<any[]>([]);
+  const [title, setTitle] = useState('همه');
+  const [value, setValue] = useState<number>(0);
   const selectedIndex = useAppSelector((state) => state.chart.selectedMerchant);
   const monthBillValue = useAppSelector(selectMonthlyBill);
   const dispatch = useAppDispatch();
@@ -51,7 +47,14 @@ export const MerchantChartSection: React.FC = () => {
     }
   });
 
+  console.log(creditorTransactionMap);
   const topThreeTransactions = Array.from(creditorTransactionMap).slice(0, 3);
+  while (topThreeTransactions.length < 3) {
+    topThreeTransactions.push([
+      'x',
+      { amount: 0, color: 'rgba(0, 114, 255, 1)' },
+    ]);
+  }
   const restOfAmounts = Array.from(creditorTransactionMap)
     .slice(3)
     .reduce((total, [, { amount }]) => total + amount, 0);
@@ -63,7 +66,24 @@ export const MerchantChartSection: React.FC = () => {
       color,
     })),
     { name: 'سایر', value: restOfAmounts, color: '#6E1BFF' },
+    { name: 'x', value: 0, color: 'rgba(0, 114, 255, 1)' },
   ];
+
+  while (newTransformedData.length < 5) {
+    newTransformedData.push({
+      name: 'placeholder',
+      value: 0,
+      color: 'rgba(0, 114, 255, 1)',
+    });
+  }
+
+  useEffect(() => {
+    handleSelectedAllMerchant();
+  }, []);
+
+  useEffect(() => {
+    handleSelectedAllMerchant();
+  }, [monthBillValue]);
 
   const handleSelectedMerchant = (
     e: React.MouseEvent<HTMLSpanElement, MouseEvent>,
@@ -75,34 +95,8 @@ export const MerchantChartSection: React.FC = () => {
       setTitle(selectedTransaction.name);
       setValue(selectedTransaction.value);
       dispatch(selectMerchant(index));
-
-      const spanColor = selectedTransaction.color;
-      setTransformedData((prevData: any) => [
-        ...prevData,
-        { name: selectedTransaction.name, color: spanColor },
-      ]);
     }
   };
-
-  useEffect(() => {
-    const totalSum = newTransformedData.reduce(
-      (sum, item) => sum + item.value,
-      0
-    );
-    setValue(totalSum);
-    setTitle('همه');
-    handleSelectedAllMerchant();
-  }, []);
-
-  useEffect(() => {
-    const totalSum = newTransformedData.reduce(
-      (sum, item) => sum + item.value,
-      0
-    );
-    setValue(totalSum);
-    setTitle('همه');
-    handleSelectedAllMerchant();
-  }, [monthBillValue]);
 
   const handleSelectedAllMerchant = () => {
     const totalSum = newTransformedData.reduce(
@@ -110,7 +104,7 @@ export const MerchantChartSection: React.FC = () => {
       0
     );
     setValue(totalSum);
-    dispatch(selectMerchant(-1));
+    dispatch(selectMerchant(4));
     setTitle('همه');
   };
 
