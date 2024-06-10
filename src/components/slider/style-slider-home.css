@@ -79,7 +79,7 @@
 @media screen and (max-width: 376px), screen and (max-height: 668px) {
   .slider-home
     .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal {
-    top: 102px;
+    top: 92px;
     height: 12px;
   }
 }

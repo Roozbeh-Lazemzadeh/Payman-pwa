@@ -96,6 +96,9 @@ export const MerchantChartSection: React.FC = () => {
       setValue(selectedTransaction.value);
       dispatch(selectMerchant(index));
     }
+    if (index === 4) {
+      handleSelectedAllMerchant();
+    }
   };
 
   const handleSelectedAllMerchant = () => {
