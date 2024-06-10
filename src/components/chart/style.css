@@ -32,6 +32,40 @@ svg.recharts-surface {
   font-size: 34px !important;
   font-weight: 600;
 }
+.empty-mandate-section {
+  margin-top: 30px;
+  direction: rtl;
+}
+.empty-mandate-section.lower-half {
+  margin-top: 20px;
+}
+.empty-mandate-section > span {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(16, 24, 40, 0.5);
+  margin-bottom: 12px;
+  display: inline-block;
+}
+.empty-mandate-section.lower-half > span {
+  margin-bottom: 60px;
+}
+.empty-mandate-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  border-bottom: 1px solid #d3d3d3;
+}
+.empty-mandate-wrapper.lower-half {
+  border-bottom: none;
+}
+.empty-mandate-wrapper > p {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(16, 24, 40, 0.5);
+  margin-bottom: 30px;
+  margin-top: 0px;
+}
 
 .chart-row-wrapper {
   display: flex;

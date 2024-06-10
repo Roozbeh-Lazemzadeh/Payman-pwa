@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import RechartPieChart from './RechartPieChart';
-import './style.css';
 import { useAppSelector, useAppDispatch } from '../hooks/reduxHooks';
 import transactionData from '../../data/transaction.json';
 import { selectMonthlyBill } from '../../store/monthlyBill/monthlyBillSlice';
 import { jalaliDate } from '../helpers/transDate';
 import { selectMerchant } from '../../store/chart/chartSlice';
+
+import './style.css';
 
 export const MerchantChartSection: React.FC = () => {
   const [title, setTitle] = useState('همه');
@@ -47,7 +48,6 @@ export const MerchantChartSection: React.FC = () => {
     }
   });
 
-  console.log(creditorTransactionMap);
   const topThreeTransactions = Array.from(creditorTransactionMap).slice(0, 3);
   while (topThreeTransactions.length < 3) {
     topThreeTransactions.push([
@@ -107,70 +107,68 @@ export const MerchantChartSection: React.FC = () => {
     dispatch(selectMerchant(4));
     setTitle('همه');
   };
+  console.log(filteredData);
 
   return (
-    <>
-      <div className='chart-row-wrapper'>
-        <div className='pay-info-wrapper'>
-          <div className='pay-title-price-wrapper'>
-            <span className='pay-title'>{`کل پرداخت های شما در  ${title}`}</span>
-            <span className='pay-price'>{`${value} تومان`}</span>
-          </div>
-          <div className='merchants-wrapper'>
-            <span
-              className='instance all'
-              style={{
-                border:
-                  selectedIndex === 4 ? '2px solid blue' : '2px solid #fff',
-              }}
-              onClick={handleSelectedAllMerchant}
-            >
-              همه
-            </span>
-            {newTransformedData.map((item, index) => {
-              const hexToRgb = (hex: any) =>
-                hex
-                  .replace(
-                    /^#?([a-f\d])([a-f\d])([a-f\d])$/i,
-                    (m: any, r: string, g: string, b: string) =>
-                      '#' + r + r + g + g + b + b
-                  )
-                  .substring(1)
-                  .match(/.{2}/g)
-                  .map((x: string) => parseInt(x, 16));
-
-              const rgbColor = hexToRgb(item.color);
-              const rgbaColor = `rgba(${rgbColor[0]}, ${rgbColor[1]}, ${rgbColor[2]}, 0.4)`;
-              const rgbaColorBorder = `rgba(${rgbColor[0]}, ${rgbColor[1]}, ${rgbColor[2]}, 1)`;
-
-              return item.value === 0 ? null : (
-                <span
-                  key={item.name}
-                  style={{
-                    backgroundColor: rgbaColor,
-                    border: `${
-                      index === selectedIndex
-                        ? `2px solid ${rgbaColorBorder}`
-                        : '2px solid #fff'
-                    }`,
-                  }}
-                  className={`instance ${
-                    index === selectedIndex ? 'selected' : ''
-                  }`}
-                  onClick={(e) => handleSelectedMerchant(e, index)}
-                >
-                  {item.name}
-                </span>
-              );
-            })}
-          </div>
+    <div className='chart-row-wrapper'>
+      <div className='pay-info-wrapper'>
+        <div className='pay-title-price-wrapper'>
+          <span className='pay-title'>{`کل پرداخت های شما در  ${title}`}</span>
+          <span className='pay-price'>{`${value} تومان`}</span>
         </div>
-        <RechartPieChart
-          data={newTransformedData}
-          selectedIndex={selectedIndex}
-          onCellClick={handleSelectedMerchant}
-        />
+        <div className='merchants-wrapper'>
+          <span
+            className='instance all'
+            style={{
+              border: selectedIndex === 4 ? '2px solid blue' : '2px solid #fff',
+            }}
+            onClick={handleSelectedAllMerchant}
+          >
+            همه
+          </span>
+          {newTransformedData.map((item, index) => {
+            const hexToRgb = (hex: any) =>
+              hex
+                .replace(
+                  /^#?([a-f\d])([a-f\d])([a-f\d])$/i,
+                  (m: any, r: string, g: string, b: string) =>
+                    '#' + r + r + g + g + b + b
+                )
+                .substring(1)
+                .match(/.{2}/g)
+                .map((x: string) => parseInt(x, 16));
+
+            const rgbColor = hexToRgb(item.color);
+            const rgbaColor = `rgba(${rgbColor[0]}, ${rgbColor[1]}, ${rgbColor[2]}, 0.4)`;
+            const rgbaColorBorder = `rgba(${rgbColor[0]}, ${rgbColor[1]}, ${rgbColor[2]}, 1)`;
+
+            return item.value === 0 ? null : (
+              <span
+                key={item.name}
+                style={{
+                  backgroundColor: rgbaColor,
+                  border: `${
+                    index === selectedIndex
+                      ? `2px solid ${rgbaColorBorder}`
+                      : '2px solid #fff'
+                  }`,
+                }}
+                className={`instance ${
+                  index === selectedIndex ? 'selected' : ''
+                }`}
+                onClick={(e) => handleSelectedMerchant(e, index)}
+              >
+                {item.name}
+              </span>
+            );
+          })}
+        </div>
       </div>
-    </>
+      <RechartPieChart
+        data={newTransformedData}
+        selectedIndex={selectedIndex}
+        onCellClick={handleSelectedMerchant}
+      />
+    </div>
   );
 };

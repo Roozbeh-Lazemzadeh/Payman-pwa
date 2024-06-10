@@ -32,6 +32,8 @@ import {
   selectBottomSheetIsOpen,
 } from '../store/bottomSheet/bottomSheetSlice';
 import { getTransactionDetails } from '../components/helpers/getBottomSheetData';
+import { ReactComponent as EmptyMandateIcon } from '../icons/emptyMandate.svg';
+import { ReactComponent as EmptyTransactionIcon } from '../icons/emptySmallTransaction.svg';
 
 export interface Month {
   id: number;
@@ -115,7 +117,7 @@ function HomeWithMandate() {
     dispatch(handleSelectedTransaction(transaction));
     dispatch(openBottomSheet());
   };
-
+  console.log(groupedTransactions);
   return (
     <div className='home-wrapper'>
       <div className='home-datepickers'>
@@ -138,64 +140,89 @@ function HomeWithMandate() {
         ))}
       </div>
       <div className='small-display'>
-        <MerchantChartSection />
-        <FilterTools title='تراکنش‌های پرداخت مستقیم' />
-        <TransactionFilterLabels />
-        <div className='TransactionHomeCard-wrapper'>
-          <div className={`TransactionHomeCard ${filterLabelStyle(allFilter)}`}>
-            <div className='TransactionHomeCard-wrapper-cards'>
-              {groupedTransactions?.map(
-                (group: {
-                  key: React.Key | null | undefined;
-                  value: Transaction[];
-                }) => {
-                  return (
-                    <div
-                      key={group.key}
-                      className='TransactionHomeCard-wrapper'
-                    >
-                      <p className='TransactionHomeCard-p'>
-                        {group.value[0].transaction_date.startsWith(
-                          format(new Date(), 'dd-MMM-yy').toUpperCase()
-                        )
-                          ? getCurrentJalaliDate()
-                          : `${jalaliMoment(
-                              format(
-                                parse(
-                                  group.value[0].transaction_date,
-                                  'dd-MMM-yy hh.mm.ss.SSSSSSSSSS a',
-                                  new Date()
-                                ),
-                                'yyyy-MM-dd HH:mm:ss'
-                              )
-                            )
-                              .locale('fa')
-                              .format('dddd ، jD jMMMM')}`}
-                      </p>
-                      <div className='TransactionHomeCard-wrapper-cards'>
-                        {group.value.map((transaction: Transaction) => (
-                          <div
-                            key={transaction.id}
-                            onClick={() => handleDrawerTransaction(transaction)}
-                          >
-                            <TransactionHomeCard
-                              merchant={transaction.creditor}
-                              price={transaction.transaction_amount}
-                              transDate={transDate(
-                                transaction.transaction_date
-                              )}
-                              img={transaction.img}
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  );
-                }
-              )}
+        {groupedTransactions.length === 0 ? (
+          <>
+            <div className='empty-mandate-section'>
+              <span>کل پرداخت های شما در این ماه</span>
+              <div className='empty-mandate-wrapper'>
+                <EmptyMandateIcon />
+                <p>هیچ اطلاعاتی یافت نشد.</p>
+              </div>
             </div>
-          </div>
-        </div>
+            <div className='empty-mandate-section lower-half'>
+              <span>تراکنش‌های پرداخت مستقیم</span>
+              <div className='empty-mandate-wrapper lower-half'>
+                <EmptyTransactionIcon />
+                <p>هیچ تراکنشی ثبت نشده است.</p>
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <MerchantChartSection />
+            <FilterTools title='تراکنش‌های پرداخت مستقیم' />
+            <TransactionFilterLabels />
+            <div className='TransactionHomeCard-wrapper'>
+              <div
+                className={`TransactionHomeCard ${filterLabelStyle(allFilter)}`}
+              >
+                <div className='TransactionHomeCard-wrapper-cards'>
+                  {groupedTransactions?.map(
+                    (group: {
+                      key: React.Key | null | undefined;
+                      value: Transaction[];
+                    }) => {
+                      return (
+                        <div
+                          key={group.key}
+                          className='TransactionHomeCard-wrapper'
+                        >
+                          <p className='TransactionHomeCard-p'>
+                            {group.value[0].transaction_date.startsWith(
+                              format(new Date(), 'dd-MMM-yy').toUpperCase()
+                            )
+                              ? getCurrentJalaliDate()
+                              : `${jalaliMoment(
+                                  format(
+                                    parse(
+                                      group.value[0].transaction_date,
+                                      'dd-MMM-yy hh.mm.ss.SSSSSSSSSS a',
+                                      new Date()
+                                    ),
+                                    'yyyy-MM-dd HH:mm:ss'
+                                  )
+                                )
+                                  .locale('fa')
+                                  .format('dddd ، jD jMMMM')}`}
+                          </p>
+                          <div className='TransactionHomeCard-wrapper-cards'>
+                            {group.value.map((transaction: Transaction) => (
+                              <div
+                                key={transaction.id}
+                                onClick={() =>
+                                  handleDrawerTransaction(transaction)
+                                }
+                              >
+                                <TransactionHomeCard
+                                  merchant={transaction.creditor}
+                                  price={transaction.transaction_amount}
+                                  transDate={transDate(
+                                    transaction.transaction_date
+                                  )}
+                                  img={transaction.img}
+                                />
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      );
+                    }
+                  )}
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
