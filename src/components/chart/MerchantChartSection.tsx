@@ -108,7 +108,7 @@ export const MerchantChartSection: React.FC = () => {
     );
     setValue(totalSum);
     dispatch(selectMerchant(4));
-    setTitle('همه');
+    setTitle('این ماه');
   };
   console.log(filteredData);
 
