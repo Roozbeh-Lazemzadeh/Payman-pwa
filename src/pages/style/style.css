@@ -237,6 +237,21 @@
   width: 123px;
 }
 
+.contact-left-wrapper {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
+.go4109123758 {
+  bottom: 10% !important;
+}
+
+.contact-left_img {
+  width: 15.33px;
+  height: 15.33px;
+  margin-right: 5px;
+}
 .contact-btn:focus {
   color: #0072ff;
 }
@@ -589,6 +604,12 @@
   .info-login.detail {
     width: calc(100% - 83px);
   }
+  .login-header__logo {
+    margin-top: 14px;
+  }
+  .info-login {
+    margin-top: 1rem;
+  }
 }
 @media screen and (max-width: 376px), screen and (max-height: 668px) {
   /* login paage  */
@@ -608,6 +629,14 @@
   .headerOnboarding-img {
     width: 30%;
     width: 30%;
+  }
+
+  .otp-form_input {
+    margin-top: 1rem;
+  }
+
+  .cover-customer__login {
+    margin-top: 1rem;
   }
 
   .item-onboarding_img {
@@ -651,7 +680,7 @@
 
   .info-login {
     padding: 9px 25px !important;
-    margin-top: 3rem;
+    margin-top: 1rem;
     font-size: 11px;
   }
 
