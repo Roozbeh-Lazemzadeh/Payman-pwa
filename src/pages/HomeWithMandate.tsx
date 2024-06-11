@@ -111,9 +111,9 @@ function HomeWithMandate() {
     }
   }, [memoizedDate, memoizedMerchants, memoizedPrice, sortKey, monthBillValue]);
 
-  useEffect(() => {
-    handleItemClick(selectedItemIndex);
-  }, []);
+  // useEffect(() => {
+  //   handleItemClick(selectedItemIndex);
+  // }, []);
 
   const handleDrawerTransaction = (transaction: Transaction) => {
     dispatch(handleSelectedTransaction(transaction));
