@@ -53,7 +53,7 @@ function HomeWithMandate() {
   const Transactions = useAppSelector(selectTransactionList);
   const isOpen = useAppSelector(selectBottomSheetIsOpen);
   const selectedTransaction = useAppSelector(selectSelectedTransaction);
-  const [selectedItemIndex, setSelectedItemIndex] = useState<number | null>(0);
+  const [selectedItemIndex, setSelectedItemIndex] = useState<number>(0);
   const groupedTransactions = useSelector(
     (state: RootState) => state.arrayHome.groupsTransactions
   );
@@ -88,9 +88,9 @@ function HomeWithMandate() {
     return `امروز، ${formattedDate}`;
   };
 
-  const handleItemClick = (id: number | null) => {
+  const handleItemClick = (id: number) => {
     dispatch(removeAllFiltersHandler());
-    setSelectedItemIndex(id);
+    setSelectedItemIndex(id === selectedItemIndex ? selectedItemIndex : id);
     const selectedMonth = monthsList.find((item) => item.id === id);
     if (selectedMonth) {
       const selectedYearMonth = monthsList2[selectedMonth.id];
@@ -115,7 +115,7 @@ function HomeWithMandate() {
     dispatch(handleSelectedTransaction(transaction));
     dispatch(openBottomSheet());
   };
-  console.log(groupedTransactions);
+
   return (
     <div className='home-wrapper'>
       <div className='home-datepickers'>
