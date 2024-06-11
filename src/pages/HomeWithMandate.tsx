@@ -90,7 +90,7 @@ function HomeWithMandate() {
 
   const handleItemClick = (id: number | null) => {
     dispatch(removeAllFiltersHandler());
-    setSelectedItemIndex(id === selectedItemIndex ? selectedItemIndex : id);
+    setSelectedItemIndex(id);
     const selectedMonth = monthsList.find((item) => item.id === id);
     if (selectedMonth) {
       const selectedYearMonth = monthsList2[selectedMonth.id];
@@ -110,10 +110,6 @@ function HomeWithMandate() {
       );
     }
   }, [memoizedDate, memoizedMerchants, memoizedPrice, sortKey, monthBillValue]);
-
-  // useEffect(() => {
-  //   handleItemClick(selectedItemIndex);
-  // }, []);
 
   const handleDrawerTransaction = (transaction: Transaction) => {
     dispatch(handleSelectedTransaction(transaction));
