@@ -77,7 +77,7 @@ function App(): JSX.Element {
             کاربر گرامی لطفا گوشی را عمودی نگه دارید.
           </p>
         </div>
-        {isAppLoaded ? (
+        {!isAppLoaded ? (
           <RouterProvider router={router} />
         ) : isAppLoading ? null : (
           <SplashScreen />

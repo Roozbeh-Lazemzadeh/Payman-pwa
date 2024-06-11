@@ -18,6 +18,7 @@ import { TransactionFilterLabels } from '../components/transactions/TransactionF
 import { filterLabelStyle } from '../components/helpers/filterLabelsStyle';
 import { useAppSelector } from '../components/hooks/reduxHooks';
 import {
+  removeAllFiltersHandler,
   selectAllFilter,
   selectSortKey,
   selectTransactionList,
@@ -88,6 +89,7 @@ function HomeWithMandate() {
   };
 
   const handleItemClick = (id: number | null) => {
+    dispatch(removeAllFiltersHandler());
     setSelectedItemIndex(id === selectedItemIndex ? selectedItemIndex : id);
     const selectedMonth = monthsList.find((item) => item.id === id);
     if (selectedMonth) {
