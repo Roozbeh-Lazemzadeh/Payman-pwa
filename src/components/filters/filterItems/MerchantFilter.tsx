@@ -262,6 +262,7 @@ export const MerchantFilter: React.FC = () => {
             className={`${isOpen ? 'hidden' : 'dummy-input'}`}
           />
           <Select
+            onDropdownVisibleChange={(open) => setIsOpen(open)}
             className='custom-select'
             placeholder='جستجوی نام کسب‌وکار'
             mode='multiple'
