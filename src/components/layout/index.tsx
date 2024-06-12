@@ -58,7 +58,9 @@ const PWALayout: React.FC = () => {
   };
 
   // Handle different scenarios for showing filter and primary footer
-  const handleClosingFooters = (e: any): void => {
+  const handleClosingFooters = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ): void => {
     e.stopPropagation();
     const targetElement = e.target as Element;
     const filterIcon = targetElement?.closest('.filter-icon');

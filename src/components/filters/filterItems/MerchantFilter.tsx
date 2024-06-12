@@ -2,7 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Select, type SelectProps, Input } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import {
+  closeDropDown,
   filteredToggle,
+  openDropDown,
   searchedToggle,
   selectFilter,
   selectSearchItem,
@@ -140,6 +142,7 @@ export const MerchantFilter: React.FC = () => {
     if (totalSelectedItems > 3) {
       selectRef.current.blur();
       setIsOpen(false);
+      // dispatch(closeDropDown());
       showNotifyToast(
         'شما مجاز به انتخاب سه کسب و کار می باشید.',
         <InfoIcon />
@@ -221,6 +224,7 @@ export const MerchantFilter: React.FC = () => {
 
   const handleSelectFocus = () => {
     inputRef.current.focus();
+    // dispatch(openDropDown());
     setTimeout(() => {
       selectRef.current.focus();
     }, 300);
@@ -230,6 +234,14 @@ export const MerchantFilter: React.FC = () => {
   // Custom filter function to ignore leading spaces
   const customFilterOption = (input: string, option: any) =>
     option?.value?.toLowerCase().indexOf(input.trim().toLowerCase()) >= 0;
+
+  useEffect(() => {
+    if (isOpen) {
+      dispatch(openDropDown());
+    } else if (!isOpen) {
+      dispatch(closeDropDown());
+    }
+  }, [isOpen]);
 
   return (
     <>
