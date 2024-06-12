@@ -7,6 +7,7 @@ import { selectBottomSheetIsOpen } from '../../../store/bottomSheet/bottomSheetS
 interface DetailedDrawerItem {
   firstWord: string;
   secondWord: string | number;
+  className?: string;
 }
 interface DetailedDrawerProps {
   title: string;
@@ -30,6 +31,7 @@ export const DetailedDrawer: React.FC<DetailedDrawerProps> = ({
               key={index}
               firstWord={value.firstWord}
               secondWord={value.secondWord}
+              className={value.className}
             />
           ))}
           <div className='drawer-children'>{children}</div>

@@ -27,3 +27,7 @@
   overflow: hidden;
   color: #cdcdd0;
 }
+
+.end-text.direction {
+  direction: rtl;
+}

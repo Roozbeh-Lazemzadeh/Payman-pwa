@@ -50,10 +50,7 @@ export const MerchantChartSection: React.FC = () => {
 
   const topThreeTransactions = Array.from(creditorTransactionMap).slice(0, 3);
   while (topThreeTransactions.length < 3) {
-    topThreeTransactions.push([
-      'x',
-      { amount: 0, color: 'rgba(0, 114, 255, 1)' },
-    ]);
+    topThreeTransactions.push(['x', { amount: 0, color: '#101828' }]);
   }
   const restOfAmounts = Array.from(creditorTransactionMap)
     .slice(3)
@@ -66,14 +63,14 @@ export const MerchantChartSection: React.FC = () => {
       color,
     })),
     { name: 'سایر', value: restOfAmounts, color: '#6E1BFF' },
-    { name: 'x', value: 0, color: 'rgba(0, 114, 255, 1)' },
+    { name: 'x', value: 0, color: '#101828' },
   ];
 
   while (newTransformedData.length < 5) {
     newTransformedData.push({
       name: 'placeholder',
       value: 0,
-      color: 'rgba(0, 114, 255, 1)',
+      color: '#101828',
     });
   }
 
@@ -123,7 +120,8 @@ export const MerchantChartSection: React.FC = () => {
           <span
             className='instance all'
             style={{
-              border: selectedIndex === 4 ? '2px solid blue' : '2px solid #fff',
+              border:
+                selectedIndex === 4 ? '2px solid #0072ff' : '2px solid #fff',
             }}
             onClick={handleSelectedAllMerchant}
           >

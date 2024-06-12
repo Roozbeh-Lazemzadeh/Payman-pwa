@@ -73,12 +73,23 @@ export const TransactionsList: React.FC = () => {
         isOpen={isOpen}
         data={getTransactionDetails(selectedTransaction)}
       >
-        <div className='info-login detail'>
-          <div> دلیل نامشخص بودن تراکنش : </div>‌
-          <div style={{ marginTop: -10 }}>
-            {selectedTransaction?.transaction_msg}
+        {selectedTransaction?.transaction_msg.length ? (
+          <div className='info-login detail'>
+            <div> دلیل نامشخص بودن تراکنش : </div>
+            <div> دلیل ناموفق بودن تراکنش : </div>
+            {selectedTransaction?.status ===
+            'موفق' ? null : selectedTransaction?.status === 'ناموفق' ? (
+              <div> دلیل ناموفق بودن تراکنش : </div>
+            ) : selectedTransaction?.status === 'نامشخص' ? (
+              <div> دلیل نامشخص بودن تراکنش : </div>
+            ) : (
+              ''
+            )}
+            <div style={{ marginTop: -10 }}>
+              {selectedTransaction?.transaction_msg}
+            </div>
           </div>
-        </div>
+        ) : null}
       </DetailedDrawer>
       {isLoading ? (
         // Render 10 instances of the TransactionSkeletonIcon when loading

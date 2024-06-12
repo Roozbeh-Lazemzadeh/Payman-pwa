@@ -192,6 +192,7 @@
 .primary-footer-active {
   bottom: 0px;
   transition: ease-in-out 0.35s;
+  height: 85px;
 }
 .slick-slider .custom-sidebar .slick-initialized {
   margin-bottom: 30px;
