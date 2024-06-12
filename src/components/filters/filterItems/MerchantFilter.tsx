@@ -231,18 +231,6 @@ export const MerchantFilter: React.FC = () => {
   const customFilterOption = (input: string, option: any) =>
     option?.value?.toLowerCase().indexOf(input.trim().toLowerCase()) >= 0;
 
-  const handleDropDownVisibility = (open: boolean) => {
-    setIsOpen(open);
-    inputRef.current.blur();
-    selectRef.current.blur();
-  };
-  useEffect(() => {
-    if (!open) {
-      inputRef.current.blur();
-      selectRef.current.blur();
-    }
-  }, [open]);
-
   return (
     <>
       <ToastContainer rtl />
@@ -314,7 +302,7 @@ export const MerchantFilter: React.FC = () => {
             className={`${isOpen ? 'hidden' : 'dummy-input'}`}
           />
           <Select
-            onDropdownVisibleChange={(open) => handleDropDownVisibility(open)}
+            onDropdownVisibleChange={(open) => setIsOpen(open)}
             className='custom-select'
             placeholder='جستجوی نام کسب‌وکار'
             mode='multiple'
