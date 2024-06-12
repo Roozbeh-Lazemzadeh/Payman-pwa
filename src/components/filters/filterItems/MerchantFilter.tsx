@@ -233,7 +233,7 @@ export const MerchantFilter: React.FC = () => {
 
   const handleDropDownVisibility = (open: boolean) => {
     setIsOpen(open);
-    inputRef.current.blur();
+    selectRef.current.blur();
   };
 
   return (
