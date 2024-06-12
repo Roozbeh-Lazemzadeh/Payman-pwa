@@ -232,10 +232,16 @@ export const MerchantFilter: React.FC = () => {
     option?.value?.toLowerCase().indexOf(input.trim().toLowerCase()) >= 0;
 
   const handleDropDownVisibility = (open: boolean) => {
+    setIsOpen(open);
     inputRef.current.blur();
     selectRef.current.blur();
-    setIsOpen(open);
   };
+  useEffect(() => {
+    if (!open) {
+      inputRef.current.blur();
+      selectRef.current.blur();
+    }
+  }, [open]);
 
   return (
     <>
