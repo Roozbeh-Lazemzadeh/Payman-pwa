@@ -758,20 +758,15 @@
     justify-content: center;
     align-items: center;
     padding: 1.5rem 15px;
-    opacity: 0.3;
+    /* opacity: 0.3; */
     font-weight: 500;
     font-size: 12px;
     border-radius: 10px;
     transition: ease-in-out 0.3s all;
   }
   .home-datepicker-click {
-    background-color: #0072ff;
-    color: #fff;
-    border-radius: 10px;
     padding: 1.5rem 15px;
     width: 52px;
     height: 60px;
-    opacity: 1;
-    transition: ease-in-out 0.3s all;
   }
 }
