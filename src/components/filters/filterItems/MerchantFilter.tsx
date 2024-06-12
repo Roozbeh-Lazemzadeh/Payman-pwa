@@ -34,16 +34,44 @@ export const MerchantFilter: React.FC = () => {
   const [selectedQuickItems, setSelectedQuickItems] = useState<string[]>([]);
   const [options, setOptions] = useState<SelectProps['options']>([]);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const quickAccessItems = ['اسنپ', 'تپسی', 'فیلیمو'];
   const selectRef = useRef<any>(null);
   const inputRef = useRef<any>(null);
 
   const selectedQuickAccess = (title: string) => {
-    if (selectedOptions.length === 3) {
+    if (selectedOptions.length === 3 && selectedQuickItems.length === 3) {
+      const newQuickAccess = selectedQuickItems.filter(
+        (item) => item !== title
+      );
+      setSelectedQuickItems(newQuickAccess);
+    } else if (
+      selectedOptions.length === 3 &&
+      selectedQuickItems.length !== 3
+    ) {
       return showNotifyToast(
         'شما مجاز به انتخاب سه کسب و کار می باشید.',
         <InfoIcon />
       );
     }
+    let updatedSelectedItems = [];
+    let updatedSelectedOptions = [...selectedOptions];
+
+    if (selectedQuickItems.includes(title)) {
+      // If the item is already selected, remove it from both arrays
+      updatedSelectedItems = selectedQuickItems.filter(
+        (item) => item !== title
+      );
+      updatedSelectedOptions = updatedSelectedOptions.filter(
+        (item) => item !== title
+      );
+    } else {
+      // Otherwise, add it to both arrays
+      updatedSelectedItems = [...selectedQuickItems, title];
+      updatedSelectedOptions = [...updatedSelectedOptions, title];
+    }
+
+    setSelectedQuickItems(updatedSelectedItems); // Update the quick access items state
+    setSelectedOptions(updatedSelectedOptions); // Update the selected options state
 
     const currentOptionsLength = selectedOptions.length;
     const totalSelectedItems = selectedQuickItems.length + currentOptionsLength; // Check if the total length (selectedQuickItems + selectedOptions) is less than 3
@@ -101,6 +129,7 @@ export const MerchantFilter: React.FC = () => {
   };
 
   const handleSelectedOptions = (newSelectedOptions: string[]) => {
+    console.log(newSelectedOptions);
     const currentSelectedOptions = selectedOptions;
     const currentQuickItems = selectedQuickItems.map((item) => item); // Get the current selected quick items
 
@@ -130,6 +159,17 @@ export const MerchantFilter: React.FC = () => {
     } else {
       setSelectedOptions(newSelectedOptions);
     }
+    // Add the quick access items if selected from the dropdown
+    const updatedQuickItems = [...selectedQuickItems];
+    newSelectedOptions.forEach((option) => {
+      if (
+        quickAccessItems.includes(option) &&
+        !selectedQuickItems.includes(option)
+      ) {
+        updatedQuickItems.push(option);
+      }
+    });
+    setSelectedQuickItems(updatedQuickItems);
   };
 
   // useEffects :
@@ -142,12 +182,12 @@ export const MerchantFilter: React.FC = () => {
     );
 
     // Remove the specified items from the uniqueCreditors array
-    const filteredCreditors = uniqueCreditors.filter(
-      (creditor) => !['اسنپ', 'تپسی', 'فیلیمو'].includes(creditor)
-    );
+    // const filteredCreditors = uniqueCreditors.filter(
+    //   (creditor) => !['اسنپ', 'تپسی', 'فیلیمو'].includes(creditor)
+    // );
 
     // Convert the filtered creditor values to the format required by the Select component
-    const selectOptions = filteredCreditors.map((creditor) => ({
+    const selectOptions = uniqueCreditors.map((creditor) => ({
       value: creditor,
     }));
 
@@ -190,6 +230,11 @@ export const MerchantFilter: React.FC = () => {
   // Custom filter function to ignore leading spaces
   const customFilterOption = (input: string, option: any) =>
     option?.value?.toLowerCase().indexOf(input.trim().toLowerCase()) >= 0;
+
+  const handleDropDownVisibility = (open: boolean) => {
+    setIsOpen(open);
+    inputRef.current.blur();
+  };
 
   return (
     <>
@@ -262,7 +307,7 @@ export const MerchantFilter: React.FC = () => {
             className={`${isOpen ? 'hidden' : 'dummy-input'}`}
           />
           <Select
-            onDropdownVisibleChange={(open) => setIsOpen(open)}
+            onDropdownVisibleChange={(open) => handleDropDownVisibility(open)}
             className='custom-select'
             placeholder='جستجوی نام کسب‌وکار'
             mode='multiple'
@@ -270,7 +315,16 @@ export const MerchantFilter: React.FC = () => {
             options={options}
             onChange={handleSelectedOptions}
             maxTagCount={2}
-            maxTagTextLength={7}
+            maxTagTextLength={5}
+            maxTagPlaceholder={(omittedValues) => {
+              if (omittedValues.length > 0) {
+                const lastValue = omittedValues[omittedValues.length - 1].label;
+                if (typeof lastValue === 'string') {
+                  return `${lastValue.substring(0, 3)}...`;
+                }
+              }
+              return '';
+            }}
             value={selectedOptions}
             placement='topRight'
             ref={selectRef}

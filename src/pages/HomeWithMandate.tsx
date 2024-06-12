@@ -160,17 +160,7 @@ function HomeWithMandate() {
           </>
         ) : (
           <>
-            {groupedTransactions.length === 0 ? (
-              <div className='empty-mandate-section'>
-                <span>کل پرداخت های شما در این ماه</span>
-                <div className='empty-mandate-wrapper'>
-                  <EmptyMandateIcon />
-                  <p>هیچ اطلاعاتی یافت نشد.</p>
-                </div>
-              </div>
-            ) : (
-              <MerchantChartSection />
-            )}
+            <MerchantChartSection />
             <FilterTools title='تراکنش‌های پرداخت مستقیم' />
             <TransactionFilterLabels />
             <div className='TransactionHomeCard-wrapper'>
