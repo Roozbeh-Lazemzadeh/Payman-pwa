@@ -229,6 +229,11 @@
   font-weight: 500;
   background-color: unset;
 }
+.ant-select-selection-item-remove {
+  width: 20px;
+  display: unset;
+  font-size: 11px;
+}
 
 .ant-input-group {
   margin-bottom: 1rem;
