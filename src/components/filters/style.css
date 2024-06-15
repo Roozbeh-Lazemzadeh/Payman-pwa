@@ -231,8 +231,8 @@
 }
 .ant-select-selection-item-remove {
   width: 20px;
-  display: unset;
-  font-size: 11px;
+  display: unset !important;
+  font-size: 11px !important;
 }
 
 .ant-input-group {
