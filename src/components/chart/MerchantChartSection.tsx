@@ -107,7 +107,6 @@ export const MerchantChartSection: React.FC = () => {
     dispatch(selectMerchant(4));
     setTitle('این ماه');
   };
-  console.log(filteredData);
 
   return (
     <div className='chart-row-wrapper'>
