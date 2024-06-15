@@ -235,6 +235,10 @@
   font-size: 11px !important;
 }
 
+.ant-select-multiple .ant-select-selection-overflow-item {
+  z-index: 10;
+}
+
 .ant-input-group {
   margin-bottom: 1rem;
 }
