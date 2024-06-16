@@ -1,5 +1,5 @@
 import { Segmented } from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 // style
@@ -9,6 +9,7 @@ export const PaymanSegmented: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { pathname } = location;
+  const [move, setMove] = useState(false);
 
   // Check if the URL includes 'paymans/me' or 'paymans/other'
   let showDefaultValue;
@@ -43,12 +44,14 @@ export const PaymanSegmented: React.FC = () => {
 
   return (
     <Segmented
-      className='payman-segmented'
+      className={`payman-segmented ${move ? 'move' : ''}`}
       style={{ direction: 'ltr', height: 40, marginBottom: '1.2rem' }}
       options={['سایر ‌هم‌پیمان‌ها', 'پیمان‌های من']}
       block
       defaultValue={showDefaultValue}
       onChange={handleSelectedTab}
+      onClick={() => setMove(false)}
+      onTouchMove={() => setMove(true)}
     />
   );
 };

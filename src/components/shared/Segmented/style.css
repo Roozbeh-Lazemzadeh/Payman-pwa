@@ -17,6 +17,14 @@
 .ant-segmented {
   background: rgba(0, 114, 255, 0.2);
 }
+
+.payman-segmented.move
+  .ant-segmented-item:hover:not(.ant-segmented-item-selected):not(
+    .ant-segmented-item-disabled
+  ) {
+  color: #0072ff;
+}
+
 .ant-segmented
   .ant-segmented-item:hover:not(.ant-segmented-item-selected):not(
     .ant-segmented-item-disabled
