@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-// import { MerchantChartSection } from '../components/chart/MerchantChartSection';
+import { MerchantChartSection } from '../components/chart/MerchantChartSection';
 import FilterTools from '../components/template/FilterTools';
 import { TransactionHomeCard } from '../components/shared/Cards/TransactionHomeCards';
 import jalaliMoment from 'jalali-moment';
@@ -138,7 +138,7 @@ function HomeWithMandate() {
         {monthsList.reverse().map((item) => (
           <div
             className={`home-datepicker ${
-              item.id === selectedItemIndex ? 'home-datepicker-click' : ''
+              item.id === selectedItemIndex ? 'home-datepicker-click' : 'white'
             }`}
             key={item.id}
             onClick={() => handleItemClick(item.id)}
@@ -183,8 +183,7 @@ function HomeWithMandate() {
             ) : isLoading ? (
               <SkeletonChart /> // Assuming SkeletonChart is imported and exists
             ) : (
-              // <MerchantChartSection />
-              <>hello</>
+              <MerchantChartSection />
             )}
             <FilterTools title='تراکنش‌های پرداخت مستقیم' />
             <TransactionFilterLabels />
