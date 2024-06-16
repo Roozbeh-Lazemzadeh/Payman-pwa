@@ -18,10 +18,10 @@ import { selectSelectedPayman } from '../../../store/payman/paymanSlice';
 import { getPaymanDetails } from '../../helpers/getBottomSheetData';
 import { TransactionFilterLabels } from '../../transactions/TransactionFilterLabels';
 import { filterLabelStyle } from '../../helpers/filterLabelsStyle';
-import { ReactComponent as PaymanSkeletonIcon } from '../../../icons/paymanSkeleton.svg';
 import { ReactComponent as EmptyPaymanIcon } from '../../../icons/emptyPayman.svg';
 
 import './style.css';
+import SkeletonPaymansCart from '../../skeleton/SkeletonPaymansCart';
 export interface Payman {
   id: number;
   creditor: string;
@@ -154,10 +154,8 @@ export const MyPaymans: React.FC = () => {
           {isLoading ? (
             // Render three instances of the PaymanSkeletonIcon when loading
             <div className='payman-skeleton-wrapper'>
-              {Array.from({ length: 3 }).map((_, index) => (
-                <div key={index} className='payman-skeleton-card'>
-                  <PaymanSkeletonIcon />
-                </div>
+              {Array.from({ length: 5 }).map((_, index) => (
+                <SkeletonPaymansCart key={index} />
               ))}
             </div>
           ) : paymanList.length === 0 ? (
