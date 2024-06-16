@@ -20,7 +20,6 @@ const RechartPieChart: React.FC<RechartPieChartProps> = ({
 }) => {
   const dispatch = useAppDispatch();
   const activeIndex = useAppSelector((state) => state.chart.selectedMerchant);
-  console.log(activeIndex);
   const renderActiveShape = (props: any) => {
     const { cx, cy, innerRadius, startAngle, endAngle, fill, percent } = props;
     return (
