@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { MerchantChartSection } from '../components/chart/MerchantChartSection';
+// import { MerchantChartSection } from '../components/chart/MerchantChartSection';
 import FilterTools from '../components/template/FilterTools';
 import { TransactionHomeCard } from '../components/shared/Cards/TransactionHomeCards';
 import jalaliMoment from 'jalali-moment';
@@ -183,7 +183,8 @@ function HomeWithMandate() {
             ) : isLoading ? (
               <SkeletonChart /> // Assuming SkeletonChart is imported and exists
             ) : (
-              <MerchantChartSection />
+              // <MerchantChartSection />
+              <>hello</>
             )}
             <FilterTools title='تراکنش‌های پرداخت مستقیم' />
             <TransactionFilterLabels />
