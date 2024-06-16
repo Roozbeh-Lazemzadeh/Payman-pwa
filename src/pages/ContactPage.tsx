@@ -24,16 +24,12 @@ const handleCopyClick = async (textToCopy: string) => {
         },
       });
     }
-    // setTimeout(() => setCopySuccess(''), 2000);
   } catch (error) {
     console.error('Failed to copy', error);
-    // setCopySuccess('Failed to copy');
   }
 };
 
 function ContactPage() {
-  // const [copySuccess, setCopySuccess] = useState('');
-
   const handleDivClick = (e: {
     currentTarget: {
       querySelector: (arg0: string) => { (): any; new (): any; innerText: any };
@@ -92,7 +88,11 @@ function ContactPage() {
           خواهند بود.
         </p>
       </div>
-      <Toaster containerClassName='toaster-style' position='bottom-center' reverseOrder={false} />
+      <Toaster
+        containerClassName='toaster-style'
+        position='bottom-center'
+        reverseOrder={false}
+      />
     </div>
   );
 }

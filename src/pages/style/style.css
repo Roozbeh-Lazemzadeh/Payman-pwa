@@ -154,7 +154,6 @@
 } */
 
 .home-datepicker-click {
-  background-color: #0072ff;
   color: #fff;
   border-radius: 10px;
   padding: 2.1rem 30px;
@@ -162,6 +161,10 @@
   height: 3rem;
   opacity: 1;
   transition: ease-in-out 0.3s all;
+}
+
+.blue {
+  background-color: #0072ff;
 }
 
 /* .home-datepicker-p:hover {

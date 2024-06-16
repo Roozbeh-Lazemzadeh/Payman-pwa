@@ -4,7 +4,7 @@ import { ReactComponent as SuccessfulIcon } from '../../icons/success.svg';
 import { ReactComponent as UnsuccessfulIcon } from '../../icons/unsuccess.svg';
 import { ReactComponent as UnclearIcon } from '../../icons/unclearStatus.svg';
 import { ReactComponent as EmptyTransactionIcon } from '../../icons/emptyTransaction.svg';
-import { ReactComponent as TransactionSkeletonIcon } from '../../icons/transactionSkeleton.svg';
+// import { ReactComponent as TransactionSkeletonIcon } from '../../icons/transactionSkeleton.svg';
 import { transDate } from '../helpers/transDate';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import {
@@ -24,6 +24,7 @@ import { filterLabelStyle } from '../helpers/filterLabelsStyle';
 
 import './style.css';
 import { getTransactionDetails } from '../helpers/getBottomSheetData';
+import SkeletonTransactionsCart from '../skeleton/SkeletonTransactionsCart';
 
 export interface Transaction {
   id: number;
@@ -75,8 +76,6 @@ export const TransactionsList: React.FC = () => {
       >
         {selectedTransaction?.transaction_msg.length ? (
           <div className='info-login detail'>
-            <div> دلیل نامشخص بودن تراکنش : </div>
-            <div> دلیل ناموفق بودن تراکنش : </div>
             {selectedTransaction?.status ===
             'موفق' ? null : selectedTransaction?.status === 'ناموفق' ? (
               <div> دلیل ناموفق بودن تراکنش : </div>
@@ -85,7 +84,7 @@ export const TransactionsList: React.FC = () => {
             ) : (
               ''
             )}
-            <div style={{ marginTop: -10 }}>
+            <div style={{ marginTop: '10px' }}>
               {selectedTransaction?.transaction_msg}
             </div>
           </div>
@@ -94,9 +93,10 @@ export const TransactionsList: React.FC = () => {
       {isLoading ? (
         // Render 10 instances of the TransactionSkeletonIcon when loading
         Array.from({ length: 4 }).map((_, index) => (
-          <div key={index} className='transaction-skeleton-card'>
-            <TransactionSkeletonIcon />
-          </div>
+          // <div  className='transaction-skeleton-card'>
+          //   <TransactionSkeletonIcon />
+          // </div>
+          <SkeletonTransactionsCart key={index} />
         ))
       ) : Transactions.length > 0 ? (
         Transactions.map((transaction) => (
