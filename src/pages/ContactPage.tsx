@@ -1,28 +1,14 @@
-import toast, { Toaster } from 'react-hot-toast';
-import './style/style.css';
+import { ToastContainer } from 'react-toastify';
+import { showCopiedToast } from '../components/shared/Toast/CustomToast';
 
+import './style/style.css';
 const handleCopyClick = async (textToCopy: string) => {
   try {
     await navigator.clipboard.writeText(textToCopy);
     if (textToCopy === 'pay.payman.info@gmail.com') {
-      toast.success('آدرس ایمیل با موفقیت کپی شد.', {
-        icon: null,
-        style: {
-          borderRadius: '10px',
-          background: '#0a0a0a',
-          color: '#fff',
-          bottom: '12% !important',
-        },
-      });
+      showCopiedToast('آدرس ایمیل با موفقیت کپی شد.');
     } else {
-      toast.success('شماره تماس با موفقیت کپی شد.', {
-        icon: null,
-        style: {
-          borderRadius: '10px',
-          background: '#0a0a0a',
-          color: '#fff',
-        },
-      });
+      showCopiedToast('شماره تماس با موفقیت کپی شد.');
     }
   } catch (error) {
     console.error('Failed to copy', error);
@@ -35,13 +21,14 @@ function ContactPage() {
       querySelector: (arg0: string) => { (): any; new (): any; innerText: any };
     };
   }) => {
-    const spanText = e.currentTarget.querySelector('.contact-title').innerText;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    const spanText: string =
+      e.currentTarget.querySelector('.contact-title').innerText;
     handleCopyClick(spanText);
   };
 
   return (
     <div className='contact-wrapper'>
+      <ToastContainer position='bottom-center' />
       <img className='contact-banner' src='/assets/pics/contact.svg' />
       <div className='contact-details'>
         <div className='contact-detail'>
@@ -88,11 +75,6 @@ function ContactPage() {
           خواهند بود.
         </p>
       </div>
-      <Toaster
-        containerClassName='toaster-style'
-        position='bottom-center'
-        reverseOrder={false}
-      />
     </div>
   );
 }

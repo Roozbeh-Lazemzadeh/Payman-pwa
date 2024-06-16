@@ -6,10 +6,10 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import './style.css';
 
 export const PaymanSegmented: React.FC = () => {
+  const [move, setMove] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
   const { pathname } = location;
-  const [move, setMove] = useState(false);
 
   // Check if the URL includes 'paymans/me' or 'paymans/other'
   let showDefaultValue;
@@ -29,6 +29,7 @@ export const PaymanSegmented: React.FC = () => {
   }
 
   const handleSelectedTab = (value: string) => {
+    setMove(false);
     switch (value) {
       case 'سایر ‌هم‌پیمان‌ها':
         navigate('others');
@@ -40,6 +41,9 @@ export const PaymanSegmented: React.FC = () => {
         navigate('me');
         break;
     }
+    setTimeout(() => {
+      setMove(true);
+    }, 400);
   };
 
   return (
@@ -50,7 +54,7 @@ export const PaymanSegmented: React.FC = () => {
       block
       defaultValue={showDefaultValue}
       onChange={handleSelectedTab}
-      onClick={() => setMove(false)}
+      onClick={() => null}
       onTouchMove={() => setMove(true)}
     />
   );

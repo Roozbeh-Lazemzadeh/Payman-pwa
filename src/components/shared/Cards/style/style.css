@@ -14,8 +14,6 @@
   width: 40%;
 }
 
-
-
 .card-merchant-wrapper .card-icon {
   padding-left: 6px;
   width: 35px;
@@ -295,7 +293,7 @@
   height: 32px;
   width: 32px;
 }
-.merchant-name-logo img {
+.merchant-name-logo.expired img {
   opacity: 0.3;
 }
 
