@@ -140,13 +140,9 @@ function HomeWithMandate() {
             className={`home-datepicker ${
               item.id === selectedItemIndex ? 'home-datepicker-click' : ''
             }`}
-            style={
-              item.id === selectedItemIndex
-                ? { backgroundColor: '#0072ff' }
-                : {}
-            }
             key={item.id}
             onClick={() => handleItemClick(item.id)}
+            onTouchMove={() => {}}
           >
             <span className='home-datepicker-num'>{item.year}</span>
             <span className='home-datepicker-p'>{item.month}</span>
