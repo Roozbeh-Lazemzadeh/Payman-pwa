@@ -9,7 +9,7 @@ export const PaymanSegmented: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { pathname } = location;
-  const [move, setMove] = useState(false);
+  const [move, setMove] = useState(true);
 
   // Check if the URL includes 'paymans/me' or 'paymans/other'
   let showDefaultValue;
