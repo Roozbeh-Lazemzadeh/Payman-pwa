@@ -25,6 +25,18 @@
   color: #fff;
   transition: color 0s ease-in;
 }
+
+.ant-segmented
+  .ant-segmented-item:focus:not(.ant-segmented-item-selected):not(
+    .ant-segmented-item-disabled
+  ) {
+  color: #0072ff;
+}
+
+.ant-segmented .ant-segmented-item:focus {
+  color: #0072ff;
+}
+
 .payman-segmented.move
   .ant-segmented-item:hover:not(.ant-segmented-item-selected):not(
     .ant-segmented-item-disabled

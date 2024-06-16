@@ -51,7 +51,7 @@ export const PaymanSegmented: React.FC = () => {
       block
       defaultValue={showDefaultValue}
       onChange={handleSelectedTab}
-      onClick={() => setMove(true)}
+      onClick={() => null}
       onTouchMove={() => setMove(true)}
     />
   );
