@@ -130,47 +130,28 @@
 .home-datepicker {
   width: 3rem;
   height: 3rem;
+  padding: 2.1rem 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2.1rem 30px;
   opacity: 0.3;
   font-weight: 500;
   font-size: 14px;
   border-radius: 10px;
   transition: ease-in-out 0.3s all;
+  background-color: #fff;
 }
-
-/* .home-datepicker:nth-child(6) {
-  background-color: #0072ff;
-  color: #fff;
-  border-radius: 10px;
-  padding: 2.1rem 30px;
-  width: 3rem;
-  height: 3rem;
-  opacity: 1;
-  transition: ease-in-out 0.3s all;
-} */
 
 .home-datepicker.home-datepicker-click {
-  color: #fff;
-  border-radius: 10px;
-  padding: 2.1rem 30px;
   width: 3rem;
   height: 3rem;
+  padding: 2.1rem 30px;
+  color: #fff;
+  border-radius: 10px;
   opacity: 1;
   transition: ease-in-out 0.3s all;
   background-color: #0072ff;
-}
-.home-datepicker.white {
-  border-radius: 10px;
-  padding: 2.1rem 30px;
-  width: 3rem;
-  height: 3rem;
-  opacity: 1;
-  transition: ease-in-out 0.3s all;
-  background-color: #fff;
 }
 
 /* .home-datepicker-p:hover {
