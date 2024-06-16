@@ -29,6 +29,7 @@ export const PaymanSegmented: React.FC = () => {
   }
 
   const handleSelectedTab = (value: string) => {
+    setMove(false);
     switch (value) {
       case 'سایر ‌هم‌پیمان‌ها':
         navigate('others');
@@ -50,7 +51,7 @@ export const PaymanSegmented: React.FC = () => {
       block
       defaultValue={showDefaultValue}
       onChange={handleSelectedTab}
-      onClick={() => setMove(false)}
+      onClick={() => setMove(true)}
       onTouchMove={() => setMove(true)}
     />
   );
