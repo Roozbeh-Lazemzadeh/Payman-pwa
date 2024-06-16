@@ -190,7 +190,7 @@
 }
 
 .TransactionHomeCard {
-  overflow: scroll !important;
+  overflow: auto !important;
   height: calc(100vh - 515px);
   direction: ltr;
 }
