@@ -138,7 +138,7 @@ function HomeWithMandate() {
         {monthsList.reverse().map((item) => (
           <div
             className={`home-datepicker ${
-              item.id === selectedItemIndex ? 'home-datepicker-click' : ''
+              item.id === selectedItemIndex ? 'active' : 'default'
             }`}
             key={item.id}
             onClick={() => handleItemClick(item.id)}
