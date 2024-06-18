@@ -23,9 +23,11 @@ import './style.css';
 import 'swiper/css';
 import 'swiper/css/effect-cards';
 import 'swiper/css/effect-flip';
+import SkeletonSliderSidebar from '../../skeleton/SkeletonSliderSidebar';
 
 export const Sidebar: React.FC = () => {
   const [selectedKey, setSelectedKey] = useState('1');
+  const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -48,6 +50,14 @@ export const Sidebar: React.FC = () => {
 
     setSelectedKey(key);
   }, [location]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer); // Cleanup function to clear the timeout
+  }, []);
 
   const items = [
     getItem({
@@ -228,13 +238,15 @@ export const Sidebar: React.FC = () => {
         items={items}
         className='custom-sidebar-menu'
       />
-
-      <Carousel autoplay infinite className='custom-sidebar'>
-        <img src='/assets/banner-home/home1.png' />
-        <img src='/assets/banner-home/home2.png' />
-        <img src='/assets/banner-home/home3.png' />
-        <img src='/assets/banner-home/home4.png' />
-      </Carousel>
+      {isLoading ? (<SkeletonSliderSidebar />)
+      : (
+        <Carousel autoplay infinite className='custom-sidebar'>
+          <img src='/assets/banner-home/home1.png' />
+          <img src='/assets/banner-home/home2.png' />
+          <img src='/assets/banner-home/home3.png' />
+          <img src='/assets/banner-home/home4.png' />
+        </Carousel>
+      )}
       <div
         style={{
           padding: '30px 10px',
