@@ -363,3 +363,12 @@
     background-position: -200px 0;
   }
 }
+
+@media screen and (max-width: 376px) {
+  .skeleton-chart-container {
+    direction: rtl;
+  }
+  .skeleton-others-container {
+    height: 100px;
+  }
+}
