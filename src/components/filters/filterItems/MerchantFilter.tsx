@@ -6,6 +6,7 @@ import {
   filteredToggle,
   openDropDown,
   searchedToggle,
+  selectDropDownVisible,
 } from '../../../store/filterMenu/filterMenuSlice';
 import { ReactComponent as TickSquareIcon } from '../../../icons/tickSquare.svg';
 import { ToastContainer } from 'react-toastify';
@@ -28,6 +29,7 @@ export const MerchantFilter: React.FC = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const dropDownOpen = useAppSelector(selectDropDownVisible);
   const allFilter = useAppSelector(selectAllFilter);
   const [options, setOptions] = useState<SelectProps['options']>([]);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
@@ -123,7 +125,6 @@ export const MerchantFilter: React.FC = () => {
 
   const handleSelectFocus = () => {
     inputRef.current.focus();
-    // dispatch(openDropDown());
     setTimeout(() => {
       selectRef.current.focus();
     }, 300);
@@ -182,7 +183,7 @@ export const MerchantFilter: React.FC = () => {
             className={`${isOpen ? 'hidden' : 'dummy-input'}`}
           />
           <Select
-            onDropdownVisibleChange={(open) => setIsOpen(open)}
+            // onDropdownVisibleChange={(open) => setIsOpen(open)}
             className='custom-select'
             placeholder='جستجوی نام کسب‌وکار'
             mode='multiple'
@@ -203,7 +204,7 @@ export const MerchantFilter: React.FC = () => {
             value={selectedOptions}
             placement='topRight'
             ref={selectRef}
-            open={isOpen}
+            open={dropDownOpen && isOpen}
             filterOption={customFilterOption}
           />
         </div>

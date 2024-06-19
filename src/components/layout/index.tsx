@@ -14,6 +14,9 @@ import {
   closeSearchToggle,
   selectSearchedFilter,
   selectFilter,
+  selectDropDownVisible,
+  closeDropDown,
+  openDropDown,
 } from '../../store/filterMenu/filterMenuSlice';
 
 interface HeaderStyle {
@@ -23,6 +26,7 @@ interface HeaderStyle {
 
 // Define the main layout for the Progressive Web App (PWA)
 const PWALayout: React.FC = () => {
+  const isDropDownOpen = useAppSelector(selectDropDownVisible);
   const dispatch = useAppDispatch();
   const { Content } = Layout;
   const location = useLocation();
@@ -73,7 +77,18 @@ const PWALayout: React.FC = () => {
     const selectDropdown = targetElement?.closest(
       '.ant-select-item.ant-select-item-option'
     );
+    const antSelectBox = targetElement?.closest('.ant-select');
+    // Close dropdown menu when clicking outside of it
     if (selectDropdown) return;
+
+    if (antSelectBox) {
+      dispatch(openDropDown());
+    }
+
+    if (!selectDropdown && !filteredFooterWrapper && isDropDownOpen) {
+      dispatch(closeDropDown());
+      return;
+    }
 
     if (!filterIcon) {
       if (!filteredFooterWrapper && isFilteredShown && !isSearchedShown) {

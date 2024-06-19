@@ -35,22 +35,27 @@ export const HomeDateFilter: React.FC = () => {
   const allFilter = useAppSelector(selectAllFilter);
   const searchItem = useAppSelector(selectSearchItem);
   const datePeriod = useAppSelector(selectDatePeriod);
+  // const searchMenu = useAppSelector(selectFilter);
   const [dates, setDates] = useState<string[]>([]);
   const [selectedQuickItems, setSelectedQuickItems] = useState<string>('');
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
   const month = useAppSelector(selectSelectedMonth);
 
+  // const [minDate, setMinDate] = useState<Date>();
+  // const [maxDate, setMaxDate] = useState<Date>();
+
   // Use fallback values if month is null
   const initialFirstDay =
     (month && new Date(Date.parse(month?.firstDayOfMonth))) ?? new Date();
-  const initialLastDay =
-    (month && new Date(Date.parse(month?.lastDayOfMonth))) ?? new Date();
+  // const initialLastDay =
+  //   (month && new Date(Date.parse(month?.lastDayOfMonth))) ?? new Date();
 
   const [values, setValues] = useState<Date[]>([
     initialFirstDay,
-    initialLastDay,
+    // initialLastDay,
   ]);
+
   const handleDateChange = (dates: DateObject[]) => {
     if (dates) {
       const formattedDates: string[] = dates.map((date) =>
@@ -78,17 +83,19 @@ export const HomeDateFilter: React.FC = () => {
   };
 
   useEffect(() => {
-    const parsedDates: Date[] = allFilter?.date.map((date) =>
-      parse(date, 'dd-MMM-yy hh:mm:ss a', new Date())
-    );
-    setValues(parsedDates);
-    // dispatching if user implement the same date filter
-    const formattedDates: string[] = parsedDates.map((date) =>
-      new DateObject(date)
-        .convert(gregorian, gregorian_en)
-        .format('DD-MMM-YY hh:mm:ss a')
-    );
-    setDates(formattedDates);
+    if (allFilter?.date.length > 0) {
+      const parsedDates: Date[] = allFilter?.date.map((date) =>
+        parse(date, 'dd-MMM-yy hh:mm:ss a', new Date())
+      );
+      setValues(parsedDates);
+      // dispatching if user implement the same date filter
+      const formattedDates: string[] = parsedDates.map((date) =>
+        new DateObject(date)
+          .convert(gregorian, gregorian_en)
+          .format('DD-MMM-YY hh:mm:ss a')
+      );
+      setDates(formattedDates);
+    }
   }, [allFilter.date]);
 
   const selectedQuickAccess = (title: string) => {
@@ -112,6 +119,8 @@ export const HomeDateFilter: React.FC = () => {
         ];
         setDates(formattedDates);
         setValues([yesterday, today]);
+        // setMinDate(yesterday);
+        // setMaxDate(today);
         dispatch(dateQuickAccessHandler('روز گذشته'));
         break;
 
@@ -126,6 +135,8 @@ export const HomeDateFilter: React.FC = () => {
         ];
         setDates(formattedDates);
         setValues([threeDaysAgo, today]);
+        // setMinDate(threeDaysAgo);
+        // setMaxDate(today);
         dispatch(dateQuickAccessHandler('۳ روز گذشته'));
 
         break;
@@ -141,6 +152,8 @@ export const HomeDateFilter: React.FC = () => {
         ];
         setDates(formattedDates);
         setValues([oneWeekAgo, today]);
+        // setMinDate(oneWeekAgo);
+        // setMaxDate(today);
         dispatch(dateQuickAccessHandler('هفته گذشته'));
 
         break;
@@ -164,8 +177,10 @@ export const HomeDateFilter: React.FC = () => {
 
   useEffect(() => {
     // Check the search item and initialize the selectedQuickItems state
-    setSelectedQuickItems(datePeriod);
-  }, [searchItem]);
+    if (allFilter.date.length > 0) {
+      setSelectedQuickItems(datePeriod);
+    }
+  }, [searchItem, allFilter.date]);
 
   useEffect(() => {
     if (dates.length > 0) {
@@ -223,6 +238,7 @@ export const HomeDateFilter: React.FC = () => {
         <div className='search-section search-bar'>
           <div className='search-datePicker'>
             <DatePicker
+              key={values.toString()}
               ref={datePickerRef}
               style={{
                 direction: 'rtl',
@@ -240,6 +256,8 @@ export const HomeDateFilter: React.FC = () => {
                 OK: 'تایید',
                 CANCEL: 'انصراف',
               }}
+              // minDate={minDate}
+              // maxDate={maxDate}
               minDate={month?.firstDayOfMonth}
               maxDate={month?.lastDayOfMonth}
               currentDate={new DateObject(initialFirstDay)} // Set the initial view to the startDate

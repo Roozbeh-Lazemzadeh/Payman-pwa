@@ -24,6 +24,9 @@ const arrayHomeWithMandateSlice = createSlice({
   name: 'arrayHomeWithMandate',
   initialState,
   reducers: {
+    emptyArrayHomeWithMandate: (state) => {
+      state.groupsTransactions = [];
+    },
     setArrayHomeWithMandate: (
       state,
       action: PayloadAction<SetArrayHomeWithMandatePayload>
@@ -95,6 +98,7 @@ const arrayHomeWithMandateSlice = createSlice({
   },
 });
 
-export const { setArrayHomeWithMandate } = arrayHomeWithMandateSlice.actions;
+export const { setArrayHomeWithMandate, emptyArrayHomeWithMandate } =
+  arrayHomeWithMandateSlice.actions;
 
 export default arrayHomeWithMandateSlice.reducer;
