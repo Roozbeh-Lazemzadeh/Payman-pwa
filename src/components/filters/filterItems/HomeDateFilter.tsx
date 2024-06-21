@@ -24,10 +24,12 @@ import {
 } from '../../../store/filterMenu/filterMenuSlice';
 import { selectSelectedMonth } from '../../../store/monthlyBill/monthlyBillSlice';
 
+// helper
+import { convertDate, convertToPersianFormat } from '../../helpers/transDate';
+
 // style
 import '../../Paymans/otherPaymans/style.css';
 import '../style.css';
-import { convertToPersianFormat } from '../../helpers/transDate';
 
 export const HomeDateFilter: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -44,13 +46,18 @@ export const HomeDateFilter: React.FC = () => {
   // Use fallback values if month is null
   const initialFirstDay =
     (month && new Date(Date.parse(month?.firstDayOfMonth))) ?? new Date();
-  const initialLastDay =
-    (month && new Date(Date.parse(month?.lastDayOfMonth))) ?? new Date();
+  // const initialLastDay =
+  //   (month && new Date(Date.parse(month?.lastDayOfMonth))) ?? new Date();
 
   const [values, setValues] = useState<Date[]>([
     initialFirstDay,
-    initialLastDay,
+    // initialLastDay,
   ]);
+  const today = startOfDay(new Date());
+  const yesterday = subDays(today, 1);
+  const threeDaysAgo = subDays(today, 3);
+  const oneWeekAgo = subWeeks(today, 1);
+
   const handleDateChange = (dates: DateObject[]) => {
     if (dates) {
       const formattedDates: string[] = dates.map((date) =>
@@ -59,9 +66,7 @@ export const HomeDateFilter: React.FC = () => {
           .format('DD-MMM-YY hh:mm:ss a')
       );
       if (formattedDates.length === 1) {
-        const currentDate = new DateObject(new Date())
-          .convert(gregorian, gregorian_en)
-          .format('DD-MMM-YY hh:mm:ss a');
+        const currentDate = convertDate(new Date());
         formattedDates.push(currentDate);
         setDates(formattedDates);
       } else if (formattedDates.length === 2) {
@@ -78,52 +83,34 @@ export const HomeDateFilter: React.FC = () => {
   };
 
   useEffect(() => {
-    const parsedDates: Date[] = allFilter?.date.map((date) =>
-      parse(date, 'dd-MMM-yy hh:mm:ss a', new Date())
-    );
-    setValues(parsedDates);
-    // dispatching if user implement the same date filter
-    const formattedDates: string[] = parsedDates.map((date) =>
-      new DateObject(date)
-        .convert(gregorian, gregorian_en)
-        .format('DD-MMM-YY hh:mm:ss a')
-    );
-    setDates(formattedDates);
+    if (allFilter?.date.length > 0) {
+      const parsedDates: Date[] = allFilter?.date.map((date) =>
+        parse(date, 'dd-MMM-yy hh:mm:ss a', new Date())
+      );
+      setValues(parsedDates);
+      // dispatching if user implement the same date filter
+      const formattedDates: string[] = parsedDates.map((date) =>
+        convertDate(date)
+      );
+      setDates(formattedDates);
+    }
   }, [allFilter.date]);
 
   const selectedQuickAccess = (title: string) => {
     let formattedDates: string[] = [];
-    const today = startOfDay(new Date());
-    const yesterday = subDays(today, 1);
-    const threeDaysAgo = subDays(today, 3);
-    const oneWeekAgo = subWeeks(today, 1);
     // Filter out the previously selected item from the selectedQuickItems array
     setSelectedQuickItems(title);
 
     switch (title) {
       case 'روز گذشته':
-        formattedDates = [
-          new DateObject(yesterday)
-            .convert(gregorian, gregorian_en)
-            .format('DD-MMM-YY hh:mm:ss a'),
-          new DateObject(today)
-            .convert(gregorian, gregorian_en)
-            .format('DD-MMM-YY hh:mm:ss a'),
-        ];
+        formattedDates = [convertDate(yesterday), convertDate(today)];
         setDates(formattedDates);
         setValues([yesterday, today]);
         dispatch(dateQuickAccessHandler('روز گذشته'));
         break;
 
       case '۳ روز گذشته':
-        formattedDates = [
-          new DateObject(threeDaysAgo)
-            .convert(gregorian, gregorian_en)
-            .format('DD-MMM-YY hh:mm:ss a'),
-          new DateObject(today)
-            .convert(gregorian, gregorian_en)
-            .format('DD-MMM-YY hh:mm:ss a'),
-        ];
+        formattedDates = [convertDate(threeDaysAgo), convertDate(today)];
         setDates(formattedDates);
         setValues([threeDaysAgo, today]);
         dispatch(dateQuickAccessHandler('۳ روز گذشته'));
@@ -131,14 +118,7 @@ export const HomeDateFilter: React.FC = () => {
         break;
 
       case 'هفته گذشته':
-        formattedDates = [
-          new DateObject(oneWeekAgo)
-            .convert(gregorian, gregorian_en)
-            .format('DD-MMM-YY hh:mm:ss a'),
-          new DateObject(today)
-            .convert(gregorian, gregorian_en)
-            .format('DD-MMM-YY hh:mm:ss a'),
-        ];
+        formattedDates = [convertDate(oneWeekAgo), convertDate(today)];
         setDates(formattedDates);
         setValues([oneWeekAgo, today]);
         dispatch(dateQuickAccessHandler('هفته گذشته'));
@@ -164,8 +144,10 @@ export const HomeDateFilter: React.FC = () => {
 
   useEffect(() => {
     // Check the search item and initialize the selectedQuickItems state
-    setSelectedQuickItems(datePeriod);
-  }, [searchItem]);
+    if (allFilter.date.length > 0) {
+      setSelectedQuickItems(datePeriod);
+    }
+  }, [searchItem, allFilter.date]);
 
   useEffect(() => {
     if (dates.length > 0) {
@@ -201,19 +183,34 @@ export const HomeDateFilter: React.FC = () => {
           {/* date  */}
           <>
             <span
-              className={selectedQuickItems === 'روز گذشته' ? 'selected' : ''}
+              className={
+                selectedQuickItems === 'روز گذشته' &&
+                dates[0].toString() === convertDate(yesterday)
+                  ? 'selected'
+                  : ''
+              }
               onClick={() => selectedQuickAccess('روز گذشته')}
             >
               روز گذشته
             </span>
             <span
-              className={selectedQuickItems === '۳ روز گذشته' ? 'selected' : ''}
+              className={
+                selectedQuickItems === '۳ روز گذشته' &&
+                dates[0].toString() === convertDate(threeDaysAgo)
+                  ? 'selected'
+                  : ''
+              }
               onClick={() => selectedQuickAccess('۳ روز گذشته')}
             >
               ۳ روز گذشته
             </span>
             <span
-              className={selectedQuickItems === 'هفته گذشته' ? 'selected' : ''}
+              className={
+                selectedQuickItems === 'هفته گذشته' &&
+                dates[0].toString() === convertDate(oneWeekAgo)
+                  ? 'selected'
+                  : ''
+              }
               onClick={() => selectedQuickAccess('هفته گذشته')}
             >
               ۷ روز گذشته
@@ -223,6 +220,7 @@ export const HomeDateFilter: React.FC = () => {
         <div className='search-section search-bar'>
           <div className='search-datePicker'>
             <DatePicker
+              key={values.toString()}
               ref={datePickerRef}
               style={{
                 direction: 'rtl',

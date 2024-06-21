@@ -3,6 +3,8 @@ import { format, parse } from 'date-fns';
 import { DateObject } from 'react-multi-date-picker';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
+import gregorian from 'react-date-object/calendars/gregorian';
+import gregorian_en from 'react-date-object/locales/gregorian_en';
 
 export const transDate = (inputDate: string) => {
   const parsedDate = parse(
@@ -68,4 +70,10 @@ export const convertToPersianFormat = (dates: string[]) => {
   });
 
   return `${persianDates[0]}~${persianDates[1]}`;
+};
+
+export const convertDate = (date: Date) => {
+  return new DateObject(date)
+    .convert(gregorian, gregorian_en)
+    .format('DD-MMM-YY hh:mm:ss a');
 };

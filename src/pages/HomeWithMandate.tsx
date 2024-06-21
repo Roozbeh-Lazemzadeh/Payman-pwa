@@ -102,6 +102,16 @@ function HomeWithMandate() {
     }
   };
 
+  // show the last month data for initial render
+  useEffect(() => {
+    const selectedMonth = monthsList.find((item) => item.id === 0);
+    if (selectedMonth) {
+      const selectedYearMonth = monthsList2[selectedMonth.id];
+      dispatch(getMonthBillHandler(selectedYearMonth));
+      dispatch(getSelectedMonth(selectedMonth));
+    }
+  }, []);
+
   useEffect(() => {
     if (Transactions) {
       dispatch(

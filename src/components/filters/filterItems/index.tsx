@@ -11,10 +11,10 @@ import { TransactionDateFilter } from './TransactionDateFilter';
 import { HomeDateFilter } from './HomeDateFilter';
 import { MerchantFilter } from './MerchantFilter';
 import '../../Paymans/otherPaymans/style.css';
-import '../style.css';
 import { useLocation } from 'react-router-dom';
 import { PaymanDateFilter } from './PaymanDateFilter';
 
+import '../style.css';
 const SearchedItems: React.FC = () => {
   const location = useLocation();
   const searchItem = useAppSelector(selectSearchItem);
