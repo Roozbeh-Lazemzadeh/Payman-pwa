@@ -1,24 +1,30 @@
+// Importing necessary dependencies and components
 import React, { useEffect, useState } from 'react';
-import RechartPieChart from './RechartPieChart';
-import { useAppSelector, useAppDispatch } from '../hooks/reduxHooks';
-import transactionData from '../../data/transaction.json';
-import { selectMonthlyBill } from '../../store/monthlyBill/monthlyBillSlice';
-import { jalaliDate } from '../helpers/transDate';
-import { selectMerchant } from '../../store/chart/chartSlice';
+import RechartPieChart from './RechartPieChart'; // Importing the RechartPieChart component
+import { useAppSelector, useAppDispatch } from '../hooks/reduxHooks'; // Importing hooks for Redux state management
+import transactionData from '../../data/transaction.json'; // Importing transaction data
+import { selectMonthlyBill } from '../../store/monthlyBill/monthlyBillSlice'; // Importing selector for monthly bill
+import { jalaliDate } from '../helpers/transDate'; // Importing helper function to handle date conversion
+import { selectMerchant } from '../../store/chart/chartSlice'; // Importing selector for merchant chart
 
-import './style.css';
+import './style.css'; // Importing styles
 
+// Define the MerchantChartSection functional component
 export const MerchantChartSection: React.FC = () => {
+  // State variables for title and value
   const [title, setTitle] = useState('همه');
   const [value, setValue] = useState<number>(0);
+  // Retrieve selected merchant index and monthly bill value from Redux store
   const selectedIndex = useAppSelector((state) => state.chart.selectedMerchant);
   const monthBillValue = useAppSelector(selectMonthlyBill);
   const dispatch = useAppDispatch();
 
+  // Formatting the monthly bill value for filtering transactions
   const formattedMonthBillValue = monthBillValue
     ? `${monthBillValue.substring(0, 2)}/${monthBillValue.substring(3)}`
     : '';
 
+  // Filter transaction data based on the formatted month bill value
   const filteredData = transactionData.filter((transaction) => {
     return (
       parseInt(jalaliDate(transaction.transaction_date).split('/')[1]) ===
@@ -26,11 +32,13 @@ export const MerchantChartSection: React.FC = () => {
     );
   });
 
+  // Map to accumulate transaction amounts by creditor
   const creditorTransactionMap = new Map<
     string,
     { amount: number; color: string }
   >();
 
+  // Accumulate transaction amounts in the map
   filteredData.forEach((transaction) => {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     const { creditor, transaction_amount, color } = transaction;
@@ -48,6 +56,7 @@ export const MerchantChartSection: React.FC = () => {
     }
   });
 
+  // Extract top three transactions and sum the rest
   const topThreeTransactions = Array.from(creditorTransactionMap).slice(0, 3);
   while (topThreeTransactions.length < 3) {
     topThreeTransactions.push(['x', { amount: 0, color: '#101828' }]);
@@ -56,6 +65,7 @@ export const MerchantChartSection: React.FC = () => {
     .slice(3)
     .reduce((total, [, { amount }]) => total + amount, 0);
 
+  // Transform data for the pie chart component
   const newTransformedData = [
     ...topThreeTransactions.map(([name, { amount, color }]) => ({
       name,
@@ -66,6 +76,7 @@ export const MerchantChartSection: React.FC = () => {
     { name: 'x', value: 0, color: '#101828' },
   ];
 
+  // Ensure there are always 5 items in the transformed data array
   while (newTransformedData.length < 5) {
     newTransformedData.push({
       name: 'placeholder',
@@ -74,14 +85,17 @@ export const MerchantChartSection: React.FC = () => {
     });
   }
 
+  // Effect hook to handle initial selection of all merchants
   useEffect(() => {
     handleSelectedAllMerchant();
   }, []);
 
+  // Effect hook to handle selection when the month bill value changes
   useEffect(() => {
     handleSelectedAllMerchant();
   }, [monthBillValue]);
 
+  // Handle selection of a specific merchant
   const handleSelectedMerchant = (
     e: React.MouseEvent<HTMLSpanElement, MouseEvent>,
     index: number
@@ -98,6 +112,7 @@ export const MerchantChartSection: React.FC = () => {
     }
   };
 
+  // Handle selection of all merchants
   const handleSelectedAllMerchant = () => {
     const totalSum = newTransformedData.reduce(
       (sum, item) => sum + item.value,
@@ -108,6 +123,7 @@ export const MerchantChartSection: React.FC = () => {
     setTitle('این ماه');
   };
 
+  // Render the component
   return (
     <div className='chart-row-wrapper'>
       <div className='pay-info-wrapper'>
@@ -172,3 +188,5 @@ export const MerchantChartSection: React.FC = () => {
     </div>
   );
 };
+
+export default MerchantChartSection;
