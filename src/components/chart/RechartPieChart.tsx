@@ -1,9 +1,11 @@
+// Import necessary dependencies and components for RechartPieChart
 import React from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Sector } from 'recharts';
 import './style.css';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import { selectMerchant } from '../../store/chart/chartSlice';
 
+// Define the RechartPieChart component with its props
 interface RechartPieChartProps {
   data: Array<{ name: string; value: number; color: string }>;
   selectedIndex?: number;
@@ -48,14 +50,14 @@ const RechartPieChart: React.FC<RechartPieChartProps> = ({
       </g>
     );
   };
-  // }
 
   const handleClick = (entry: any, index: number) => {
     dispatch(selectMerchant(index));
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    onCellClick(entry, index);
+    onCellClick(entry, index); // Notify parent component of the selection
   };
 
+  // Render the pie chart component
   return (
     <ResponsiveContainer>
       <PieChart>
