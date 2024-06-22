@@ -37,6 +37,7 @@ export const TransactionDateFilter: React.FC = () => {
   const [dates, setDates] = useState<string[]>([]);
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
+  const [isFilled, setIsFilled] = useState(false);
   const [values, setValues] = useState<Date[]>([]);
   const [selectedQuickItems, setSelectedQuickItems] = useState<string>('');
   const today = startOfDay(new Date());
@@ -142,6 +143,19 @@ export const TransactionDateFilter: React.FC = () => {
     }
   }, [dates]);
 
+  useEffect(() => {
+    if (
+      dates.length > 0 &&
+      dates[0]?.toString() !== convertDate(yesterday) &&
+      dates[0]?.toString() !== convertDate(oneWeekAgo) &&
+      dates[0]?.toString() !== convertDate(oneMonthAgo)
+    ) {
+      setIsFilled(true);
+    } else {
+      setIsFilled(false);
+    }
+  }, [dates]);
+
   return (
     <>
       <div className='implement-remove-wrapper'>
@@ -203,7 +217,7 @@ export const TransactionDateFilter: React.FC = () => {
           </>
         </div>
         <div className='search-section search-bar'>
-          <div className='search-datePicker'>
+          <div className={`search-datePicker ${isFilled ? 'filled' : ''}`}>
             <DatePicker
               ref={datePickerRef}
               style={{

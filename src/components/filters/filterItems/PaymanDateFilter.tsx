@@ -39,6 +39,8 @@ export const PaymanDateFilter: React.FC = () => {
   const [endingDates, setEndingDates] = useState<string[]>([]);
   const [viewStartingPayman, setViewStartingPayman] = useState<string[]>([]);
   const [viewEndingPayman, setViewEndingPayman] = useState<string[]>([]);
+  const [isStartingFilled, setIsStartingFilled] = useState(false);
+  const [isEndingFilled, setIsEndingFilled] = useState(false);
   const [selectedDateTab, setSelectedDateTab] = useState('start');
   const [dateValues, setDateValues] = useState<{
     startingDateValues: Date[];
@@ -172,6 +174,9 @@ export const PaymanDateFilter: React.FC = () => {
       if (splitDates.length > 0) {
         setViewStartingPayman([splitDates[0], splitDates[1]]);
       }
+      // border of the input
+      setIsStartingFilled(true);
+      console.log('start');
     }
     if (endingDates.length > 0) {
       const Dates = convertToPersianFormat(endingDates);
@@ -179,6 +184,8 @@ export const PaymanDateFilter: React.FC = () => {
       if (splitDates.length > 0) {
         setViewEndingPayman([splitDates[0], splitDates[1]]);
       }
+      // border of the input
+      setIsEndingFilled(true);
     }
   }, [startingDates, endingDates]);
 
@@ -223,7 +230,14 @@ export const PaymanDateFilter: React.FC = () => {
           />
         </div>
         <div className='search-section search-bar'>
-          <div className='search-datePicker payman'>
+          <div
+            className={`search-datePicker payman ${
+              (selectedDateTab === 'start' && isStartingFilled) ||
+              (selectedDateTab !== 'start' && isEndingFilled)
+                ? 'filled'
+                : ''
+            }`}
+          >
             <DatePicker
               ref={datePickerRef}
               style={{ direction: 'rtl', fontSize: 12 }}

@@ -42,6 +42,7 @@ export const HomeDateFilter: React.FC = () => {
   const datePeriod = useAppSelector(selectDatePeriod);
   const [dates, setDates] = useState<string[]>([]);
   const [selectedQuickItems, setSelectedQuickItems] = useState<string>('');
+  const [isFilled, setIsFilled] = useState(false);
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
   const month = useAppSelector(selectSelectedMonth);
@@ -166,6 +167,19 @@ export const HomeDateFilter: React.FC = () => {
     }
   }, [dates]);
 
+  useEffect(() => {
+    if (
+      dates.length > 0 &&
+      dates[0]?.toString() !== convertDate(yesterday) &&
+      dates[0]?.toString() !== convertDate(threeDaysAgo) &&
+      dates[0]?.toString() !== convertDate(oneWeekAgo)
+    ) {
+      setIsFilled(true);
+    } else {
+      setIsFilled(false);
+    }
+  }, [dates]);
+
   return (
     <>
       <ToastContainer />
@@ -228,7 +242,7 @@ export const HomeDateFilter: React.FC = () => {
           </>
         </div>
         <div className='search-section search-bar'>
-          <div className='search-datePicker'>
+          <div className={`search-datePicker ${isFilled ? 'filled' : ''}`}>
             <DatePicker
               key={values.toString()}
               ref={datePickerRef}
