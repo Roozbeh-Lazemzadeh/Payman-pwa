@@ -26,7 +26,7 @@ import {
 // style
 import '../../Paymans/otherPaymans/style.css';
 import '../style.css';
-import { convertToPersianFormat } from '../../helpers/transDate';
+import { convertDate, convertToPersianFormat } from '../../helpers/transDate';
 
 export const TransactionDateFilter: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -39,6 +39,10 @@ export const TransactionDateFilter: React.FC = () => {
   const [toDate, setToDate] = useState('');
   const [values, setValues] = useState<Date[]>([]);
   const [selectedQuickItems, setSelectedQuickItems] = useState<string>('');
+  const today = startOfDay(new Date());
+  const yesterday = subDays(today, 1);
+  const oneWeekAgo = subWeeks(today, 1);
+  const oneMonthAgo = subMonths(today, 1);
 
   const handleDateChange = (dates: DateObject[]) => {
     if (dates) {
@@ -48,9 +52,7 @@ export const TransactionDateFilter: React.FC = () => {
           .format('DD-MMM-YY hh:mm:ss a')
       );
       if (formattedDates.length === 1) {
-        const currentDate = new DateObject(new Date())
-          .convert(gregorian, gregorian_en)
-          .format('DD-MMM-YY hh:mm:ss a');
+        const currentDate = convertDate(new Date());
         formattedDates.push(currentDate);
         setDates(formattedDates);
       } else if (formattedDates.length === 2) {
@@ -82,37 +84,20 @@ export const TransactionDateFilter: React.FC = () => {
 
   const selectedQuickAccess = (title: string) => {
     let formattedDates: string[] = [];
-    const today = startOfDay(new Date());
-    const yesterday = subDays(today, 1);
-    const oneWeekAgo = subWeeks(today, 1);
-    const oneMonthAgo = subMonths(today, 1);
+
     // Filter out the previously selected item from the selectedQuickItems array
     setSelectedQuickItems(title);
 
     switch (title) {
       case 'روز گذشته':
-        formattedDates = [
-          new DateObject(yesterday)
-            .convert(gregorian, gregorian_en)
-            .format('DD-MMM-YY hh:mm:ss a'),
-          new DateObject(today)
-            .convert(gregorian, gregorian_en)
-            .format('DD-MMM-YY hh:mm:ss a'),
-        ];
+        formattedDates = [convertDate(yesterday), convertDate(today)];
         setDates(formattedDates);
         setValues([yesterday, today]);
         dispatch(dateQuickAccessHandler('روز گذشته'));
         break;
 
       case 'هفته گذشته':
-        formattedDates = [
-          new DateObject(oneWeekAgo)
-            .convert(gregorian, gregorian_en)
-            .format('DD-MMM-YY hh:mm:ss a'),
-          new DateObject(today)
-            .convert(gregorian, gregorian_en)
-            .format('DD-MMM-YY hh:mm:ss a'),
-        ];
+        formattedDates = [convertDate(oneWeekAgo), convertDate(today)];
         setDates(formattedDates);
         setValues([oneWeekAgo, today]);
         dispatch(dateQuickAccessHandler('هفته گذشته'));
@@ -120,14 +105,7 @@ export const TransactionDateFilter: React.FC = () => {
         break;
 
       case 'ماه گذشته':
-        formattedDates = [
-          new DateObject(oneMonthAgo)
-            .convert(gregorian, gregorian_en)
-            .format('DD-MMM-YY hh:mm:ss a'),
-          new DateObject(today)
-            .convert(gregorian, gregorian_en)
-            .format('DD-MMM-YY hh:mm:ss a'),
-        ];
+        formattedDates = [convertDate(oneMonthAgo), convertDate(today)];
         setDates(formattedDates);
         setValues([oneMonthAgo, today]);
         dispatch(dateQuickAccessHandler('ماه گذشته'));
@@ -190,19 +168,34 @@ export const TransactionDateFilter: React.FC = () => {
           {/* date  */}
           <>
             <span
-              className={selectedQuickItems === 'روز گذشته' ? 'selected' : ''}
+              className={
+                selectedQuickItems === 'روز گذشته' &&
+                dates[0].toString() === convertDate(yesterday)
+                  ? 'selected'
+                  : ''
+              }
               onClick={() => selectedQuickAccess('روز گذشته')}
             >
               روز گذشته
             </span>
             <span
-              className={selectedQuickItems === 'هفته گذشته' ? 'selected' : ''}
+              className={
+                selectedQuickItems === 'هفته گذشته' &&
+                dates[0].toString() === convertDate(oneWeekAgo)
+                  ? 'selected'
+                  : ''
+              }
               onClick={() => selectedQuickAccess('هفته گذشته')}
             >
               7 روز گذشته
             </span>
             <span
-              className={selectedQuickItems === 'ماه گذشته' ? 'selected' : ''}
+              className={
+                selectedQuickItems === 'ماه گذشته' &&
+                dates[0].toString() === convertDate(oneMonthAgo)
+                  ? 'selected'
+                  : ''
+              }
               onClick={() => selectedQuickAccess('ماه گذشته')}
             >
               30 روز گذشته

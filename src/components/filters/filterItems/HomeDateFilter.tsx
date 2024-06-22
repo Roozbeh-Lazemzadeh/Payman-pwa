@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { ToastContainer } from 'react-toastify';
 import { ReactComponent as TickSquareIcon } from '../../../icons/tickSquare.svg';
 import { ReactComponent as CalendarIcon } from '../../../icons/calendar.svg';
 import { ReactComponent as RemoveIcon } from '../../../icons/delete.svg';
+import { ReactComponent as InfoIcon } from '../../../icons/yellowInfo.svg';
 import DatePicker, { DateObject } from 'react-multi-date-picker';
 import { weekDays } from '../../types/calendar';
 import gregorian from 'react-date-object/calendars/gregorian';
@@ -30,6 +32,7 @@ import { convertDate, convertToPersianFormat } from '../../helpers/transDate';
 // style
 import '../../Paymans/otherPaymans/style.css';
 import '../style.css';
+import { showNotifyToast } from '../../shared/Toast/CustomToast';
 
 export const HomeDateFilter: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -97,6 +100,12 @@ export const HomeDateFilter: React.FC = () => {
   }, [allFilter.date]);
 
   const selectedQuickAccess = (title: string) => {
+    if (month?.id !== 0) {
+      return showNotifyToast(
+        'فقط قابل اجرا در ماه جاری می باشد.',
+        <InfoIcon />
+      );
+    }
     let formattedDates: string[] = [];
     // Filter out the previously selected item from the selectedQuickItems array
     setSelectedQuickItems(title);
@@ -159,6 +168,7 @@ export const HomeDateFilter: React.FC = () => {
 
   return (
     <>
+      <ToastContainer />
       <div className='implement-remove-wrapper'>
         <div
           className={`remove-button ${dates.length === 0 ? 'disabled' : ''}`}

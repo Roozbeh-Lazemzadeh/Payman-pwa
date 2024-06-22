@@ -37,7 +37,7 @@
   z-index: 10;
 }
 .filtered-footer.invisible {
-  transition: ease-in-out 0.24s;
+  transition: none;
   opacity: 0;
   visibility: hidden;
 }

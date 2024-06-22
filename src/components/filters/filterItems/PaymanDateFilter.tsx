@@ -28,7 +28,7 @@ import { useLocation } from 'react-router-dom';
 // style
 import '../style.css';
 import '../../Paymans/otherPaymans/style.css';
-import { convertToPersianFormat } from '../../helpers/transDate';
+import { convertDate, convertToPersianFormat } from '../../helpers/transDate';
 
 export const PaymanDateFilter: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -73,17 +73,9 @@ export const PaymanDateFilter: React.FC = () => {
 
         const isFutureDate = parsedDate > currentDate; // Compare the actual Date objects
         if (isFutureDate) {
-          formattedDates.unshift(
-            new DateObject(currentDate)
-              .convert(gregorian, gregorian_en)
-              .format('DD-MMM-YY hh:mm:ss a')
-          );
+          formattedDates.unshift(convertDate(currentDate));
         } else {
-          formattedDates.push(
-            new DateObject(currentDate)
-              .convert(gregorian, gregorian_en)
-              .format('DD-MMM-YY hh:mm:ss a')
-          );
+          formattedDates.push(convertDate(currentDate));
         }
       }
 
@@ -113,9 +105,7 @@ export const PaymanDateFilter: React.FC = () => {
       parse(date, 'dd-MMM-yy hh:mm:ss a', new Date())
     );
     const startingFormattedDates: string[] = startingParsedDates.map((date) =>
-      new DateObject(date)
-        .convert(gregorian, gregorian_en)
-        .format('DD-MMM-YY hh:mm:ss a')
+      convertDate(date)
     );
     setStartingDates(startingFormattedDates);
     setDateValues((prevValues) => ({
@@ -130,9 +120,7 @@ export const PaymanDateFilter: React.FC = () => {
       parse(date, 'dd-MMM-yy hh:mm:ss a', new Date())
     );
     const endingFormattedDates: string[] = endingParsedDates.map((date) =>
-      new DateObject(date)
-        .convert(gregorian, gregorian_en)
-        .format('DD-MMM-YY hh:mm:ss a')
+      convertDate(date)
     );
     setEndingDates(endingFormattedDates);
     setDateValues((prevValues) => ({

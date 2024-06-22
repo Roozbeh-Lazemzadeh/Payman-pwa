@@ -84,7 +84,6 @@ const FilterMenu: React.FC = () => {
       >
         <Menu
           style={{ background: 'none' }}
-          // onClick={handleTabClick}
           mode='inline'
           selectedKeys={[location.pathname]}
           items={items.map((item) => ({
