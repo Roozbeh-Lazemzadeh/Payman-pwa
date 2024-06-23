@@ -56,6 +56,7 @@ export const TransactionDateFilter: React.FC = () => {
         const currentDate = convertDate(new Date());
         formattedDates.push(currentDate);
         setDates(formattedDates);
+        setValues([dates[0].toDate(), new Date()]);
       } else if (formattedDates.length === 2) {
         setDates(formattedDates);
       }

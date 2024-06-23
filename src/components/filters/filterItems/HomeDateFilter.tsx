@@ -50,11 +50,11 @@ export const HomeDateFilter: React.FC = () => {
   // Use fallback values if month is null
   const initialFirstDay =
     (month && new Date(Date.parse(month?.firstDayOfMonth))) ?? new Date();
-  // const initialLastDay =
-  //   (month && new Date(Date.parse(month?.lastDayOfMonth))) ?? new Date();
+  const initialLastDay =
+    (month && new Date(Date.parse(month?.lastDayOfMonth))) ?? new Date();
 
   const [values, setValues] = useState<Date[]>([
-    initialFirstDay,
+    // initialFirstDay,
     // initialLastDay,
   ]);
   const today = startOfDay(new Date());
@@ -70,9 +70,10 @@ export const HomeDateFilter: React.FC = () => {
           .format('DD-MMM-YY hh:mm:ss a')
       );
       if (formattedDates.length === 1) {
-        const currentDate = convertDate(new Date());
-        formattedDates.push(currentDate);
+        const lastDateOfMonth = convertDate(initialLastDay);
+        formattedDates.push(lastDateOfMonth);
         setDates(formattedDates);
+        setValues([dates[0].toDate(), initialLastDay]);
       } else if (formattedDates.length === 2) {
         setDates(formattedDates);
       }
@@ -207,12 +208,15 @@ export const HomeDateFilter: React.FC = () => {
           {/* date  */}
           <>
             <span
-              className={
+              className={[
+                month?.id !== 0 ? 'disabled' : '',
                 selectedQuickItems === 'روز گذشته' &&
                 dates[0].toString() === convertDate(yesterday)
                   ? 'selected'
-                  : ''
-              }
+                  : '',
+              ]
+                .join(' ')
+                .trim()}
               onClick={() => selectedQuickAccess('روز گذشته')}
             >
               روز گذشته
