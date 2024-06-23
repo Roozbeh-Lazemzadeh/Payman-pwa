@@ -35,6 +35,7 @@ export const MerchantFilter: React.FC = () => {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const selectRef = useRef<any>(null);
   const inputRef = useRef<any>(null);
+  const [isFilled, setIsFilled] = useState(false);
 
   const selectedQuickAccess = (title: string) => {
     const currentOptionsLength = selectedOptions.length;
@@ -143,6 +144,14 @@ export const MerchantFilter: React.FC = () => {
     }
   }, [isOpen]);
 
+  useEffect(() => {
+    if (selectedOptions.length > 0) {
+      setIsFilled(true);
+    } else {
+      setIsFilled(false);
+    }
+  }, [selectedOptions]);
+
   return (
     <>
       <ToastContainer rtl />
@@ -184,7 +193,7 @@ export const MerchantFilter: React.FC = () => {
           />
           <Select
             // onDropdownVisibleChange={(open) => setIsOpen(open)}
-            className='custom-select'
+            className={`custom-select ${isFilled ? 'filled' : ''}`}
             placeholder='جستجوی نام کسب‌وکار'
             mode='multiple'
             style={{ width: '100%' }}

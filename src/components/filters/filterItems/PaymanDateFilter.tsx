@@ -28,7 +28,7 @@ import { useLocation } from 'react-router-dom';
 // style
 import '../style.css';
 import '../../Paymans/otherPaymans/style.css';
-import { convertToPersianFormat } from '../../helpers/transDate';
+import { convertDate, convertToPersianFormat } from '../../helpers/transDate';
 
 export const PaymanDateFilter: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -39,6 +39,8 @@ export const PaymanDateFilter: React.FC = () => {
   const [endingDates, setEndingDates] = useState<string[]>([]);
   const [viewStartingPayman, setViewStartingPayman] = useState<string[]>([]);
   const [viewEndingPayman, setViewEndingPayman] = useState<string[]>([]);
+  const [isStartingFilled, setIsStartingFilled] = useState(false);
+  const [isEndingFilled, setIsEndingFilled] = useState(false);
   const [selectedDateTab, setSelectedDateTab] = useState('start');
   const [dateValues, setDateValues] = useState<{
     startingDateValues: Date[];
@@ -73,17 +75,9 @@ export const PaymanDateFilter: React.FC = () => {
 
         const isFutureDate = parsedDate > currentDate; // Compare the actual Date objects
         if (isFutureDate) {
-          formattedDates.unshift(
-            new DateObject(currentDate)
-              .convert(gregorian, gregorian_en)
-              .format('DD-MMM-YY hh:mm:ss a')
-          );
+          formattedDates.unshift(convertDate(currentDate));
         } else {
-          formattedDates.push(
-            new DateObject(currentDate)
-              .convert(gregorian, gregorian_en)
-              .format('DD-MMM-YY hh:mm:ss a')
-          );
+          formattedDates.push(convertDate(currentDate));
         }
       }
 
@@ -113,9 +107,7 @@ export const PaymanDateFilter: React.FC = () => {
       parse(date, 'dd-MMM-yy hh:mm:ss a', new Date())
     );
     const startingFormattedDates: string[] = startingParsedDates.map((date) =>
-      new DateObject(date)
-        .convert(gregorian, gregorian_en)
-        .format('DD-MMM-YY hh:mm:ss a')
+      convertDate(date)
     );
     setStartingDates(startingFormattedDates);
     setDateValues((prevValues) => ({
@@ -130,9 +122,7 @@ export const PaymanDateFilter: React.FC = () => {
       parse(date, 'dd-MMM-yy hh:mm:ss a', new Date())
     );
     const endingFormattedDates: string[] = endingParsedDates.map((date) =>
-      new DateObject(date)
-        .convert(gregorian, gregorian_en)
-        .format('DD-MMM-YY hh:mm:ss a')
+      convertDate(date)
     );
     setEndingDates(endingFormattedDates);
     setDateValues((prevValues) => ({
@@ -184,6 +174,9 @@ export const PaymanDateFilter: React.FC = () => {
       if (splitDates.length > 0) {
         setViewStartingPayman([splitDates[0], splitDates[1]]);
       }
+      // border of the input
+      setIsStartingFilled(true);
+      console.log('start');
     }
     if (endingDates.length > 0) {
       const Dates = convertToPersianFormat(endingDates);
@@ -191,6 +184,8 @@ export const PaymanDateFilter: React.FC = () => {
       if (splitDates.length > 0) {
         setViewEndingPayman([splitDates[0], splitDates[1]]);
       }
+      // border of the input
+      setIsEndingFilled(true);
     }
   }, [startingDates, endingDates]);
 
@@ -235,7 +230,14 @@ export const PaymanDateFilter: React.FC = () => {
           />
         </div>
         <div className='search-section search-bar'>
-          <div className='search-datePicker payman'>
+          <div
+            className={`search-datePicker payman ${
+              (selectedDateTab === 'start' && isStartingFilled) ||
+              (selectedDateTab !== 'start' && isEndingFilled)
+                ? 'filled'
+                : ''
+            }`}
+          >
             <DatePicker
               ref={datePickerRef}
               style={{ direction: 'rtl', fontSize: 12 }}

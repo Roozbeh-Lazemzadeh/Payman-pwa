@@ -37,6 +37,8 @@ export const PriceFilter: React.FC = () => {
   const [prices, setPrices] = useState<number[]>([]);
   const [priceFrom, setPriceFrom] = useState<string>();
   const [priceTo, setPriceTo] = useState<string>();
+  const [isFromFilled, setIsFromFilled] = useState(false);
+  const [isToFilled, setIsToFilled] = useState(false);
 
   const handleRemoveFilter = () => {
     if (prices.length === 0) return null;
@@ -155,6 +157,24 @@ export const PriceFilter: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    if (prices[0] > 0) {
+      setIsFromFilled(true);
+    } else {
+      setIsFromFilled(false);
+    }
+    if (
+      prices[1] >= 0 &&
+      prices[1] !== 100000 &&
+      prices[1] !== 200000 &&
+      prices[1] !== 300000
+    ) {
+      setIsToFilled(true);
+    } else {
+      setIsToFilled(false);
+    }
+  }, [prices]);
+
   return (
     <>
       <ToastContainer rtl />
@@ -220,7 +240,7 @@ export const PriceFilter: React.FC = () => {
             <Input
               type='text'
               inputMode='numeric'
-              className='search-input'
+              className={`search-input ${isFromFilled ? 'filled' : ''}`}
               addonBefore={prices[0] ? <TomanIcon /> : <BuyIcon />}
               placeholder='از مبلغ'
               onChange={(e) => handlePriceFrom(e)}
@@ -229,7 +249,7 @@ export const PriceFilter: React.FC = () => {
             <Input
               type='text'
               inputMode='numeric'
-              className='search-input'
+              className={`search-input ${isToFilled ? 'filled' : ''}`}
               addonBefore={prices[1] ? <TomanIcon /> : <BuyIcon />}
               placeholder='تا مبلغ'
               onChange={(e) => handlePriceTo(e)}

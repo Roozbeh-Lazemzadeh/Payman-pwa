@@ -37,7 +37,7 @@
   z-index: 10;
 }
 .filtered-footer.invisible {
-  transition: ease-in-out 0.24s;
+  transition: none;
   opacity: 0;
   visibility: hidden;
 }
@@ -290,6 +290,9 @@
   position: relative;
   overflow: hidden;
 }
+.custom-select.filled .ant-select-selector {
+  border: 1px solid #0072ff;
+}
 
 .search-section.search-bar {
   display: unset;
@@ -333,6 +336,9 @@
 .search-input {
   direction: ltr;
 }
+.search-input.filled .ant-input-outlined {
+  border-color: #0072ff;
+}
 .search-input .ant-input-group-addon {
   border-radius: 5px;
   background-color: unset;
@@ -356,6 +362,9 @@
   border-color: #cdcdd0;
   border-radius: 5px !important;
   margin: unset !important;
+}
+.search-datePicker.filled .rmdp-container .rmdp-input {
+  border-color: #0072ff;
 }
 .search-datePicker .icon {
   position: absolute;
