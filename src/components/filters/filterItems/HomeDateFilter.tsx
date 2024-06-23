@@ -222,23 +222,29 @@ export const HomeDateFilter: React.FC = () => {
               روز گذشته
             </span>
             <span
-              className={
+              className={[
+                month?.id !== 0 ? 'disabled' : '',
                 selectedQuickItems === '۳ روز گذشته' &&
                 dates[0].toString() === convertDate(threeDaysAgo)
                   ? 'selected'
-                  : ''
-              }
+                  : '',
+              ]
+                .join(' ')
+                .trim()}
               onClick={() => selectedQuickAccess('۳ روز گذشته')}
             >
               ۳ روز گذشته
             </span>
             <span
-              className={
+              className={[
+                month?.id !== 0 ? 'disabled' : '',
                 selectedQuickItems === 'هفته گذشته' &&
                 dates[0].toString() === convertDate(oneWeekAgo)
                   ? 'selected'
-                  : ''
-              }
+                  : '',
+              ]
+                .join(' ')
+                .trim()}
               onClick={() => selectedQuickAccess('هفته گذشته')}
             >
               ۷ روز گذشته

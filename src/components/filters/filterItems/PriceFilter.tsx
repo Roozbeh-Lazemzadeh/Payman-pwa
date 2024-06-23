@@ -81,7 +81,7 @@ export const PriceFilter: React.FC = () => {
     if (prices.length === 0) return null;
     if (prices[0] > prices[1]) {
       return showNotifyToast(
-        'بازه قیمت از قیمت پایین به بالا فیلتر شود.',
+        'مبلغ شروع، نمی‌تواند بیشتر از مبلغ پایانی باشد. ',
         <InfoIcon />
       );
     }

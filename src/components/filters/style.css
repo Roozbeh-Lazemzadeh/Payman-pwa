@@ -223,6 +223,10 @@
   background-color: #0072ff;
   color: #fff;
 }
+.quick-access-section .disabled {
+  background-color: #acacac;
+  color: #fff;
+}
 .quick-access-section .title {
   font-size: 10px;
   color: rgba(16, 24, 40, 1);
