@@ -2,6 +2,8 @@ import { ToastContainer } from 'react-toastify';
 import { showCopiedToast } from '../components/shared/Toast/CustomToast';
 
 import './style/style.css';
+import { useEffect, useState } from 'react';
+import SkeletonBannerContact from '../components/skeleton/SkeletonBannerContact';
 const handleCopyClick = async (textToCopy: string) => {
   try {
     await navigator.clipboard.writeText(textToCopy);
@@ -16,6 +18,7 @@ const handleCopyClick = async (textToCopy: string) => {
 };
 
 function ContactPage() {
+  const [isLoading, setIsLoading] = useState(true);
   const handleDivClick = (e: {
     currentTarget: {
       querySelector: (arg0: string) => { (): any; new (): any; innerText: any };
@@ -26,10 +29,23 @@ function ContactPage() {
     handleCopyClick(spanText);
   };
 
+  useEffect(() => {
+    // Simulate data fetching with a 1000ms delay
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 100000);
+
+    return () => clearTimeout(timer); // Clean up the timer
+  }, []);
+
   return (
     <div className='contact-wrapper'>
       <ToastContainer position='bottom-center' />
-      <img className='contact-banner' src='/assets/pics/contact.svg' />
+      {isLoading ? (
+        <SkeletonBannerContact />
+      ) : (
+        <img className='contact-banner' src='/assets/pics/contact.png' />
+      )}
       <div className='contact-details'>
         <div className='contact-detail'>
           <a href='tel:02122989880' className='contact-btn'>

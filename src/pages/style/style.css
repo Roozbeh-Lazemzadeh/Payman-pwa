@@ -594,9 +594,6 @@
   .login-header__logo {
     margin-top: 14px;
   }
-  .info-login {
-    margin-top: 1rem;
-  }
 }
 @media screen and (max-width: 376px), screen and (max-height: 668px) {
   /* login paage  */
@@ -667,7 +664,7 @@
 
   .info-login {
     padding: 9px 25px !important;
-    margin-top: 1rem;
+    margin-top: 3rem;
     font-size: 11px;
   }
 
@@ -752,5 +749,17 @@
   .home-datepicker.default span:nth-of-type(2),
   .home-datepicker.active span:nth-child(2) {
     font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 395px) {
+  .contact-title {
+    font-size: 14px;
+  }
+  .contact-btn {
+    padding: 7px 2px;
+  }
+  .info-login {
+    margin-top: 20%;
   }
 }
