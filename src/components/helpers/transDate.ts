@@ -17,7 +17,7 @@ export const transDate = (inputDate: string) => {
     'jYYYY/jMM/jDD - HH:mm:ss'
   );
   const weekday = jalaliMoment(formattedDate).locale('fa').format('dddd');
-  return `${weekday} ، ${jalaliDate}`;
+  return `${weekday}، ${jalaliDate}`;
 };
 
 export const filterConvertDate = (inputDate: string) => {
