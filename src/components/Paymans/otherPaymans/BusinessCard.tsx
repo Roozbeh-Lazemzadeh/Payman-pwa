@@ -12,7 +12,7 @@ const BusinessCard: React.FC<BusinessCardProps> = ({ title, icon, active }) => {
     <div className={`business-card-wrapper ${active ? 'clicked' : ''}`}>
       <div className='business-card-icon'>
         {typeof icon === 'string' ? (
-          <img src={icon} alt={`${title} icon`} />
+          <img className='business-card-img' src={icon} alt={`${title} icon`} />
         ) : (
           React.createElement(icon, { className: active ? 'clicked' : '' })
         )}
