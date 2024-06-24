@@ -153,6 +153,7 @@
   opacity: 1;
   transition: ease-in-out 0.3s all;
   background-color: #0072ff;
+  gap: 5px;
 }
 
 .home-datepicker.default {
@@ -737,7 +738,7 @@
 }
 
 @media screen and (min-width: 400px) {
-  .home-datepicker.default {
+  .home-datepicker {
     width: 65px;
     font-size: 12px;
     border-radius: 10px;
@@ -749,9 +750,9 @@
     background-color: #0072ff;
   }
 
-  .home-datepicker.default span:nth-of-type(2),
-  .home-datepicker.active span:nth-child(2) {
-    font-size: 14px;
+  .home-datepicker .home-datepicker-p,
+  .home-datepicker.active .home-datepicker-p {
+    font-size: 14px !important;
   }
 }
 
