@@ -22,7 +22,7 @@ import { useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { showNotifyToast } from '../../shared/Toast/CustomToast';
 // helper
-import { MAX_SAFE_INTEGER } from '../../helpers';
+// import { MAX_SAFE_INTEGER } from '../../helpers';
 import { formatNumberWithCommas } from '../../helpers/seperatorInNumbers';
 // style
 import '../../Paymans/otherPaymans/style.css';
@@ -123,7 +123,7 @@ export const PriceFilter: React.FC = () => {
     } else {
       setSelectedQuickItems([0, prices[1]]);
     }
-    if (isNumeric && parsedValue <= MAX_SAFE_INTEGER) {
+    if (isNumeric && parsedValue <= 1000000000) {
       // Update the state only if the input value is a valid number
       setPriceFrom(formatNumberWithCommas(Number(parsedValue)));
       setPrices([Number(parsedValue), prices[1]]);
@@ -148,7 +148,7 @@ export const PriceFilter: React.FC = () => {
       setSelectedQuickItems([prices[0], parsedValue]);
     }
 
-    if (isNumeric && parsedValue <= MAX_SAFE_INTEGER) {
+    if (isNumeric && parsedValue <= 1000000000) {
       // Update the state only if the input value is a valid number
       setPriceTo(formatNumberWithCommas(parsedValue));
       setPrices([prices[0], parsedValue]);

@@ -33,7 +33,7 @@ function ContactPage() {
     // Simulate data fetching with a 1000ms delay
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 100000);
+    }, 1000);
 
     return () => clearTimeout(timer); // Clean up the timer
   }, []);

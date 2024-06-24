@@ -215,6 +215,7 @@ export const MerchantFilter: React.FC = () => {
             ref={selectRef}
             open={dropDownOpen && isOpen}
             filterOption={customFilterOption}
+            notFoundContent='هیچ نتیجه‌ای یافت نشد'
           />
         </div>
       </div>
