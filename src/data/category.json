@@ -14,11 +14,11 @@
   { "id": "14", "title": "امور دولتی", "img": "/assets/category/Ca14.svg" },
   { "id": "15", "title": "تبلیغات", "img": "/assets/category/Ca15.svg" },
   { "id": "16", "title": "سلامت", "img": "/assets/category/Ca16.svg" },
-  { "id": "17", "title": "خیریه‌ها", "img": "/assets/category/Ca18.svg" },
-  { "id": "18", "title": "سرگرمی", "img": "/assets/category/Ca19.svg" },
-  { "id": "19", "title": "سوپرمارکت", "img": "/assets/category/Ca20.svg" },
-  { "id": "20", "title": "اپ استور", "img": "/assets/category/Ca21.svg" },
-  { "id": "21", "title": "کاریابی", "img": "/assets/category/Ca22.svg" },
-  { "id": "22", "title": "گردشگری", "img": "/assets/category/Ca23.svg" },
-  { "id": "23", "title": "تسهیلات", "img": "/assets/category/Ca24.svg" }
+  { "id": "17", "title": "خیریه‌ها", "img": "/assets/category/Ca17.svg" },
+  { "id": "18", "title": "سرگرمی", "img": "/assets/category/Ca18.svg" },
+  { "id": "19", "title": "سوپرمارکت", "img": "/assets/category/Ca19.svg" },
+  { "id": "20", "title": "اپ استور", "img": "/assets/category/Ca20.svg" },
+  { "id": "21", "title": "کاریابی", "img": "/assets/category/Ca21.svg" },
+  { "id": "22", "title": "گردشگری", "img": "/assets/category/Ca22.svg" },
+  { "id": "23", "title": "تسهیلات", "img": "/assets/category/Ca23.svg" }
 ]

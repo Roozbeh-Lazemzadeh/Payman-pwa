@@ -7,8 +7,16 @@ interface FilterToolsProps {
 }
 
 const FilterTools: React.FC<FilterToolsProps> = ({ title }) => {
+  const handleTouch = (e: { preventDefault: () => void; }) => {
+    e.preventDefault(); // Prevent the default touch event
+  };
   return (
-    <div className='filter-tools-wrapper'>
+    <div
+      className='filter-tools-wrapper'
+      onTouchStart={handleTouch}
+      onTouchMove={handleTouch}
+      onTouchEnd={handleTouch}
+    >
       <p className='filter-tools-title'>{title}</p>
       <div className='filter-tools-component'>
         <Sort />
