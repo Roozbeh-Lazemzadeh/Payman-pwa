@@ -154,12 +154,12 @@
   width: 100%;
 }
 
-/* .ant-menu.ant-menu-root.ant-menu-inline.ant-menu-light.custom-sidebar-menu
-  .ant-menu-item-active {
-  background-color: #0072ff;
-  color: #fff;
-}
 .ant-menu.ant-menu-root.ant-menu-inline.ant-menu-light.custom-sidebar-menu
+  .ant-menu-item-active {
+  background-color: transparent;
+  /* color: #fff; */
+}
+/* .ant-menu.ant-menu-root.ant-menu-inline.ant-menu-light.custom-sidebar-menu
   .ant-menu-item-active
   span {
   color: #fff;
@@ -169,7 +169,7 @@
   svg
   path {
   stroke: #fff;
-} */
+}  */
 
 .custom-sidebar-menu .ant-menu-item.ant-menu-item-selected {
   background-color: #0072ff !important;
