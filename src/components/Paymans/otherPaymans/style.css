@@ -69,9 +69,10 @@
 }
 
 .business-card-wrapper .title {
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 600;
   line-height: 13px;
+  margin-bottom: 4px;
 }
 
 .business-card-img {
