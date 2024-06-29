@@ -11,7 +11,7 @@
     "phone_number": "09121022529",
     "payman_id": "Ckjsdn983027vfnl8",
     "bank_img": "/assets/banks/day.svg",
-    "merchant_img": "/assets/transactions-logo/filimo.svg"
+    "merchant_img": "/assets/transactions-logo/Filimo.svg"
   },
   {
     "id": 2,
@@ -25,7 +25,7 @@
     "phone_number": "09122022530",
     "payman_id": "Dkjsdn983027vfnl9",
     "bank_img": "/assets/banks/blu.svg",
-    "merchant_img": "/assets/transactions-logo/FILMNET.svg"
+    "merchant_img": "/assets/transactions-logo/Filmnet.svg"
   },
   {
     "id": 3,
@@ -67,7 +67,7 @@
     "phone_number": "09125022533",
     "payman_id": "Gkjsdn983027vfnl12",
     "bank_img": "/assets/banks/sarmayeh.svg",
-    "merchant_img": "/assets/transactions-logo/MTN.svg"
+    "merchant_img": "/assets/transactions-logo/Mtn.svg"
   },
   {
     "id": 6,
@@ -81,7 +81,7 @@
     "phone_number": "09126022534",
     "payman_id": "Hkjsdn983027vfnl13",
     "bank_img": "/assets/banks/mellat.svg",
-    "merchant_img": "/assets/transactions-logo/filimo.svg"
+    "merchant_img": "/assets/transactions-logo/Filimo.svg"
   },
   {
     "id": 7,
@@ -95,7 +95,7 @@
     "phone_number": "09127022535",
     "payman_id": "Ikjsdn983027vfnl14",
     "bank_img": "/assets/banks/shahr.svg",
-    "merchant_img": "/assets/transactions-logo/SIBCH.svg"
+    "merchant_img": "/assets/transactions-logo/Sibche.svg"
   },
   {
     "id": 8,

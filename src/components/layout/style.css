@@ -121,6 +121,8 @@
 .ant-drawer-content.custom-sidebar {
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
+  overflow: hidden !important;
+  border-radius: 5px !important;
 }
 
 .ant-drawer-content.custom-sidebar .ant-drawer-header {
@@ -206,14 +208,20 @@
   visibility: hidden;
 }
 
+.ant-carousel .slick-list {
+  border-radius: 5px !important;
+  height: 80px;
+}
+
 .slick-dots.slick-dots-bottom {
-  margin: 0 6rem !important;
+  margin-inline: 6rem !important;
   background-color: rgba(255, 255, 255, 0.2) !important;
   padding-right: 5px;
   padding-left: 5px;
   padding-top: 3px;
   padding-bottom: 3px;
   border-radius: 1rem;
+  margin-bottom: -7px;
 }
 
 .ant-carousel .slick-dots li {
