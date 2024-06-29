@@ -154,12 +154,23 @@ const getPriceRangeLabel = (minPrice: number, maxPrice: number): string => {
 
 // Helper function to get the price label with the correct unit
 const getPriceLabel = (price: number): string => {
-  if (price >= 1000000) {
+  if (price >= 1000000000) {
+    const billionPrice = price / 1000000000;
+    return `${
+      billionPrice % 1 === 0 ? billionPrice.toFixed(0) : billionPrice.toFixed(1)
+    } میلیارد تومان`;
+  } else if (price >= 1000000) {
     const millionPrice = price / 1000000;
-    return `${millionPrice} میلیون تومان`;
+    return `${
+      millionPrice % 1 === 0 ? millionPrice.toFixed(0) : millionPrice.toFixed(1)
+    } میلیون تومان`;
   } else if (price >= 1000) {
     const thousandPrice = price / 1000;
-    return `${thousandPrice} هزار تومان`;
+    return `${
+      thousandPrice % 1 === 0
+        ? thousandPrice.toFixed(0)
+        : thousandPrice.toFixed(1)
+    } هزار تومان`;
   } else {
     return `${price} تومان`;
   }

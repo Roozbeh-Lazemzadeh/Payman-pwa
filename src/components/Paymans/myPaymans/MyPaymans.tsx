@@ -166,7 +166,7 @@ export const MyPaymans: React.FC = () => {
             </div>
           ) : (
             <>
-              {nearExpiredPaymans.map((payman) => (
+              {nearExpiredPaymans.slice(0, 3).map((payman) => (
                 <NearExpiredPaymanCard key={payman.id} payman={payman} />
               ))}
               {renderBasedOnSortKey()}

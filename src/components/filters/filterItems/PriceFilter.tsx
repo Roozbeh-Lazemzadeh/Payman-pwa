@@ -39,6 +39,8 @@ export const PriceFilter: React.FC = () => {
   const [priceTo, setPriceTo] = useState<string>();
   const [isFromFilled, setIsFromFilled] = useState(false);
   const [isToFilled, setIsToFilled] = useState(false);
+  const [lastValidFrom, setLastValidFrom] = useState<string>('');
+  const [lastValidTo, setLastValidTo] = useState<string>('');
 
   const handleRemoveFilter = () => {
     if (prices.length === 0) return null;
@@ -59,18 +61,24 @@ export const PriceFilter: React.FC = () => {
         setPriceFrom('0'); // Update priceFrom to 0
         setPriceTo('100,000'); // Update priceTo to 100000
         setPrices([0, 100000]);
+        setLastValidFrom('0');
+        setLastValidTo('100,000');
         break;
 
       case 200000:
         setPriceFrom('0'); // Update priceFrom to 0
         setPriceTo('200,000'); // Update priceTo to 200000
         setPrices([0, 200000]);
+        setLastValidFrom('0');
+        setLastValidTo('200,000');
         break;
 
       case 300000:
         setPriceFrom('0'); // Update priceFrom to 0
         setPriceTo('300,000'); // Update priceTo to 300000
         setPrices([0, 300000]);
+        setLastValidFrom('0');
+        setLastValidTo('300,000');
         break;
 
       default:
@@ -127,8 +135,9 @@ export const PriceFilter: React.FC = () => {
       // Update the state only if the input value is a valid number
       setPriceFrom(formatNumberWithCommas(Number(parsedValue)));
       setPrices([Number(parsedValue), prices[1]]);
+      setLastValidFrom(formatNumberWithCommas(Number(parsedValue)));
     } else {
-      setPriceFrom('');
+      setPriceFrom(lastValidFrom); // Revert to the last valid value
     }
   };
 
@@ -152,8 +161,9 @@ export const PriceFilter: React.FC = () => {
       // Update the state only if the input value is a valid number
       setPriceTo(formatNumberWithCommas(parsedValue));
       setPrices([prices[0], parsedValue]);
+      setLastValidTo(formatNumberWithCommas(parsedValue));
     } else {
-      setPriceTo('');
+      setPriceTo(lastValidTo); // Revert to the last valid value
     }
   };
 
