@@ -74,6 +74,7 @@
   font-weight: 500;
   color: rgba(16, 24, 40, 0.5);
   padding-bottom: 30px;
+  margin-top: 7rem;
 }
 
 .ant-btn-primary.contact-us-with-icon {
@@ -123,9 +124,9 @@
     padding: 15px 0 15px 0;
   }
 
-  .ant-collapse-content-box > span {
+  /* .ant-collapse-content-box > span {
     font-size: 11px;
-  }
+  } */
 
   .btn-faq {
     font-size: 13px;
