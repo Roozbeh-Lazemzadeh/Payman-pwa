@@ -33,6 +33,10 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+html {
+  overscroll-behavior: none;
+}
+
 body {
   margin: 0;
   font-family: 'IranYekan', sans-serif;
@@ -40,6 +44,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   user-select: none;
   background: #fff;
+  overscroll-behavior: none;
 }
 
 .landscape-wrapper {
