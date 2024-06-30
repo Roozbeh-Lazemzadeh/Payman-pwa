@@ -16,7 +16,7 @@
   background: #fff;
   line-height: unset;
   color: unset;
-  /* position: fixed; */
+  position: absolute;
   /* top: 0;
   left: 0;
   right: 0; */
@@ -47,9 +47,10 @@
 
 .content-wrapper {
   width: 100%;
+  position: relative;
   /* height: 90%; */
-  position: absolute;
-  top: 11vh;
+  /* position: absolute; */
+  /* top: 11vh; */
   background-color: rgb(255, 255, 255);
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
@@ -62,6 +63,7 @@
 .content-wrapper.scroll {
   overflow: hidden !important;
   max-width: 460px;
+  margin-top: 97px;
 }
 
 /* ::-webkit-scrollbar {
@@ -239,7 +241,7 @@
 
 @media screen and (max-width: 376px), screen and (max-height: 668px) {
   .content-wrapper {
-    top: 13vh;
+    /* top: 13vh; */
     overflow: hidden;
     height: 80%;
   }

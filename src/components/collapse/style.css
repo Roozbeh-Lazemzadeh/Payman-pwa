@@ -55,7 +55,7 @@
 
 .ant-collapse.ant-collapse-icon-position-start {
   overflow: scroll;
-  height: 65%;
+  height: 450px;
   direction: ltr;
   padding-top: 20px;
 }
@@ -74,7 +74,7 @@
   font-weight: 500;
   color: rgba(16, 24, 40, 0.5);
   padding-bottom: 30px;
-  margin-top: 7rem;
+  margin-top: 3rem;
 }
 
 .ant-btn-primary.contact-us-with-icon {
@@ -103,7 +103,7 @@
   }
   .ant-collapse.ant-collapse-icon-position-start {
     overflow: scroll;
-    height: 67%;
+    height: 350px;
     direction: ltr;
   }
   .question-title {
