@@ -4,6 +4,7 @@ import { showCopiedToast } from '../components/shared/Toast/CustomToast';
 import './style/style.css';
 import { useEffect, useState } from 'react';
 import SkeletonBannerContact from '../components/skeleton/SkeletonBannerContact';
+// import SkeletonPaymansCart from '../components/skeleton/SkeletonPaymansCart';
 const handleCopyClick = async (textToCopy: string) => {
   try {
     await navigator.clipboard.writeText(textToCopy);
@@ -41,11 +42,13 @@ function ContactPage() {
   return (
     <div className='contact-wrapper'>
       <ToastContainer position='bottom-center' />
-      {isLoading ? (
-        <SkeletonBannerContact />
-      ) : (
-        <img className='contact-banner' src='/assets/pics/contact.png' />
-      )}
+      <div className='contact-banner_wrapper'>
+        {isLoading ? (
+          <SkeletonBannerContact />
+        ) : (
+          <img className='contact-banner' src='/assets/pics/contact.png' />
+        )}
+      </div>
       <div className='contact-details'>
         <div className='contact-detail'>
           <a href='tel:02122989880' className='contact-btn'>
