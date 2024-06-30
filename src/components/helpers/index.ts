@@ -46,6 +46,8 @@ export function getItem({
       dispatch(removeAllFiltersHandler());
     } else if (key === '3') {
       navigate('/profile');
+    } else if (key === '5') {
+      window.open('https://web.paymanpay.ir/blog/', '_blank');
     }
 
     // for filtering price , date, merchants
