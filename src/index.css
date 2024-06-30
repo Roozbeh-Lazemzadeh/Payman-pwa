@@ -34,7 +34,7 @@
 }
 
 html {
-  overscroll-behavior: none;
+  /* overscroll-behavior: none; */
 }
 
 body {
