@@ -1,7 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import { type FC, type Dispatch, type SetStateAction } from 'react';
 import { Checkbox, Button } from 'antd';
-// import OtpInput from 'react-otp-input';
 import { CustomDrawer } from '../shared/Drawer/Drawer';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import {
@@ -17,16 +16,6 @@ interface OnboardingProps {
 const SendOTPForm: FC<OnboardingProps> = ({ setStep }) => {
   const dispatch = useAppDispatch();
   const isOpen = useAppSelector(selectBottomSheetIsOpen);
-  // const [otp, setOtp] = useState<string>();
-  // const [otpVal, setOtpVal] = useState<string>();
-
-  // useEffect(() => {
-  //   // console.log(otp);
-  // }, [otp]);
-
-  // const sharedProps = {
-  //   onChange,
-  // };
   const handleBottomSheet = () => {
     dispatch(openBottomSheet());
   };
@@ -34,43 +23,32 @@ const SendOTPForm: FC<OnboardingProps> = ({ setStep }) => {
     <div className='send-otp-wrapper'>
       <div className='send-otp-form__wrapper'>
         <form className='send-otp-form'>
-          {/* <Input.OTP formatter={(str) => str.toUpperCase()} {...sharedProps} /> */}
           <span className='send-otp__title'>ورود یا ثبت نام</span>
           <div className='otp-form_input-wrapper'>
             <div className='otp-form_input'>
               <span className='form-input_title'>شماره موبایل</span>
               <span className='form-input_num'>
-                {/* <OtpInput
-                  value={otp}
-                  onChange={setOtp}
-                  numInputs={9}
-                  renderSeparator={<span>{''}</span>}
-                  renderInput={(props) => <input {...props} />}
-                  containerStyle='phone-num-inputs'
-                  inputStyle='phone-num-input'
-                /> */}
-                <input type='text' className='phone-num-inputs' />
+                <input
+                  type='text'
+                  className='phone-num-inputs'
+                  maxLength={9}
+                  inputMode='numeric'
+                />
                 <span>۰۹</span>
               </span>
             </div>
             <div className='otp-form_input'>
               <span className='form-input_title'>کد ملی</span>
               <span className='form-input_num'>
-                {/* <OtpInput
-                  value={otpVal}
-                  onChange={setOtpVal}
-                  numInputs={10}
-                  renderSeparator={<span>{''}</span>}
-                  renderInput={(props) => <input {...props} />}
-                  containerStyle='phone-num-inputs'
-                  inputStyle='phone-num-input'
-                /> */}
-                {/* <span>۰۹</span> */}
-                <input type='text' className='phone-num-inputs' />
+                <input
+                  type='text'
+                  className='phone-num-inputs'
+                  maxLength={10}
+                  inputMode='numeric'
+                />
               </span>
             </div>
           </div>
-          {/* <input type="checkbox" className="otp-form_checked" /> */}
           <Checkbox className='otp-Checkbox'>
             <span onClick={handleBottomSheet}>
               <span className='otp-Checkbox__open-drawer'>
@@ -80,11 +58,6 @@ const SendOTPForm: FC<OnboardingProps> = ({ setStep }) => {
             </span>
           </Checkbox>
           <Button className='otp-form_btn-wrapper' type='primary'>
-            {/* <input
-              type="submit"
-              value="تایید و ادامه"
-              className="otp-form_submit"
-            /> */}
             تایید و ادامه
           </Button>
         </form>
@@ -110,7 +83,7 @@ const SendOTPForm: FC<OnboardingProps> = ({ setStep }) => {
               padding: '0px 20px',
               color: 'rgba(16, 24, 40, 1)',
               fontSize: 14,
-              direction: 'ltr'
+              direction: 'ltr',
             }}
           >
             <div className='rules-wrapper'>
