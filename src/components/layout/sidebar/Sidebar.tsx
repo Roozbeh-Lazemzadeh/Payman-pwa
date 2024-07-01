@@ -27,11 +27,11 @@ import SkeletonSliderSidebar from '../../skeleton/SkeletonSliderSidebar';
 
 export const Sidebar: React.FC = () => {
   const [selectedKey, setSelectedKey] = useState('1');
-  const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const isSidebarOpen = useAppSelector(selectSidebar);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const pathname = location.pathname;
@@ -52,12 +52,15 @@ export const Sidebar: React.FC = () => {
   }, [location]);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
+    if (isSidebarOpen) {
+      setIsLoading(true);
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
 
-    return () => clearTimeout(timer); // Cleanup function to clear the timeout
-  }, []);
+      return () => clearTimeout(timer); // Cleanup function to clear the timeout
+    }
+  }, [isSidebarOpen]);
 
   const items = [
     getItem({
