@@ -1,17 +1,30 @@
-import { type FC, useState } from 'react';
+import { type FC, useState, useEffect } from 'react';
 import SendOTPForm from '../components/template/SendOTPForm';
 import CheckOTPForm from '../components/template/CheckOTPForm';
 import FooterApp from '../components/layout/sidebar/SidebarFooter';
 import './style/style.css';
+import SkeletonBannerLogin from '../components/skeleton/SkeletonBannerLogin';
 
 const LoginPage: FC = () => {
   const [step, setStep] = useState<number>(1);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate data fetching with a 1000ms delay
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer); // Clean up the timer
+  }, []);
 
   return (
-    <div
-      className='login-wrapper'
-      style={{ backgroundImage: 'url(/assets/pics/img-login.svg)' }}
-    >
+    <>
+      {isLoading ? (
+        <SkeletonBannerLogin />
+      ) : (
+        <img className='login-banner' src='/assets/pics/img-login.svg'></img>
+      )}
       <div className='login-body'>
         <div className='login-body-wrapper'>
           <div className='login-header'>
@@ -24,10 +37,10 @@ const LoginPage: FC = () => {
           </div>
           {step === 1 && <SendOTPForm setStep={setStep} />}
           {step === 2 && <CheckOTPForm />}
-          <FooterApp />
+          <FooterApp topSpace='18px' />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

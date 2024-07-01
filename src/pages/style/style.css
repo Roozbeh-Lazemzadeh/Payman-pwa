@@ -1,5 +1,5 @@
 /* start style login page */
-
+/* 
 .login-wrapper {
   display: flex;
   justify-content: center;
@@ -10,21 +10,27 @@
   background-repeat: no-repeat;
   background-size: contain;
   overflow: hidden;
+} */
+
+.login-banner {
+  width: 100%;
+  position: absolute;
+  z-index: -1;
 }
 
 .login-body {
   display: flex;
   justify-content: flex-start;
   background-color: #fff;
-  max-height: 80%;
-  height: 100vh;
-  width: 100vw;
-  border-top-right-radius: 40px 40px;
-  border-top-left-radius: 40px 40px;
+  height: 80%;
+  border-top-right-radius: 40px;
+  border-top-left-radius: 40px;
   overflow: hidden;
   flex-direction: column;
   align-items: center;
   align-self: self-end;
+  bottom: 0;
+  position: absolute;
 }
 
 .login-body-wrapper {
@@ -33,6 +39,7 @@
   width: 100vw;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   justify-content: space-between;
 }
 
@@ -605,6 +612,10 @@
   .login-header__logo {
     margin-top: 14px;
   }
+
+  .info-login.login {
+    margin-top: 4%;
+  }
 }
 @media screen and (max-width: 376px), screen and (max-height: 668px) {
   /* login paage  */
@@ -777,6 +788,6 @@
     padding: 7px 2px;
   }
   .info-login {
-    margin-top: 20%;
+    margin-top: 12%;
   }
 }
